@@ -10,6 +10,15 @@ btn.addEventListener('click', () => {
   localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
 });
 
+// Toggle Retro
+const retroEnabled = localStorage.getItem('retro') === '1';
+if (retroEnabled) document.documentElement.classList.add('retro');
+
+function toggleRetro(){
+  const r = document.documentElement.classList.toggle('retro');
+  localStorage.setItem('retro', r ? '1' : '0');
+});
+
 // Volver arriba suave
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', e=>{
