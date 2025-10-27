@@ -17,7 +17,7 @@ if (retroEnabled) document.documentElement.classList.add('retro');
 function toggleRetro(){
   const r = document.documentElement.classList.toggle('retro');
   localStorage.setItem('retro', r ? '1' : '0');
-});
+}
 
 // Volver arriba suave
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
