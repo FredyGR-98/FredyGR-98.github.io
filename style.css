@@ -1,13 +1,25 @@
 :root{
-  --bg:#0f0f11; --surface:#17181b; --muted:#8e95a2; --text:#e9edf3;
-  --card:#15161a; --border:#23252b; --brand:#2563eb; --brand-2:#1e40af;
-  --chip:#20222a; --chip-br:#2a2d36;
+  /* Oscuro por defecto */
+  --bg:#0E1116; --surface:#121721; --text:#EAF2F8; --muted:#A9B7C7;
+  --card:#0F151F; --border:#24334A;
+
+  /* Paleta azul/UCN */
+  --brand:#1E56A0;    /* azul principal */
+  --brand-2:#0B2C5E;  /* azul marino */
+  --accent:#38BDF8;   /* celeste */
+
+  /* Chips */
+  --chip:#0F1A28; --chip-br:#233754;
 }
 
 :root.light{
-  --bg:#f3f5f7; --surface:#eaeef2; --muted:#6b7280; --text:#101316;
-  --card:#ffffff; --border:#dfe3ea; --brand:#2563eb; --brand-2:#1d4ed8;
-  --chip:#f3f5f7; --chip-br:#e5e7eb;
+  /* Claro */
+  --bg:#F2F6FA; --surface:#EAF2F8; --text:#0B2C5E; --muted:#4E6A8A;
+  --card:#ffffff; --border:#D3DFEA;
+
+  --brand:#1E56A0; --brand-2:#18467F; --accent:#38BDF8;
+
+  --chip:#F2F6FA; --chip-br:#DCE7F2;
 }
 
 *{box-sizing:border-box}
@@ -33,16 +45,37 @@ body{
 .nav-links a:hover{opacity:1}
 .icon-btn{background:transparent;border:1px solid var(--border);color:var(--text);border-radius:10px;padding:8px 10px;cursor:pointer}
 
-/* Hero */
-.hero{background:linear-gradient(180deg,var(--surface),transparent 60%), var(--bg); padding-top:72px}
-.hero-inner{display:flex; flex-direction:column; align-items:center; text-align:center; padding:56px 0}
-.avatar{width:112px;height:112px;border-radius:50%;object-fit:cover;border:4px solid var(--border);box-shadow:0 10px 24px rgba(0,0,0,.25)}
-h1{font-size:clamp(28px,5vw,44px); margin:18px 0 4px; font-weight:800}
-.subtitle{margin:0; color:var(--muted); font-weight:600}
-.lead{max-width:760px; margin:16px auto 22px; color:var(--muted)}
-.hero-actions{display:flex; gap:12px; margin:12px 0 10px}
-.hero-icons{color:var(--muted); display:flex; gap:18px; margin:10px 0}
-.scroll-down{margin-top:8px; color:var(--muted)}
+/* Hero con toque azul/celeste */
+.hero{
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(56,189,248,.18), transparent 60%),
+    linear-gradient(180deg, rgba(30,86,160,.15), transparent 60%),
+    var(--bg);
+}
+
+/* Botón principal: azul con sombra celeste */
+.btn.primary{
+  box-shadow: 0 8px 20px rgba(30,86,160,.35);
+}
+.btn.primary:hover{ transform: translateY(-2px); }
+
+/* Enlaces de acción en celeste */
+.actions .link{ color: var(--accent); }
+
+/* Avatar con aro celeste sutil */
+.avatar{ border:4px solid rgba(56,189,248,.35); }
+
+/* Separador sutil bajo los H2 */
+h2{ border-bottom: 2px solid rgba(56,189,248,.35); padding-bottom:.35rem; }
+
+/* Chips con realce celeste al hover */
+.chip:hover{
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(56,189,248,.15);
+}
+
+/* Botón del cambio de tema con highlight celeste */
+.icon-btn:hover{ box-shadow: 0 0 0 3px rgba(56,189,248,.18); }
 
 /* Buttons */
 .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; border:1px solid var(--border); text-decoration:none; color:var(--text); font-weight:600}
