@@ -27,5 +27,5 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
       e.preventDefault();
       document.querySelector(id).scrollIntoView({behavior:'smooth', block:'start'});
     }
-  })
+  });
 });
