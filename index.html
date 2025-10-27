@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fredy Omar Geraldo Rivera | Portafolio</title>
+
+  <!-- Fuente y iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- NAV -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#">Portfolio</a>
+      <nav class="nav-links">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+        <button id="themeToggle" class="icon-btn" aria-label="Cambiar tema">
+          <i class="fa-regular fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=facearea&facepad=3" alt="Foto profesional" class="avatar"/>
+      <h1>Fredy Omar Geraldo Rivera</h1>
+      <p class="subtitle">Ingeniero Comercial | Especialista en Machine Learning</p>
+      <p class="lead">
+        Especializado en análisis de datos, control de gestión y automatización de procesos.
+        Combino formación empresarial con habilidades técnicas avanzadas en ciencia de datos e IA para optimizar la toma de decisiones.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#proyectos"><i class="fa-solid fa-diagram-project"></i> Ver Proyectos</a>
+        <a class="btn" href="#contacto"><i class="fa-regular fa-envelope"></i> Contactar</a>
+      </div>
+      <div class="hero-icons">
+        <i class="fa-solid fa-database"></i>
+        <i class="fa-solid fa-brain"></i>
+      </div>
+      <div class="scroll-down"><i class="fa-solid fa-angles-down"></i></div>
+    </div>
+  </section>
+
+  <!-- SOBRE MI -->
+  <section id="sobre-mi" class="section">
+    <div class="container">
+      <h2>Sobre mí</h2>
+      <div class="grid about-grid">
+        <div class="card padded">
+          <p>
+            Soy Ingeniero Comercial especializado en Machine Learning, con foco en análisis de datos, control de gestión y automatización.
+            He desarrollado soluciones en contextos municipales que reducen tiempos operativos y estandarizan procesos.
+          </p>
+          <p>
+            Mi motivación es traducir datos en decisiones y construir herramientas simples, robustas y mantenibles.
+          </p>
+        </div>
+        <div class="card padded">
+          <h3 class="muted">Educación</h3>
+          <ul class="edu">
+            <li>
+              <strong>Ingeniería Comercial</strong><br>
+              Universidad Católica del Norte (UCN) — 2018–2023
+            </li>
+            <li>
+              <strong>Especialización en Machine Learning</strong><br>
+              Kibernum — Talento Digital para Chile — 2025
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="muted mt-32">Habilidades Técnicas</h3>
+      <div class="chip-groups">
+        <div class="chip-card">
+          <span class="chip-title">Machine Learning</span>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">scikit-learn</span>
+            <span class="chip">NLP</span><span class="chip">Redes Neuronales</span><span class="chip">Clustering</span>
+          </div>
+        </div>
+        <div class="chip-card">
+          <span class="chip-title">Análisis de Datos</span>
+          <div class="chips">
+            <span class="chip">Pandas</span><span class="chip">NumPy</span>
+            <span class="chip">Excel Avanzado</span><span class="chip">Stata</span><span class="chip">RStudio</span>
+          </div>
+        </div>
+        <div class="chip-card">
+          <span class="chip-title">Visualización</span>
+          <div class="chips">
+            <span class="chip">Power BI</span><span class="chip">Dashboards</span><span class="chip">Excel Interactivo</span>
+          </div>
+        </div>
+        <div class="chip-card">
+          <span class="chip-title">Automatización</span>
+          <div class="chips">
+            <span class="chip">VBA</span><span class="chip">APIs</span><span class="chip">Python</span><span class="chip">ChatGPT/Copilot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCIA -->
+  <section id="experiencia" class="section">
+    <div class="container">
+      <h2>Experiencia Profesional</h2>
+
+      <article class="card job">
+        <div class="job-header">
+          <h3>Apoyo Profesional</h3>
+          <span class="job-dates"><i class="fa-regular fa-calendar"></i> Oct 2024 – Actualidad</span>
+        </div>
+        <div class="job-sub">Ilustre Municipalidad de Chañaral</div>
+        <p class="job-desc">
+          Desarrollo integral de soluciones de gestión de datos para múltiples departamentos municipales (cementerio, patentes, planificación y presupuesto).
+        </p>
+        <ul class="bullets">
+          <li>Estandaricé 30%+ de registros históricos (1995–2025).</li>
+          <li>Reduje 80% del tiempo de búsqueda con un sistema de ordenamiento inteligente.</li>
+          <li>Creé dashboards interactivos en Excel con VBA para seguimiento presupuestario.</li>
+          <li>Implementé metodología Kanban para control de patentes.</li>
+        </ul>
+      </article>
+
+      <article class="card job">
+        <div class="job-header">
+          <h3>Práctica Profesional – Programa MBA</h3>
+          <span class="job-dates"><i class="fa-regular fa-calendar"></i> Dic 2022 – Mar 2023</span>
+        </div>
+        <div class="job-sub">Universidad Católica del Norte</div>
+        <ul class="bullets">
+          <li>Gestión de estados de pago y encuestas de calidad docente.</li>
+          <li>Optimización de registro y documentación con formularios dinámicos.</li>
+          <li>Digitalización y organización de inventario de activos.</li>
+        </ul>
+      </article>
+
+      <article class="card job">
+        <div class="job-header">
+          <h3>Ayudante de Cátedra</h3>
+          <span class="job-dates"><i class="fa-regular fa-calendar"></i> 2019 – 2022</span>
+        </div>
+        <div class="job-sub">Universidad Católica del Norte</div>
+        <ul class="bullets">
+          <li>Apoyo en cursos de Estadística II, Aprendizaje Estadístico y Gestión de SIA.</li>
+          <li>Revisión de proyectos y evaluación de modelos.</li>
+          <li>Fortalecimiento de habilidades en Excel, Stata y RStudio.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="section">
+    <div class="container">
+      <h2>Proyectos Destacados</h2>
+      <p class="section-lead">Casos de éxito en machine learning y análisis de datos aplicados.</p>
+
+      <div class="grid projects-grid">
+        <!-- Card 1 -->
+        <article class="project card">
+          <div class="project-head">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Clasificador de Cáncer de Mama</h3>
+          </div>
+          <p>Modelo de ML para predecir benigno/maligno. Incluye API Flask y frontend interactivo.</p>
+          <div class="tags">
+            <span>Python</span><span>Scikit-learn</span><span>Flask</span><span>API</span>
+          </div>
+          <div class="result-tags">
+            <span>Tiempo real</span><span>Dataset médico</span><span>Frontend</span>
+          </div>
+          <div class="actions">
+            <a class="link" href="#" target="_blank">Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="project card">
+          <div class="project-head">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Clasificador de Sentimientos (NLP)</h3>
+          </div>
+          <p>Pipeline NLP para clasificar reseñas; dataset propio y despliegue de API.</p>
+          <div class="tags">
+            <span>Python</span><span>NLP</span><span>Flask</span><span>Scikit-learn</span>
+          </div>
+          <div class="result-tags">
+            <span>Análisis sentimientos</span><span>API desplegada</span>
+          </div>
+          <div class="actions">
+            <a class="link" href="#" target="_blank">Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="project card">
+          <div class="project-head">
+            <i class="fa-solid fa-business-time"></i>
+            <h3>Control de Gestión – Madurez Digital</h3>
+          </div>
+          <p>Tesis: índice de madurez digital y benchmarking con Balanced Scorecard.</p>
+          <div class="tags">
+            <span>Excel</span><span>BSC</span><span>Benchmarking</span>
+          </div>
+          <div class="result-tags">
+            <span>Análisis comparativo</span><span>BSC optimizado</span>
+          </div>
+          <div class="actions">
+            <a class="link" href="#" target="_blank">Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="project card">
+          <div class="project-head">
+            <i class="fa-solid fa-folder-tree"></i>
+            <h3>Sistema de Gestión Municipal</h3>
+          </div>
+          <p>Suite en Excel/VBA para cementerio, patentes y presupuesto. 80% menos tiempo de búsqueda.</p>
+          <div class="tags">
+            <span>Excel</span><span>VBA</span><span>Dashboards</span><span>Kanban</span>
+          </div>
+          <div class="result-tags">
+            <span>80% reducción tiempo</span><span>30% estandarización</span>
+          </div>
+          <div class="actions">
+            <a class="link" href="#" target="_blank">Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <div class="container">
+      <h2>Hablemos</h2>
+      <p class="section-lead">¿Proyecto en mente o quieres conversar sobre datos y ML?</p>
+
+      <div class="grid contact-grid">
+        <div class="card contact-card">
+          <div class="contact-icon"><i class="fa-regular fa-envelope"></i></div>
+          <div>
+            <div class="muted">Email</div>
+            <a href="mailto:fredy.geraldo.r@gmail.com">fredy.geraldo.r@gmail.com</a><br>
+            <span class="muted">+56 9 8825 8526</span>
+          </div>
+        </div>
+        <div class="card contact-card">
+          <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <div class="muted">Ubicación</div>
+            <span>Chañaral, Chile</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="socials">
+        <a class="btn ghost" href="https://www.linkedin.com/in/tuusuario" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/tu_usuario" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+
+      <div class="notice">
+        Abierto a oportunidades: consultoría en análisis de datos, proyectos de ML e investigación aplicada.
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div>© 2025 Portfolio Profesional. Todos los derechos reservados.</div>
+      <a href="#" class="back-top"><i class="fa-solid fa-arrow-up"></i> Volver arriba</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
