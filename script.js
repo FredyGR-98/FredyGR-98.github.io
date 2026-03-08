@@ -1,18 +1,12 @@
-// Scroll reveal
-const revealElements = document.querySelectorAll(".reveal");
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
 
-const revealOnScroll = () => {
-  const windowHeight = window.innerHeight;
-
-  revealElements.forEach((element) => {
-    const elementTop = element.getBoundingClientRect().top;
-    const visiblePoint = 100;
-
-    if (elementTop < windowHeight - visiblePoint) {
-      element.classList.add("active");
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   });
-};
-
-window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+});
