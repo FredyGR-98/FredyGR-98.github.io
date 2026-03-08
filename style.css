@@ -414,12 +414,17 @@ ul {
 
 .profile-card {
   position: absolute;
-  inset: auto 24px 24px 24px;
-  z-index: 2;
-  padding: 26px 26px 24px;
-  border-radius: 26px;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 480px;
+  padding: 70px 28px 28px 28px; /* espacio arriba para la foto */
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(255, 255, 255, 0.10);
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Variante clara del hero */
@@ -436,12 +441,19 @@ ul {
 }
 
 .profile-frame {
+  position: absolute;
+  top: -64px;          /* hace que sobresalga */
+  left: 50%;
+  transform: translateX(-50%);
   width: 128px;
   height: 128px;
-  margin-bottom: 18px;
   padding: 5px;
   border-radius: 28px;
-  background: linear-gradient(135deg, rgba(200, 162, 255, 0.7), rgba(143, 183, 255, 0.6));
+  background: linear-gradient(
+    135deg,
+    rgba(200, 162, 255, 0.7),
+    rgba(143, 183, 255, 0.6)
+  );
 }
 
 /* Efecto luna */
@@ -489,6 +501,7 @@ ul {
 .profile-info h3 {
   margin-bottom: 8px;
   font-size: 1.15rem;
+  text-align: center;
 }
 
 .profile-info p {
