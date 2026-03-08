@@ -1,14 +1,18 @@
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Scroll reveal
+const revealElements = document.querySelectorAll(".reveal");
 
-anchor.addEventListener("click", function(e){
+const revealOnScroll = () => {
+  const windowHeight = window.innerHeight;
 
-e.preventDefault()
+  revealElements.forEach((element) => {
+    const elementTop = element.getBoundingClientRect().top;
+    const visiblePoint = 100;
 
-document.querySelector(this.getAttribute("href"))
-.scrollIntoView({
-behavior:"smooth"
-})
+    if (elementTop < windowHeight - visiblePoint) {
+      element.classList.add("active");
+    }
+  });
+};
 
-})
-
-})
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
