@@ -8,293 +8,137 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <!-- Tipografías -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700&family=VT323&display=swap" rel="stylesheet">
-
-  <!-- Iconos -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- NAV -->
-  <header class="navbar">
-    <div class="container nav-inner">
-      <a class="brand" href="#inicio">FredyGR</a>
-
-      <nav class="nav-links">
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#habilidades">Habilidades</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#contacto">Contacto</a>
-
-        <button id="themeToggle" class="icon-btn" aria-label="Cambiar tema">
-          <i class="fa-regular fa-moon"></i>
-        </button>
-
-        <button class="icon-btn" aria-label="Modo retro" onclick="toggleRetro()">
-          <i class="fa-solid fa-gamepad"></i>
-        </button>
-      </nav>
-    </div>
-  </header>
 
   <!-- HERO -->
-  <section id="inicio" class="hero">
+  <section class="hero">
     <div class="hero-overlay"></div>
 
-    <div class="container hero-inner">
-      <div class="hero-avatar-wrap">
-        <img src="foto-perfil.jpg" alt="Foto de Fredy Geraldo" class="avatar" />
-      </div>
+    <div class="hero-content container">
+      <div class="profile-circle"></div>
 
-      <p class="hero-kicker">PORTAFOLIO PROFESIONAL</p>
-      <h1>Fredy Omar <span>Geraldo Rivera</span></h1>
+      <h1>FREDY OMAR<br>GERALDO RIVERA</h1>
+      <p class="hero-subtitle">Ingeniero Comercial | Especialista en Machine Learning</p>
 
-      <p class="subtitle">Ingeniero Comercial | Especialista en Machine Learning</p>
-
-      <p class="lead">
-        Especializado en análisis de datos, control de gestión y automatización de procesos.
-        Combino enfoque de negocio con herramientas técnicas para transformar información en decisiones útiles.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn primary" href="#proyectos">
-          <i class="fa-solid fa-diagram-project"></i> Ver proyectos
-        </a>
-        <a class="btn" href="#contacto">
-          <i class="fa-regular fa-envelope"></i> Contacto
-        </a>
-        <a class="btn" href="CV-Fredy-Geraldo.pdf" target="_blank">
-          <i class="fa-regular fa-file-lines"></i> Descargar CV
-        </a>
-      </div>
-
-      <div class="terminal-line">
-        <span>&gt; loading portfolio...</span>
-        <span>&gt; data systems ready</span>
+      <div class="hero-buttons">
+        <a href="#proyectos" class="hero-btn">VER PROYECTOS</a>
+        <a href="#contacto" class="hero-btn">CONTACTO</a>
+        <a href="CV-Fredy-Geraldo.pdf" target="_blank" class="hero-btn">DESCARGAR CV</a>
       </div>
     </div>
   </section>
 
   <!-- SOBRE MÍ -->
-  <section id="sobre-mi" class="section section-soft">
+  <section class="section section-lila" id="sobre-mi">
     <div class="container">
-      <h2 class="section-title">&gt; Sobre mí</h2>
+      <h2>&gt; SOBRE MÍ</h2>
 
-      <div class="grid about-grid">
-        <article class="card padded">
-          <h3 class="card-title">Perfil profesional</h3>
+      <div class="about-grid">
+        <div class="info-box">
+          <h3>PERFIL PROFESIONAL</h3>
           <p>
-            Ingeniero Comercial especializado en Machine Learning, con foco en análisis de datos, control de gestión y automatización.
-            He desarrollado soluciones orientadas a ordenar información, reducir tiempos operativos y estandarizar procesos.
+            Ingeniero Comercial especializado en Machine Learning, con foco en análisis de datos,
+            control de gestión y automatización. He desarrollado soluciones en contextos municipales
+            que reducen tiempos operativos y estandarizan procesos.
           </p>
           <p>
-            Mi interés está en construir herramientas simples, robustas y mantenibles, combinando lógica de negocio con tecnología.
+            Mi motivación es traducir datos en decisiones y construir herramientas simples,
+            robustas y mantenibles.
           </p>
-        </article>
+        </div>
 
-        <article class="card padded">
-          <h3 class="card-title">Educación</h3>
+        <div class="info-box">
+          <h3>EDUCACIÓN</h3>
 
-          <ul class="edu">
-            <li>
-              <strong>Ingeniería Comercial</strong><br>
-              Universidad Católica del Norte (UCN) — 2018–2023
-            </li>
-            <li>
-              <strong>Especialización en Machine Learning</strong><br>
-              Kibernum · Talento Digital para Chile — 2025
-            </li>
-          </ul>
-        </article>
+          <div class="edu-card">
+            <strong>Ingeniería Comercial</strong><br>
+            Universidad Católica del Norte (UCN)<br>
+            2018–2023
+          </div>
+
+          <div class="edu-card">
+            <strong>Especialización en Machine Learning</strong><br>
+            Kibernum · Talento Digital para Chile<br>
+            2025
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- HABILIDADES -->
-  <section id="habilidades" class="section section-lilac">
+  <section class="section section-lila-soft" id="habilidades">
     <div class="container">
-      <h2 class="section-title">&gt; Habilidades técnicas</h2>
+      <h2>&gt; HABILIDADES TÉCNICAS</h2>
 
       <div class="skills-grid">
-        <article class="skill-column">
+        <div class="skill-col">
           <h3>Lenguajes</h3>
-          <div class="skill-list">
-            <span class="skill-pill"><i class="fa-brands fa-python"></i> Python</span>
-            <span class="skill-pill"><i class="fa-solid fa-database"></i> SQL</span>
-            <span class="skill-pill"><i class="fa-solid fa-chart-column"></i> RStudio</span>
-          </div>
-        </article>
+          <div class="pill"><i class="fa-brands fa-python"></i> Python</div>
+          <div class="pill"><i class="fa-solid fa-database"></i> SQL</div>
+          <div class="pill"><i class="fa-solid fa-r"></i> R Studios</div>
+        </div>
 
-        <article class="skill-column">
-          <h3>Análisis de datos</h3>
-          <div class="skill-list">
-            <span class="skill-pill">Pandas</span>
-            <span class="skill-pill">NumPy</span>
-            <span class="skill-pill">Scikit-Learn</span>
-            <span class="skill-pill">Excel Avanzado</span>
-          </div>
-        </article>
+        <div class="skill-col">
+          <h3>Análisis de Datos</h3>
+          <div class="pill">Pandas</div>
+          <div class="pill">Scikit-Learn</div>
+        </div>
 
-        <article class="skill-column">
+        <div class="skill-col">
           <h3>Visualización</h3>
-          <div class="skill-list">
-            <span class="skill-pill"><i class="fa-solid fa-chart-pie"></i> Power BI</span>
-            <span class="skill-pill"><i class="fa-solid fa-file-excel"></i> Excel</span>
-            <span class="skill-pill"><i class="fa-solid fa-chart-line"></i> Dashboards</span>
-          </div>
-        </article>
-
-        <article class="skill-column">
-          <h3>Automatización</h3>
-          <div class="skill-list">
-            <span class="skill-pill">VBA</span>
-            <span class="skill-pill">Flask</span>
-            <span class="skill-pill">FastAPI</span>
-            <span class="skill-pill">APIs</span>
-          </div>
-        </article>
+          <div class="pill"><i class="fa-solid fa-chart-column"></i> Power BI</div>
+          <div class="pill"><i class="fa-solid fa-file-excel"></i> Excel</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PROYECTOS -->
-  <section id="proyectos" class="section section-light">
+  <section class="section section-light" id="proyectos">
     <div class="container">
-      <h2 class="section-title dark">&gt; Proyectos realizados</h2>
-      <p class="section-lead dark">
-        Proyectos enfocados en machine learning, automatización y análisis de datos aplicados.
-      </p>
+      <h2>&gt; PROYECTOS REALIZADOS</h2>
 
-      <div class="projects-grid">
-        <article class="project-card featured">
-          <img src="project-breast-cancer.png" alt="Ilustración del detector de cáncer de mama" class="project-image" />
+      <div class="project-card">
+        <img src="detector-cancer-mama.jpg" alt="Detector de cáncer de mama" class="project-image" />
 
-          <div class="project-body">
-            <h3>Detector de Cáncer de Mama</h3>
-            <p>
-              Sistema desarrollado para estimar la probabilidad de cáncer de mama mediante un modelo de
-              <strong>Random Forest</strong> entrenado con el dataset <strong>Breast Cancer</strong>.
-              Incluye gestión de registros en base de datos personal y visualización mediante dashboard en <strong>Power BI</strong>.
-            </p>
+        <div class="project-content">
+          <h3>Detector de Cáncer de Mama</h3>
+          <p>
+            Aplicación que estima la probabilidad de cáncer de mama mediante un modelo
+            <strong>Random Forest</strong> entrenado con el dataset <strong>Breast Cancer</strong>.
+            El sistema permite registrar evaluaciones en una base de datos personal y visualizar
+            los resultados a través de un <strong>dashboard en Power BI</strong>.
+          </p>
 
-            <div class="tags">
-              <span>Python</span>
-              <span>Random Forest</span>
-              <span>SQL</span>
-              <span>Power BI</span>
-            </div>
-
-            <a class="project-link" href="#" target="_blank">
-              Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-body">
-            <h3>Clasificador de Sentimientos</h3>
-            <p>
-              Pipeline NLP para clasificación de reseñas utilizando procesamiento de lenguaje natural
-              y despliegue de API para evaluación de resultados.
-            </p>
-
-            <div class="tags">
-              <span>Python</span>
-              <span>NLP</span>
-              <span>Flask</span>
-              <span>Scikit-Learn</span>
-            </div>
-
-            <a class="project-link" href="#" target="_blank">
-              Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-body">
-            <h3>Control de Gestión – Madurez Digital</h3>
-            <p>
-              Trabajo orientado al análisis comparativo de madurez digital con enfoque de benchmarking
-              y Balanced Scorecard para apoyar evaluación estratégica.
-            </p>
-
-            <div class="tags">
-              <span>Excel</span>
-              <span>BSC</span>
-              <span>Benchmarking</span>
-            </div>
-
-            <a class="project-link" href="#" target="_blank">
-              Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="project-body">
-            <h3>Sistema de Gestión Municipal</h3>
-            <p>
-              Soluciones en Excel/VBA para cementerio, patentes y control presupuestario,
-              enfocadas en búsqueda eficiente, estandarización y apoyo a procesos administrativos.
-            </p>
-
-            <div class="tags">
-              <span>Excel</span>
-              <span>VBA</span>
-              <span>Dashboards</span>
-              <span>Automatización</span>
-            </div>
-
-            <a class="project-link" href="#" target="_blank">
-              Ver detalles <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </div>
-        </article>
+          <p class="project-tech">
+            Tecnologías utilizadas:<br>
+            Python · Machine Learning · SQL · Random Forest · Power BI
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACTO / CIERRE -->
-  <section id="contacto" class="contact-hero">
+  <!-- CONTACTO -->
+  <section class="contact-section" id="contacto">
     <div class="contact-overlay"></div>
 
-    <div class="container contact-inner">
-      <h2>Contactémonos</h2>
-      <p class="section-lead">
-        Disponible para oportunidades en análisis de datos, automatización y proyectos con enfoque práctico.
-      </p>
+    <div class="container contact-content">
+      <h2>CONTACTÉMONOS</h2>
 
-      <div class="contact-boxes">
-        <a class="contact-pill" href="mailto:fredy.geraldo.r@gmail.com">
-          fredy.geraldo.r@gmail.com
-        </a>
-        <a class="contact-pill" href="https://github.com/tu_usuario" target="_blank">
-          GitHub
-        </a>
-        <a class="contact-pill" href="https://www.linkedin.com/in/tuusuario" target="_blank">
-          LinkedIn
-        </a>
-        <span class="contact-pill">
-          +56 9 8825 8526
-        </span>
+      <div class="contact-grid">
+        <a href="mailto:fredy.geraldo.r@gmail.com" class="contact-pill">fredy.geraldo.r@gmail.com</a>
+        <a href="https://github.com/tu_usuario" target="_blank" class="contact-pill">Github</a>
+        <span class="contact-pill">+56 9 8825 8526</span>
       </div>
-
-      <p class="closing-line">Construyendo soluciones con datos</p>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>© 2025 Fredy Omar Geraldo Rivera</div>
-      <a href="#inicio" class="back-top">
-        <i class="fa-solid fa-arrow-up"></i> Volver arriba
-      </a>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
