@@ -1,158 +1,188 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fredy Omar Geraldo Rivera | Portafolio</title>
 
-<title>Fredy Omar Geraldo Rivera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<!-- HERO -->
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-content">
+      <a href="#" class="logo">FGR</a>
 
-<section class="hero">
+      <nav class="nav-links">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="hero-overlay">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
 
-<div class="profile-pic"></div>
+    <div class="container hero-content reveal">
+      <div class="profile-pic"></div>
 
-<h1>FREDY OMAR <br> GERALDO RIVERA</h1>
+      <h1>FREDY OMAR<br>GERALDO RIVERA</h1>
 
-<p class="subtitle">
-Ingeniero Comercial Especialista en Machine Learning
-</p>
+      <p class="hero-subtitle">
+        Ingeniero Comercial especializado en análisis de datos, control de gestión y Machine Learning.
+      </p>
 
-<div class="hero-buttons">
+      <div class="hero-buttons">
+        <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-secondary">Contacto</a>
+        <a href="cv.pdf" class="btn btn-secondary" target="_blank">Descargar CV</a>
+      </div>
+    </div>
+  </section>
 
-<a href="#proyectos" class="btn">VER PROYECTOS</a>
+  <!-- SOBRE MI -->
+  <section id="sobre-mi" class="section section-soft">
+    <div class="container">
+      <h2 class="section-title reveal">&gt; SOBRE MÍ</h2>
 
-<a href="#contacto" class="btn">CONTACTO</a>
+      <div class="about-grid">
+        <article class="card glass reveal">
+          <h3>Perfil profesional</h3>
+          <p>
+            Ingeniero Comercial con especialización en Machine Learning, con foco en análisis de datos,
+            control de gestión y automatización. Me interesa desarrollar soluciones que conecten
+            el negocio con herramientas prácticas, claras y mantenibles.
+          </p>
+        </article>
 
-<a href="cv.pdf" class="btn">DESCARGAR CV</a>
+        <article class="card glass reveal">
+          <h3>Educación</h3>
 
-</div>
+          <div class="edu-item">
+            <strong>Ingeniería Comercial</strong>
+            <span>Universidad Católica del Norte</span>
+          </div>
 
-</div>
+          <div class="edu-item">
+            <strong>Especialización en Machine Learning</strong>
+            <span>Talento Digital para Chile</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-</section>
+  <!-- HABILIDADES -->
+  <section id="habilidades" class="section">
+    <div class="container">
+      <h2 class="section-title reveal">&gt; HABILIDADES TÉCNICAS</h2>
 
+      <div class="skills-columns">
+        <div class="skill-group reveal">
+          <h3>Lenguajes</h3>
+          <div class="chips">
+            <span class="chip">Python</span>
+            <span class="chip">SQL</span>
+            <span class="chip">R Studio</span>
+          </div>
+        </div>
 
-<!-- SOBRE MI -->
+        <div class="skill-group reveal">
+          <h3>Análisis de Datos</h3>
+          <div class="chips">
+            <span class="chip">Pandas</span>
+            <span class="chip">Scikit-Learn</span>
+            <span class="chip">Machine Learning</span>
+          </div>
+        </div>
 
-<section class="about">
+        <div class="skill-group reveal">
+          <h3>Visualización</h3>
+          <div class="chips">
+            <span class="chip">Power BI</span>
+            <span class="chip">Excel</span>
+            <span class="chip">Dashboards</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>> SOBRE MÍ</h2>
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="section section-soft">
+    <div class="container">
+      <h2 class="section-title reveal">&gt; PROYECTOS REALIZADOS</h2>
 
-<div class="about-grid">
+      <div class="projects-grid">
+        <article class="project-card reveal">
+          <div class="project-image-wrapper">
+            <img src="img/project-breast-cancer.png" alt="Proyecto detector de cáncer de mama">
+          </div>
 
-<div class="card">
+          <div class="project-content">
+            <h3>Detector de Cáncer de Mama</h3>
 
-<h3>PERFIL PROFESIONAL</h3>
+            <p>
+              Aplicación enfocada en predicción y análisis de registros clínicos, combinando
+              Machine Learning, visualización de datos y una propuesta de integración orientada
+              a la gestión de información.
+            </p>
 
-<p>
-Ingeniero Comercial especializado en Machine Learning,
-con foco en análisis de datos, control de gestión y
-automatización.
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Scikit-Learn</span>
+              <span>Random Forest</span>
+              <span>Power BI</span>
+            </div>
 
-Motivado en crear soluciones simples,
-robustas y mantenibles.
-</p>
+            <div class="project-actions">
+              <a href="#" class="btn btn-primary">Ver detalle</a>
+              <a href="#" class="btn btn-secondary">Repositorio</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-</div>
+  <!-- CONTACTO -->
+  <section id="contacto" class="contact-section">
+    <div class="contact-overlay"></div>
 
-<div class="card">
+    <div class="container contact-content">
+      <h2 class="section-title reveal">CONTACTO</h2>
 
-<h3>EDUCACIÓN</h3>
+      <p class="contact-text reveal">
+        Si buscas a alguien con enfoque analítico, criterio de negocio y ganas reales de construir soluciones útiles, conversemos.
+      </p>
 
-<p>
-Ingeniería Comercial<br>
-Universidad Católica del Norte
-</p>
+      <div class="contact-grid">
+        <a class="contact-card reveal" href="mailto:fredy.geraldo.r@gmail.com">
+          <span class="contact-label">Correo</span>
+          <span class="contact-value">fredy.geraldo.r@gmail.com</span>
+        </a>
 
-<p>
-Especialización Machine Learning<br>
-Talento Digital
-</p>
+        <a class="contact-card reveal" href="https://github.com/" target="_blank">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-value">Ver perfil</span>
+        </a>
 
-</div>
+        <a class="contact-card reveal" href="tel:+56988258526">
+          <span class="contact-label">Teléfono</span>
+          <span class="contact-value">+56 9 8825 8526</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-</div>
-
-</section>
-
-
-<!-- HABILIDADES -->
-
-<section class="skills">
-
-<h2>> HABILIDADES TÉCNICAS</h2>
-
-<div class="skills-grid">
-
-<div class="skill">Python</div>
-<div class="skill">SQL</div>
-<div class="skill">R</div>
-
-<div class="skill">Pandas</div>
-<div class="skill">Scikit-Learn</div>
-
-<div class="skill">Power BI</div>
-<div class="skill">Excel</div>
-
-</div>
-
-</section>
-
-
-<!-- PROYECTOS -->
-
-<section id="proyectos" class="projects">
-
-<h2>> PROYECTOS REALIZADOS</h2>
-
-<div class="project-card">
-
-<img src="img/cancer_project.jpg">
-
-<h3>Detector de Cáncer de Mama</h3>
-
-<p>
-Aplicación que utiliza un modelo de Machine Learning
-para predecir la probabilidad de cáncer de mama.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- CONTACTO -->
-
-<section id="contacto" class="contact">
-
-<h2>CONTACTO</h2>
-
-<div class="contact-grid">
-
-<div class="contact-box">fredy.geraldo.r@gmail.com</div>
-
-<div class="contact-box">Github</div>
-
-<div class="contact-box">+56 9 8825 8526</div>
-
-</div>
-
-</section>
-
-
-<script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
