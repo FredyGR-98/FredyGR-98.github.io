@@ -35,20 +35,30 @@ document.addEventListener("DOMContentLoaded", () => {
         navMenu.classList.remove("open");
       }
     });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 820) {
+        navMenu.classList.remove("open");
+      }
+    });
   }
 
   /* =========================================
      2. LINK ACTIVO SEGÚN SECCIÓN
   ========================================= */
   const activateNavLink = () => {
-    let currentSectionId = "";
+    let currentSectionId = "inicio";
 
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 140;
+      const sectionTop = section.offsetTop - 160;
       const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute("id");
 
-      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-        currentSectionId = section.getAttribute("id");
+      if (
+        window.scrollY >= sectionTop &&
+        window.scrollY < sectionTop + sectionHeight
+      ) {
+        currentSectionId = sectionId;
       }
     });
 
@@ -68,21 +78,36 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================
      3. ANIMACIÓN DE ENTRADA (REVEAL)
   ========================================= */
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-    }
-  );
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+      }
+    );
 
-  revealElements.forEach((element) => {
-    revealObserver.observe(element);
-  });
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("visible");
+    });
+  }
+
+  /* =========================================
+     4. SEGURIDAD EXTRA PARA VISIBILIDAD
+  ========================================= */
+  setTimeout(() => {
+    revealElements.forEach((element) => {
+      element.classList.add("visible");
+    });
+  }, 250);
 });
