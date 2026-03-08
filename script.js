@@ -1,16 +1,88 @@
-// Scroll suave
+/* =========================================================
+   PORTAFOLIO - SCRIPT PRINCIPAL
+   Funciones:
+   1. Menú responsive
+   2. Activación de links según sección visible
+   3. Animación reveal al hacer scroll
+========================================================= */
 
-document.querySelectorAll("nav a").forEach(anchor => {
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const navMenu = document.getElementById("nav-menu");
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("main section[id]");
+  const revealElements = document.querySelectorAll(".reveal");
 
-anchor.addEventListener("click", function(e) {
+  /* =========================================
+     1. MENÚ HAMBURGUESA
+  ========================================= */
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("open");
+    });
 
-e.preventDefault();
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+      });
+    });
 
-document.querySelector(this.getAttribute("href"))
-.scrollIntoView({
-behavior: "smooth"
-});
+    document.addEventListener("click", (event) => {
+      const clickedInsideMenu = navMenu.contains(event.target);
+      const clickedToggle = menuToggle.contains(event.target);
 
-});
+      if (!clickedInsideMenu && !clickedToggle) {
+        navMenu.classList.remove("open");
+      }
+    });
+  }
 
+  /* =========================================
+     2. LINK ACTIVO SEGÚN SECCIÓN
+  ========================================= */
+  const activateNavLink = () => {
+    let currentSectionId = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 140;
+      const sectionHeight = section.offsetHeight;
+
+      if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+        currentSectionId = section.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+
+      const href = link.getAttribute("href");
+      if (href === `#${currentSectionId}`) {
+        link.classList.add("active");
+      }
+    });
+  };
+
+  window.addEventListener("scroll", activateNavLink);
+  activateNavLink();
+
+  /* =========================================
+     3. ANIMACIÓN DE ENTRADA (REVEAL)
+  ========================================= */
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15,
+    }
+  );
+
+  revealElements.forEach((element) => {
+    revealObserver.observe(element);
+  });
 });
