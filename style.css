@@ -505,9 +505,7 @@ ul {
 }
 
 .profile-info p {
-  color: var(--text-soft);
-  margin-bottom: 16px;
-  text-align: justify;
+  text-align: center;
 }
 
 .profile-info--dark h3 {
