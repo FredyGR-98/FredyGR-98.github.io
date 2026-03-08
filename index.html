@@ -6,7 +6,7 @@
   <title>Fredy Omar Geraldo Rivera | Portafolio</title>
   <meta
     name="description"
-    content="Portafolio profesional de Fredy Omar Geraldo Rivera, orientado a análisis de datos, machine learning, dashboards y automatización."
+    content="Portafolio profesional de Fredy Omar Geraldo Rivera, Ingeniero Comercial y Analista de Datos con enfoque en Machine Learning."
   />
 
   <!-- Tipografías -->
@@ -25,6 +25,12 @@
     referrerpolicy="no-referrer"
   />
 
+  <!-- Devicons para skills -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+  />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -38,7 +44,7 @@
   <!-- =========================
        HEADER / NAVBAR
   ========================== -->
-  <header class="header" id="inicio">
+  <header class="header">
     <div class="container nav-container">
       <a href="#inicio" class="logo">
         <span class="logo-mark">F</span>
@@ -65,7 +71,7 @@
     <!-- =========================
          HERO
     ========================== -->
-    <section class="hero section">
+    <section class="hero section" id="inicio">
       <div class="hero-backdrop"></div>
 
       <div class="container hero-container">
@@ -80,36 +86,21 @@
           </h1>
 
           <h2>
-            Analista de Datos | Machine Learning | Automatización y Dashboards
+            Ingeniero Comercial | Analista de Datos con enfoque en Machine Learning
           </h2>
 
           <p class="hero-description">
-            Construyo soluciones orientadas a datos con enfoque práctico:
-            análisis, visualización, automatización de procesos y desarrollo de
-            proyectos aplicados con Python, SQL, Power BI y Excel.
+            Combino formación empresarial con herramientas de análisis de datos,
+            control de gestión y automatización de procesos para desarrollar
+            soluciones prácticas que apoyen la toma de decisiones.
           </p>
 
           <div class="hero-actions">
             <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-            <a href="#contacto" class="btn btn-secondary">Contacto</a>
-            <a href="cv-fredy-geraldo.pdf" class="btn btn-ghost" download>
+            <a href="CV Fredy Geraldo Rivera (6).pdf" class="btn btn-ghost" download>
               Descargar CV
             </a>
-          </div>
-
-          <div class="hero-highlights">
-            <div class="highlight-card">
-              <span class="highlight-number">Data</span>
-              <span class="highlight-label">Análisis y reporting</span>
-            </div>
-            <div class="highlight-card">
-              <span class="highlight-number">ML</span>
-              <span class="highlight-label">Modelos y evaluación</span>
-            </div>
-            <div class="highlight-card">
-              <span class="highlight-number">BI</span>
-              <span class="highlight-label">Dashboards y métricas</span>
-            </div>
+            <a href="#contacto" class="btn btn-secondary">Contacto</a>
           </div>
         </div>
 
@@ -121,28 +112,22 @@
               class="hero-bg-image"
             />
 
-            <div class="profile-card">
-              <div class="profile-frame">
+            <div class="profile-card profile-card--light">
+              <div class="profile-frame profile-frame--moon">
                 <img
                   src="img/foto-perfil.jpg"
                   alt="Foto de perfil de Fredy Omar Geraldo Rivera"
-                  class="profile-image"
+                  class="profile-image profile-image--circle"
                 />
               </div>
 
-              <div class="profile-info">
+              <div class="profile-info profile-info--dark">
                 <h3>Perfil profesional</h3>
                 <p>
-                  Enfocado en transformar datos en información útil para la toma
-                  de decisiones.
+                  Ingeniero Comercial especializado en Machine Learning, con un
+                  enfoque en análisis de datos, control de gestión y automatización
+                  de procesos.
                 </p>
-              </div>
-
-              <div class="tech-pills">
-                <span>Python</span>
-                <span>SQL</span>
-                <span>Power BI</span>
-                <span>Excel</span>
               </div>
             </div>
           </div>
@@ -168,25 +153,26 @@
         <div class="about-grid">
           <article class="glass-card reveal">
             <div class="card-icon">
-              <i class="fa-solid fa-user-tie"></i>
+              <i class="fa-solid fa-graduation-cap"></i>
             </div>
-            <h3>Perfil profesional</h3>
+            <h3>Formación académica</h3>
             <p>
-              Profesional orientado al análisis de datos, machine learning y
-              automatización de procesos. Me enfoco en construir soluciones
-              claras, medibles y útiles para contextos reales.
+              Ingeniero Comercial de la Universidad Católica del Norte, con una
+              formación orientada a comprender procesos organizacionales, análisis
+              estratégico y toma de decisiones basadas en datos.
             </p>
           </article>
 
           <article class="glass-card reveal delay-1">
             <div class="card-icon">
-              <i class="fa-solid fa-graduation-cap"></i>
+              <i class="fa-solid fa-brain"></i>
             </div>
-            <h3>Educación</h3>
+            <h3>Especialización y aprendizaje continuo</h3>
             <p>
-              Formación en análisis de datos y especialización en machine
-              learning, complementada con proyectos prácticos en Python, SQL,
-              visualización y modelado aplicado.
+              Especialización en Machine Learning a través de Talento Digital para
+              Chile junto a Kibernum, complementada con aprendizaje autodidacta y
+              un interés constante por nuevas herramientas que permitan mejorar
+              procesos, análisis y soluciones tecnológicas.
             </p>
           </article>
 
@@ -194,11 +180,12 @@
             <div class="card-icon">
               <i class="fa-solid fa-briefcase"></i>
             </div>
-            <h3>Enfoque laboral</h3>
+            <h3>Enfoque profesional</h3>
             <p>
-              Busco aportar en roles donde pueda combinar análisis, dashboards,
-              automatización y pensamiento estructurado para optimizar procesos y
-              apoyar la toma de decisiones.
+              Busco aportar en roles donde pueda combinar análisis de datos,
+              automatización de procesos y desarrollo de dashboards, utilizando
+              herramientas tecnológicas para optimizar procesos y apoyar la toma
+              de decisiones.
             </p>
           </article>
         </div>
@@ -219,35 +206,83 @@
           </p>
         </div>
 
-        <div class="skills-grid">
+        <div class="skills-grid skills-grid--icons">
           <article class="skill-card reveal">
-            <h3>Lenguajes</h3>
-            <ul class="skill-list">
-              <li><span>Python</span><div class="skill-bar"><span style="width: 90%"></span></div></li>
-              <li><span>SQL</span><div class="skill-bar"><span style="width: 85%"></span></div></li>
-              <li><span>JavaScript</span><div class="skill-bar"><span style="width: 60%"></span></div></li>
-              <li><span>HTML / CSS</span><div class="skill-bar"><span style="width: 75%"></span></div></li>
-            </ul>
+            <h3>Lenguajes y desarrollo</h3>
+            <div class="skill-icon-grid">
+              <div class="skill-icon-item">
+                <i class="devicon-python-plain"></i>
+                <span>Python</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-mysql-plain"></i>
+                <span>SQL</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-javascript-plain"></i>
+                <span>JavaScript</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-html5-plain"></i>
+                <span>HTML</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-css3-plain"></i>
+                <span>CSS</span>
+              </div>
+            </div>
           </article>
 
           <article class="skill-card reveal delay-1">
-            <h3>Análisis de datos</h3>
-            <ul class="skill-list">
-              <li><span>Pandas / NumPy</span><div class="skill-bar"><span style="width: 88%"></span></div></li>
-              <li><span>Machine Learning</span><div class="skill-bar"><span style="width: 78%"></span></div></li>
-              <li><span>Automatización</span><div class="skill-bar"><span style="width: 84%"></span></div></li>
-              <li><span>Excel avanzado</span><div class="skill-bar"><span style="width: 92%"></span></div></li>
-            </ul>
+            <h3>Análisis de datos y Machine Learning</h3>
+            <div class="skill-icon-grid">
+              <div class="skill-icon-item">
+                <i class="devicon-pandas-original"></i>
+                <span>Pandas</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-numpy-original"></i>
+                <span>NumPy</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-scikitlearn-plain"></i>
+                <span>Scikit-learn</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="fa-solid fa-robot"></i>
+                <span>Machine Learning</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="fa-solid fa-table"></i>
+                <span>Excel avanzado</span>
+              </div>
+            </div>
           </article>
 
           <article class="skill-card reveal delay-2">
-            <h3>Visualización</h3>
-            <ul class="skill-list">
-              <li><span>Power BI</span><div class="skill-bar"><span style="width: 82%"></span></div></li>
-              <li><span>Matplotlib / Seaborn</span><div class="skill-bar"><span style="width: 74%"></span></div></li>
-              <li><span>Dashboards</span><div class="skill-bar"><span style="width: 86%"></span></div></li>
-              <li><span>Storytelling con datos</span><div class="skill-bar"><span style="width: 80%"></span></div></li>
-            </ul>
+            <h3>Visualización y herramientas</h3>
+            <div class="skill-icon-grid">
+              <div class="skill-icon-item">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Power BI</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-matplotlib-plain"></i>
+                <span>Matplotlib</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Dashboards</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-fastapi-plain"></i>
+                <span>FastAPI</span>
+              </div>
+              <div class="skill-icon-item">
+                <i class="devicon-streamlit-plain"></i>
+                <span>Streamlit</span>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -260,10 +295,11 @@
       <div class="container">
         <div class="section-heading reveal">
           <p class="section-tag">Proyectos</p>
-          <h2>Proyecto destacado</h2>
+          <h2>Trabajos realizados</h2>
           <p>
-            Un ejemplo de trabajo aplicado que combina análisis, modelado,
-            visualización y foco en presentación profesional.
+            Un ejemplo de trabajo aplicado que combina machine learning,
+            integración con base de datos y visualización orientada a la toma de
+            decisiones.
           </p>
         </div>
 
@@ -285,23 +321,31 @@
             <h3>Detector de cáncer de mama</h3>
 
             <p>
-              Proyecto orientado a la clasificación de casos utilizando técnicas
-              de machine learning, acompañado por una interfaz de presentación,
-              análisis exploratorio, métricas y visualización de resultados para
-              comunicar hallazgos de forma clara.
+              Proyecto enfocado en detectar tumores malignos a través de Machine
+              Learning utilizando el dataset correspondiente. Como añadido, se
+              incorporó la posibilidad de registrar consultas realizadas en una
+              nueva base de datos, cuya información puede visualizarse mediante un
+              dashboard para su análisis.
             </p>
 
             <div class="project-tech">
               <span>Python</span>
+              <span>Scikit-learn</span>
               <span>SQL</span>
               <span>Machine Learning</span>
               <span>Power BI</span>
-              <span>Streamlit / Frontend</span>
+              <span>Streamlit</span>
             </div>
 
             <div class="project-actions">
-              <a href="#" class="btn btn-primary">Ver repositorio</a>
-              <a href="#" class="btn btn-secondary">Ver detalle</a>
+              <a
+                href="https://github.com/FredyGR-98/detector-cancer-mama-mlops.git"
+                class="btn btn-primary"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver repositorio
+              </a>
             </div>
           </div>
         </article>
@@ -317,30 +361,36 @@
       <div class="container contact-container">
         <div class="section-heading reveal">
           <p class="section-tag">Contacto</p>
-          <h2>Conversemos</h2>
+          <h2>Contactemos</h2>
           <p>
             Estoy abierto a oportunidades relacionadas con análisis de datos,
-            dashboards, automatización y proyectos tecnológicos aplicados.
+            machine learning, dashboards y desarrollo de soluciones tecnológicas
+            basadas en datos.
           </p>
         </div>
 
         <div class="contact-grid">
-          <a href="mailto:tuemail@correo.com" class="contact-card reveal">
+          <a href="mailto:fredy.geraldo.r@gmail.com" class="contact-card reveal">
             <i class="fa-solid fa-envelope"></i>
             <h3>Email</h3>
-            <p>tuemail@correo.com</p>
+            <p>fredy.geraldo.r@gmail.com</p>
           </a>
 
-          <a href="https://github.com/tuusuario" target="_blank" class="contact-card reveal delay-1">
+          <a
+            href="https://github.com/FredyGR-98"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="contact-card reveal delay-1"
+          >
             <i class="fa-brands fa-github"></i>
             <h3>GitHub</h3>
-            <p>github.com/tuusuario</p>
+            <p>github.com/FredyGR-98</p>
           </a>
 
-          <a href="tel:+56900000000" class="contact-card reveal delay-2">
+          <a href="tel:+56988258526" class="contact-card reveal delay-2">
             <i class="fa-solid fa-phone"></i>
             <h3>Teléfono</h3>
-            <p>+56 9 0000 0000</p>
+            <p>+56 9 8825 8526</p>
           </a>
         </div>
       </div>
@@ -351,9 +401,8 @@
        FOOTER
   ========================== -->
   <footer class="footer">
-    <div class="container footer-content">
+    <div class="container footer-content footer-content--single">
       <p>© 2026 Fredy Omar Geraldo Rivera. Portafolio profesional.</p>
-      <p>Diseñado con enfoque tech premium + estética lofi.</p>
     </div>
   </footer>
 
