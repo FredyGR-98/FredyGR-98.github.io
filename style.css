@@ -430,7 +430,6 @@ ul {
   padding: 0;
 }
 
-/* Variante clara del hero */
 .profile-card--light {
   display: flex;
   flex-direction: column;
@@ -455,7 +454,6 @@ ul {
   );
 }
 
-/* Efecto luna */
 .profile-frame--moon {
   width: 210px;
   height: 210px;
@@ -555,8 +553,7 @@ ul {
 .glass-card,
 .skill-card,
 .project-card,
-.contact-card,
-.cv-wrapper {
+.contact-card {
   border: 1px solid var(--border);
   background: var(--bg-card);
   backdrop-filter: blur(14px);
@@ -581,8 +578,7 @@ ul {
 .glass-card:hover,
 .skill-card:hover,
 .contact-card:hover,
-.project-card:hover,
-.cv-wrapper:hover {
+.project-card:hover {
   transform: translateY(-6px);
   border-color: rgba(200, 162, 255, 0.26);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
@@ -631,7 +627,6 @@ ul {
   font-size: 1.2rem;
 }
 
-/* Estilo anterior, ya no usado */
 .skill-list,
 .skill-bar {
   display: none;
@@ -762,67 +757,6 @@ ul {
 }
 
 /* =========================================================
-   CV
-========================================================= */
-.cv-wrapper {
-  border-radius: 32px;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(20, 24, 44, 0.9), rgba(13, 17, 31, 0.98));
-  transition:
-    transform var(--transition),
-    border-color var(--transition),
-    box-shadow var(--transition);
-}
-
-.cv-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 22px 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(135deg, rgba(200, 162, 255, 0.08), rgba(143, 183, 255, 0.06));
-}
-
-.cv-toolbar-info {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--text-main);
-  font-weight: 600;
-  min-width: 0;
-}
-
-.cv-toolbar-info i {
-  color: #ff6b81;
-  font-size: 1.15rem;
-  flex-shrink: 0;
-}
-
-.cv-toolbar-info span {
-  color: var(--text-soft);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cv-viewer {
-  padding: 0;
-  background:
-    linear-gradient(180deg, rgba(10, 13, 24, 0.92), rgba(7, 9, 18, 0.98));
-}
-
-.cv-frame {
-  width: 100%;
-  height: 980px;
-  border: none;
-  display: block;
-  background: #ffffff;
-}
-
-/* =========================================================
    CONTACTO
 ========================================================= */
 .contact-section {
@@ -949,10 +883,6 @@ ul {
   .skill-icon-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
-
-  .cv-frame {
-    height: 860px;
-  }
 }
 
 @media (max-width: 820px) {
@@ -1036,20 +966,6 @@ ul {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .cv-toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 20px;
-  }
-
-  .cv-toolbar-info {
-    justify-content: flex-start;
-  }
-
-  .cv-frame {
-    height: 760px;
-  }
-
   .footer-content {
     flex-direction: column;
     justify-content: center;
@@ -1098,15 +1014,12 @@ ul {
     bottom: 18px;
     transform: translateX(-50%);
     z-index: 2;
-
     width: 88%;
     max-width: 88%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
-
     padding: 0;
     background: transparent;
     border: none;
@@ -1162,25 +1075,6 @@ ul {
   .glass-card,
   .contact-card {
     padding: 22px;
-  }
-
-  .cv-wrapper {
-    border-radius: 24px;
-  }
-
-  .cv-toolbar {
-    padding: 18px 16px;
-  }
-
-  .cv-toolbar-info span {
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-    line-height: 1.4;
-  }
-
-  .cv-frame {
-    height: 620px;
   }
 
   .section-heading {
