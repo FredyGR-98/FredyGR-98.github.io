@@ -4,137 +4,358 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fredy Omar Geraldo Rivera | Portafolio</title>
+  <meta
+    name="description"
+    content="Portafolio profesional de Fredy Omar Geraldo Rivera, orientado a análisis de datos, machine learning, dashboards y automatización."
+  />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
     rel="stylesheet"
-  >
+  />
+
+  <!-- Iconos -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- =========================
+       FONDO DECORATIVO GLOBAL
+  ========================== -->
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
 
-  <section class="hero">
-    <div class="hero-overlay"></div>
+  <!-- =========================
+       HEADER / NAVBAR
+  ========================== -->
+  <header class="header" id="inicio">
+    <div class="container nav-container">
+      <a href="#inicio" class="logo">
+        <span class="logo-mark">F</span>
+        <span class="logo-text">Fredy Geraldo</span>
+      </a>
 
-    <div class="hero-content">
-      <div class="profile-pic"></div>
+      <nav class="nav" id="nav-menu">
+        <a href="#inicio" class="nav-link active">Inicio</a>
+        <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#proyectos" class="nav-link">Proyectos</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
 
-      <h1>FREDY OMAR<br>GERALDO RIVERA</h1>
-
-      <p class="hero-subtitle">
-        Ingeniero Comercial Especialista en Machine Learning
-      </p>
-
-      <div class="hero-buttons">
-        <a href="#proyectos" class="btn">VER PROYECTOS</a>
-        <a href="#contacto" class="btn">CONTACTO</a>
-        <a href="#" class="btn">DESCARGAR CV</a>
-      </div>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
-  </section>
+  </header>
 
-  <section class="section section-soft" id="sobre-mi">
-    <h2>&gt; SOBRE MÍ</h2>
+  <main>
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section class="hero section">
+      <div class="hero-backdrop"></div>
 
-    <div class="about-grid">
-      <div class="card">
-        <h3>PERFIL PROFESIONAL</h3>
-        <p>
-          Ingeniero Comercial especializado en Machine Learning, con foco en
-          análisis de datos, control de gestión y automatización. He desarrollado
-          soluciones orientadas a procesos, reportes y visualización de información.
-          Mi motivación es crear productos útiles, claros y mantenibles.
-        </p>
-      </div>
+      <div class="container hero-container">
+        <div class="hero-text reveal">
+          <p class="eyebrow">
+            <i class="fa-solid fa-circle"></i>
+            Disponible para oportunidades en datos y analítica
+          </p>
 
-      <div class="card">
-        <h3>EDUCACIÓN</h3>
-        <p><strong>Ingeniería Comercial</strong><br>Universidad Católica del Norte</p>
-        <p><strong>Especialización en Machine Learning</strong><br>Talento Digital para Chile</p>
-      </div>
-    </div>
-  </section>
+          <h1>
+            Fredy Omar Geraldo Rivera
+          </h1>
 
-  <section class="section" id="habilidades">
-    <h2>&gt; HABILIDADES TÉCNICAS</h2>
+          <h2>
+            Analista de Datos | Machine Learning | Automatización y Dashboards
+          </h2>
 
-    <div class="skills-grid">
-      <div class="skill-column">
-        <h3>Lenguajes</h3>
-        <div class="skill-list">
-          <span class="skill-pill">Python</span>
-          <span class="skill-pill">SQL</span>
-          <span class="skill-pill">R Studio</span>
+          <p class="hero-description">
+            Construyo soluciones orientadas a datos con enfoque práctico:
+            análisis, visualización, automatización de procesos y desarrollo de
+            proyectos aplicados con Python, SQL, Power BI y Excel.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
+            <a href="#contacto" class="btn btn-secondary">Contacto</a>
+            <a href="cv-fredy-geraldo.pdf" class="btn btn-ghost" download>
+              Descargar CV
+            </a>
+          </div>
+
+          <div class="hero-highlights">
+            <div class="highlight-card">
+              <span class="highlight-number">Data</span>
+              <span class="highlight-label">Análisis y reporting</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-number">ML</span>
+              <span class="highlight-label">Modelos y evaluación</span>
+            </div>
+            <div class="highlight-card">
+              <span class="highlight-number">BI</span>
+              <span class="highlight-label">Dashboards y métricas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal delay-1">
+          <div class="hero-image-card">
+            <img
+              src="img/hero-lofi-sky.jpg"
+              alt="Fondo lofi de cielo violeta"
+              class="hero-bg-image"
+            />
+
+            <div class="profile-card">
+              <div class="profile-frame">
+                <img
+                  src="img/foto-perfil.jpg"
+                  alt="Foto de perfil de Fredy Omar Geraldo Rivera"
+                  class="profile-image"
+                />
+              </div>
+
+              <div class="profile-info">
+                <h3>Perfil profesional</h3>
+                <p>
+                  Enfocado en transformar datos en información útil para la toma
+                  de decisiones.
+                </p>
+              </div>
+
+              <div class="tech-pills">
+                <span>Python</span>
+                <span>SQL</span>
+                <span>Power BI</span>
+                <span>Excel</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="skill-column">
-        <h3>Análisis de Datos</h3>
-        <div class="skill-list">
-          <span class="skill-pill">Pandas</span>
-          <span class="skill-pill">Scikit-Learn</span>
-          <span class="skill-pill">Machine Learning</span>
+    <!-- =========================
+         SOBRE MI
+    ========================== -->
+    <section class="section" id="sobre-mi">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-tag">Sobre mí</p>
+          <h2>Perfil profesional con foco en análisis y soluciones aplicadas</h2>
+          <p>
+            Me interesa desarrollar proyectos que conecten datos, procesos y
+            decisiones, con una base sólida en análisis, automatización y mejora
+            continua.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="glass-card reveal">
+            <div class="card-icon">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3>Perfil profesional</h3>
+            <p>
+              Profesional orientado al análisis de datos, machine learning y
+              automatización de procesos. Me enfoco en construir soluciones
+              claras, medibles y útiles para contextos reales.
+            </p>
+          </article>
+
+          <article class="glass-card reveal delay-1">
+            <div class="card-icon">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3>Educación</h3>
+            <p>
+              Formación en análisis de datos y especialización en machine
+              learning, complementada con proyectos prácticos en Python, SQL,
+              visualización y modelado aplicado.
+            </p>
+          </article>
+
+          <article class="glass-card reveal delay-2">
+            <div class="card-icon">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h3>Enfoque laboral</h3>
+            <p>
+              Busco aportar en roles donde pueda combinar análisis, dashboards,
+              automatización y pensamiento estructurado para optimizar procesos y
+              apoyar la toma de decisiones.
+            </p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="skill-column">
-        <h3>Visualización</h3>
-        <div class="skill-list">
-          <span class="skill-pill">Power BI</span>
-          <span class="skill-pill">Excel</span>
-          <span class="skill-pill">Dashboards</span>
+    <!-- =========================
+         SKILLS
+    ========================== -->
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-tag">Skills</p>
+          <h2>Habilidades técnicas</h2>
+          <p>
+            Un stack orientado a analítica, automatización y desarrollo de
+            soluciones con foco en datos.
+          </p>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card reveal">
+            <h3>Lenguajes</h3>
+            <ul class="skill-list">
+              <li><span>Python</span><div class="skill-bar"><span style="width: 90%"></span></div></li>
+              <li><span>SQL</span><div class="skill-bar"><span style="width: 85%"></span></div></li>
+              <li><span>JavaScript</span><div class="skill-bar"><span style="width: 60%"></span></div></li>
+              <li><span>HTML / CSS</span><div class="skill-bar"><span style="width: 75%"></span></div></li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal delay-1">
+            <h3>Análisis de datos</h3>
+            <ul class="skill-list">
+              <li><span>Pandas / NumPy</span><div class="skill-bar"><span style="width: 88%"></span></div></li>
+              <li><span>Machine Learning</span><div class="skill-bar"><span style="width: 78%"></span></div></li>
+              <li><span>Automatización</span><div class="skill-bar"><span style="width: 84%"></span></div></li>
+              <li><span>Excel avanzado</span><div class="skill-bar"><span style="width: 92%"></span></div></li>
+            </ul>
+          </article>
+
+          <article class="skill-card reveal delay-2">
+            <h3>Visualización</h3>
+            <ul class="skill-list">
+              <li><span>Power BI</span><div class="skill-bar"><span style="width: 82%"></span></div></li>
+              <li><span>Matplotlib / Seaborn</span><div class="skill-bar"><span style="width: 74%"></span></div></li>
+              <li><span>Dashboards</span><div class="skill-bar"><span style="width: 86%"></span></div></li>
+              <li><span>Storytelling con datos</span><div class="skill-bar"><span style="width: 80%"></span></div></li>
+            </ul>
+          </article>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section section-soft" id="proyectos">
-    <h2>&gt; PROYECTOS REALIZADOS</h2>
+    <!-- =========================
+         PROYECTOS
+    ========================== -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-tag">Proyectos</p>
+          <h2>Proyecto destacado</h2>
+          <p>
+            Un ejemplo de trabajo aplicado que combina análisis, modelado,
+            visualización y foco en presentación profesional.
+          </p>
+        </div>
 
-    <div class="project-card">
-      <img src="img/project-breast-cancer.png" alt="Proyecto detector de cáncer de mama">
+        <article class="project-card reveal">
+          <div class="project-image-wrapper">
+            <img
+              src="img/project-breast-cancer.png"
+              alt="Proyecto detector de cáncer de mama"
+              class="project-image"
+            />
+          </div>
 
-      <div class="project-info">
-        <h3>Detector de Cáncer de Mama</h3>
-        <p>
-          Aplicación basada en Machine Learning para análisis de datos clínicos,
-          predicción de resultados y visualización orientada a la toma de decisiones.
-        </p>
+          <div class="project-content">
+            <div class="project-badge">
+              <i class="fa-solid fa-sparkles"></i>
+              Proyecto principal
+            </div>
 
-        <div class="project-tags">
-          <span>Python</span>
-          <span>Scikit-Learn</span>
-          <span>Random Forest</span>
-          <span>Power BI</span>
+            <h3>Detector de cáncer de mama</h3>
+
+            <p>
+              Proyecto orientado a la clasificación de casos utilizando técnicas
+              de machine learning, acompañado por una interfaz de presentación,
+              análisis exploratorio, métricas y visualización de resultados para
+              comunicar hallazgos de forma clara.
+            </p>
+
+            <div class="project-tech">
+              <span>Python</span>
+              <span>SQL</span>
+              <span>Machine Learning</span>
+              <span>Power BI</span>
+              <span>Streamlit / Frontend</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="#" class="btn btn-primary">Ver repositorio</a>
+              <a href="#" class="btn btn-secondary">Ver detalle</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- =========================
+         CONTACTO
+    ========================== -->
+    <section class="section contact-section" id="contacto">
+      <div class="contact-overlay"></div>
+
+      <div class="container contact-container">
+        <div class="section-heading reveal">
+          <p class="section-tag">Contacto</p>
+          <h2>Conversemos</h2>
+          <p>
+            Estoy abierto a oportunidades relacionadas con análisis de datos,
+            dashboards, automatización y proyectos tecnológicos aplicados.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <a href="mailto:tuemail@correo.com" class="contact-card reveal">
+            <i class="fa-solid fa-envelope"></i>
+            <h3>Email</h3>
+            <p>tuemail@correo.com</p>
+          </a>
+
+          <a href="https://github.com/tuusuario" target="_blank" class="contact-card reveal delay-1">
+            <i class="fa-brands fa-github"></i>
+            <h3>GitHub</h3>
+            <p>github.com/tuusuario</p>
+          </a>
+
+          <a href="tel:+56900000000" class="contact-card reveal delay-2">
+            <i class="fa-solid fa-phone"></i>
+            <h3>Teléfono</h3>
+            <p>+56 9 0000 0000</p>
+          </a>
         </div>
       </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>© 2026 Fredy Omar Geraldo Rivera. Portafolio profesional.</p>
+      <p>Diseñado con enfoque tech premium + estética lofi.</p>
     </div>
-  </section>
-
-  <section class="contact-section" id="contacto">
-    <div class="contact-overlay"></div>
-
-    <div class="contact-content">
-      <h2>CONTACTO</h2>
-
-      <div class="contact-grid">
-        <a href="mailto:fredy.geraldo.r@gmail.com" class="contact-box">
-          fredy.geraldo.r@gmail.com
-        </a>
-
-        <a href="https://github.com/" target="_blank" class="contact-box">
-          Github
-        </a>
-
-        <a href="tel:+56988258526" class="contact-box">
-          +56 9 8825 8526
-        </a>
-      </div>
-    </div>
-  </section>
+  </footer>
 
   <script src="script.js"></script>
 </body>
