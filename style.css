@@ -415,40 +415,39 @@ ul {
 .profile-card {
   position: absolute;
   left: 50%;
-  bottom: 30px;
+  bottom: 28px;
   transform: translateX(-50%);
-  width: 80%;
-  max-width: 480px;
-  padding: 70px 28px 28px 28px; /* espacio arriba para la foto */
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(18px);
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  width: 82%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
 /* Variante clara del hero */
 .profile-card--light {
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow:
-    0 16px 40px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.65);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .profile-frame {
-  position: absolute;
-  top: -64px;          /* hace que sobresalga */
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: 128px;
   height: 128px;
   padding: 5px;
   border-radius: 28px;
+  margin: 0 auto;
   background: linear-gradient(
     135deg,
     rgba(200, 162, 255, 0.7),
@@ -458,11 +457,11 @@ ul {
 
 /* Efecto luna */
 .profile-frame--moon {
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   padding: 8px;
   border-radius: 50%;
-  margin: 0 auto 18px;
+  margin: 0 auto;
   background:
     radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.98), rgba(238, 241, 255, 0.86) 45%, rgba(206, 214, 241, 0.78) 72%, rgba(182, 194, 232, 0.68) 100%);
   box-shadow:
@@ -470,6 +469,7 @@ ul {
     0 0 30px rgba(214, 224, 255, 0.48),
     0 0 70px rgba(200, 162, 255, 0.32);
   position: relative;
+  z-index: 2;
 }
 
 .profile-frame--moon::before {
@@ -505,16 +505,27 @@ ul {
 }
 
 .profile-info p {
+  color: var(--text-soft);
+  margin-bottom: 0;
   text-align: center;
+  text-wrap: pretty;
 }
 
-.profile-info--dark h3 {
-  color: #182033;
+.profile-info--dark {
+  width: 100%;
+  padding: 26px 28px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  text-align: center;
 }
 
 .profile-info--dark p {
   color: #33415f;
-  max-width: 340px;
+  max-width: 100%;
+  margin: 0 auto;
+  line-height: 1.7;
 }
 
 .tech-pills {
