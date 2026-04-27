@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Análisis de Sentimientos de Películas | Fredy Geraldo</title>
+  <meta
+    name="description"
+    content="Caso de NLP aplicado a reseñas IMDb con Logistic Regression, API Flask, Streamlit y despliegue reproducible."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body class="project-page-body">
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-grid"></div>
+
+  <header class="header">
+    <div class="container nav-container">
+      <a href="../index.html#proyectos" class="logo">
+        <span class="logo-mark">FG</span>
+        <span class="logo-text">Volver al portafolio</span>
+      </a>
+
+      <nav class="nav" id="nav-menu">
+        <a href="#resumen" class="nav-link active">Resumen</a>
+        <a href="#problema" class="nav-link">Problema</a>
+        <a href="#analisis" class="nav-link">Análisis</a>
+        <a href="#solucion" class="nav-link">Solución</a>
+        <a href="#resultados" class="nav-link">Resultados</a>
+        <a href="#stack" class="nav-link">Stack</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <span id="scroll-progress-bar"></span>
+  </div>
+
+  <main class="project-page-main">
+    <section class="section project-hero" id="resumen">
+      <div class="container project-hero-grid">
+        <div class="project-hero-copy reveal">
+          <p class="project-breadcrumb">
+            <a href="../index.html#proyectos">Proyectos</a>
+            <span>/</span>
+            <span>Machine Learning</span>
+          </p>
+
+          <p class="project-page-tag">NLP aplicado</p>
+          <h1>Análisis de sentimientos de películas</h1>
+          <p class="project-page-summary">
+            Este proyecto convierte texto libre en una señal interpretable de
+            percepción. Toma reseñas IMDb, aplica preprocesamiento NLP y despliega un
+            clasificador que permite probar inferencia vía API y frontend de forma
+            simple.
+          </p>
+
+          <div class="project-actions">
+            <a
+              href="https://github.com/FredyGR-98/nlp-sentiment-movies"
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver repositorio
+            </a>
+            <a href="../index.html#proyectos" class="btn btn-ghost">Más proyectos</a>
+          </div>
+
+          <p class="project-source-note">Resumen armado desde el README público del repositorio.</p>
+
+          <div class="project-meta-grid">
+            <article class="meta-card">
+              <small>Dataset</small>
+              <strong>IMDb Reviews</strong>
+              <span>25.000 reseñas evaluadas en el reporte final.</span>
+            </article>
+            <article class="meta-card">
+              <small>Modelo</small>
+              <strong>Logistic Regression</strong>
+              <span>Entrenado sobre texto vectorizado con TF-IDF.</span>
+            </article>
+            <article class="meta-card">
+              <small>Métrica</small>
+              <strong>Accuracy 88.6%</strong>
+              <span>Desempeño balanceado entre clases positiva y negativa.</span>
+            </article>
+            <article class="meta-card">
+              <small>Entrega</small>
+              <strong>API + Streamlit</strong>
+              <span>Experiencia reproducible con Docker y CI/CD.</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="reveal reveal-right delay-1">
+          <div class="illustration-placeholder">
+            <small>Ilustración pendiente</small>
+            <strong>Escena sugerida para este proyecto</strong>
+            <p>
+              Reseñas, etiquetas positiva/negativa, interfaz de texto y un ambiente
+              cinematográfico coherente con la estética general del sitio.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section project-outline">
+      <div class="container project-outline-grid">
+        <article class="project-copy-card reveal">
+          <h3>Problema de negocio</h3>
+          <p>
+            Cuando el feedback está en texto libre, cuesta convertirlo en señales
+            accionables. Este caso muestra cómo transformar opiniones dispersas en una
+            clasificación útil para lectura rápida.
+          </p>
+        </article>
+        <article class="project-copy-card reveal delay-1">
+          <h3>Qué se analizó</h3>
+          <p>
+            Se trabajó con reseñas IMDb para limpiar texto, tokenizar, vectorizar con
+            TF-IDF y entrenar un clasificador binario entre reseñas positivas y
+            negativas.
+          </p>
+        </article>
+        <article class="project-copy-card reveal delay-2">
+          <h3>Solución implementada</h3>
+          <p>
+            Se construyó un flujo con entrenamiento, artefactos serializados, API
+            Flask, frontend Streamlit, Docker Compose y automatización con GitHub
+            Actions.
+          </p>
+        </article>
+        <article class="project-copy-card reveal delay-3">
+          <h3>Resultados obtenidos</h3>
+          <p>
+            El modelo logró un desempeño consistente y dejó una ruta clara para usar
+            NLP en una experiencia simple, replicable y fácil de explicar.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="problema">
+      <div class="container project-section-grid">
+        <article class="project-copy-card reveal">
+          <h3>Qué problema resuelve</h3>
+          <p>
+            Clasificar reseñas permite pasar de miles de opiniones textuales a una
+            lectura binaria que puede servir para seguimiento de experiencia,
+            percepción de producto o triage inicial de feedback.
+          </p>
+        </article>
+        <article class="project-copy-card reveal delay-1">
+          <h3>Por qué importa</h3>
+          <p>
+            El texto es una fuente de señal rica pero costosa de revisar manualmente.
+            Un pipeline NLP bien presentado ayuda a convertirlo en información útil
+            para análisis posterior o monitoreo rápido.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="analisis">
+      <div class="container project-section-grid">
+        <article class="project-copy-card reveal">
+          <h3>Qué se analizó</h3>
+          <ul>
+            <li>Limpieza y tokenización de reseñas textuales.</li>
+            <li>Vectorización TF-IDF para traducir texto a variables numéricas.</li>
+            <li>Balance entre clases positiva y negativa en el set evaluado.</li>
+          </ul>
+        </article>
+        <article class="project-copy-card reveal delay-1">
+          <h3>Lectura analítica</h3>
+          <p>
+            El proyecto busca demostrar que NLP no tiene que quedarse en un notebook.
+            También puede exponerse con una interfaz clara para que una persona pruebe
+            ejemplos y entienda el comportamiento del clasificador.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="solucion">
+      <div class="container project-section-grid">
+        <article class="project-copy-card reveal">
+          <h3>Qué solución se implementó</h3>
+          <ul>
+            <li>Entrenamiento con Logistic Regression.</li>
+            <li>Vectorizador serializado para reproducir inferencia.</li>
+            <li>API Flask para clasificar nuevas reseñas.</li>
+            <li>Frontend Streamlit para interacción amigable.</li>
+            <li>Docker Compose y CI/CD para ejecución reproducible.</li>
+          </ul>
+        </article>
+        <article class="project-copy-card reveal delay-1">
+          <h3>Cómo se aplica en negocio</h3>
+          <p>
+            La misma lógica puede adaptarse a reseñas de clientes, tickets, encuestas
+            o comentarios abiertos donde interese una lectura rápida de tono o
+            percepción general.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="resultados">
+      <div class="container">
+        <article class="project-copy-card reveal">
+          <h3>Resultados obtenidos</h3>
+          <div class="project-key-results">
+            <span class="result-chip">Accuracy: 0.886</span>
+            <span class="result-chip">F1 negativo: 0.885</span>
+            <span class="result-chip">F1 positivo: 0.887</span>
+            <span class="result-chip">25.000 reseñas evaluadas</span>
+            <span class="result-chip">API Flask</span>
+            <span class="result-chip">Frontend Streamlit</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="container">
+        <article class="project-copy-card reveal">
+          <h3>Tecnologías utilizadas</h3>
+          <div class="project-stack">
+            <span>Python</span>
+            <span>TF-IDF</span>
+            <span>Logistic Regression</span>
+            <span>Flask</span>
+            <span>Streamlit</span>
+            <span>Docker Compose</span>
+            <span>GitHub Actions</span>
+            <span>IMDb Reviews</span>
+          </div>
+        </article>
+
+        <div class="project-link-grid">
+          <article class="project-link-card reveal">
+            <h3>Otro caso ML</h3>
+            <p>
+              Si quieres ver un proyecto donde el foco está en clasificación clínica
+              y presentación MLOps, revisa el detector de cáncer de mama.
+            </p>
+            <a href="breast-cancer-mlops.html" class="btn btn-secondary">Ver caso clínico</a>
+          </article>
+          <article class="project-link-card reveal delay-1">
+            <h3>Volver al portafolio</h3>
+            <p>
+              Explora el resto de categorías para revisar casos orientados a riesgo,
+              dashboards y capas operativas.
+            </p>
+            <a href="../index.html#proyectos" class="btn btn-secondary">Volver a proyectos</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content footer-content--single">
+      <p>© 2026 Fredy Omar Geraldo Rivera. Portafolio profesional.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
