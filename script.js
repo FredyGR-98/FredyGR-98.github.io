@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+﻿document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   const navMenu = document.getElementById("nav-menu");
   const navLinks = document.querySelectorAll(".nav-link");
@@ -54,19 +54,23 @@ document.addEventListener("DOMContentLoaded", () => {
         "El caso convierte el modelo en una herramienta mas demostrable, mas facil de validar y mejor preparada para comunicar valor."
     },
     "nlp-sentiment-movies": {
-      category: "Machine Learning",
-      title: "Analisis de sentimientos de peliculas",
+      category: "ETL / Data Engineering",
+      title: "Lector inteligente de PDFs",
       repoUrl: "https://github.com/FredyGR-98/nlp-sentiment-movies",
-      metrics: ["Accuracy 0.886", "25k resenas", "F1 0.887"],
-      visualTitle: "NLP aplicado a resenas IMDb",
+      metrics: ["OCR", "Lectura de formularios", "Scoring automatico"],
+      image: {
+        src: "project-images/project-pdf-reader.png",
+        alt: "Ilustracion del proyecto lector inteligente de PDFs"
+      },
+      visualTitle: "Lectura automatica de evaluaciones de capacitacion",
       visualText:
-        "Placeholder para resenas, polaridad positiva/negativa y un entorno visual cinematografico.",
+        "Ilustracion del flujo donde las evaluaciones se transcriben, se ordenan y se convierten en una lectura mas clara con apoyo de scoring automatico.",
       problem:
-        "El problema era transformar muchas resenas en una senal clara de percepcion, evitando revision manual caso por caso.",
+        "El problema era que revisar evaluaciones de capacitacion en formularios fisicos o PDFs consume mucho tiempo y dificulta tener una lectura clara de los resultados.",
       approach:
-        "Se uso un flujo de NLP con clasificacion y una interfaz simple para convertir opinion dispersa en una lectura rapida y facil de explorar.",
+        "La solucion propone leer documentos, transcribir respuestas y ordenarlas en una salida simple de revisar para evitar consolidaciones manuales innecesarias.",
       result:
-        "El proyecto facilita interpretar volumenes altos de opinion y deja una base util para seguimiento de percepcion o experiencia."
+        "El resultado es una revision mas agil, un score de impacto para resumir percepcion y una base mucho mas facil de analizar."
     },
     "iris-flower-classifier": {
       category: "Machine Learning",
@@ -82,21 +86,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Se priorizo claridad por sobre complejidad, conectando modelo, API, interfaz y pruebas en un caso pequeno pero facil de entender.",
       result:
         "El resultado es una base reusable para futuros servicios de ML, con una presentacion funcional y portable."
-    },
-    "fraud-data-pipeline": {
-      category: "ETL / Data Engineering",
-      title: "Pipeline de scoring para monitoreo transaccional",
-      repoUrl: "https://github.com/FredyGR-98/monitoreo-transacciones-riesgo-fraude",
-      metrics: ["10 features", "Batch scoring", "Docker Compose"],
-      visualTitle: "Flujo tecnico de scoring e integracion",
-      visualText:
-        "Placeholder para diagrama visual de payload, validacion, scoring y consumo en dashboard.",
-      problem:
-        "El problema era evitar que el analisis quedara encerrado en una capa tecnica dificil de consumir o integrar.",
-      approach:
-        "Se ordeno la arquitectura para que scoring, validacion y consumo analitico convivieran en un flujo mas claro y reutilizable.",
-      result:
-        "El resultado es una capa tecnica mas consistente, mas facil de integrar y mejor preparada para convertir analisis en capacidad operativa."
     }
   };
 

@@ -1,12 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Análisis de Sentimientos de Películas | Fredy Geraldo</title>
+  <title>Lector Inteligente de PDFs | Fredy Geraldo</title>
   <meta
     name="description"
-    content="Caso de NLP aplicado a reseñas IMDb con Logistic Regression, API Flask, Streamlit y despliegue reproducible."
+    content="Caso de lector de PDFs con OCR, extracción de texto, estructuración tabular y una interfaz simple para revisión documental."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,16 +62,16 @@
           <p class="project-breadcrumb">
             <a href="../index.html#proyectos">Proyectos</a>
             <span>/</span>
-            <span>Machine Learning</span>
+            <span>ETL / Data Engineering</span>
           </p>
 
-          <p class="project-page-tag">NLP aplicado</p>
-          <h1>Análisis de sentimientos de películas</h1>
+          <p class="project-page-tag">Evaluaciones + automatización documental</p>
+          <h1>Lector inteligente de PDFs</h1>
           <p class="project-page-summary">
-            Este proyecto convierte texto libre en una señal interpretable de
-            percepción. Toma reseñas IMDb, aplica preprocesamiento NLP y despliega un
-            clasificador que permite probar inferencia vía API y frontend de forma
-            simple.
+            Este proyecto está pensado para facilitar la revisión de evaluaciones de
+            capacitación cuando la información llega en formularios físicos o PDFs.
+            La idea es leer esos documentos, transcribir su contenido y dejar las
+            respuestas listas para analizarlas con mayor rapidez y menos trabajo manual.
           </p>
 
           <div class="project-actions">
@@ -86,41 +86,44 @@
             <a href="../index.html#proyectos" class="btn btn-ghost">Más proyectos</a>
           </div>
 
-          <p class="project-source-note">Resumen armado desde el README público del repositorio.</p>
+          <p class="project-source-note">Caso reenfocado para mostrar utilidad práctica en revisión y análisis de evaluaciones.</p>
 
           <div class="project-meta-grid">
             <article class="meta-card">
-              <small>Dataset</small>
-              <strong>IMDb Reviews</strong>
-              <span>25.000 reseñas evaluadas en el reporte final.</span>
+              <small>Entrada</small>
+              <strong>Formularios y PDFs</strong>
+              <span>Evaluaciones de capacitación que suelen revisarse una por una.</span>
             </article>
             <article class="meta-card">
-              <small>Modelo</small>
-              <strong>Logistic Regression</strong>
-              <span>Entrenado sobre texto vectorizado con TF-IDF.</span>
+              <small>Lectura</small>
+              <strong>Transcripción automática</strong>
+              <span>Contenido pasado a una base más clara y fácil de revisar.</span>
             </article>
             <article class="meta-card">
-              <small>Métrica</small>
-              <strong>Accuracy 88.6%</strong>
-              <span>Desempeño balanceado entre clases positiva y negativa.</span>
+              <small>Salida</small>
+              <strong>Resultados ordenados</strong>
+              <span>Respuestas listas para filtrar, consolidar y comparar con facilidad.</span>
             </article>
             <article class="meta-card">
-              <small>Entrega</small>
-              <strong>API + Streamlit</strong>
-              <span>Experiencia reproducible con Docker y CI/CD.</span>
+              <small>Valor</small>
+              <strong>Score de impacto</strong>
+              <span>Señal rápida para entender mejor el resultado general de la capacitación.</span>
             </article>
           </div>
         </div>
 
-        <div class="reveal reveal-right delay-1">
-          <div class="illustration-placeholder">
-            <small>Ilustración pendiente</small>
-            <strong>Escena sugerida para este proyecto</strong>
-            <p>
-              Reseñas, etiquetas positiva/negativa, interfaz de texto y un ambiente
-              cinematográfico coherente con la estética general del sitio.
-            </p>
+        <div class="project-hero-visual reveal reveal-right delay-1">
+          <div class="case-artwork project-case-artwork">
+            <img
+              src="../project-images/project-pdf-reader.png"
+              alt="Ilustración del lector inteligente de PDFs"
+              class="case-artwork-image"
+            />
           </div>
+          <p class="project-illustration-note">
+            La ilustración resume el objetivo del sistema: leer evaluaciones,
+            transcribir respuestas y convertirlas en una revisión más clara, rápida y útil.
+          </p>
         </div>
       </div>
     </section>
@@ -130,32 +133,30 @@
         <article class="project-copy-card reveal">
           <h3>Problema de negocio</h3>
           <p>
-            Cuando el feedback está en texto libre, cuesta convertirlo en señales
-            accionables. Este caso muestra cómo transformar opiniones dispersas en una
-            clasificación útil para lectura rápida.
+            Cuando una capacitación se evalúa con formularios físicos o PDFs, revisar
+            respuesta por respuesta toma tiempo y dificulta obtener una lectura general
+            de los resultados con rapidez.
           </p>
         </article>
         <article class="project-copy-card reveal delay-1">
-          <h3>Qué se analizó</h3>
+          <h3>Qué tipo de contenido aborda</h3>
           <p>
-            Se trabajó con reseñas IMDb para limpiar texto, tokenizar, vectorizar con
-            TF-IDF y entrenar un clasificador binario entre reseñas positivas y
-            negativas.
+            Comentarios abiertos, valoraciones y respuestas de participantes que
+            normalmente quedan repartidas en documentos difíciles de consolidar.
           </p>
         </article>
         <article class="project-copy-card reveal delay-2">
-          <h3>Solución implementada</h3>
+          <h3>Solución planteada</h3>
           <p>
-            Se construyó un flujo con entrenamiento, artefactos serializados, API
-            Flask, frontend Streamlit, Docker Compose y automatización con GitHub
-            Actions.
+            Una solución que lee documentos, transcribe el contenido y organiza las
+            respuestas para que queden listas para revisión y análisis.
           </p>
         </article>
         <article class="project-copy-card reveal delay-3">
-          <h3>Resultados obtenidos</h3>
+          <h3>Valor esperado</h3>
           <p>
-            El modelo logró un desempeño consistente y dejó una ruta clara para usar
-            NLP en una experiencia simple, replicable y fácil de explicar.
+            El valor está en reducir revisión manual, acelerar la lectura de resultados
+            y facilitar una evaluación más clara del impacto de la capacitación.
           </p>
         </article>
       </div>
@@ -166,17 +167,16 @@
         <article class="project-copy-card reveal">
           <h3>Qué problema resuelve</h3>
           <p>
-            Clasificar reseñas permite pasar de miles de opiniones textuales a una
-            lectura binaria que puede servir para seguimiento de experiencia,
-            percepción de producto o triage inicial de feedback.
+            Permite pasar de formularios difíciles de revisar a una salida donde las
+            respuestas se pueden consultar, comparar y analizar de forma mucho más simple.
           </p>
         </article>
         <article class="project-copy-card reveal delay-1">
           <h3>Por qué importa</h3>
           <p>
-            El texto es una fuente de señal rica pero costosa de revisar manualmente.
-            Un pipeline NLP bien presentado ayuda a convertirlo en información útil
-            para análisis posterior o monitoreo rápido.
+            Cuando la evaluación se hace manualmente, se pierde tiempo operativo y se
+            vuelve más difícil detectar patrones, comentarios repetidos o una señal
+            clara sobre el resultado real de la capacitación.
           </p>
         </article>
       </div>
@@ -187,17 +187,17 @@
         <article class="project-copy-card reveal">
           <h3>Qué se analizó</h3>
           <ul>
-            <li>Limpieza y tokenización de reseñas textuales.</li>
-            <li>Vectorización TF-IDF para traducir texto a variables numéricas.</li>
-            <li>Balance entre clases positiva y negativa en el set evaluado.</li>
+            <li>Respuestas abiertas contenidas en formularios físicos o PDFs.</li>
+            <li>Valoraciones y comentarios que ayudan a entender la experiencia del participante.</li>
+            <li>Formas de ordenar la información para facilitar revisión y análisis posterior.</li>
           </ul>
         </article>
         <article class="project-copy-card reveal delay-1">
           <h3>Lectura analítica</h3>
           <p>
-            El proyecto busca demostrar que NLP no tiene que quedarse en un notebook.
-            También puede exponerse con una interfaz clara para que una persona pruebe
-            ejemplos y entienda el comportamiento del clasificador.
+            El foco está en transformar respuestas dispersas en una lectura más útil:
+            qué tan bien fue recibida la capacitación, dónde hay señales positivas y
+            dónde conviene profundizar con más atención.
           </p>
         </article>
       </div>
@@ -206,21 +206,21 @@
     <section class="section" id="solucion">
       <div class="container project-section-grid">
         <article class="project-copy-card reveal">
-          <h3>Qué solución se implementó</h3>
+          <h3>Qué flujo se propone</h3>
           <ul>
-            <li>Entrenamiento con Logistic Regression.</li>
-            <li>Vectorizador serializado para reproducir inferencia.</li>
-            <li>API Flask para clasificar nuevas reseñas.</li>
-            <li>Frontend Streamlit para interacción amigable.</li>
-            <li>Docker Compose y CI/CD para ejecución reproducible.</li>
+            <li>Leer documentos y recuperar las respuestas contenidas en cada evaluación.</li>
+            <li>Transcribir el contenido para dejarlo en un formato más claro y ordenado.</li>
+            <li>Agrupar resultados en una base simple de revisar y exportar.</li>
+            <li>Generar una señal rápida para resumir impacto, percepción o resultado general.</li>
+            <li>Facilitar análisis posterior sin depender de lectura completamente manual.</li>
           </ul>
         </article>
         <article class="project-copy-card reveal delay-1">
           <h3>Cómo se aplica en negocio</h3>
           <p>
-            La misma lógica puede adaptarse a reseñas de clientes, tickets, encuestas
-            o comentarios abiertos donde interese una lectura rápida de tono o
-            percepción general.
+            Puede ayudar a áreas de capacitación, RR.HH. o gestión interna que
+            necesiten revisar muchas evaluaciones, resumir resultados y detectar con
+            más rapidez cómo fue recibida una actividad formativa.
           </p>
         </article>
       </div>
@@ -229,14 +229,14 @@
     <section class="section" id="resultados">
       <div class="container">
         <article class="project-copy-card reveal">
-          <h3>Resultados obtenidos</h3>
+          <h3>Entregables esperados</h3>
           <div class="project-key-results">
-            <span class="result-chip">Accuracy: 0.886</span>
-            <span class="result-chip">F1 negativo: 0.885</span>
-            <span class="result-chip">F1 positivo: 0.887</span>
-            <span class="result-chip">25.000 reseñas evaluadas</span>
-            <span class="result-chip">API Flask</span>
-            <span class="result-chip">Frontend Streamlit</span>
+            <span class="result-chip">Score de impacto</span>
+            <span class="result-chip">Lectura de formularios</span>
+            <span class="result-chip">Respuestas organizadas</span>
+            <span class="result-chip">Menos trabajo manual</span>
+            <span class="result-chip">Análisis más simple</span>
+            <span class="result-chip">Revisión más rápida</span>
           </div>
         </article>
       </div>
@@ -248,24 +248,25 @@
           <h3>Tecnologías utilizadas</h3>
           <div class="project-stack">
             <span>Python</span>
-            <span>TF-IDF</span>
-            <span>Logistic Regression</span>
-            <span>Flask</span>
+            <span>OCR</span>
+            <span>Pandas</span>
+            <span>PDF Processing</span>
             <span>Streamlit</span>
-            <span>Docker Compose</span>
-            <span>GitHub Actions</span>
-            <span>IMDb Reviews</span>
+            <span>Text Cleaning</span>
+            <span>Document Parsing</span>
+            <span>Data Export</span>
+            <span>NLP</span>
           </div>
         </article>
 
         <div class="project-link-grid">
           <article class="project-link-card reveal">
-            <h3>Otro caso ML</h3>
+            <h3>Otro caso aplicado</h3>
             <p>
               Si quieres ver un proyecto donde el foco está en clasificación clínica
               y presentación MLOps, revisa el detector de cáncer de mama.
             </p>
-            <a href="breast-cancer-mlops.html" class="btn btn-secondary">Ver caso clínico</a>
+            <a href="fraud-monitoring.html" class="btn btn-secondary">Ver caso de fraude</a>
           </article>
           <article class="project-link-card reveal delay-1">
             <h3>Volver al portafolio</h3>

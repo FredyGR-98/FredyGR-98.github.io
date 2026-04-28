@@ -1905,6 +1905,11 @@ ul {
   align-items: center;
 }
 
+.project-hero-visual {
+  display: grid;
+  gap: 16px;
+}
+
 .project-breadcrumb {
   display: inline-flex;
   align-items: center;
@@ -1997,6 +2002,20 @@ ul {
 .project-visual-card--pipeline {
   background:
     linear-gradient(180deg, rgba(23, 48, 54, 0.92), rgba(12, 16, 30, 0.98));
+}
+
+.project-case-artwork {
+  min-height: 360px;
+  aspect-ratio: 1 / 1;
+}
+
+.project-illustration-note {
+  padding: 18px 20px;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .project-visual-header {
