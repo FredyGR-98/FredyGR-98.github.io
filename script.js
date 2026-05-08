@@ -71,21 +71,6 @@
         "La solucion propone leer documentos, transcribir respuestas y ordenarlas en una salida simple de revisar para evitar consolidaciones manuales innecesarias.",
       result:
         "El resultado es una revision mas agil, un score de impacto para resumir percepcion y una base mucho mas facil de analizar."
-    },
-    "iris-flower-classifier": {
-      category: "Machine Learning",
-      title: "Clasificador de flores Iris",
-      repoUrl: "https://github.com/FredyGR-98/iris-flower-classifier",
-      metrics: ["4 variables", "3 especies", "Flask + HTML"],
-      visualTitle: "Prediccion simple con Flask + HTML",
-      visualText:
-        "Placeholder para ilustracion botanica, sliders y salida de clasificacion en una UI liviana.",
-      problem:
-        "El objetivo era mostrar de forma simple como un modelo puede pasar del entrenamiento a una experiencia que cualquiera pueda probar.",
-      approach:
-        "Se priorizo claridad por sobre complejidad, conectando modelo, API, interfaz y pruebas en un caso pequeno pero facil de entender.",
-      result:
-        "El resultado es una base reusable para futuros servicios de ML, con una presentacion funcional y portable."
     }
   };
 
