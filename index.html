@@ -1,18 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fredy Omar Geraldo Rivera | Portafolio</title>
+  <title>Fredy Geraldo | Intro</title>
   <meta
     name="description"
-    content="Portafolio profesional de Fredy Omar Geraldo Rivera, Ingeniero Comercial y Analista de Datos con foco en analítica, machine learning y soluciones orientadas a negocio."
+    content="Pantalla de inicio del portafolio de Fredy Geraldo, analista de datos con foco en SQL, Python, BI y machine learning aplicado."
   />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Cormorant+Garamond:wght@400;500&family=Instrument+Sans:wght@400;500&family=Manrope:wght@500;600&display=swap"
     rel="stylesheet"
   />
 
@@ -23,779 +23,121 @@
     referrerpolicy="no-referrer"
   />
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
-  />
-
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <div class="bg-orb orb-1"></div>
-  <div class="bg-orb orb-2"></div>
-  <div class="bg-grid"></div>
-
-  <header class="header">
-    <div class="container nav-container">
-      <a href="#inicio" class="logo">
-        <span class="logo-mark">FG</span>
-        <span class="logo-text">Data Portfolio</span>
-      </a>
-
-      <nav class="nav" id="nav-menu">
-        <a href="#inicio" class="nav-link active">Inicio</a>
-        <a href="#sobre-mi" class="nav-link">Sobre mí</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#proyectos" class="nav-link">Proyectos</a>
-        <a
-          href="cv-fredy-geraldo.pdf"
-          class="nav-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          CV
-        </a>
-        <a href="#contacto" class="nav-link">Contacto</a>
-      </nav>
-
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </header>
-
-  <div class="scroll-progress" aria-hidden="true">
-    <span id="scroll-progress-bar"></span>
-  </div>
-
-  <main>
-    <section class="hero section" id="inicio">
-      <div class="hero-backdrop"></div>
-
-      <div class="container hero-container">
-        <div class="hero-text reveal">
-          <p class="eyebrow">
-            <i class="fa-solid fa-circle"></i>
-            Disponible para oportunidades en datos y analítica
-          </p>
-
-          <h1>Fredy Omar Geraldo Rivera</h1>
-
-          <h2>
-            Analista de Datos enfocado en modelos predictivos y decisiones con impacto
-          </h2>
-
-          <p class="hero-description">
-            Trabajo con Python, Machine Learning, APIs y herramientas de visualización
-            para transformar datos complejos en historias claras, decisiones prácticas
-            y soluciones que se pueden usar.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#proyectos" class="btn btn-primary">Ver proyectos</a>
-
-            <a
-              href="cv-fredy-geraldo.pdf"
-              class="btn btn-ghost"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Ver CV
-            </a>
-
-            <a href="#contacto" class="btn btn-secondary">Contacto</a>
+<body class="intro-notebook">
+  <main class="intro-notebook-page">
+    <section class="intro-notebook-shell" aria-label="Pantalla de bienvenida del portafolio">
+      <div class="intro-notebook-topbar">
+        <div class="intro-notebook-topbar-start">
+          <div class="notebook-window-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="intro-notebook-file-tab">
+            <i class="fa-brands fa-python" aria-hidden="true"></i>
+            <span>fredy_portfolio.ipynb</span>
           </div>
         </div>
-
-        <div class="hero-visual reveal delay-1">
-          <div class="hero-image-card">
-            <img
-              src="img/hero-lofi-sky.jpg"
-              alt="Fondo lofi de cielo violeta"
-              class="hero-bg-image"
-            />
-
-            <div class="profile-card profile-card--light">
-              <div class="profile-frame profile-frame--moon">
-                <img
-                  src="img/foto-perfil.jpg"
-                  alt="Foto de perfil de Fredy Omar Geraldo Rivera"
-                  class="profile-image profile-image--circle"
-                />
-              </div>
-
-              <div class="profile-info profile-info--dark">
-                <h3>Perfil profesional</h3>
-                <p>
-                  Ingeniero Comercial con especialización en Machine Learning, enfocado
-                  en análisis de datos, automatización y desarrollo de soluciones
-                  aplicables a contextos de negocio reales.
-                </p>
-              </div>
-            </div>
-          </div>
+        <div class="intro-notebook-kernel" aria-label="Estado del notebook">
+          <span>Python 3</span>
+          <i aria-hidden="true"></i>
+          <span>Kernel activo</span>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="sobre-mi">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-tag">Sobre mí</p>
-          <h2>Foco principal</h2>
-          <p>
-            Me interesa trabajar en proyectos donde los datos permitan entender
-            comportamientos, reducir incertidumbre y apoyar decisiones reales.
-            Tengo especial interés en análisis de clientes, evaluación de riesgo y
-            mejora de procesos mediante automatización.
-          </p>
-        </div>
+      <div class="intro-notebook-workspace">
+        <section class="intro-notebook-copy" aria-labelledby="intro-title">
+          <div class="intro-cell-prompt" aria-hidden="true">
+            <span>In [1]:</span>
+            <i class="fa-solid fa-play"></i>
+          </div>
 
-        <div class="about-grid">
-          <article class="glass-card reveal">
-            <div class="card-icon">
-              <i class="fa-solid fa-graduation-cap"></i>
-            </div>
-            <h3>Formación académica</h3>
-            <p>
-              Ingeniero Comercial de la Universidad Católica del Norte, con una
-              formación orientada a comprender procesos organizacionales, análisis
-              estratégico y toma de decisiones basadas en datos.
-            </p>
-          </article>
-
-          <article class="glass-card reveal delay-1">
-            <div class="card-icon">
-              <i class="fa-solid fa-brain"></i>
-            </div>
-            <h3>Especialización y aprendizaje continuo</h3>
-            <p>
-              Especialización en Machine Learning a través de Talento Digital para
-              Chile junto a Kibernum, complementada con aprendizaje autodidacta y un
-              interés constante por nuevas herramientas que permitan mejorar procesos,
-              análisis y soluciones tecnológicas.
+          <div class="intro-copy-content">
+            <p class="intro-notebook-kicker"><span>#</span> Analista de datos</p>
+            <h1 id="intro-title">
+              <span class="intro-notebook-title">Los datos cuentan historias</span>
+              <span class="intro-notebook-accent">Yo las convierto en decisiones</span>
+            </h1>
+            <p class="intro-notebook-lead">
+              Transformo informaci&oacute;n compleja en an&aacute;lisis, visualizaciones y soluciones claras que apoyan la toma de decisiones
             </p>
 
-            <div class="badge-container">
-              <a
-                href="https://acreditta.com/credential/d64d7633-f135-4fac-9cf0-4b3db6701bb9"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="badge-link"
-              >
-                <img src="img/image.webp" alt="Certificación Machine Learning" />
-                <span>Ver credencial</span>
+            <p class="intro-notebook-instruction">
+              <span aria-hidden="true">&gt;&gt;&gt;</span> Si te interesa saber m&aacute;s, puedes descubrir
+            </p>
+
+            <nav class="intro-notebook-routes" aria-label="Entradas al portafolio">
+              <a href="portfolio.html?panel=about">
+                <span class="intro-route-file">about.md</span>
+                <strong>Qui&eacute;n soy</strong>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
               </a>
-            </div>
-          </article>
+              <a href="portfolio.html?panel=projects">
+                <span class="intro-route-file">projects.ipynb</span>
+                <strong>Mis proyectos</strong>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+              <a href="portfolio.html?panel=skills">
+                <span class="intro-route-file">skills.py</span>
+                <strong>Mis habilidades</strong>
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </nav>
+          </div>
+        </section>
 
-          <article class="glass-card reveal delay-2">
-            <div class="card-icon">
-              <i class="fa-solid fa-briefcase"></i>
-            </div>
-            <h3>Enfoque profesional</h3>
-            <p>
-              Interesado en roles donde pueda aplicar análisis de datos, automatización
-              y visualización para mejorar la toma de decisiones y la operación.
-            </p>
-          </article>
-        </div>
-      </div>
-    </section>
+        <section class="intro-notebook-output" aria-label="Visualizaci&oacute;n del trabajo con datos">
+          <span class="intro-output-label" aria-hidden="true">Out [1]:</span>
 
-    <section class="section" id="skills">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-tag">Skills</p>
-          <h2>Habilidades técnicas</h2>
-          <p>
-            Un stack orientado a analítica, automatización y desarrollo de soluciones
-            con foco en datos.
-          </p>
-        </div>
-
-        <div class="skills-grid skills-grid--icons">
-          <article class="skill-card reveal">
-            <h3>Manejo de datos</h3>
-            <div class="skill-icon-grid">
-              <div class="skill-icon-item">
-                <i class="devicon-python-plain"></i>
-                <span>Python</span>
+          <div class="intro-output-content">
+            <div class="intro-output-charts" aria-hidden="true">
+              <div class="intro-output-chart intro-output-donut"><span></span></div>
+              <div class="intro-output-chart intro-output-bars">
+                <span></span><span></span><span></span><span></span>
               </div>
-              <div class="skill-icon-item">
-                <i class="devicon-mysql-plain"></i>
-                <span>SQL</span>
+              <div class="intro-output-chart intro-output-line">
+                <svg viewBox="0 0 160 64" role="presentation">
+                  <polyline points="4,52 35,39 62,44 91,22 119,29 156,8"></polyline>
+                  <circle cx="4" cy="52" r="3"></circle>
+                  <circle cx="35" cy="39" r="3"></circle>
+                  <circle cx="62" cy="44" r="3"></circle>
+                  <circle cx="91" cy="22" r="3"></circle>
+                  <circle cx="119" cy="29" r="3"></circle>
+                  <circle cx="156" cy="8" r="3"></circle>
+                </svg>
               </div>
             </div>
-          </article>
 
-          <article class="skill-card reveal delay-1">
-            <h3>Análisis de datos</h3>
-            <div class="skill-icon-grid">
-              <div class="skill-icon-item">
-                <i class="devicon-pandas-original"></i>
-                <span>Pandas</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="devicon-numpy-original"></i>
-                <span>NumPy</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="devicon-scikitlearn-plain"></i>
-                <span>Scikit-learn</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="fa-solid fa-robot"></i>
-                <span>Machine Learning</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="fa-solid fa-table"></i>
-                <span>Excel avanzado</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="skill-card reveal delay-2">
-            <h3>Visualización y herramientas</h3>
-            <div class="skill-icon-grid">
-              <div class="skill-icon-item">
-                <i class="fa-solid fa-chart-column"></i>
-                <span>Power BI</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="devicon-matplotlib-plain"></i>
-                <span>Matplotlib</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="fa-solid fa-chart-line"></i>
-                <span>Dashboards</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="devicon-fastapi-plain"></i>
-                <span>FastAPI</span>
-              </div>
-              <div class="skill-icon-item">
-                <i class="devicon-streamlit-plain"></i>
-                <span>Streamlit</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section workflow-section">
-      <div class="container">
-        <div class="workflow-shell reveal">
-          <div class="section-heading section-heading--compact">
-            <p class="section-tag">Cómo trabajo</p>
-            <h2>Un flujo simple para transformar datos en decisiones</h2>
-            <p>
-              Me interesa que el análisis no termine en un notebook: busco ordenar
-              datos, leer patrones con claridad y convertir hallazgos en acciones
-              útiles para negocio, operación o producto.
-            </p>
-          </div>
-
-          <div class="workflow-track">
-            <article class="workflow-step workflow-step--data reveal">
-              <span class="workflow-step-index">01</span>
-              <h3>Datos</h3>
-              <p>
-                Reúno, limpio y ordeno la información para partir de una base clara.
-              </p>
-            </article>
-
-            <span class="workflow-connector" aria-hidden="true">
-              <i class="fa-solid fa-arrow-right"></i>
-            </span>
-
-            <article class="workflow-step workflow-step--analysis reveal delay-1">
-              <span class="workflow-step-index">02</span>
-              <h3>Análisis</h3>
-              <p>
-                Detecto patrones, señales y oportunidades con foco en preguntas útiles.
-              </p>
-            </article>
-
-            <span class="workflow-connector" aria-hidden="true">
-              <i class="fa-solid fa-arrow-right"></i>
-            </span>
-
-            <article class="workflow-step workflow-step--decision reveal delay-2">
-              <span class="workflow-step-index">03</span>
-              <h3>Decisión</h3>
-              <p>
-                Convierto el hallazgo en una salida accionable: dashboard, scoring o interfaz.
-              </p>
-            </article>
-          </div>
-
-          <div class="workflow-note reveal delay-3">
-            <strong>Resultado:</strong>
-            cada proyecto termina en una salida clara, usable y lista para apoyar decisiones.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section projects-section" id="proyectos">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="section-tag">Proyectos</p>
-          <h2>Casos que convierten datos en decisiones</h2>
-          <p>
-            Una selección de casos organizados por categoría, pensados para mostrar
-            problema, enfoque analítico, resultados y stack de forma más clara y
-            navegable.
-          </p>
-        </div>
-
-        <div class="projects-experience reveal delay-1" data-theme="data-analysis">
-          <div class="projects-tabs" role="tablist" aria-label="Categorías de proyectos">
-            <button
-              class="project-tab is-active"
-              type="button"
-              role="tab"
-              aria-selected="true"
-              aria-controls="tab-data-analysis"
-              id="tab-button-data-analysis"
-              data-tab="data-analysis"
-              data-theme="data-analysis"
-            >
-              Data Analysis
-            </button>
-            <button
-              class="project-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-machine-learning"
-              id="tab-button-machine-learning"
-              data-tab="machine-learning"
-              data-theme="machine-learning"
-            >
-              Machine Learning
-            </button>
-            <button
-              class="project-tab"
-              type="button"
-              role="tab"
-              aria-selected="false"
-              aria-controls="tab-etl"
-              id="tab-button-etl"
-              data-tab="etl"
-              data-theme="etl"
-            >
-              ETL / Data Engineering
-            </button>
-          </div>
-
-          <div class="project-tab-panels">
-            <section
-              class="project-tab-panel is-active"
-              id="tab-data-analysis"
-              role="tabpanel"
-              aria-labelledby="tab-button-data-analysis"
-              data-panel="data-analysis"
-            >
-              <div class="panel-intro">
-                <div>
-                  <p class="category-label">Data Analysis</p>
-                  <h3>Casos orientados a lectura ejecutiva y decisiones operativas</h3>
-                </div>
-                <p>
-                  Proyectos donde el análisis no se queda en el modelo: aterriza en
-                  prioridades, monitoreo y criterios de revisión.
-                </p>
-              </div>
-
-              <div class="cases-carousel" data-carousel="data-analysis">
-                <button class="carousel-control prev" type="button" aria-label="Proyecto anterior">
-                  <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-                <div class="carousel-viewport">
-                  <div class="cases-track">
-                    <article class="case-slide is-active" data-index="0">
-                      <div class="case-card case-card--standard">
-                        <div class="case-visual">
-                          <div class="case-artwork">
-                            <img
-                              src="project-images/project-fraud-monitoring.png"
-                              alt="Ilustración del proyecto de monitoreo de fraude"
-                              class="case-artwork-image"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="case-content">
-                          <p class="story-topline">Data Analysis + riesgo</p>
-                          <h4>Monitoreo de transacciones y riesgo de fraude</h4>
-                          <p class="case-summary">
-                            Caso orientado a reducir ruido operativo en monitoreo de
-                            fraude, priorizando mejor qué transacciones revisar y con
-                            qué nivel de urgencia.
-                          </p>
-
-                          <div class="project-tech">
-                            <span>PaySim</span>
-                            <span>EDA</span>
-                            <span>FastAPI</span>
-                            <span>Streamlit</span>
-                            <span>Power BI</span>
-                          </div>
-
-                          <div class="case-results">
-                            <span class="case-results-title">Resultados clave</span>
-                            <ul class="case-results-list">
-                              <li>Alta precisión sin generar ruido operativo innecesario.</li>
-                              <li>Mejor priorización de transacciones que requieren revisión.</li>
-                              <li>Alertas más accionables para seguimiento de negocio.</li>
-                            </ul>
-                          </div>
-
-                          <div class="project-actions">
-                            <button class="btn btn-primary case-open" type="button" data-case="fraud-monitoring">
-                              Ver caso
-                            </button>
-                            <a
-                              href="https://github.com/FredyGR-98/monitoreo-transacciones-riesgo-fraude"
-                              class="btn btn-secondary"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              Ver repositorio
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-
-                <button class="carousel-control next" type="button" aria-label="Proyecto siguiente">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-
-              <div class="carousel-dots" aria-label="Indicadores del carrusel"></div>
-            </section>
-
-            <section
-              class="project-tab-panel"
-              id="tab-machine-learning"
-              role="tabpanel"
-              aria-labelledby="tab-button-machine-learning"
-              data-panel="machine-learning"
-              hidden
-            >
-              <div class="panel-intro">
-                <div>
-                  <p class="category-label">Machine Learning</p>
-                  <h3>Modelos presentados como casos, no como demos aisladas</h3>
-                </div>
-                <p>
-                  Casos donde el modelo convive con una interfaz, una API y una forma
-                  clara de explicar el valor del proyecto.
-                </p>
-              </div>
-
-              <div class="cases-carousel" data-carousel="machine-learning">
-                <button class="carousel-control prev" type="button" aria-label="Proyecto anterior">
-                  <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-                <div class="carousel-viewport">
-                  <div class="cases-track">
-                    <article class="case-slide is-active" data-index="0">
-                      <div class="case-card case-card--standard">
-                        <div class="case-visual">
-                          <div class="case-artwork">
-                            <img
-                              src="project-images/project-breast-cancer.png"
-                              alt="Ilustración del proyecto detector de cáncer de mama"
-                              class="case-artwork-image"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="case-content">
-                          <p class="story-topline">Clasificación + MLOps</p>
-                          <h4>Detector de cáncer de mama</h4>
-                          <p class="case-summary">
-                            Caso de clasificación clínica enfocado en convertir un
-                            modelo en una herramienta más clara, reproducible y fácil
-                            de probar para distintos usuarios.
-                          </p>
-
-                          <div class="project-tech">
-                            <span>Python</span>
-                            <span>Scikit-learn</span>
-                            <span>Flask</span>
-                            <span>Streamlit</span>
-                            <span>Docker</span>
-                          </div>
-
-                          <div class="case-results">
-                            <span class="case-results-title">Resultados clave</span>
-                            <ul class="case-results-list">
-                              <li>Clasificación sólida para distinguir casos benignos y malignos.</li>
-                              <li>Modelo expuesto en una experiencia reproducible y fácil de probar.</li>
-                              <li>Mejor presentación del flujo completo entre entrenamiento y uso.</li>
-                            </ul>
-                          </div>
-
-                          <div class="project-actions">
-                            <button class="btn btn-primary case-open" type="button" data-case="breast-cancer-mlops">
-                              Ver caso
-                            </button>
-                            <a
-                              href="https://github.com/FredyGR-98/detector-cancer-mama-mlops"
-                              class="btn btn-secondary"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              Ver repositorio
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-
-                  </div>
-                </div>
-
-                <button class="carousel-control next" type="button" aria-label="Proyecto siguiente">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-
-              <div class="carousel-dots" aria-label="Indicadores del carrusel"></div>
-            </section>
-
-            <section
-              class="project-tab-panel"
-              id="tab-etl"
-              role="tabpanel"
-              aria-labelledby="tab-button-etl"
-              data-panel="etl"
-              hidden
-            >
-              <div class="panel-intro">
-                <div>
-                  <p class="category-label">ETL / Data Engineering</p>
-                  <h3>Pipelines documentales y capas técnicas para hacer utilizable la información</h3>
-                </div>
-                <p>
-                  Casos donde la capa técnica ordena extracción, transformación,
-                  enriquecimiento y consumo para una experiencia más utilizable.
-                </p>
-              </div>
-
-              <div class="cases-carousel" data-carousel="etl">
-                <button class="carousel-control prev" type="button" aria-label="Proyecto anterior">
-                  <i class="fa-solid fa-arrow-left"></i>
-                </button>
-
-                <div class="carousel-viewport">
-                  <div class="cases-track">
-                    <article class="case-slide is-active" data-index="0">
-                      <div class="case-card case-card--standard case-card--reverse">
-                        <div class="case-visual">
-                          <div class="case-artwork">
-                            <img
-                              src="project-images/project-pdf-reader.png"
-                              alt="Ilustración del proyecto lector inteligente de PDFs"
-                              class="case-artwork-image"
-                            />
-                          </div>
-                        </div>
-
-                        <div class="case-content">
-                          <p class="story-topline">Evaluaciones + automatización</p>
-                          <h4>Lector inteligente de PDFs</h4>
-                          <p class="case-summary">
-                            Caso orientado a leer evaluaciones de capacitación en
-                            formularios o PDFs, transcribir respuestas y facilitar una
-                            revisión mucho más rápida y útil.
-                          </p>
-
-                          <div class="project-tech">
-                            <span>OCR</span>
-                            <span>Lectura de formularios</span>
-                            <span>Scoring automático</span>
-                          </div>
-
-                          <div class="case-results">
-                            <span class="case-results-title">Resultados clave</span>
-                            <ul class="case-results-list">
-                              <li>Reduce el tiempo de revisión manual de evaluaciones.</li>
-                              <li>Genera un score de impacto para resumir resultados.</li>
-                              <li>Facilita analizar respuestas y detectar patrones con más rapidez.</li>
-                            </ul>
-                          </div>
-
-                          <div class="project-actions">
-                            <button class="btn btn-primary case-open" type="button" data-case="nlp-sentiment-movies">
-                              Ver caso
-                            </button>
-                            <a
-                              href="https://github.com/FredyGR-98/nlp-sentiment-movies"
-                              class="btn btn-secondary"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              Ver repositorio
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </div>
-
-                <button class="carousel-control next" type="button" aria-label="Proyecto siguiente">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
-
-              <div class="carousel-dots" aria-label="Indicadores del carrusel"></div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="case-modal" id="case-modal" aria-hidden="true">
-      <div class="case-modal-backdrop" data-close-modal></div>
-      <div
-        class="case-modal-dialog"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="case-modal-title"
-      >
-        <button class="case-modal-close" type="button" aria-label="Cerrar detalle" data-close-modal>
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-        <div class="case-modal-grid">
-          <div class="case-modal-visual">
-            <div class="illustration-placeholder">
+            <div class="intro-notebook-laptop">
               <img
-                id="case-modal-image"
-                class="case-modal-image"
-                src=""
-                alt=""
-                hidden
+                src="img/intro-laptop-cutout.png"
+                alt="Notebook con un entorno de programaci&oacute;n y an&aacute;lisis de datos"
               />
-              <small>Visualización</small>
-              <strong id="case-modal-visual-title">Placeholder del caso</strong>
-              <p id="case-modal-visual-text">
-                Aquí puede ir una ilustración o visualización representativa del caso.
-              </p>
-              <div class="case-metric-chips" id="case-modal-metrics" aria-label="Métricas del proyecto"></div>
-            </div>
-          </div>
-
-          <div class="case-modal-content">
-            <p class="project-page-tag" id="case-modal-category">Categoría</p>
-            <h3 id="case-modal-title">Caso</h3>
-
-            <div class="case-modal-sections">
-              <div class="case-modal-section">
-                <h4>Problema</h4>
-                <p id="case-modal-problem"></p>
-              </div>
-
-              <div class="case-modal-section">
-                <h4>Enfoque</h4>
-                <p id="case-modal-approach"></p>
-              </div>
-
-              <div class="case-modal-section">
-                <h4>Resultado</h4>
-                <p id="case-modal-result"></p>
-              </div>
             </div>
 
-            <div class="case-modal-actions">
-              <a
-                id="case-modal-repo"
-                href="#"
-                class="btn btn-secondary"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver repositorio
+            <div class="intro-notebook-socials" aria-label="Enlaces profesionales">
+              <a href="https://github.com/FredyGR-98" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/fredy-omar-geraldo-rivera-979732148/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="mailto:fredy.geraldo.r@gmail.com" aria-label="Correo electr&oacute;nico">
+                <i class="fa-regular fa-envelope"></i>
+              </a>
+              <a href="https://public.tableau.com/app/profile/fredy.omar.geraldo.rivera/vizzes" target="_blank" rel="noopener noreferrer" aria-label="Tableau Public">
+                <i class="fa-solid fa-chart-pie"></i>
               </a>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
 
-    <section class="section contact-section" id="contacto">
-      <div class="contact-overlay"></div>
-
-      <div class="container contact-container">
-        <div class="section-heading reveal">
-          <p class="section-tag">Contacto</p>
-          <h2>Contactemos</h2>
-          <p>
-            Estoy abierto a oportunidades relacionadas con análisis de datos,
-            machine learning, dashboards y desarrollo de soluciones tecnológicas
-            basadas en datos.
-          </p>
-        </div>
-
-        <div class="contact-grid">
-          <a href="mailto:fredy.geraldo.r@gmail.com" class="contact-card reveal">
-            <i class="fa-solid fa-envelope"></i>
-            <h3>Email</h3>
-            <p>fredy.geraldo.r@gmail.com</p>
-          </a>
-
-          <a
-            href="https://github.com/FredyGR-98"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-card reveal delay-1"
-          >
-            <i class="fa-brands fa-github"></i>
-            <h3>GitHub</h3>
-            <p>github.com/FredyGR-98</p>
-          </a>
-
-          <a href="tel:+56988258526" class="contact-card reveal delay-2">
-            <i class="fa-solid fa-phone"></i>
-            <h3>Teléfono</h3>
-            <p>+56 9 8825 8526</p>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/fredy-omar-geraldo-rivera-979732148/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-card reveal delay-3"
-          >
-            <i class="fa-brands fa-linkedin"></i>
-            <h3>LinkedIn</h3>
-            <p>linkedin.com/in/fredy-omar-geraldo-rivera</p>
-          </a>
-        </div>
-      </div>
+      <footer class="intro-notebook-status">
+        <span><i aria-hidden="true"></i> Portafolio profesional de Fredy Geraldo</span>
+        <span>Chile &middot; 2026</span>
+      </footer>
     </section>
   </main>
-
-  <footer class="footer">
-    <div class="container footer-content footer-content--single">
-      <p>© 2026 Fredy Omar Geraldo Rivera. Portafolio profesional.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
