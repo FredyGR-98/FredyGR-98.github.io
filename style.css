@@ -4964,3 +4964,95 @@ body.is-intro-active .panel-layout {
     grid-column: 1 / -1;
   }
 }
+
+/* Mobile compact header: preserve identity instead of hiding the hero entirely. */
+@media (max-width: 680px) {
+  .portfolio-notebook .notebook-sticky-header .site-header {
+    max-height: 198px;
+    transition:
+      min-height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      max-height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 180ms ease,
+      background-position 240ms ease;
+  }
+
+  .portfolio-notebook .notebook-sticky-header .nav-shell {
+    max-height: 198px;
+    transition:
+      min-height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      max-height 240ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .portfolio-notebook .notebook-sticky-header .header-contact-icons {
+    max-height: 44px;
+    overflow: hidden;
+    transition:
+      max-height 180ms ease,
+      margin 180ms ease,
+      opacity 150ms ease,
+      transform 180ms ease;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .site-header,
+  .portfolio-notebook .notebook-sticky-header.is-compact .nav-shell {
+    min-height: 70px;
+    max-height: 70px;
+    opacity: 1;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .site-header {
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    background-position: center 42%;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .site-header::after {
+    inset: 6px;
+    border-left-width: 2px;
+    border-radius: 9px;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .nav-shell {
+    padding: 8px 14px;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-intro {
+    gap: 2px;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-intro strong {
+    font-size: clamp(1.08rem, 5vw, 1.28rem);
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-professional-copy {
+    display: block;
+    margin-top: 1px;
+    line-height: 1;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-professional-copy > span {
+    font-size: 0.7rem;
+    letter-spacing: 0.045em;
+    text-transform: uppercase;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-professional-copy small,
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-markdown-heading {
+    display: none;
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .header-contact-icons {
+    max-height: 0;
+    margin: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-5px);
+  }
+
+  .portfolio-notebook .notebook-sticky-header.is-compact .section-switcher-wrap {
+    box-shadow: 0 10px 22px rgba(73, 63, 50, 0.16);
+  }
+}
