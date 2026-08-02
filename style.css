@@ -752,8 +752,9 @@ body.is-intro-active .panel-layout {
   margin-bottom: 12px;
   padding: 8px 14px;
   border-radius: 999px;
-  background: rgba(209, 174, 138, 0.68);
-  color: #f8f8f2;
+  border: 1px solid rgba(239, 111, 125, 0.24);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 212, 227, 0.96));
+  color: #c43d55;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -995,12 +996,19 @@ body.is-intro-active .panel-layout {
   place-items: center;
   border-radius: 12px;
   margin-bottom: 14px;
-  background: rgba(151, 171, 127, 0.15);
-  color: #506640;
+  background: rgba(204, 225, 146, 0.22);
+  color: #329943;
+  transition: transform 0.3s ease, color 0.3s ease, background 0.3s ease;
 }
 
 .about-focus-icon i {
   font-size: 1.15rem;
+}
+
+.about-focus-card:hover .about-focus-icon {
+  background: rgba(247, 212, 227, 0.34);
+  color: #ef6f7d;
+  transform: translateY(-2px);
 }
 
 .about-focus-card h4 {
@@ -1081,14 +1089,16 @@ body.is-intro-active .panel-layout {
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(143, 119, 96, 0.15);
-  color: var(--text);
+  background: linear-gradient(135deg, #329943, #58b85d);
+  border: 1px solid rgba(50, 153, 67, 0.22);
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(50, 153, 67, 0.18);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.85);
-  border-color: rgba(143, 119, 96, 0.3);
+  background: linear-gradient(135deg, #2c8b3d, #4faa58);
+  border-color: rgba(50, 153, 67, 0.35);
+  color: #ffffff;
   transform: translateY(-2px);
 }
 
@@ -1480,7 +1490,7 @@ body.is-intro-active .panel-layout {
 }
 
 .credentials-copy h3 {
-  color: var(--text);
+  color: #5a4838;
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1729,13 +1739,13 @@ body.is-intro-active .panel-layout {
 
 .skill-tile i {
   font-size: 2.2rem;
-  color: #7a5f46;
+  color: #329943;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .skill-tile:hover i {
   transform: scale(1.1);
-  color: var(--surface-2);
+  color: #ef6f7d;
 }
 
 .skill-tile span {
@@ -1806,7 +1816,7 @@ body.is-intro-active .panel-layout {
 .project-modal-close:hover {
   background: rgba(255, 255, 255, 0.95);
   transform: rotate(90deg);
-  color: #7f4b18;
+  color: #ef6f7d;
 }
 
 .project-modal-carousel {
@@ -1880,9 +1890,9 @@ body.is-intro-active .panel-layout {
 .project-modal-tags span {
   padding: 6px 12px;
   border-radius: 999px;
-  background: rgba(151, 171, 127, 0.12);
-  border: 1px solid rgba(151, 171, 127, 0.2);
-  color: #506640;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(247, 212, 227, 0.94));
+  border: 1px solid rgba(239, 111, 125, 0.24);
+  color: #c43d55;
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -1923,18 +1933,18 @@ body.is-intro-active .panel-layout {
 }
 
 .project-modal-actions .btn-primary {
-  background: var(--surface-2);
+  background: linear-gradient(135deg, #ef6f7d, #d94a72);
   color: white;
   font-weight: 600;
   border-radius: 12px;
   padding: 12px 24px;
-  box-shadow: 0 8px 24px rgba(151, 171, 127, 0.3);
+  box-shadow: 0 10px 24px rgba(217, 74, 114, 0.24);
   transition: var(--transition-smooth);
 }
 
 .project-modal-actions .btn-primary:hover {
-  background: #7a8e63;
-  box-shadow: 0 12px 30px rgba(151, 171, 127, 0.45);
+  background: linear-gradient(135deg, #e45c7a, #c73d66);
+  box-shadow: 0 12px 30px rgba(217, 74, 114, 0.32);
   transform: translateY(-2px);
 }
 
@@ -1950,9 +1960,9 @@ body.is-intro-active .panel-layout {
 }
 
 .project-modal-arrow:hover:not(:disabled) {
-  background: var(--surface-2);
+  background: #329943;
   color: white;
-  border-color: var(--surface-2);
+  border-color: #329943;
   transform: scale(1.05);
 }
 
@@ -2345,24 +2355,25 @@ body.is-intro-active .panel-layout {
 
 /* Notebook visual experiment for portfolio.html */
 .portfolio-notebook {
-  --notebook-bg: #e8eadf;
-  --notebook-surface: #fbf9f3;
-  --notebook-surface-soft: #f1eee5;
-  --notebook-border: rgba(91, 76, 61, 0.14);
-  --notebook-ink: #574638;
-  --notebook-muted: #806f61;
-  --notebook-green: #839571;
-  --notebook-green-dark: #596b4c;
-  --notebook-green-soft: #dfe7d5;
-  --notebook-accent: #c9ad75;
-  --notebook-code-bg: #edf0e8;
-  --notebook-shadow: 0 24px 70px rgba(73, 63, 50, 0.12);
+  --notebook-bg: #eef7de;
+  --notebook-surface: #fffafc;
+  --notebook-surface-soft: #f9eef3;
+  --notebook-border: rgba(129, 94, 105, 0.18);
+  --notebook-ink: #4c5c2d;
+  --notebook-muted: #7c6872;
+  --notebook-green: #cce192;
+  --notebook-green-dark: #329943;
+  --notebook-green-soft: #f7d4e3;
+  --notebook-accent: #ef6f7d;
+  --notebook-code-bg: #f3f8e4;
+  --notebook-shadow: 0 24px 70px rgba(109, 88, 95, 0.14);
   --notebook-radius: 26px;
   --container: 1420px;
   padding: 16px 0;
   background:
-    radial-gradient(circle at 12% 8%, rgba(151, 171, 127, 0.18), transparent 30%),
-    linear-gradient(180deg, #eef0e7, #e5e5d8);
+    radial-gradient(circle at 12% 8%, rgba(181, 217, 108, 0.28), transparent 30%),
+    radial-gradient(circle at 88% 14%, rgba(247, 212, 227, 0.34), transparent 24%),
+    linear-gradient(180deg, #f3fae8, #efe8f0);
 }
 
 .notebook-app {
@@ -2446,7 +2457,7 @@ body.is-intro-active .panel-layout {
 
 .notebook-file-tab i,
 .project-modal-topbar i {
-  color: var(--notebook-green-dark);
+  color: #5a4838;
 }
 
 .notebook-kernel {
@@ -2472,7 +2483,7 @@ body.is-intro-active .panel-layout {
   align-items: center;
   overflow: hidden;
   background:
-    linear-gradient(rgba(92, 112, 78, 0.76), rgba(104, 124, 89, 0.82)),
+    linear-gradient(rgba(50, 153, 67, 0.82), rgba(204, 225, 146, 0.74)),
     url("img/header.png") center 32% / cover no-repeat;
   border-bottom-color: rgba(255, 255, 255, 0.24);
 }
@@ -2498,8 +2509,8 @@ body.is-intro-active .panel-layout {
   padding: 6px 10px;
   border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 999px;
-  background: rgba(250, 248, 240, 0.82);
-  color: #506342;
+  background: rgba(255, 255, 255, 0.9);
+  color: #329943;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.7rem;
   letter-spacing: 0.12em;
@@ -2535,6 +2546,8 @@ body.is-intro-active .panel-layout {
 .portfolio-notebook .header-contact-icon {
   width: 44px;
   height: 44px;
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.44);
 }
 
 .portfolio-notebook .section-switcher-wrap {
@@ -2584,11 +2597,11 @@ body.is-intro-active .panel-layout {
   color: var(--notebook-ink);
   background: var(--notebook-surface);
   border-radius: 10px 10px 0 0;
-  box-shadow: 0 -4px 14px rgba(91, 76, 61, 0.04);
+  box-shadow: 0 -4px 14px rgba(109, 88, 95, 0.08);
 }
 
 .portfolio-notebook .section-switcher-btn.is-active::before {
-  background: var(--notebook-green);
+  background: linear-gradient(90deg, var(--notebook-accent), var(--notebook-green));
 }
 
 .section-file-name {
@@ -2606,7 +2619,7 @@ body.is-intro-active .panel-layout {
 .portfolio-notebook .logo-pill:focus-visible,
 .portfolio-notebook .project-modal-close:focus-visible,
 .portfolio-notebook .project-modal-arrow:focus-visible {
-  outline: 3px solid rgba(89, 107, 76, 0.4);
+  outline: 3px solid rgba(239, 111, 125, 0.34);
   outline-offset: 3px;
 }
 
@@ -2631,7 +2644,7 @@ body.is-intro-active .panel-layout {
   border: 1px solid var(--notebook-border);
   border-radius: 20px;
   background: var(--notebook-surface);
-  box-shadow: 0 8px 24px rgba(91, 76, 61, 0.045);
+  box-shadow: 0 10px 26px rgba(109, 88, 95, 0.07);
 }
 
 .portfolio-notebook .notebook-cell::before {
@@ -2640,7 +2653,7 @@ body.is-intro-active .panel-layout {
   top: 32px;
   left: 12px;
   width: 64px;
-  color: var(--notebook-green-dark);
+  color: #5a4838;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.75rem;
   line-height: 1.35;
@@ -2659,7 +2672,7 @@ body.is-intro-active .panel-layout {
 }
 
 .portfolio-notebook .notebook-markdown-cell {
-  border-left: 3px solid rgba(131, 149, 113, 0.68);
+  border-left: 3px solid rgba(239, 111, 125, 0.42);
 }
 
 .portfolio-notebook .notebook-code-cell {
@@ -2693,9 +2706,9 @@ body.is-intro-active .panel-layout {
   height: 24px;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(89, 107, 76, 0.22);
+  border: 1px solid rgba(239, 111, 125, 0.28);
   border-radius: 7px;
-  color: var(--notebook-green-dark);
+  color: var(--notebook-accent);
   font-size: 0.58rem;
 }
 
@@ -2777,7 +2790,8 @@ body.is-intro-active .panel-layout {
   padding-top: 32px;
   border-radius: 18px;
   background: #fffdf8;
-  box-shadow: 0 7px 20px rgba(91, 76, 61, 0.045);
+  border: 1px solid rgba(239, 111, 125, 0.14);
+  box-shadow: 0 7px 20px rgba(109, 88, 95, 0.06);
 }
 
 .portfolio-notebook .project-card-button::before {
@@ -2785,7 +2799,7 @@ body.is-intro-active .panel-layout {
   position: absolute;
   top: 9px;
   left: 16px;
-  color: var(--notebook-green-dark);
+  color: var(--notebook-accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.69rem;
   letter-spacing: 0.04em;
@@ -2793,7 +2807,7 @@ body.is-intro-active .panel-layout {
 
 .portfolio-notebook .project-card-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(91, 76, 61, 0.09);
+  box-shadow: 0 14px 30px rgba(239, 111, 125, 0.14);
 }
 
 .portfolio-notebook .project-card-button:hover .project-structure-media img {
@@ -2824,7 +2838,7 @@ body.is-intro-active .panel-layout {
   padding: 32px 34px 32px 92px;
   border-radius: 20px;
   border-top-style: dashed;
-  background: var(--notebook-green-soft);
+  background: var(--notebook-surface);
 }
 
 .portfolio-notebook .project-modal-dialog {
@@ -3202,7 +3216,7 @@ body.is-intro-active .panel-layout {
 
 .markdown-section-title h2 {
   margin: 0;
-  color: var(--notebook-ink);
+  color: #5a4838;
   font-family: "Bricolage Grotesque", sans-serif;
   font-weight: 700;
   line-height: 1.08;
@@ -3357,14 +3371,14 @@ body.is-intro-active .panel-layout {
   align-items: center;
   gap: 8px;
   margin-bottom: 18px;
-  color: var(--notebook-green-dark);
+  color: var(--notebook-accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.72rem;
 }
 
 .profile-output-item h3 {
   margin-bottom: 8px;
-  color: var(--notebook-ink);
+  color: #5a4838;
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 1.12rem;
   line-height: 1.25;
@@ -3426,7 +3440,7 @@ body.is-intro-active .panel-layout {
 
 .project-filter-label {
   flex: 0 0 auto;
-  color: var(--notebook-green-dark);
+  color: var(--notebook-accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.78rem;
   font-weight: 600;
@@ -3443,7 +3457,7 @@ body.is-intro-active .panel-layout {
 
 .portfolio-notebook .project-filter-btn.is-active,
 .portfolio-notebook .skills-filter-btn.is-active {
-  color: var(--notebook-green-dark);
+  color: var(--notebook-accent);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 5px;
@@ -3797,7 +3811,7 @@ body.is-intro-active .panel-layout {
 
 .work-mode-summary h3 {
   margin-bottom: 5px;
-  color: var(--notebook-ink);
+  color: #5a4838;
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 1.12rem;
   line-height: 1.25;
@@ -3891,24 +3905,24 @@ body.is-intro-active .panel-layout {
 
 /* Intro notebook: a visual bridge between the cover and the portfolio. */
 .intro-notebook {
-  --intro-bg: #e8eadf;
-  --intro-surface: #fbf9f3;
-  --intro-surface-soft: #f1eee5;
-  --intro-code: #edf0e8;
-  --intro-ink: #574638;
-  --intro-muted: #806f61;
-  --intro-green: #839571;
-  --intro-green-dark: #596b4c;
-  --intro-green-soft: #dfe7d5;
-  --intro-panel-green: #60734f;
-  --intro-panel-cream: #f7f3e9;
-  --intro-panel-gold: #efd09a;
-  --intro-accent: #9a6128;
-  --intro-border: rgba(91, 76, 61, 0.14);
+  --intro-bg: #eef7de;
+  --intro-surface: #fffafc;
+  --intro-surface-soft: #f9eef3;
+  --intro-code: #f3f8e4;
+  --intro-ink: #5a4838;
+  --intro-muted: #7c6872;
+  --intro-green: #cce192;
+  --intro-green-dark: #329943;
+  --intro-green-soft: #f7d4e3;
+  --intro-panel-green: #329943;
+  --intro-panel-cream: #fff8fc;
+  --intro-panel-gold: #ffc8dc;
+  --intro-accent: #ef6f7d;
+  --intro-border: rgba(129, 94, 105, 0.18);
   min-height: 100vh;
   background:
-    radial-gradient(circle at 8% 10%, rgba(131, 149, 113, 0.22), transparent 27%),
-    radial-gradient(circle at 92% 88%, rgba(201, 173, 117, 0.2), transparent 24%),
+    radial-gradient(circle at 8% 10%, rgba(181, 217, 108, 0.3), transparent 27%),
+    radial-gradient(circle at 92% 88%, rgba(255, 200, 220, 0.24), transparent 24%),
     var(--intro-bg);
   color: var(--intro-ink);
 }
@@ -4007,8 +4021,8 @@ body.is-intro-active .panel-layout {
   grid-template-columns: 82px minmax(0, 1fr);
   background:
     radial-gradient(circle at 16% 8%, rgba(255, 255, 255, 0.12), transparent 30%),
-    radial-gradient(circle at 92% 88%, rgba(239, 208, 154, 0.12), transparent 28%),
-    linear-gradient(145deg, #536645 0%, var(--intro-panel-green) 52%, #61744f 100%);
+    radial-gradient(circle at 92% 88%, rgba(255, 200, 220, 0.16), transparent 28%),
+    linear-gradient(145deg, #329943 0%, var(--intro-panel-green) 52%, #cce192 100%);
 }
 
 .intro-cell-prompt {
@@ -4089,14 +4103,14 @@ body.is-intro-active .panel-layout {
 
 .intro-notebook-lead {
   max-width: 610px;
-  color: var(--intro-panel-cream);
+  color: rgba(255, 250, 252, 0.92);
   font-size: clamp(0.96rem, 1.2vw, 1.14rem);
   line-height: 1.58;
 }
 
 .intro-notebook-instruction {
   margin: clamp(22px, 3.3vh, 34px) 0 12px;
-  color: var(--intro-panel-cream);
+  color: rgba(255, 250, 252, 0.92);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: clamp(0.76rem, 0.92vw, 0.88rem);
   font-weight: 600;
@@ -4134,7 +4148,7 @@ body.is-intro-active .panel-layout {
 }
 
 .intro-notebook-routes strong {
-  color: var(--intro-ink);
+  color: #5a4838;
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: clamp(0.9rem, 1.05vw, 1.04rem);
   line-height: 1.1;
@@ -4151,7 +4165,7 @@ body.is-intro-active .panel-layout {
 
 .intro-notebook-routes a:hover {
   transform: translateY(-4px);
-  border-color: rgba(89, 107, 76, 0.38);
+  border-color: rgba(239, 111, 125, 0.34);
   background: var(--intro-surface);
   box-shadow: 0 12px 24px rgba(73, 63, 50, 0.1);
 }
@@ -4177,7 +4191,7 @@ body.is-intro-active .panel-layout {
 
 .intro-output-label {
   padding: clamp(44px, 6vh, 70px) 10px 0 0;
-  color: var(--intro-green-dark);
+  color: #5a4838;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   font-size: 0.74rem;
   text-align: right;
@@ -4217,7 +4231,7 @@ body.is-intro-active .panel-layout {
   width: 62px;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: conic-gradient(var(--intro-green) 0 45%, #c9ad75 45% 72%, #d7c6a9 72% 100%);
+  background: conic-gradient(var(--intro-green) 0 45%, var(--intro-accent) 45% 72%, #ffe6f0 72% 100%);
   -webkit-mask: radial-gradient(circle, transparent 42%, #000 44%);
   mask: radial-gradient(circle, transparent 42%, #000 44%);
 }
@@ -4231,13 +4245,13 @@ body.is-intro-active .panel-layout {
 .intro-output-bars span {
   width: 12px;
   border-radius: 4px 4px 2px 2px;
-  background: linear-gradient(180deg, var(--intro-green), #b2bd9f);
+  background: linear-gradient(180deg, var(--intro-green), #d8ecac);
 }
 
 .intro-output-bars span:nth-child(1) { height: 35px; }
 .intro-output-bars span:nth-child(2) { height: 52px; }
 .intro-output-bars span:nth-child(3) { height: 43px; }
-.intro-output-bars span:nth-child(4) { height: 66px; background: linear-gradient(180deg, #c9ad75, #ddcba8); }
+.intro-output-bars span:nth-child(4) { height: 66px; background: linear-gradient(180deg, var(--intro-accent), #ffc8dc); }
 
 .intro-output-line svg {
   width: 100%;
