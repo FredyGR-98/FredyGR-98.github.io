@@ -30,35 +30,12 @@
 
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="portfolio-notebook">
-  <div class="notebook-app">
-    <div class="notebook-sticky-header">
-    <div class="notebook-topbar" aria-hidden="true">
-      <div class="notebook-topbar-start">
-        <div class="notebook-window-dots">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="notebook-file-tab">
-          <i class="fa-brands fa-python"></i>
-          <span>fredy_portfolio.ipynb</span>
-        </div>
-      </div>
-      <div class="notebook-kernel">
-        <span>Python 3</span>
-        <i></i>
-        <span class="notebook-kernel-status">Kernel activo</span>
-      </div>
-    </div>
-
+<body>
   <header class="site-header" id="top">
     <div class="container nav-shell">
       <div class="header-intro">
-        <span class="header-markdown-heading" aria-hidden="true">### Presentación</span>
         <strong>Fredy Omar Geraldo Rivera</strong>
-        <p class="header-professional-copy">
-          <span>Analista de Datos</span>
-          <small>SQL · Python · Power BI · Tableau · Machine Learning</small>
-        </p>
+        <p>Analista de Datos : SQL | Python | Power BI | Tableau | Machine Learning</p>
         <div class="header-contact-icons" aria-label="Enlaces principales">
           <a
             href="https://github.com/FredyGR-98"
@@ -81,7 +58,7 @@
           </a>
 
           <a
-            href="mailto:fredy.geraldo.r@gmail.com?subject=Contacto%20desde%20tu%20portafolio%20profesional&amp;body=Hola%20Fredy%2C%0D%0A%0D%0AVisit%C3%A9%20tu%20portafolio%20profesional%20y%20me%20gustar%C3%ADa%20conversar%20contigo%20sobre%20una%20oportunidad.%0D%0A%0D%0ANombre%3A%0D%0AEmpresa%20u%20organizaci%C3%B3n%3A%0D%0AMotivo%20del%20contacto%3A%0D%0ADetalles%20del%20proyecto%20u%20oportunidad%3A%0D%0A%0D%0AQuedo%20atento%2Fa%20a%20tu%20respuesta.%0D%0A%0D%0ASaludos%2C"
+            href="mailto:fredy.geraldo.r@gmail.com"
             class="header-contact-icon"
             aria-label="Gmail"
           >
@@ -105,130 +82,93 @@
   <div class="section-switcher-wrap">
     <div class="container">
       <nav class="section-switcher" aria-label="Secciones principales">
-        <button class="section-switcher-btn is-active" type="button" data-panel-target="about">
-          <span class="section-file-name" aria-hidden="true">about.md</span>
-          <span>Sobre mí</span>
-        </button>
-        <button class="section-switcher-btn" type="button" data-panel-target="projects">
-          <span class="section-file-name" aria-hidden="true">projects.ipynb</span>
-          <span>Proyectos</span>
-        </button>
-        <button class="section-switcher-btn" type="button" data-panel-target="skills">
-          <span class="section-file-name" aria-hidden="true">skills.py</span>
-          <span>Skills</span>
-        </button>
+        <button class="section-switcher-btn is-active" type="button" data-panel-target="about">Sobre mí</button>
+        <button class="section-switcher-btn" type="button" data-panel-target="projects">Proyectos</button>
+        <button class="section-switcher-btn" type="button" data-panel-target="skills">Skills</button>
       </nav>
     </div>
   </div>
-    </div>
 
   <main class="panel-layout" id="main-content">
     <section class="content-panel is-active" id="panel-about" data-panel="about">
       <section class="hero about-hero">
-        <div class="container about-sheet notebook-sequence">
-          <div class="notebook-cell notebook-code-cell" data-cell-label="In [1]:" aria-hidden="true">
-            <span class="notebook-run-control"><i class="fa-solid fa-play"></i></span>
-            <pre><code><span class="code-variable">perfil</span> <span class="code-punctuation">=</span> <span class="code-function">construir_perfil</span><span class="code-punctuation">(</span>
-    <span class="code-argument">intereses</span><span class="code-punctuation">=</span><span class="code-punctuation">[</span><span class="code-string">"datos"</span><span class="code-punctuation">,</span> <span class="code-string">"programación"</span><span class="code-punctuation">,</span> <span class="code-string">"visualización"</span><span class="code-punctuation">],</span>
-    <span class="code-argument">enfoque</span><span class="code-punctuation">=</span><span class="code-string">"resolver problemas"</span><span class="code-punctuation">,</span> <span class="code-argument">modalidad</span><span class="code-punctuation">=</span><span class="code-string">"analítica técnica y colaborativa"</span>
-<span class="code-punctuation">)</span></code></pre>
-          </div>
-
-          <div class="about-sheet-left notebook-cell notebook-output-cell profile-render-output" data-cell-label="Out [1]:">
-            <div class="markdown-section-title markdown-h3">
-              <span aria-hidden="true">###</span>
-              <h2>Perfil profesional</h2>
+        <div class="container about-sheet">
+          <div class="about-sheet-left">
+            <div class="about-profile-photo-wrap">
+              <img
+                src="img/foto-perfil.jpg"
+                alt="Foto de perfil de Fredy Geraldo"
+                class="about-profile-photo"
+              />
             </div>
 
-            <div class="about-profile-layout">
-              <div class="about-profile-photo-wrap">
-                <img
-                  src="img/foto-perfil.jpg"
-                  alt="Foto de perfil de Fredy Geraldo"
-                  class="about-profile-photo"
-                />
-              </div>
+            <div class="about-intro-copy">
+              <h2>Hola, qué tal, me llamo Fredy.</h2>
+              <p>
+                Soy ingeniero comercial, pero fue el análisis de datos donde encontré mi verdadera
+                vocación. Lo que comenzó como un interés por comprender la información terminó
+                convirtiéndose en mi forma de resolver problemas.
+              </p>
+              <p>
+                Hoy diseño soluciones que transforman datos en decisiones mediante SQL, Python,
+                Power BI y Machine Learning.
+              </p>
+            </div>
+          </div>
 
-              <div class="about-intro-copy">
-                <h2>Hola, qué tal, me llamo Fredy.</h2>
-                <p>
-                  Soy ingeniero comercial, pero fue el análisis de datos donde encontré mi verdadera
-                  vocación. Lo que comenzó como un interés por comprender la información terminó
-                  convirtiéndose en mi forma de resolver problemas.
-                </p>
-                <p>
-                  Hoy diseño soluciones que transforman datos en decisiones mediante SQL, Python,
-                  Power BI y Machine Learning.
-                </p>
-                <div class="about-intro-actions">
-                  <a
-                    href="cv/CV_FREDY_GERALDO.pdf"
-                    class="btn btn-secondary"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Ver CV
-                  </a>
+          <div class="about-sheet-right">
+            <div class="about-side-stack">
+              <section class="about-side-block">
+                <h3>Educación</h3>
+
+                <article class="about-side-item">
+                  <span class="about-side-line" aria-hidden="true"></span>
+                  <div>
+                    <h4>Kibernum — Talento Digital para Chile</h4>
+                    <p>Especialización en Machine Learning · 2025</p>
+                  </div>
+                </article>
+
+                <article class="about-side-item">
+                  <span class="about-side-line" aria-hidden="true"></span>
+                  <div>
+                    <h4>Universidad Católica del Norte</h4>
+                    <p>Ingeniería Comercial · 2018 - 2023</p>
+                  </div>
+                </article>
+              </section>
+
+              <section class="about-side-block">
+                <h3>La metodología que sigo para resolver es</h3>
+
+                <div class="about-focus-grid">
+                  <article class="about-focus-card">
+                    <div class="about-focus-icon">
+                      <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+                    <h4>Entender</h4>
+                    <p>El contexto, el problema y la información disponible.</p>
+                  </article>
+
+                  <article class="about-focus-card">
+                    <div class="about-focus-icon">
+                      <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h4>Analizar</h4>
+                    <p>Patrones, señales y oportunidades con criterio de negocio.</p>
+                  </article>
+
+                  <article class="about-focus-card">
+                    <div class="about-focus-icon">
+                      <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h4>Comunicar</h4>
+                    <p>Hallazgos de forma clara para apoyar decisiones y acciones.</p>
+                  </article>
                 </div>
-              </div>
+              </section>
             </div>
           </div>
-
-          <div class="about-sheet-right notebook-cell notebook-output-cell education-output" data-cell-label="Out [2]:">
-            <div class="markdown-section-title markdown-h3">
-              <span aria-hidden="true">###</span>
-              <h2>Formación y especialización</h2>
-            </div>
-
-            <div class="profile-output-grid profile-output-grid--education">
-              <article class="profile-output-item">
-                <span class="profile-output-label"><i class="fa-solid fa-graduation-cap"></i> formación_base</span>
-                <h3>Universidad Católica del Norte</h3>
-                <p>Ingeniería Comercial · 2018–2023</p>
-              </article>
-
-              <article class="profile-output-item">
-                <span class="profile-output-label"><i class="fa-solid fa-brain"></i> especialización_técnica</span>
-                <h3>Kibernum — Talento Digital para Chile</h3>
-                <p>Especialización en Machine Learning · 2025</p>
-              </article>
-            </div>
-          </div>
-
-          <section class="about-methodology notebook-cell notebook-output-cell" data-cell-label="Out [3]:">
-            <div class="markdown-section-title markdown-h3">
-              <span aria-hidden="true">###</span>
-              <h2>Cómo trabajo</h2>
-            </div>
-
-            <article class="work-mode-summary">
-              <span class="profile-output-label"><i class="fa-solid fa-people-group"></i> modalidad_de_trabajo</span>
-              <div>
-                <h3>Análisis técnico con comprensión de negocio</h3>
-                <p>Trabajo estructurado, colaborativo y orientado a decisiones.</p>
-              </div>
-            </article>
-
-            <div class="about-focus-grid">
-              <article class="about-focus-card">
-                <div class="about-focus-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                <h4>Entender</h4>
-                <p>El contexto, el problema y la información disponible.</p>
-              </article>
-
-              <article class="about-focus-card">
-                <div class="about-focus-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h4>Analizar</h4>
-                <p>Patrones, señales y oportunidades con criterio de negocio.</p>
-              </article>
-
-              <article class="about-focus-card">
-                <div class="about-focus-icon"><i class="fa-solid fa-comments"></i></div>
-                <h4>Comunicar</h4>
-                <p>Hallazgos de forma clara para apoyar decisiones y acciones.</p>
-              </article>
-            </div>
-          </section>
         </div>
       </section>
     </section>
@@ -236,40 +176,23 @@
     <section class="content-panel" id="panel-projects" data-panel="projects" hidden>
       <section class="section">
         <div class="container">
-          <div class="notebook-cell notebook-code-cell" data-cell-label="In [3]:" aria-hidden="true">
-            <span class="notebook-run-control"><i class="fa-solid fa-play"></i></span>
-            <pre><code><span class="code-variable">datos_entrada</span> <span class="code-punctuation">=</span> <span class="code-punctuation">{</span>
-  <span class="code-string">"fuentes"</span><span class="code-punctuation">:</span> <span class="code-punctuation">[</span><span class="code-string">"CSV"</span><span class="code-punctuation">,</span> <span class="code-string">"bases de datos"</span><span class="code-punctuation">,</span> <span class="code-string">"registros"</span><span class="code-punctuation">],</span>
-  <span class="code-string">"estado"</span><span class="code-punctuation">:</span> <span class="code-string">"desordenado"</span><span class="code-punctuation">,</span> <span class="code-string">"objetivo"</span><span class="code-punctuation">:</span> <span class="code-string">"convertir información en decisiones"</span>
-<span class="code-punctuation">}</span></code></pre>
-          </div>
+          <div class="projects-header-row">
+            <h2 class="projects-main-title">PROYECTOS REALIZADOS</h2>
 
-          <div class="projects-header-row notebook-cell notebook-markdown-cell">
-            <div>
-              <div class="markdown-section-title markdown-h2">
-                <span aria-hidden="true">##</span>
-                <h2 class="projects-main-title">Proyectos realizados</h2>
-              </div>
-              <p class="notebook-section-lead">Datos desordenados, preguntas reales y decisiones que necesitaban una respuesta.</p>
-            </div>
-          </div>
-
-          <div class="project-filter-row">
-            <span class="project-filter-label">Filtrar salida por:</span>
             <div class="project-filters" aria-label="Filtros de proyectos">
               <button class="project-filter-btn is-active" type="button" data-filter="all">Todos</button>
-              <span class="project-filter-separator" aria-hidden="true">·</span>
+              <span class="project-filter-separator" aria-hidden="true">|</span>
               <button class="project-filter-btn" type="button" data-filter="sql">SQL</button>
-              <span class="project-filter-separator" aria-hidden="true">·</span>
+              <span class="project-filter-separator" aria-hidden="true">|</span>
               <button class="project-filter-btn" type="button" data-filter="python">Python</button>
-              <span class="project-filter-separator" aria-hidden="true">·</span>
+              <span class="project-filter-separator" aria-hidden="true">|</span>
               <button class="project-filter-btn" type="button" data-filter="ml">Machine Learning</button>
-              <span class="project-filter-separator" aria-hidden="true">·</span>
+              <span class="project-filter-separator" aria-hidden="true">|</span>
               <button class="project-filter-btn" type="button" data-filter="viz">Visualización</button>
             </div>
           </div>
 
-          <div class="projects-structure-grid projects-structure-grid--main notebook-cell notebook-output-cell" data-cell-label="Out [4]:">
+          <div class="projects-structure-grid projects-structure-grid--main">
             <button class="project-structure-card project-card-button" type="button" data-project="credit-risk" data-filters="sql python viz">
               <div class="project-structure-media">
                 <img src="project-images/project-fraud-monitoring.png" alt="Miniatura análisis de riesgo crediticio" />
@@ -287,8 +210,8 @@
               </div>
               <div class="project-structure-body">
                 <p class="case-kicker">Python · ML</p>
-                <h3>Modelo predictivo de tumores mamarios</h3>
-                <p>Clasificación clínica para apoyar una lectura más clara de los casos.</p>
+                <h3>Detector de cáncer de mama</h3>
+                <p>Clasificación clínica para apoyar una lectura diagnóstica más clara.</p>
               </div>
             </button>
           </div>
@@ -299,33 +222,19 @@
     <section class="content-panel" id="panel-skills" data-panel="skills" hidden>
       <section class="section section-soft">
         <div class="container">
-          <div class="notebook-cell notebook-code-cell" data-cell-label="In [5]:" aria-hidden="true">
-            <span class="notebook-run-control"><i class="fa-solid fa-play"></i></span>
-            <pre><code><span class="code-keyword">import</span> <span class="code-module">pandas</span> <span class="code-keyword">as</span> <span class="code-variable">pd</span>
-<span class="code-keyword">import</span> <span class="code-module">numpy</span> <span class="code-keyword">as</span> <span class="code-variable">np</span>
-<span class="code-keyword">from</span> <span class="code-module">analytics</span> <span class="code-keyword">import</span> <span class="code-function">SQL</span><span class="code-punctuation">,</span> <span class="code-function">PowerBI</span><span class="code-punctuation">,</span> <span class="code-function">Tableau</span>
-<span class="code-keyword">from</span> <span class="code-module">machine_learning</span> <span class="code-keyword">import</span> <span class="code-function">ScikitLearn</span></code></pre>
-          </div>
-
-          <div class="projects-header-row skills-header-row notebook-cell notebook-markdown-cell">
+          <div class="projects-header-row skills-header-row">
             <div class="skills-heading-copy">
-              <div class="markdown-section-title markdown-h2">
-                <span aria-hidden="true">##</span>
-                <h2 class="projects-main-title">Cómo trabajo</h2>
-              </div>
+              <h2 class="projects-main-title">CÓMO TRABAJO</h2>
             </div>
-          </div>
 
-          <div class="project-filter-row skills-filter-row">
-            <span class="project-filter-label">Filtrar habilidades por:</span>
             <div class="skills-filters" aria-label="Tipos de habilidades">
               <button class="skills-filter-btn is-active" type="button" data-skills-filter="technical">Técnico</button>
-              <span class="project-filter-separator" aria-hidden="true">·</span>
+              <span class="project-filter-separator" aria-hidden="true">|</span>
               <button class="skills-filter-btn" type="button" data-skills-filter="soft">Comunicación</button>
             </div>
           </div>
 
-          <div class="skills-panels notebook-cell notebook-output-cell" data-cell-label="Out [5]:">
+          <div class="skills-panels">
             <div class="skills-panel is-active" data-skills-panel="technical">
               <div class="skills-groups-grid">
                 <article class="skill-group-card">
@@ -438,7 +347,7 @@
             </div>
           </div>
 
-          <div class="credentials-strip notebook-cell notebook-output-cell" data-cell-label="Out [6]:">
+          <div class="credentials-strip">
             <div class="credentials-copy">
               <h3>ACREDITADO POR</h3>
             </div>
@@ -481,16 +390,9 @@
     </section>
   </main>
 
-  </div>
-
   <div class="project-modal" id="project-modal" aria-hidden="true">
     <div class="project-modal-backdrop" data-close-project-modal></div>
     <div class="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
-      <div class="project-modal-topbar" aria-hidden="true">
-        <div class="notebook-window-dots"><span></span><span></span><span></span></div>
-        <span><i class="fa-brands fa-python"></i> project_analysis.ipynb</span>
-        <span>Python 3</span>
-      </div>
       <button class="project-modal-close" type="button" aria-label="Cerrar proyecto" data-close-project-modal>
         <i class="fa-solid fa-xmark"></i>
       </button>

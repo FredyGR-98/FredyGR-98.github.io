@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     {
       id: "breast-cancer",
-      title: "Detector de cáncer de mama",
+      title: "Modelo predictivo de tumores mamarios",
       kicker: "Machine learning + salud",
       description: "Caso orientado a estructurar mejor la interpretación de hallazgos clínicos, utilizando machine learning para clasificar diagnósticos y un dashboard visual para comunicar patrones, distribución de casos y señales relevantes.",
       image: "project-images/project-breast-cancer.png",
