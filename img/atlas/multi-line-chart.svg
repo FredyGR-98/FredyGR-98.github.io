@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de gráfico de líneas múltiples</title>
+  <desc id="desc">Un gráfico de líneas con dos series para comparar su evolución.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g stroke="#e8ddd0" stroke-width="2">
+    <line x1="70" y1="190" x2="470" y2="190"/>
+    <line x1="70" y1="140" x2="470" y2="140"/>
+    <line x1="70" y1="90" x2="470" y2="90"/>
+  </g>
+  <polyline fill="none" stroke="#4f7ddb" stroke-width="6" points="90,205 170,190 250,188 330,140 420,108"/>
+  <polyline fill="none" stroke="#d35a47" stroke-width="6" points="90,150 170,135 250,120 330,102 420,95"/>
+  <g fill="#4f7ddb">
+    <circle cx="90" cy="205" r="6"/><circle cx="170" cy="190" r="6"/><circle cx="250" cy="188" r="6"/><circle cx="330" cy="140" r="6"/><circle cx="420" cy="108" r="6"/>
+  </g>
+  <g fill="#d35a47">
+    <circle cx="90" cy="150" r="6"/><circle cx="170" cy="135" r="6"/><circle cx="250" cy="120" r="6"/><circle cx="330" cy="102" r="6"/><circle cx="420" cy="95" r="6"/>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de boxplot</title>
+  <desc id="desc">Un diagrama de caja y bigotes para mostrar dispersión y outliers.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="150" x2="450" y2="150" stroke="#bda98f" stroke-width="3"/>
+  <line x1="120" y1="120" x2="120" y2="180" stroke="#5a4838" stroke-width="4"/>
+  <line x1="380" y1="120" x2="380" y2="180" stroke="#5a4838" stroke-width="4"/>
+  <line x1="120" y1="150" x2="170" y2="150" stroke="#5a4838" stroke-width="4"/>
+  <line x1="330" y1="150" x2="380" y2="150" stroke="#5a4838" stroke-width="4"/>
+  <rect x="170" y="102" width="160" height="96" rx="12" fill="#f7d4e3" stroke="#d35a47" stroke-width="4"/>
+  <line x1="248" y1="102" x2="248" y2="198" stroke="#45a049" stroke-width="5"/>
+  <circle cx="430" cy="150" r="8" fill="#4f7ddb"/>
+  <circle cx="92" cy="150" r="8" fill="#4f7ddb"/>
+</svg>

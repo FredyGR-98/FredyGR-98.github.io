@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 390" role="img" aria-labelledby="title desc">
+  <title id="title">Esquema triádico</title>
+  <desc id="desc">Combinación triádica para categorías balanceadas y bien separadas.</desc>
+  <rect width="560" height="390" rx="24" fill="#fffdf8"/>
+  <text x="34" y="48" font-family="Bricolage Grotesque, Arial, sans-serif" font-size="24" font-weight="700" fill="#201a16">Triádico</text>
+  <g transform="translate(160 206)">
+    <path d="M0,0 L0,-112 A112,112 0 0,1 56,-97 Z" fill="#ff3b1f"/><path d="M0,0 L56,-97 A112,112 0 0,1 97,-56 Z" fill="#ff6a14"/><path d="M0,0 L97,-56 A112,112 0 0,1 112,0 Z" fill="#ffae1f"/><path d="M0,0 L112,0 A112,112 0 0,1 97,56 Z" fill="#ffd21a"/><path d="M0,0 L97,56 A112,112 0 0,1 56,97 Z" fill="#ffe91f"/><path d="M0,0 L56,97 A112,112 0 0,1 0,112 Z" fill="#8bd700"/><path d="M0,0 L0,112 A112,112 0 0,1 -56,97 Z" fill="#00c941"/><path d="M0,0 L-56,97 A112,112 0 0,1 -97,56 Z" fill="#11b7c8"/><path d="M0,0 L-97,56 A112,112 0 0,1 -112,0 Z" fill="#1974c8"/><path d="M0,0 L-112,0 A112,112 0 0,1 -97,-56 Z" fill="#3b48bb"/><path d="M0,0 L-97,-56 A112,112 0 0,1 -56,-97 Z" fill="#7b2bc1"/><path d="M0,0 L-56,-97 A112,112 0 0,1 0,-112 Z" fill="#c92b8c"/>
+    <polygon points="0,-112 97,56 -97,56" fill="none" stroke="#111" stroke-width="4"/>
+    <circle cx="0" cy="-112" r="12" fill="#ff3b1f" stroke="#111" stroke-width="4"/>
+    <circle cx="97" cy="56" r="12" fill="#ffe91f" stroke="#111" stroke-width="4"/>
+    <circle cx="-97" cy="56" r="12" fill="#1974c8" stroke="#111" stroke-width="4"/>
+  </g>
+  <g transform="translate(384 114)">
+    <rect width="62" height="42" fill="#ff3b1f"/><rect y="42" width="62" height="42" fill="#c31a00"/><rect y="84" width="62" height="42" fill="#ffe91f"/><rect y="126" width="62" height="42" fill="#1974c8"/><rect y="168" width="62" height="42" fill="#2228b5"/>
+  </g>
+</svg>

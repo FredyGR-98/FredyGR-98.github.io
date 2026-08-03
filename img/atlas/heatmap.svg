@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de mapa de calor</title>
+  <desc id="desc">Una grilla coloreada para comparar intensidad entre categorías.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <g transform="translate(70 50)">
+    <rect x="0" y="0" width="60" height="36" fill="#de563e"/>
+    <rect x="60" y="0" width="60" height="36" fill="#e78a34"/>
+    <rect x="120" y="0" width="60" height="36" fill="#f0d77d"/>
+    <rect x="180" y="0" width="60" height="36" fill="#f4ead1"/>
+    <rect x="240" y="0" width="60" height="36" fill="#da4933"/>
+    <rect x="0" y="36" width="60" height="36" fill="#e8943e"/>
+    <rect x="60" y="36" width="60" height="36" fill="#f2efe5"/>
+    <rect x="120" y="36" width="60" height="36" fill="#e27a28"/>
+    <rect x="180" y="36" width="60" height="36" fill="#d4432e"/>
+    <rect x="240" y="36" width="60" height="36" fill="#f1c44c"/>
+    <rect x="0" y="72" width="60" height="36" fill="#f1c44c"/>
+    <rect x="60" y="72" width="60" height="36" fill="#ead6cc"/>
+    <rect x="120" y="72" width="60" height="36" fill="#f0b946"/>
+    <rect x="180" y="72" width="60" height="36" fill="#eddfc5"/>
+    <rect x="240" y="72" width="60" height="36" fill="#de563e"/>
+    <rect x="0" y="108" width="60" height="36" fill="#f4ead1"/>
+    <rect x="60" y="108" width="60" height="36" fill="#f0b946"/>
+    <rect x="120" y="108" width="60" height="36" fill="#f7f1e1"/>
+    <rect x="180" y="108" width="60" height="36" fill="#f0dfaa"/>
+    <rect x="240" y="108" width="60" height="36" fill="#e9bfc0"/>
+  </g>
+  <rect x="410" y="65" width="24" height="130" rx="12" fill="url(#grad)"/>
+  <defs>
+    <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#be3422"/>
+      <stop offset="50%" stop-color="#f1d67c"/>
+      <stop offset="100%" stop-color="#e07f2e"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">Tono, saturación y brillo</title>
+  <desc id="desc">Explicación visual centrada de tono, saturación y brillo o luminosidad para teoría del color.</desc>
+  <rect width="980" height="560" rx="28" fill="#fffdf8"/>
+  <text x="490" y="76" text-anchor="middle" font-family="Bricolage Grotesque, Arial, sans-serif" font-size="42" font-weight="700" fill="#201a16">Tono, saturación y brillo</text>
+  <text x="490" y="112" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="18" fill="#6c5a4a">Tres propiedades que cambian por completo cómo se percibe una paleta.</text>
+
+  <g transform="translate(70 170)">
+    <rect width="260" height="280" rx="24" fill="#ffffff" stroke="#eadfd4"/>
+    <text x="130" y="46" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#201a16">Tono</text>
+    <text x="130" y="74" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="14" fill="#6c5a4a">Cambia la familia cromática.</text>
+    <rect x="34" y="108" width="42" height="116" rx="14" fill="#d94f45"/>
+    <rect x="82" y="108" width="42" height="116" rx="14" fill="#e6942a"/>
+    <rect x="130" y="108" width="42" height="116" rx="14" fill="#d8c91d"/>
+    <rect x="178" y="108" width="42" height="116" rx="14" fill="#4ea95f"/>
+    <rect x="226" y="108" width="42" height="116" rx="14" fill="#2a8acb"/>
+    <text x="130" y="254" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="15" fill="#6c5a4a">Rojo → naranja → amarillo → verde → azul</text>
+  </g>
+
+  <g transform="translate(360 170)">
+    <rect width="260" height="280" rx="24" fill="#ffffff" stroke="#eadfd4"/>
+    <text x="130" y="46" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#201a16">Saturación</text>
+    <text x="130" y="74" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="14" fill="#6c5a4a">Cambia la intensidad del color.</text>
+    <rect x="34" y="108" width="42" height="116" rx="14" fill="#bca7a5"/>
+    <rect x="82" y="108" width="42" height="116" rx="14" fill="#c98e88"/>
+    <rect x="130" y="108" width="42" height="116" rx="14" fill="#d8776c"/>
+    <rect x="178" y="108" width="42" height="116" rx="14" fill="#ef5342"/>
+    <rect x="226" y="108" width="42" height="116" rx="14" fill="#ff3f2e"/>
+    <text x="130" y="254" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="15" fill="#6c5a4a">Apagado → neutro → vibrante</text>
+  </g>
+
+  <g transform="translate(650 170)">
+    <rect width="260" height="280" rx="24" fill="#ffffff" stroke="#eadfd4"/>
+    <text x="130" y="46" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="24" font-weight="700" fill="#201a16">Brillo / luminosidad</text>
+    <text x="130" y="74" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="14" fill="#6c5a4a">Cambia qué tan claro u oscuro se ve.</text>
+    <rect x="34" y="108" width="42" height="116" rx="14" fill="#421813"/>
+    <rect x="82" y="108" width="42" height="116" rx="14" fill="#6b2720"/>
+    <rect x="130" y="108" width="42" height="116" rx="14" fill="#93352c"/>
+    <rect x="178" y="108" width="42" height="116" rx="14" fill="#c54a3a"/>
+    <rect x="226" y="108" width="42" height="116" rx="14" fill="#ff8a78"/>
+    <text x="130" y="254" text-anchor="middle" font-family="Instrument Sans, Arial, sans-serif" font-size="15" fill="#6c5a4a">Oscuro → medio → claro</text>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de gráfico de barras agrupadas</title>
+  <desc id="desc">Un gráfico con dos barras por categoría para comparar grupos.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g>
+    <rect x="90" y="168" width="28" height="72" rx="6" fill="#4f7ddb"/>
+    <rect x="122" y="184" width="28" height="56" rx="6" fill="#d35a47"/>
+    <rect x="175" y="142" width="28" height="98" rx="6" fill="#4f7ddb"/>
+    <rect x="207" y="176" width="28" height="64" rx="6" fill="#d35a47"/>
+    <rect x="260" y="138" width="28" height="102" rx="6" fill="#4f7ddb"/>
+    <rect x="292" y="158" width="28" height="82" rx="6" fill="#d35a47"/>
+    <rect x="345" y="112" width="28" height="128" rx="6" fill="#4f7ddb"/>
+    <rect x="377" y="130" width="28" height="110" rx="6" fill="#d35a47"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de gráfico circular</title>
+  <desc id="desc">Un gráfico circular con varias categorías.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <g transform="translate(250 150)">
+    <circle r="92" fill="#4f7ddb"/>
+    <path d="M0 0 L0 -92 A92 92 0 0 1 79 47 Z" fill="#d35a47"/>
+    <path d="M0 0 L79 47 A92 92 0 0 1 -15 91 Z" fill="#f0b946"/>
+    <path d="M0 0 L-15 91 A92 92 0 0 1 -75 53 Z" fill="#4da05d"/>
+    <path d="M0 0 L-75 53 A92 92 0 0 1 0 -92 Z" fill="#f37a2b"/>
+  </g>
+</svg>

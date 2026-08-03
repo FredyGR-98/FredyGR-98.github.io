@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de histograma</title>
+  <desc id="desc">Barras contiguas formando una distribución.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g fill="#4f7ddb">
+    <rect x="95" y="220" width="34" height="20" rx="4"/>
+    <rect x="131" y="205" width="34" height="35" rx="4"/>
+    <rect x="167" y="180" width="34" height="60" rx="4"/>
+    <rect x="203" y="145" width="34" height="95" rx="4"/>
+    <rect x="239" y="105" width="34" height="135" rx="4"/>
+    <rect x="275" y="92" width="34" height="148" rx="4"/>
+    <rect x="311" y="115" width="34" height="125" rx="4"/>
+    <rect x="347" y="152" width="34" height="88" rx="4"/>
+    <rect x="383" y="190" width="34" height="50" rx="4"/>
+  </g>
+  <path d="M88 232 C150 160 210 105 276 98 C332 94 390 152 440 228" fill="none" stroke="#45a049" stroke-width="5"/>
+</svg>

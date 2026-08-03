@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de gráfico de líneas</title>
+  <desc id="desc">Un gráfico de líneas con una tendencia ascendente a lo largo del tiempo.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g stroke="#e8ddd0" stroke-width="2">
+    <line x1="70" y1="190" x2="470" y2="190"/>
+    <line x1="70" y1="140" x2="470" y2="140"/>
+    <line x1="70" y1="90" x2="470" y2="90"/>
+  </g>
+  <polyline fill="none" stroke="#45a049" stroke-width="6" points="90,200 170,180 250,155 330,152 420,105"/>
+  <g fill="#d9486b">
+    <circle cx="90" cy="200" r="7"/>
+    <circle cx="170" cy="180" r="7"/>
+    <circle cx="250" cy="155" r="7"/>
+    <circle cx="330" cy="152" r="7"/>
+    <circle cx="420" cy="105" r="7"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de diagrama de dispersión</title>
+  <desc id="desc">Puntos dispersos con tendencia positiva.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g fill="#4f7ddb">
+    <circle cx="100" cy="228" r="8"/>
+    <circle cx="155" cy="220" r="8"/>
+    <circle cx="210" cy="210" r="8"/>
+    <circle cx="275" cy="195" r="8"/>
+    <circle cx="320" cy="165" r="8"/>
+    <circle cx="355" cy="132" r="8"/>
+    <circle cx="405" cy="115" r="8"/>
+    <circle cx="445" cy="96" r="8"/>
+  </g>
+</svg>

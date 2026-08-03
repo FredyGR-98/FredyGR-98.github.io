@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Esquemas de color</title>
+  <desc id="desc">Ejemplos de esquemas de color usados en visualización: monocromático, análogo, complementario, triádico, split-complementario y análogo con acento.</desc>
+  <rect width="900" height="620" rx="28" fill="#fffdf8"/>
+  <text x="54" y="72" font-family="Bricolage Grotesque, Arial, sans-serif" font-size="46" font-weight="700" fill="#201a16">Esquemas de color</text>
+  <defs>
+    <g id="wheel">
+      <path d="M0,0 L0,-92 A92,92 0 0,1 46,-80 Z" fill="#ff3b1f"/>
+      <path d="M0,0 L46,-80 A92,92 0 0,1 80,-46 Z" fill="#ff6a14"/>
+      <path d="M0,0 L80,-46 A92,92 0 0,1 92,0 Z" fill="#ffae1f"/>
+      <path d="M0,0 L92,0 A92,92 0 0,1 80,46 Z" fill="#ffd21a"/>
+      <path d="M0,0 L80,46 A92,92 0 0,1 46,80 Z" fill="#ffe91f"/>
+      <path d="M0,0 L46,80 A92,92 0 0,1 0,92 Z" fill="#8bd700"/>
+      <path d="M0,0 L0,92 A92,92 0 0,1 -46,80 Z" fill="#00c941"/>
+      <path d="M0,0 L-46,80 A92,92 0 0,1 -80,46 Z" fill="#11b7c8"/>
+      <path d="M0,0 L-80,46 A92,92 0 0,1 -92,0 Z" fill="#1974c8"/>
+      <path d="M0,0 L-92,0 A92,92 0 0,1 -80,-46 Z" fill="#3b48bb"/>
+      <path d="M0,0 L-80,-46 A92,92 0 0,1 -46,-80 Z" fill="#7b2bc1"/>
+      <path d="M0,0 L-46,-80 A92,92 0 0,1 0,-92 Z" fill="#c92b8c"/>
+      <circle r="4" fill="#fffdf8"/>
+    </g>
+  </defs>
+
+  <g transform="translate(120 140)">
+    <text x="-36" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Monocromático</text>
+    <use href="#wheel"/>
+    <line x1="0" y1="0" x2="46" y2="80" stroke="#111" stroke-width="3"/>
+    <circle cx="46" cy="80" r="10" fill="#8bd700" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -74)">
+      <rect width="52" height="28" fill="#486f00"/><rect y="28" width="52" height="28" fill="#72b400"/><rect y="56" width="52" height="28" fill="#8bd700"/><rect y="84" width="52" height="28" fill="#b0eb52"/><rect y="112" width="52" height="28" fill="#d6f5a3"/>
+    </g>
+  </g>
+
+  <g transform="translate(455 140)">
+    <text x="-56" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Split-complementario</text>
+    <use href="#wheel"/>
+    <polygon points="-80,46 46,80 46,-80" fill="none" stroke="#111" stroke-width="3"/>
+    <circle cx="-80" cy="46" r="10" fill="#1974c8" stroke="#111" stroke-width="3"/>
+    <circle cx="46" cy="80" r="10" fill="#00c941" stroke="#111" stroke-width="3"/>
+    <circle cx="46" cy="-80" r="10" fill="#ff6a14" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -68)">
+      <rect width="52" height="28" fill="#ff6a14"/><rect y="28" width="52" height="28" fill="#ffae1f"/><rect y="56" width="52" height="28" fill="#ff8847"/><rect y="84" width="52" height="28" fill="#1974c8"/><rect y="112" width="52" height="28" fill="#00c941"/>
+    </g>
+  </g>
+
+  <g transform="translate(120 360)">
+    <text x="-16" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Análogo</text>
+    <use href="#wheel"/>
+    <polyline points="80,-46 92,0 80,46" fill="none" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="-46" r="10" fill="#ffae1f" stroke="#111" stroke-width="3"/>
+    <circle cx="92" cy="0" r="10" fill="#ffd21a" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="46" r="10" fill="#ffe91f" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -68)">
+      <rect width="52" height="28" fill="#ffea00"/><rect y="28" width="52" height="28" fill="#f5d600"/><rect y="56" width="52" height="28" fill="#ffd21a"/><rect y="84" width="52" height="28" fill="#f0b946"/><rect y="112" width="52" height="28" fill="#ffae1f"/>
+    </g>
+  </g>
+
+  <g transform="translate(455 360)">
+    <text x="-18" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Triádico</text>
+    <use href="#wheel"/>
+    <polygon points="0,-92 80,46 -80,46" fill="none" stroke="#111" stroke-width="3"/>
+    <circle cx="0" cy="-92" r="10" fill="#ff3b1f" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="46" r="10" fill="#ffe91f" stroke="#111" stroke-width="3"/>
+    <circle cx="-80" cy="46" r="10" fill="#1974c8" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -68)">
+      <rect width="52" height="28" fill="#ff3b1f"/><rect y="28" width="52" height="28" fill="#c31a00"/><rect y="56" width="52" height="28" fill="#ffe91f"/><rect y="84" width="52" height="28" fill="#1974c8"/><rect y="112" width="52" height="28" fill="#2228b5"/>
+    </g>
+  </g>
+
+  <g transform="translate(120 560)">
+    <text x="-38" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Complementario</text>
+    <use href="#wheel"/>
+    <line x1="-46" y1="-80" x2="46" y2="80" stroke="#111" stroke-width="3"/>
+    <circle cx="-46" cy="-80" r="10" fill="#c92b8c" stroke="#111" stroke-width="3"/>
+    <circle cx="46" cy="80" r="10" fill="#8bd700" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -68)">
+      <rect width="52" height="28" fill="#f043ab"/><rect y="28" width="52" height="28" fill="#7e0f61"/><rect y="56" width="52" height="28" fill="#8bd700"/><rect y="84" width="52" height="28" fill="#3d8d00"/>
+    </g>
+  </g>
+
+  <g transform="translate(455 560)">
+    <text x="-54" y="-118" font-family="Instrument Sans, Arial, sans-serif" font-size="18" font-weight="700" fill="#201a16">Análogo con acento</text>
+    <use href="#wheel"/>
+    <polyline points="-92,0 92,0 80,-46 80,46" fill="none" stroke="#111" stroke-width="3"/>
+    <circle cx="-92" cy="0" r="10" fill="#3b48bb" stroke="#111" stroke-width="3"/>
+    <circle cx="92" cy="0" r="10" fill="#ffd21a" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="-46" r="10" fill="#ffae1f" stroke="#111" stroke-width="3"/>
+    <circle cx="80" cy="46" r="10" fill="#ffe91f" stroke="#111" stroke-width="3"/>
+    <g transform="translate(136 -82)">
+      <rect width="52" height="28" fill="#ffea00"/><rect y="28" width="52" height="28" fill="#f7d600"/><rect y="56" width="52" height="28" fill="#ffd21a"/><rect y="84" width="52" height="28" fill="#ffae1f"/><rect y="112" width="52" height="28" fill="#3b48bb"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 300" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustración de gráfico de barras</title>
+  <desc id="desc">Un gráfico de barras con columnas ascendentes.</desc>
+  <rect width="520" height="300" rx="24" fill="#fffdf8"/>
+  <line x1="70" y1="240" x2="470" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <line x1="70" y1="50" x2="70" y2="240" stroke="#bda98f" stroke-width="3"/>
+  <g fill="#5a9b5f">
+    <rect x="95" y="170" width="48" height="70" rx="8"/>
+    <rect x="170" y="145" width="48" height="95" rx="8"/>
+    <rect x="245" y="138" width="48" height="102" rx="8"/>
+    <rect x="320" y="110" width="48" height="130" rx="8"/>
+    <rect x="395" y="92" width="48" height="148" rx="8"/>
+  </g>
+</svg>
