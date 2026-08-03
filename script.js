@@ -22,6 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalRepo = document.getElementById("project-modal-repo");
   const modalPrev = document.querySelector(".project-modal-arrow.prev");
   const modalNext = document.querySelector(".project-modal-arrow.next");
+  const cvModal = document.getElementById("cv-modal");
+  const openCvModalButtons = document.querySelectorAll("[data-open-cv-modal]");
+  const closeCvModalButtons = document.querySelectorAll("[data-close-cv-modal]");
+  const cvTabButtons = document.querySelectorAll("[data-cv-tab]");
+  const cvTabPanels = document.querySelectorAll("[data-cv-panel]");
 
   const atlasSearchInput = document.querySelector("[data-atlas-search]");
   const atlasClearSearch = document.querySelector("[data-atlas-clear-search]");
@@ -881,6 +886,140 @@ document.addEventListener("DOMContentLoaded", () => {
       relatedIds: ["choose-the-right-tool", "common-problem-types-and-smart-questions"]
     },
     {
+      id: "data-collection-and-structure-guide",
+      slug: "como-seleccionar-y-estructurar-los-datos-correctos",
+      title: "C\u00F3mo seleccionar, recopilar y estructurar los datos correctos",
+      summary: "Una gu\u00EDa para elegir qu\u00E9 datos conviene usar, de d\u00F3nde salen y c\u00F3mo cambia el an\u00E1lisis seg\u00FAn si los datos son estructurados o no estructurados.",
+      category: "Fundamentos",
+      type: "Gu\u00EDa",
+      level: "basic",
+      readingTime: "9 min",
+      updatedAt: "2026-08-03",
+      tags: ["Recopilaci\u00F3n", "Fuentes", "Datos estructurados", "Fundamentos"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Idea central",
+          body: "Antes de analizar, conviene resolver dos preguntas: qu\u00E9 datos necesito realmente y en qu\u00E9 formato est\u00E1n. Si elijo mal la fuente o el tipo de dato, puedo terminar respondiendo otra cosa, demorando m\u00E1s de la cuenta o apoy\u00E1ndome en informaci\u00F3n poco \u00FAtil para el problema."
+        },
+        {
+          title: "Qu\u00E9 revisar antes de recopilar datos",
+          body: "Cuando pienso en recopilaci\u00F3n, me sirve pasar por una lista corta: c\u00F3mo se obtendr\u00E1n los datos, si vienen de mis propios recursos o de terceros, si realmente responden el problema de negocio, cu\u00E1ntos necesito y cu\u00E1l es el marco temporal disponible.",
+          highlights: [
+            {
+              icon: "fa-solid fa-layer-group",
+              title: "Elegir el tipo de dato correcto",
+              text: "No todos los conjuntos sirven para todas las preguntas: si quiero tendencias, necesito datos con tiempo; si quiero comportamiento, necesito datos que capturen ese contexto."
+            },
+            {
+              icon: "fa-regular fa-clock",
+              title: "Definir el marco temporal",
+              text: "Si necesito una respuesta inmediata, puede que tenga que trabajar con datos hist\u00F3ricos en vez de esperar recolecci\u00F3n nueva."
+            },
+            {
+              icon: "fa-solid fa-database",
+              title: "Decidir c\u00F3mo se recopilar\u00E1n",
+              text: "Puedo usar datos de primera fuente, comprar o recibir datos de otras fuentes, o mezclar varias seg\u00FAn el caso."
+            },
+            {
+              icon: "fa-solid fa-filter-circle-check",
+              title: "Definir cu\u00E1ntos datos usar",
+              text: "A veces basta una muestra aleatoria razonable; otras veces conviene una selecci\u00F3n m\u00E1s estrat\u00E9gica seg\u00FAn el objetivo."
+            }
+          ],
+          example: "Elegir tipo de dato \u2192 definir tiempo disponible \u2192 decidir si recolecto nuevo o uso existente \u2192 validar fuente \u2192 definir volumen de datos"
+        },
+        {
+          title: "Fuentes de datos: primera, segunda y tercera parte",
+          body: "La diferencia principal est\u00E1 en qui\u00E9n recopil\u00F3 originalmente la informaci\u00F3n. Si la obtengo con mis propios recursos, hablo de datos de primera fuente. Si los recopil\u00F3 otro grupo y luego me los vende o comparte, ya estoy entrando en datos de segunda o tercera parte.",
+          comparisonTable: {
+            columns: ["Clasificaci\u00F3n", "Definici\u00F3n", "Ejemplos"],
+            rows: [
+              [
+                "Datos primarios",
+                "Recogidos directamente por quien investiga o por la propia organizaci\u00F3n.",
+                "Entrevistas, encuestas propias, formularios internos o levantamiento directo con clientes."
+              ],
+              [
+                "Datos secundarios / de segunda parte",
+                "Recogidos por otro grupo y luego compartidos, vendidos o reutilizados.",
+                "Datos demogr\u00E1ficos de una universidad, perfiles de clientes de otra empresa o reportes sectoriales."
+              ],
+              [
+                "Datos de tercera parte",
+                "Distribuidos por un proveedor que no necesariamente los recopil\u00F3 por s\u00ED mismo.",
+                "Paquetes de datos agregados desde varias fuentes comerciales o plataformas de datos."
+              ]
+            ]
+          }
+        },
+        {
+          title: "Datos internos y externos",
+          body: "Otra forma \u00FAtil de pensar las fuentes es distinguir si los datos nacen dentro del sistema de una organizaci\u00F3n o si vienen desde fuera. Esa diferencia importa porque cambia el nivel de control, el contexto y la facilidad para interpretar lo que estoy viendo.",
+          comparisonTable: {
+            columns: ["Clasificaci\u00F3n", "Definici\u00F3n", "Ejemplos"],
+            rows: [
+              [
+                "Datos internos",
+                "Se almacenan dentro de los propios sistemas de una empresa u organizaci\u00F3n.",
+                "Ventas por sucursal, inventario, registros de RRHH, historial de transacciones."
+              ],
+              [
+                "Datos externos",
+                "Se almacenan fuera de la organizaci\u00F3n y se incorporan para complementar contexto.",
+                "Informes de cr\u00E9dito, salarios de mercado, datos censales e indicadores econ\u00F3micos."
+              ]
+            ]
+          }
+        },
+        {
+          title: "Datos estructurados frente a no estructurados",
+          body: "Los datos estructurados vienen ordenados en un formato f\u00E1cil de identificar, normalmente filas y columnas. Los no estructurados no siguen ese patr\u00F3n tan claro y suelen dar m\u00E1s libertad, pero tambi\u00E9n m\u00E1s dificultad para buscar, gestionar y analizar.",
+          comparisonTable: {
+            columns: ["Tipo", "Caracter\u00EDsticas", "Ejemplos"],
+            rows: [
+              [
+                "Estructurados",
+                "Tienen tipos de dato definidos, suelen ser cuantitativos, son f\u00E1ciles de organizar, buscar y analizar, y suelen vivir en tablas o bases relacionales.",
+                "Excel, Google Sheets, SQL, datos de clientes, registros telef\u00F3nicos, historial transaccional."
+              ],
+              [
+                "No estructurados",
+                "Tienen formatos variados, suelen ser cualitativos, son m\u00E1s dif\u00EDciles de buscar y ordenar, pero pueden aportar m\u00E1s libertad anal\u00EDtica.",
+                "Mensajes, comentarios de redes sociales, transcripciones, logs, im\u00E1genes, audio, video, PDFs y p\u00E1ginas web."
+              ]
+            ]
+          }
+        },
+        {
+          title: "Por qu\u00E9 esta diferencia importa en la pr\u00E1ctica",
+          body: "Si exporto datos estructurados, la estructura suele viajar con ellos. En cambio, los datos no estructurados exigen m\u00E1s interpretaci\u00F3n y herramientas m\u00E1s sofisticadas para volverse analizables. Por eso hoy muchas soluciones usan IA o aprendizaje autom\u00E1tico para clasificar texto, imagen o audio que antes era m\u00E1s dif\u00EDcil de trabajar.",
+          bestPractices: [
+            "No elegir una fuente solo porque tiene muchos datos: elegirla porque responde la pregunta.",
+            "Si el tiempo apremia, priorizar datos hist\u00F3ricos confiables antes que esperar una recolecci\u00F3n larga.",
+            "Distinguir si necesito estructura para buscar r\u00E1pido o flexibilidad para explorar mejor.",
+            "Validar si la fuente introduce sesgos, vac\u00EDos o representaciones injustas del problema."
+          ]
+        },
+        {
+          title: "El problema de la equidad",
+          body: "Cuando los datos no representan bien a la poblaci\u00F3n o ciertos grupos quedan subrepresentados, el an\u00E1lisis se vuelve menos confiable. Esto se vuelve especialmente delicado cuando uso IA o modelos para procesar datos no estructurados, porque un sesgo en la fuente puede terminar en resultados injustos o poco precisos."
+        },
+        {
+          title: "Para recordar",
+          body: "Lo importante no es acumular datos, sino elegir los correctos. Primero decido si necesito recolectar o reutilizar, luego reviso la fuente, el tiempo, el volumen y la estructura. Reci\u00E9n con eso tiene sentido pensar en la herramienta o en el an\u00E1lisis que har\u00E9 despu\u00E9s."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Google Career Certificates. (s. f.). <em>Foundations: Data, Data, Everywhere</em>. Coursera. https://www.coursera.org/learn/foundations-data",
+          url: "https://www.coursera.org/learn/foundations-data"
+        }
+      ],
+      relatedIds: ["structured-problem-solving", "qualitative-quantitative-and-data-scale", "choose-the-right-tool"]
+    },
+    {
       id: "excel-shortcuts-guide",
       slug: "atajos-de-excel-para-analisis",
       title: "Atajos de Excel para an\u00E1lisis",
@@ -1313,6 +1452,15 @@ document.addEventListener("DOMContentLoaded", () => {
     stickyHeader?.classList.toggle("is-compact", window.scrollY > 120);
   };
 
+  const syncBodyScrollState = () => {
+    const hasOpenModal =
+      modal?.classList.contains("is-open") ||
+      atlasNoteModal?.classList.contains("is-open") ||
+      cvModal?.classList.contains("is-open");
+
+    document.body.style.overflow = hasOpenModal ? "hidden" : "";
+  };
+
   const validPanels = new Set(["about", "projects", "skills", "resources"]);
   const requestedPanel = new URLSearchParams(window.location.search).get("panel");
   const initialPanel = validPanels.has(requestedPanel) ? requestedPanel : "about";
@@ -1388,14 +1536,44 @@ document.addEventListener("DOMContentLoaded", () => {
     renderProjectModal(index);
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    syncBodyScrollState();
   };
 
   const closeProjectModal = () => {
     if (!modal) return;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = atlasNoteModal?.classList.contains("is-open") ? "hidden" : "";
+    syncBodyScrollState();
+  };
+
+  const openCvModal = () => {
+    if (!cvModal) return;
+    cvModal.classList.add("is-open");
+    cvModal.setAttribute("aria-hidden", "false");
+    syncBodyScrollState();
+  };
+
+  const closeCvModal = () => {
+    if (!cvModal) return;
+    cvModal.classList.remove("is-open");
+    cvModal.setAttribute("aria-hidden", "true");
+    syncBodyScrollState();
+  };
+
+  const setActiveCvTab = (tabName) => {
+    if (!cvTabButtons.length || !cvTabPanels.length) return;
+
+    cvTabButtons.forEach((button) => {
+      const isActive = button.dataset.cvTab === tabName;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", String(isActive));
+    });
+
+    cvTabPanels.forEach((panel) => {
+      const isActive = panel.dataset.cvPanel === tabName;
+      panel.classList.toggle("is-active", isActive);
+      panel.hidden = !isActive;
+    });
   };
 
   const applyFilter = (filter) => {
@@ -1810,14 +1988,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     atlasNoteModal.classList.add("is-open");
     atlasNoteModal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    syncBodyScrollState();
   };
 
   const closeAtlasNote = () => {
     if (!atlasNoteModal) return;
     atlasNoteModal.classList.remove("is-open");
     atlasNoteModal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = modal?.classList.contains("is-open") ? "hidden" : "";
+    syncBodyScrollState();
   };
 
   switcherButtons.forEach((button) => {
@@ -1889,6 +2067,21 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", closeAtlasNote);
   });
 
+  openCvModalButtons.forEach((button) => {
+    button.addEventListener("click", openCvModal);
+  });
+
+  closeCvModalButtons.forEach((button) => {
+    button.addEventListener("click", closeCvModal);
+  });
+
+  cvTabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tabName = button.dataset.cvTab;
+      if (tabName) setActiveCvTab(tabName);
+    });
+  });
+
   modalPrev?.addEventListener("click", () => {
     renderProjectModal(currentProjectIndex - 1);
   });
@@ -1904,12 +2097,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (event.key === "Escape" && atlasNoteModal?.classList.contains("is-open")) {
       closeAtlasNote();
     }
+    if (event.key === "Escape" && cvModal?.classList.contains("is-open")) {
+      closeCvModal();
+    }
   });
 
   window.addEventListener("scroll", updateCompactHeader, { passive: true });
 
   applyFilter("all");
   applySkillsFilter("technical");
+  setActiveCvTab("laboral");
   renderAtlas();
   setActivePanel(initialPanel, { scroll: false });
   updateCompactHeader();

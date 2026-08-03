@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -97,7 +97,7 @@
           >
             <i class="fa-solid fa-chart-pie"></i>
           </a>
-        </div>
+</div>
       </div>
     </div>
   </header>
@@ -165,13 +165,20 @@
                   Power BI y Machine Learning.
                 </p>
                 <div class="about-intro-actions">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-open-cv-modal
+                  >
+                    Ver CV
+                  </button>
                   <a
                     href="cv/CV_FREDY_GERALDO.pdf"
-                    class="btn btn-secondary"
+                    class="btn btn-primary btn-harvard"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Ver CV
+                    Descargar CV Harvard
                   </a>
                 </div>
               </div>
@@ -585,6 +592,446 @@
 
   </div>
 
+  <div class="cv-modal" id="cv-modal" aria-hidden="true">
+    <div class="cv-modal-backdrop" data-close-cv-modal></div>
+    <div class="cv-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="cv-modal-title">
+      <div class="cv-modal-topbar">
+        <div class="notebook-window-dots"><span></span><span></span><span></span></div>
+        <span id="cv-modal-title"><i class="fa-regular fa-file-lines"></i> cv_interactivo.html</span>
+      </div>
+
+      <button class="cv-modal-close" type="button" aria-label="Cerrar CV" data-close-cv-modal>
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="cv-modal-body">
+        <article class="cv-showcase" aria-label="Curr&iacute;culum interactivo de Fredy Geraldo">
+          <section class="cv-hero-card">
+            <p class="cv-hero-kicker">Curr&iacute;culum visual</p>
+            <h2>Fredy Omar Geraldo Rivera</h2>
+            <p class="cv-hero-role">Analista de Datos</p>
+
+            <div class="cv-hero-socials" aria-label="Redes y contacto">
+              <a href="mailto:fredy.geraldo.r@gmail.com" aria-label="Correo">
+                <i class="fa-regular fa-envelope"></i>
+              </a>
+              <a href="https://github.com/FredyGR-98" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/fredy-omar-geraldo-rivera-979732148/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </a>
+              <a href="https://public.tableau.com/app/profile/fredy.omar.geraldo.rivera/vizzes" target="_blank" rel="noopener noreferrer" aria-label="Tableau Public">
+                <i class="fa-solid fa-chart-pie"></i>
+              </a>
+              <span
+                class="cv-hero-phone"
+                aria-label="Tel&eacute;fono de contacto"
+                title="+569 88258526"
+              >
+                <i class="fa-solid fa-phone"></i>
+              </span>
+            </div>
+
+            <p class="cv-hero-summary">
+              Ingeniero comercial orientado a transformar datos en decisiones. Me especializo en
+              SQL, Python, Power BI, Tableau y Machine Learning para resolver problemas con una
+              mezcla de an&aacute;lisis t&eacute;cnico, criterio de negocio y comunicaci&oacute;n clara.
+            </p>
+
+            <div class="cv-hero-actions">
+              <a
+                href="cv/CV_FREDY_GERALDO.pdf"
+                class="cv-hero-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Descargar CV Harvard
+              </a>
+            </div>
+          </section>
+
+          <section class="cv-block cv-tabs-block">
+            <div class="cv-block-heading">
+              <span>Resumen profesional</span>
+              <h3>Explora cada secci&oacute;n del CV de forma m&aacute;s interactiva</h3>
+            </div>
+
+            <div class="cv-tabs-nav" role="tablist" aria-label="Secciones del curr&iacute;culum">
+              <button class="cv-tab-btn is-active" type="button" role="tab" aria-selected="true" aria-controls="cv-tab-laboral" id="cv-tab-button-laboral" data-cv-tab="laboral">
+                Experiencia laboral
+              </button>
+              <button class="cv-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="cv-tab-estudios" id="cv-tab-button-estudios" data-cv-tab="estudios">
+                Formaci&oacute;n
+              </button>
+              <button class="cv-tab-btn" type="button" role="tab" aria-selected="false" aria-controls="cv-tab-intereses" id="cv-tab-button-intereses" data-cv-tab="intereses">
+                Intereses
+              </button>
+            </div>
+
+            <div class="cv-tab-panel is-active" id="cv-tab-laboral" role="tabpanel" aria-labelledby="cv-tab-button-laboral" data-cv-panel="laboral">
+              <div class="cv-panel-intro">
+                <h4>Experiencia laboral</h4>
+                <p>
+                  Un resumen breve del trabajo aplicado y las experiencias que ya forman parte de mi
+                  recorrido profesional. Al pasar sobre cada card puedes ver funciones y logros.
+                </p>
+              </div>
+
+              <div class="cv-experience-timeline">
+                <article class="cv-experience-item cv-experience-item--left">
+                  <div class="cv-experience-card" tabindex="0">
+                    <div class="cv-experience-ribbon">Analista de Datos Freelance</div>
+                    <h4>Proyecto de riesgo crediticio</h4>
+                    <p class="cv-experience-meta">Ene 2026 &ndash; Actualidad</p>
+                    <p class="cv-experience-context">Proyecto independiente de an&aacute;lisis de riesgo crediticio</p>
+                    <div class="cv-experience-actions" aria-label="Detalles de experiencia">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver funciones">
+                          <i class="fa-solid fa-list-check"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Funciones</strong>
+                          <ul>
+                            <li>Analic&eacute; solicitudes de cr&eacute;dito seg&uacute;n variables del cliente, prop&oacute;sito del pr&eacute;stamo e historial financiero.</li>
+                            <li>Segment&eacute; perfiles de riesgo con consultas, filtros y rankings para identificar grupos con mayor probabilidad de incumplimiento.</li>
+                            <li>Constru&iacute; herramientas en Google Sheets para organizar resultados y facilitar el seguimiento anal&iacute;tico.</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver logros">
+                          <i class="fa-solid fa-trophy"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Logro</strong>
+                          <p>Desarroll&eacute; una soluci&oacute;n que redujo entre 40% y 50% los tiempos de b&uacute;squeda y an&aacute;lisis.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="cv-experience-item cv-experience-item--right">
+                  <div class="cv-experience-card" tabindex="0">
+                    <div class="cv-experience-ribbon">Analista de Datos Freelance</div>
+                    <h4>Modelo predictivo de tumores mamarios</h4>
+                    <p class="cv-experience-meta">Oct 2025 &ndash; Ene 2026</p>
+                    <p class="cv-experience-context">Proyecto independiente de modelo predictivo de tumores mamarios</p>
+                    <div class="cv-experience-actions" aria-label="Detalles de experiencia">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver funciones">
+                          <i class="fa-solid fa-list-check"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Funciones</strong>
+                          <ul>
+                            <li>Desarroll&eacute; un modelo predictivo para clasificar tipos de tumor en c&aacute;ncer de mama a partir de variables cl&iacute;nicas.</li>
+                            <li>Implement&eacute; una API en Flask para ejecutar inferencias reproducibles y conectar la salida del modelo con una interfaz de visualizaci&oacute;n.</li>
+                            <li>Dise&ntilde;&eacute; un dashboard con base de datos local para registrar predicciones y observar la distribuci&oacute;n de casos.</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver logros">
+                          <i class="fa-solid fa-trophy"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Logro</strong>
+                          <p>Desarroll&eacute; una soluci&oacute;n predictiva con accuracy 94.7%, F1 score 0.958 y ROC AUC 0.994, complementada con un dashboard para registrar predicciones y visualizar la distribuci&oacute;n de casos.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="cv-experience-item cv-experience-item--left">
+                  <div class="cv-experience-card" tabindex="0">
+                    <div class="cv-experience-ribbon">Apoyo Profesional</div>
+                    <h4>Ilustre Municipalidad de Cha&ntilde;aral</h4>
+                    <p class="cv-experience-meta">Oct 2024 &ndash; Dic 2025</p>
+                    <p class="cv-experience-context">Gesti&oacute;n operativa y soporte administrativo del &aacute;rea</p>
+                    <div class="cv-experience-actions" aria-label="Detalles de experiencia">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver funciones">
+                          <i class="fa-solid fa-list-check"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Funciones</strong>
+                          <ul>
+                            <li>Apoy&eacute; la gesti&oacute;n operativa, la organizaci&oacute;n de informaci&oacute;n y el soporte administrativo del &aacute;rea.</li>
+                            <li>Atend&iacute; p&uacute;blico para orientar y responder consultas seg&uacute;n los requerimientos del &aacute;rea.</li>
+                            <li>Registr&eacute; y di seguimiento a informaci&oacute;n administrativa para mantener continuidad operativa.</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver logros">
+                          <i class="fa-solid fa-trophy"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Logro</strong>
+                          <p>Elabor&eacute; herramientas en Excel que redujeron en 40% los tiempos de b&uacute;squeda de registros.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="cv-tab-panel" id="cv-tab-estudios" role="tabpanel" aria-labelledby="cv-tab-button-estudios" data-cv-panel="estudios" hidden>
+              <div class="cv-panel-intro">
+                <h4>Formaci&oacute;n y cursos</h4>
+                <p>
+                  Una l&iacute;nea de tiempo que resume mi formaci&oacute;n desde lo m&aacute;s reciente a la base
+                  acad&eacute;mica. Cada etapa muestra lo principal que aprend&iacute; y las herramientas que reforc&eacute;.
+                </p>
+              </div>
+
+              <div class="cv-study-timeline">
+                <article class="cv-study-item cv-study-item--left">
+                  <div class="cv-study-dot"></div>
+                  <div class="cv-study-card" tabindex="0">
+                    <div class="cv-study-ribbon">Google Data Analytics Professional Certificate</div>
+                    <div class="cv-study-main">
+                      <h4>Google &ndash; Coursera</h4>
+                      <p class="cv-experience-meta">Jun 2026 &ndash; Jul 2026</p>
+                    </div>
+                    <p class="cv-experience-context">
+                      Profundic&eacute; el uso de SQL, Google Sheets, BigQuery y Tableau, adem&aacute;s de reforzar
+                      estructura del an&aacute;lisis, visualizaci&oacute;n y comunicaci&oacute;n de hallazgos.
+                    </p>
+                    <div class="cv-experience-actions" aria-label="Detalles de formaci&oacute;n">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes">
+                          <i class="fa-solid fa-book-open-reader"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Aprendizajes</strong>
+                          <ul>
+                            <li>Foundations: Data, Data, Everywhere</li>
+                            <li>Ask Questions to Make Data-Driven Decisions</li>
+                            <li>Prepare Data for Exploration</li>
+                            <li>Process Data from Dirty to Clean</li>
+                            <li>Analyze Data to Answer Questions</li>
+                            <li>Share Data Through the Art of Visualization</li>
+                            <li>Data Analysis with R Programming</li>
+                            <li>Google Data Analytics Capstone: Complete a Case Study</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver herramientas aprendidas">
+                          <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Herramientas aprendidas</strong>
+                          <div class="cv-popover-chip-cloud">
+                            <span>SQL</span>
+                            <span>Google Sheets</span>
+                            <span>BigQuery</span>
+                            <span>Tableau</span>
+                            <span>R</span>
+                            <span>An&aacute;lisis estructurado</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="cv-study-item cv-study-item--right">
+                  <div class="cv-study-dot"></div>
+                  <div class="cv-study-card" tabindex="0">
+                    <div class="cv-study-ribbon">Especializaci&oacute;n en Machine Learning</div>
+                    <div class="cv-study-main">
+                      <h4>Kibernum &ndash; Talento Digital para Chile</h4>
+                      <p class="cv-experience-meta">Jul 2025 &ndash; Oct 2025</p>
+                    </div>
+                    <p class="cv-experience-context">
+                      Reforc&eacute; el trabajo t&eacute;cnico ligado a modelamiento, redes neuronales y
+                      procesamiento de lenguaje, ampliando mi base anal&iacute;tica hacia aprendizaje autom&aacute;tico.
+                    </p>
+                    <div class="cv-experience-actions" aria-label="Detalles de especializaci&oacute;n">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes">
+                          <i class="fa-solid fa-brain"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Aprendizajes</strong>
+                          <p>Profundic&eacute; en Python, NumPy, redes neuronales, NLP y otras herramientas ligadas a modelamiento y aprendizaje autom&aacute;tico.</p>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver herramientas aprendidas">
+                          <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Herramientas aprendidas</strong>
+                          <div class="cv-popover-chip-cloud">
+                            <span>Python</span>
+                            <span>NumPy</span>
+                            <span>Redes neuronales</span>
+                            <span>NLP</span>
+                            <span>Modelamiento</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="cv-study-item cv-study-item--left">
+                  <div class="cv-study-dot"></div>
+                  <div class="cv-study-card" tabindex="0">
+                    <div class="cv-study-ribbon">Ingenier&iacute;a Comercial</div>
+                    <div class="cv-study-main">
+                      <h4>Universidad Cat&oacute;lica del Norte, Coquimbo</h4>
+                      <p class="cv-experience-meta">Jul 2018 &ndash; Dic 2022</p>
+                    </div>
+                    <p class="cv-experience-context">
+                      Constru&iacute; la base para ordenar informaci&oacute;n, comprender negocio y fortalecer
+                      habilidades blandas que hoy aplico al an&aacute;lisis y la comunicaci&oacute;n de resultados.
+                    </p>
+                    <div class="cv-experience-actions" aria-label="Detalles de certificaci&oacute;n">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes">
+                          <i class="fa-solid fa-building-columns"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Aprendizajes</strong>
+                          <p>Base en an&aacute;lisis de negocio, estructuraci&oacute;n de informaci&oacute;n y desarrollo de habilidades blandas como comunicaci&oacute;n, autonom&iacute;a y resoluci&oacute;n de problemas.</p>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes del certificado">
+                          <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Herramientas aprendidas</strong>
+                          <div class="cv-popover-chip-cloud">
+                            <span>Excel</span>
+                            <span>SQL</span>
+                            <span>Visualizaciones</span>
+                            <span>Stata</span>
+                            <span>RStudio</span>
+                            <span>Canva</span>
+                            <span>Habilidades blandas</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="cv-tab-panel" id="cv-tab-intereses" role="tabpanel" aria-labelledby="cv-tab-button-intereses" data-cv-panel="intereses" hidden>
+              <div class="cv-panel-intro">
+                <h4>Intereses y desarrollo complementario</h4>
+                <p>
+                  Espacios que reforzaron mi base anal&iacute;tica fuera del recorrido principal: ayudant&iacute;as,
+                  pr&aacute;ctica constante y aprendizaje independiente orientado a resolver mejor problemas reales.
+                </p>
+              </div>
+
+              <div class="cv-study-timeline">
+                <article class="cv-study-item cv-study-item--right">
+                  <div class="cv-study-dot"></div>
+                  <div class="cv-study-card" tabindex="0">
+                    <div class="cv-study-ribbon">Aprendizaje independiente</div>
+                    <div class="cv-study-main">
+                      <h4>Exploraci&oacute;n autodidacta continua</h4>
+                      <p class="cv-experience-meta">Continuo</p>
+                    </div>
+                    <p class="cv-experience-context">
+                      Complement&eacute; mi formaci&oacute;n con estudio propio para mejorar la elaboraci&oacute;n de
+                      prompts para IAs, conectar bases de datos con otras soluciones ahorrando costos y
+                      aprender HTML de forma pr&aacute;ctica.
+                    </p>
+                    <div class="cv-experience-actions" aria-label="Detalles de aprendizaje independiente">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes">
+                          <i class="fa-solid fa-lightbulb"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Aprendizajes</strong>
+                          <p>Fortalec&iacute; el uso estrat&eacute;gico de IA, la automatizaci&oacute;n de flujos y una mirada m&aacute;s pr&aacute;ctica para integrar herramientas y optimizar costos.</p>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver herramientas fortalecidas">
+                          <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Herramientas fortalecidas</strong>
+                          <div class="cv-popover-chip-cloud">
+                            <span>Prompts para IA</span>
+                            <span>Bases de datos</span>
+                            <span>Integraciones</span>
+                            <span>HTML</span>
+                            <span>Automatizaci&oacute;n</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="cv-study-item cv-study-item--left">
+                  <div class="cv-study-dot"></div>
+                  <div class="cv-study-card" tabindex="0">
+                    <div class="cv-study-ribbon">Ayudant&iacute;as acad&eacute;micas</div>
+                    <div class="cv-study-main">
+                      <h4>Ayudante de C&aacute;tedra</h4>
+                      <p class="cv-experience-meta">Jul 2019 &ndash; Dic 2022</p>
+                    </div>
+                    <p class="cv-experience-context">
+                      Estad&iacute;stica, Econometr&iacute;a y Gesti&oacute;n de Proyectos: una experiencia que me ayud&oacute;
+                      a reforzar herramientas base, explicar contenidos y acompa&ntilde;ar procesos de aprendizaje.
+                    </p>
+                    <div class="cv-experience-actions" aria-label="Detalles de ayudantÃ­as">
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver aprendizajes">
+                          <i class="fa-solid fa-chalkboard-user"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Aprendizajes</strong>
+                          <ul>
+                            <li>Apoy&eacute; asignaturas de Estad&iacute;stica II, Aprendizaje Estad&iacute;stico (Econometr&iacute;a) y Gesti&oacute;n de Proyectos SIA.</li>
+                            <li>Acompa&ntilde;&eacute; a estudiantes en an&aacute;lisis de datos y resoluci&oacute;n de ejercicios.</li>
+                            <li>Elabor&eacute; material complementario y segu&iacute; proyectos con herramientas de planificaci&oacute;n.</li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="cv-experience-badge">
+                        <button type="button" class="cv-experience-icon" aria-label="Ver herramientas fortalecidas">
+                          <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </button>
+                        <div class="cv-experience-popover">
+                          <strong>Herramientas fortalecidas</strong>
+                          <div class="cv-popover-chip-cloud">
+                            <span>Stata</span>
+                            <span>RStudio</span>
+                            <span>Excel</span>
+                            <span>Trello</span>
+                            <span>Cartas Gantt</span>
+                            <span>Visual Basic</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </div>
+  </div>
+
   <div class="project-modal" id="project-modal" aria-hidden="true">
     <div class="project-modal-backdrop" data-close-project-modal></div>
     <div class="project-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
@@ -673,4 +1120,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
