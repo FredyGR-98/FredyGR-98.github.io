@@ -27,6 +27,8 @@
   const closeCvModalButtons = document.querySelectorAll("[data-close-cv-modal]");
   const cvTabButtons = document.querySelectorAll("[data-cv-tab]");
   const cvTabPanels = document.querySelectorAll("[data-cv-panel]");
+  const cvExperienceBadges = document.querySelectorAll(".cv-experience-badge");
+  const cvPhoneToggle = document.querySelector("[data-cv-phone-toggle]");
 
   const atlasSearchInput = document.querySelector("[data-atlas-search]");
   const atlasClearSearch = document.querySelector("[data-atlas-clear-search]");
@@ -99,6 +101,7 @@
     "Hojas de c\u00E1lculo",
     "SQL",
     "Programación",
+    "Machine Learning",
     "Visualizaciones"
   ];
 
@@ -118,6 +121,10 @@
     Programación: {
       iconClass: "fa-brands fa-python",
       label: "Programación"
+    },
+    "Machine Learning": {
+      iconClass: "fa-solid fa-brain",
+      label: "Machine Learning"
     },
     Visualizaciones: {
       iconClass: "fa-solid fa-chart-column",
@@ -2286,6 +2293,1026 @@
       ]
     },
     {
+      id: "matrix-and-vector-foundations-for-machine-learning",
+      slug: "matrices-y-vectores-como-base-del-machine-learning",
+      title: "Matrices y vectores como base del Machine Learning",
+      summary: "Una guía base para entender por qué vectores y matrices son tan importantes en datos y Machine Learning, cómo se relacionan con la representación de observaciones, distancias, transformaciones y modelos como regresión lineal, PCA y redes neuronales.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "basic",
+      readingTime: "12 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Álgebra lineal", "Matrices", "NumPy"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta parte no es solo teoría",
+          body: "Cuando entro a Machine Learning, los datos casi nunca se procesan como valores sueltos. Se organizan como vectores y matrices para poder compararlos, transformarlos, normalizarlos y combinarlos de manera eficiente. Por eso el álgebra lineal no está de adorno: es una de las bases reales del trabajo con datos."
+        },
+        {
+          title: "Vector y matriz en una sola mirada",
+          body: "La forma más práctica de recordarlo es pensar que un vector suele representar una observación, un conjunto de características o incluso pesos de un modelo, mientras que una matriz organiza muchas observaciones o una transformación aplicada sobre ellas.",
+          comparisonTable: {
+            columns: ["Concepto", "Qué representa", "Ejemplo mental"],
+            rows: [
+              ["Vector", "Una fila o columna de valores relacionados.", "Una observación con varias features."],
+              ["Matriz", "Conjunto bidimensional de datos.", "Un dataset completo con filas y columnas."],
+              ["Escalar", "Un solo valor numérico.", "Un factor que cambia la escala de una matriz."]
+            ]
+          }
+        },
+        {
+          title: "Qué aportan a la gestión de datos",
+          body: "Entender matrices y vectores ayuda a ordenar cómo pienso los datos: cada fila puede ser una observación, cada columna una variable, y cada transformación una operación matemática con sentido. Esa lógica vuelve más fácil interpretar preprocesamiento, escalado, reducción de dimensionalidad y entrenamiento de modelos.",
+          bestPractices: [
+            "Pensar un dataset como una matriz de observaciones por variables.",
+            "Pensar una fila como un vector de características.",
+            "Recordar que muchas transformaciones del pipeline son operaciones matriciales disfrazadas de funciones."
+          ]
+        },
+        {
+          title: "Operaciones básicas que sí conviene recordar",
+          body: "Las operaciones elementales son las que luego reaparecen en casi todos los modelos numéricos.",
+          comparisonTable: {
+            columns: ["Operación", "Qué hace", "Por qué importa en ML"],
+            rows: [
+              ["Suma y resta", "Combina matrices o vectores elemento a elemento.", "Ajustes, diferencias y acumulación de valores."],
+              ["Multiplicación escalar", "Cambia la escala de todos los elementos.", "Escalado y ponderación de datos."],
+              ["Multiplicación matricial", "Combina filas por columnas.", "Base de modelos lineales y redes neuronales."],
+              ["Transpuesta", "Intercambia filas por columnas.", "Reorganiza estructuras para cálculos y fórmulas analíticas."],
+              ["Norma", "Mide magnitud o longitud.", "Distancias, similitudes y normalización."],
+              ["Inversa", "Revierte una transformación lineal cuando existe.", "Resolución analítica de sistemas y regresiones."],
+              ["Valores propios y vectores propios", "Detectan direcciones invariantes y su escala.", "PCA y compresión de información."]
+            ]
+          }
+        },
+        {
+          title: "La regla más importante en multiplicación matricial",
+          body: "Para multiplicar matrices, las columnas de la primera deben coincidir con las filas de la segunda. Si eso no se cumple, el cálculo no tiene sentido y NumPy devolverá un error.",
+          example: "Si `A` es de tamaño `2x3` y `B` es de tamaño `3x2`, entonces `A @ B` sí existe y da una matriz `2x2`."
+        },
+        {
+          title: "NumPy vuelve esto usable de verdad",
+          body: "En Python, `NumPy` permite crear vectores y matrices con poco código y ejecutar operaciones optimizadas mucho más rápido que con listas puras.",
+          code: "import numpy as np\n\nv = np.array([1, 2, 3])\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\n\nsuma = A + B\nproducto = A @ B\ntranspuesta = A.T"
+        },
+        {
+          title: "Regresión lineal: aquí ya aparece el álgebra matricial",
+          body: "Una regresión lineal no se entiende solo como una línea ajustada: también puede verse como una estimación matricial de parámetros. Por eso esta clase conecta tan bien con Machine Learning.",
+          code: "import numpy as np\n\nx = np.linspace(0, 10, 20)\ny = 4 + 3 * x + np.random.randn(20)\nX = np.column_stack((np.ones_like(x), x))\n\nbeta = np.linalg.inv(X.T @ X) @ X.T @ y"
+        },
+        {
+          title: "Dónde aparece esto en Machine Learning",
+          body: "Aunque al principio parezca contenido matemático aislado, la verdad es que reaparece una y otra vez.",
+          comparisonTable: {
+            columns: ["Tema", "Rol del álgebra matricial"],
+            rows: [
+              ["Regresión lineal", "Estimación de parámetros mediante ecuaciones matriciales."],
+              ["Redes neuronales", "Cálculo de activaciones con productos tipo `W @ X + b`."],
+              ["PCA", "Uso de vectores y valores propios para reducir dimensionalidad."],
+              ["KNN y clustering", "Cálculo de distancias entre vectores."],
+              ["Normalización", "Reescalado de datos para volver comparables las variables."]
+            ]
+          }
+        },
+        {
+          title: "Vectores: mucho más que una lista de números",
+          body: "En ML, un vector puede representar una observación, una embedding, los pesos de una neurona o incluso una dirección dominante dentro de un espacio de datos. Por eso entender su norma, su dirección y el producto punto ayuda mucho más de lo que parece al principio."
+        },
+        {
+          title: "Producto punto y ortogonalidad",
+          body: "El producto punto ayuda a medir similitud direccional. Si el resultado entre dos vectores es cero, son ortogonales. Esa idea reaparece bastante en reducción de dimensionalidad y representación de información.",
+          example: "En PCA, varias direcciones relevantes del espacio se interpretan buscando componentes que aporten información sin repetir la misma dirección dominante."
+        },
+        {
+          title: "Transformaciones matriciales: cambiar el espacio de los datos",
+          body: "Las matrices no solo guardan datos: también pueden transformarlos. Rotar, escalar o deformar un espacio es una forma útil de pensar lo que ocurre cuando reexpreso variables o proyecto datos en nuevas dimensiones."
+        },
+        {
+          title: "Para recordar",
+          body: "Si domino vectores, matrices, multiplicación matricial, transpuesta, norma e idea de valores propios, ya tengo una base mucho más sólida para entender por qué los modelos de Machine Learning pueden representar, transformar y aprender desde datos numéricos."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 3 / Clase 1: Álgebra matricial y vectores para Machine Learning</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S1 – Lección: Álgebra matricial y vectores para Machine Learning</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "python-libraries-modules-and-numpy",
+        "algorithm-efficiency-and-big-o-for-ml",
+        "pythonic-optimization-and-jit-for-ml"
+      ]
+    },
+    {
+      id: "linear-systems-and-transformations-for-machine-learning",
+      slug: "sistemas-de-ecuaciones-y-transformaciones-en-machine-learning",
+      title: "Sistemas de ecuaciones y transformaciones en Machine Learning",
+      summary: "Una guía base para entender por qué los sistemas de ecuaciones lineales y las transformaciones matriciales ayudan a comprender mejor cómo se estiman parámetros, se reorganizan datos y se construyen varias ideas centrales de programación numérica y Machine Learning.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "basic",
+      readingTime: "12 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Álgebra lineal", "Transformaciones", "NumPy"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta parte sigue siendo fundamento",
+          body: "Igual que con matrices y vectores, aquí la idea no es aprender teoría aislada, sino entender cómo se representan y resuelven problemas dentro del Machine Learning. Saber de sistemas de ecuaciones y transformaciones ayuda a comprender mejor lo que luego aparece en programación numérica, regresión, optimización y reducción de dimensionalidad."
+        },
+        {
+          title: "Qué es un sistema de ecuaciones en este contexto",
+          body: "Un sistema de ecuaciones lineales organiza varias relaciones entre variables al mismo tiempo. En forma matricial suele escribirse como `Ax = b`, donde `A` reúne coeficientes, `x` representa incógnitas o parámetros y `b` contiene los valores observados o deseados.",
+          comparisonTable: {
+            columns: ["Parte", "Qué representa", "Cómo lo pienso en datos o ML"],
+            rows: [
+              ["`A`", "Matriz de coeficientes.", "Relación entre variables o features."],
+              ["`x`", "Vector de incógnitas.", "Parámetros que quiero estimar."],
+              ["`b`", "Vector de resultados.", "Valores objetivo o restricciones del sistema."]
+            ]
+          }
+        },
+        {
+          title: "Por qué esto importa en programación y ML",
+          body: "Cuando un modelo lineal busca parámetros, en el fondo está intentando resolver relaciones estructuradas entre datos y resultados. Entender esta lógica vuelve mucho más clara la transición desde la matemática a funciones reales de Python como `np.linalg.solve()` o `np.linalg.lstsq()`."
+        },
+        {
+          title: "La conexión más directa: regresión lineal",
+          body: "Una de las aplicaciones más claras aparece en regresión lineal. La matriz `X` contiene las características, el vector `β` contiene los parámetros y `y` representa el objetivo. Por eso una parte importante del problema puede leerse como una resolución matricial.",
+          code: "import numpy as np\n\nA = np.array([[3, 2, -1], [2, -2, 4], [-1, 0.5, -1]])\nb = np.array([1, -2, 0])\n\nx = np.linalg.solve(A, b)\nprint(x)"
+        },
+        {
+          title: "solve vs lstsq",
+          body: "No todos los problemas tienen exactamente la misma forma, por eso NumPy ofrece más de una ruta.",
+          comparisonTable: {
+            columns: ["Función", "Cuándo usarla", "Qué resuelve"],
+            rows: [
+              ["`np.linalg.solve(A, b)`", "Cuando el sistema es cuadrado y la matriz es invertible.", "Una solución exacta."],
+              ["`np.linalg.lstsq(X, y, rcond=None)`", "Cuando hay más ecuaciones que incógnitas o el sistema no cierra exacto.", "La mejor aproximación en mínimos cuadrados."]
+            ]
+          }
+        },
+        {
+          title: "Mínimos cuadrados: la idea clave",
+          body: "En análisis real, muchas veces los datos no permiten una solución perfecta. Ahí aparece mínimos cuadrados, que no busca acertar cada punto exactamente, sino minimizar el error total entre lo observado y lo predicho. Esa idea es central en regresión y en muchísimos flujos posteriores de ML."
+        },
+        {
+          title: "Valores y vectores propios vuelven a aparecer",
+          body: "Esta clase también profundiza en `Av = λv`, que describe una dirección que se mantiene al aplicar una transformación y cuánto se estira o comprime esa dirección. En Machine Learning esto importa mucho porque aparece de lleno en PCA y en la lectura geométrica de los datos.",
+          code: "import numpy as np\n\nA = np.array([[2, 0], [0, 3]])\nvals, vecs = np.linalg.eig(A)\n\nprint(vals)\nprint(vecs)"
+        },
+        {
+          title: "Qué me dice un valor propio alto en PCA",
+          body: "Un valor propio alto indica una dirección donde hay más varianza útil. En simple, significa que esa componente explica una parte más importante de la estructura del dataset, por eso PCA la considera más informativa al reducir dimensiones."
+        },
+        {
+          title: "Transformaciones matriciales: cambiar el espacio de los datos",
+          body: "Las matrices no solo sirven para guardar o resolver sistemas: también transforman. Pueden rotar, escalar, reflejar o cambiar la base desde la que observo los datos. Esa idea es muy útil para entender preprocesamiento, proyecciones y representación geométrica.",
+          comparisonTable: {
+            columns: ["Transformación", "Qué hace", "Por qué me sirve"],
+            rows: [
+              ["Rotación", "Gira los datos sin cambiar su longitud.", "Cambiar orientación o interpretar mejor el espacio."],
+              ["Escalado", "Aumenta o reduce magnitudes.", "Normalización y ponderación de variables."],
+              ["Cambio de base", "Reexpresa los datos en otra base.", "PCA y proyecciones en nuevas dimensiones."],
+              ["Reflexión o deformación", "Modifica la geometría del espacio.", "Entender efectos de ciertas transformaciones lineales."]
+            ]
+          }
+        },
+        {
+          title: "Ejemplo visual de transformación",
+          body: "Una rotación 2D es un buen ejemplo porque deja ver que una matriz puede cambiar la dirección de los puntos sin necesariamente alterar su estructura global.",
+          code: "import numpy as np\n\nX = np.array([[1, 2, 3], [1, 2, 3]])\ntheta = np.pi / 4\nR = np.array([\n    [np.cos(theta), -np.sin(theta)],\n    [np.sin(theta),  np.cos(theta)]\n])\n\nY = R @ X"
+        },
+        {
+          title: "Dónde vuelve a aparecer esto después",
+          body: "Si entiendo esta parte ahora, después me costará menos leer varias técnicas numéricas y de modelado.",
+          comparisonTable: {
+            columns: ["Tema posterior", "Cómo se conecta"],
+            rows: [
+              ["Regresión lineal", "Estimación de parámetros mediante sistemas o mínimos cuadrados."],
+              ["PCA", "Uso de vectores y valores propios para reducir dimensión."],
+              ["Optimización", "Interpretación del problema como ajuste de parámetros bajo error."],
+              ["Programación con NumPy", "Operaciones matriciales directas y eficientes."],
+              ["Redes neuronales", "Transformaciones lineales repetidas sobre entradas y pesos."]
+            ]
+          }
+        },
+        {
+          title: "Para recordar",
+          body: "Saber de sistemas de ecuaciones y transformaciones no me convierte solo en alguien más fuerte en teoría: me ayuda a leer mejor el código numérico, entender por qué existe `lstsq`, captar la lógica de PCA y ver que muchos modelos de ML no hacen magia, sino operaciones lineales bien organizadas."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 3 / Clase 2: Sistemas de ecuaciones y transformaciones matriciales en Machine Learning</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S2 – Lectura: Sistemas de ecuaciones y transformaciones matriciales</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "matrix-and-vector-foundations-for-machine-learning",
+        "python-libraries-modules-and-numpy",
+        "algorithm-efficiency-and-big-o-for-ml"
+      ]
+    },
+    {
+      id: "derivatives-and-optimization-foundations-for-machine-learning",
+      slug: "derivadas-y-optimizacion-como-base-del-machine-learning",
+      title: "Derivadas y optimización como base del Machine Learning",
+      summary: "Una guía fundamental para entender qué mide una derivada, cómo ayuda a leer y graficar funciones, y por qué esta idea es tan importante cuando un modelo de Machine Learning necesita minimizar error y ajustar parámetros.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "basic",
+      readingTime: "13 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Derivadas", "Optimización", "Funciones"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esto sigue siendo fundamento",
+          body: "Las derivadas pueden sonar matemáticas, pero en Machine Learning aparecen en una de las tareas más importantes de todas: ajustar parámetros para reducir error. Si entiendo cómo cambia una función, me resulta mucho más fácil comprender después por qué existen el descenso de gradiente, la retropropagación y varias técnicas de optimización."
+        },
+        {
+          title: "Primero: pensar en funciones",
+          body: "Antes de derivar, conviene recordar que una función representa una relación entre entrada y salida. En análisis y ML, muchas de esas funciones modelan pérdida, costo, activación o comportamiento de una variable frente a otra.",
+          example: "Si `f(x) = x^2`, la función me dice qué salida obtengo para cada valor de `x`. Si esa función fuera una pérdida, entonces me interesaría saber dónde crece, dónde baja y dónde alcanza un mínimo."
+        },
+        {
+          title: "Qué mide realmente una derivada",
+          body: "La derivada mide la tasa de cambio instantánea de una función en un punto. En términos visuales, también puede pensarse como la pendiente de la recta tangente en ese punto. Esa idea es muy útil para leer gráficas y entender hacia dónde se mueve una función.",
+          comparisonTable: {
+            columns: ["Valor de la derivada", "Qué indica", "Lectura visual"],
+            rows: [
+              ["Positiva", "La función está creciendo.", "La curva sube hacia la derecha."],
+              ["Negativa", "La función está bajando.", "La curva desciende hacia la derecha."],
+              ["Cercana a cero", "La función se aplana o cambia de comportamiento.", "Puede haber máximo, mínimo o meseta."]
+            ]
+          }
+        },
+        {
+          title: "Por qué sirve para graficar funciones",
+          body: "Cuando grafico una función, la derivada me ayuda a interpretar su forma: en qué tramos sube, en cuáles baja y dónde aparecen puntos críticos. Por eso no solo sirve para resolver ejercicios; también mejora la lectura visual de curvas y resultados."
+        },
+        {
+          title: "Puntos críticos, máximos y mínimos",
+          body: "Un punto crítico suele aparecer cuando la derivada vale cero o no está definida. Es una pista de que algo importante ocurre ahí: puede tratarse de un máximo local, un mínimo local o un punto donde la función cambia su forma.",
+          bestPractices: [
+            "Primero calcular la derivada `f'(x)`.",
+            "Luego resolver `f'(x) = 0` o revisar dónde no existe.",
+            "Después interpretar si se trata de un máximo, un mínimo o un cambio de comportamiento."
+          ]
+        },
+        {
+          title: "La segunda derivada como apoyo",
+          body: "La segunda derivada ayuda a interpretar la curvatura de la función. En muchos casos, si `f''(x) > 0` en un punto crítico, hay un mínimo local; si `f''(x) < 0`, hay un máximo local. No reemplaza todo el análisis, pero sirve como guía rápida."
+        },
+        {
+          title: "Reglas de derivación que más conviene recordar",
+          body: "No hace falta memorizar un libro entero, pero sí conviene tener claras las reglas que más reaparecen.",
+          comparisonTable: {
+            columns: ["Regla", "Idea central", "Ejemplo breve"],
+            rows: [
+              ["Suma", "La derivada se reparte entre términos.", "`(f + g)' = f' + g'`"],
+              ["Producto", "Se derivan ambas partes con combinación cruzada.", "`(fg)' = f'g + fg'`"],
+              ["Cociente", "Compara cambio del numerador y denominador.", "`(f/g)' = (f'g - fg') / g^2`"],
+              ["Cadena", "Deriva una función compuesta por capas.", "`f(g(x))' = f'(g(x)) * g'(x)`"]
+            ]
+          }
+        },
+        {
+          title: "La regla de la cadena: la más importante para ML",
+          body: "Si tuviera que destacar una sola, sería la regla de la cadena. En Machine Learning importa muchísimo porque muchos modelos están construidos como funciones compuestas: una salida depende de una activación, que depende de una combinación lineal, que depende de pesos y entradas. La regla de la cadena permite desarmar ese proceso paso a paso."
+        },
+        {
+          title: "Backpropagation nace de esta idea",
+          body: "En redes neuronales, la retropropagación usa derivadas para medir cómo cambia el error respecto a cada peso y sesgo. Como la red está formada por varias capas conectadas, la regla de la cadena permite propagar esos gradientes desde la salida hacia atrás de forma ordenada.",
+          comparisonTable: {
+            columns: ["Etapa", "Qué ocurre"],
+            rows: [
+              ["Forward pass", "La red produce una salida y se calcula la pérdida."],
+              ["Backward pass", "Se usa la regla de la cadena para propagar el error."],
+              ["Gradientes", "Se obtiene cuánto aporta cada parámetro al error."],
+              ["Actualización", "Se ajustan pesos y sesgos para mejorar el modelo."]
+            ]
+          }
+        },
+        {
+          title: "Derivadas y descenso de gradiente",
+          body: "El descenso de gradiente usa derivadas para decidir en qué dirección conviene mover los parámetros. Si la derivada dice que la función sube, el algoritmo se mueve en la dirección contraria para buscar un valor menor de la pérdida.",
+          example: "Si una función de costo tiene pendiente positiva en un punto, el descenso de gradiente ajusta el parámetro hacia la izquierda; si la pendiente es negativa, se mueve hacia la derecha."
+        },
+        {
+          title: "Ejemplo simple de mínimo",
+          body: "En una función cuadrática, las derivadas permiten localizar el punto óptimo de manera clara.",
+          code: "f(x) = x^2 - 4x + 5\nf'(x) = 2x - 4\n\n# Igualando a cero:\n2x - 4 = 0\nx = 2"
+        },
+        {
+          title: "Python también ayuda a verlo",
+          body: "La clase conecta esta base matemática con herramientas prácticas. `SymPy` sirve para derivación simbólica, `Matplotlib` para graficar funciones y derivadas, y `SciPy` para buscar mínimos de forma numérica.",
+          comparisonTable: {
+            columns: ["Herramienta", "Para qué sirve", "Cuándo me ayuda"],
+            rows: [
+              ["`SymPy`", "Calcular derivadas simbólicas.", "Cuando quiero confirmar una derivada o enseñar el proceso."],
+              ["`Matplotlib`", "Graficar función y derivada.", "Cuando quiero ver crecimiento, mínimos o cambios de pendiente."],
+              ["`SciPy`", "Optimización numérica.", "Cuando quiero encontrar mínimos de forma programática."]
+            ]
+          }
+        },
+        {
+          title: "Dónde vuelve a aparecer esto en otras ramas",
+          body: "Aunque aquí lo vemos como fundamento, las derivadas aparecen más adelante en varias áreas: entrenamiento de modelos, redes neuronales, ajuste de parámetros, análisis de funciones de costo e incluso optimización fuera de ML."
+        },
+        {
+          title: "Para recordar",
+          body: "Si entiendo que una derivada mide cambio y pendiente, ya tengo una base muy fuerte para graficar funciones, detectar máximos y mínimos y comprender por qué los modelos de Machine Learning necesitan gradientes para aprender."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S3 – Lectura: Cálculo diferencial en una variable</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S3 – Lección: Cálculo diferencial en una variable</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "matrix-and-vector-foundations-for-machine-learning",
+        "linear-systems-and-transformations-for-machine-learning",
+        "pythonic-optimization-and-jit-for-ml"
+      ]
+    },
+    {
+      id: "python-multivariable-calculus-for-machine-learning",
+      slug: "calculo-multivariable-con-python-para-machine-learning",
+      title: "Cálculo multivariable con Python para Machine Learning",
+      summary: "Una guía para entender cómo se usan derivadas parciales, gradiente y matriz Hessiana dentro de Python para analizar funciones de costo, visualizar superficies y comprender mejor cómo optimiza un modelo de Machine Learning.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "basic",
+      readingTime: "13 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Python", "Gradiente", "Hessiana"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta clase ya entra al uso de Python en ML",
+          body: "Aquí ya no estoy viendo solo matemática abstracta. Estoy viendo cómo usar Python para calcular, visualizar e interpretar funciones de varias variables, justo como pasa cuando un modelo tiene muchos parámetros y necesito entender cómo bajar el error de forma ordenada."
+        },
+        {
+          title: "Qué cambia cuando la función tiene varias variables",
+          body: "En Machine Learning casi nunca trabajo con una sola variable. Las funciones de costo suelen depender de muchos parámetros al mismo tiempo, así que el análisis también cambia: en vez de una sola derivada, aparecen derivadas parciales, gradiente y curvatura multivariable."
+        },
+        {
+          title: "Derivadas parciales: mirar una variable a la vez",
+          body: "Una derivada parcial mide cómo cambia la función cuando modifico solo una variable y dejo las demás constantes. Esto sirve para entender cuánto afecta cada parámetro individual al error del modelo.",
+          code: "import sympy as sp\n\nx, y = sp.symbols('x y')\nf = x**2 + x*y + y**2\n\ndf_dx = sp.diff(f, x)\ndf_dy = sp.diff(f, y)\n\nprint(df_dx)\nprint(df_dy)"
+        },
+        {
+          title: "Cómo leer esto en Machine Learning",
+          body: "Si una función representa error o pérdida, entonces cada derivada parcial me dice qué tanto cambia ese error cuando toco solo uno de los parámetros. Esa idea es clave para ajustar modelos, porque me deja ver qué dirección conviene corregir."
+        },
+        {
+          title: "El gradiente: el resumen de todas las derivadas parciales",
+          body: "El gradiente es el vector que junta todas las derivadas parciales. Indica la dirección de mayor incremento de la función, y por eso en optimización normalmente se usa su dirección contraria para bajar la pérdida.",
+          comparisonTable: {
+            columns: ["Concepto", "Qué aporta", "Uso en ML"],
+            rows: [
+              ["Derivada parcial", "Cambio respecto a una variable.", "Impacto individual de un parámetro."],
+              ["Gradiente", "Cambio conjunto en todas las variables.", "Base del descenso de gradiente."],
+              ["Norma del gradiente", "Tamaño del cambio.", "Ayuda a entender si sigo lejos o cerca de estabilizarme."]
+            ]
+          }
+        },
+        {
+          title: "Descenso de gradiente, explicado corto",
+          body: "Si el gradiente apunta hacia donde la función sube más rápido, entonces el descenso de gradiente se mueve en el sentido opuesto para intentar minimizar la función de costo.",
+          code: "theta_next = theta_current - eta * gradiente"
+        },
+        {
+          title: "Entonces, ¿qué hace la Hessiana?",
+          body: "La matriz Hessiana reúne las segundas derivadas parciales. Mientras el gradiente me dice hacia dónde sube más la función, la Hessiana me dice cómo se curva esa superficie. En simple: ayuda a saber si el terreno se parece a un valle, una cima o una silla de montar.",
+          comparisonTable: {
+            columns: ["Señal de la Hessiana", "Qué sugiere", "Lectura práctica"],
+            rows: [
+              ["Definida positiva", "Mínimo local.", "La función se curva hacia arriba."],
+              ["Definida negativa", "Máximo local.", "La función se curva hacia abajo."],
+              ["Valores propios mixtos", "Punto de silla.", "Sube en una dirección y baja en otra."]
+            ]
+          }
+        },
+        {
+          title: "Por qué la Hessiana importa en ML",
+          body: "La Hessiana sirve para entender la curvatura de la función de costo. Eso ayuda a clasificar puntos críticos y también explica por qué algunos métodos de segundo orden, como Newton, pueden converger más rápido que los métodos que usan solo gradiente. El problema es que calcularla puede ser costoso cuando el modelo tiene muchísimos parámetros."
+        },
+        {
+          title: "Cálculo simbólico con Python",
+          body: "Python permite practicar estos conceptos de forma mucho más tangible. `SymPy` sirve para derivar simbólicamente, calcular gradientes y construir la Hessiana sin hacer todo a mano.",
+          code: "import sympy as sp\n\nx, y = sp.symbols('x y')\ng = x**2 + 2*x*y + 2*y**2\n\ngrad = sp.Matrix([sp.diff(g, x), sp.diff(g, y)])\nH = sp.hessian(g, (x, y))\ncrit = sp.solve([sp.diff(g, x), sp.diff(g, y)], (x, y))\n\nprint(grad)\nprint(H)\nprint(crit)"
+        },
+        {
+          title: "Visualizar superficies también ayuda",
+          body: "Cuando puedo graficar una función de dos variables, el gradiente y la curvatura dejan de sentirse tan abstractos. `Matplotlib` o `Plotly` ayudan a ver superficies, pendientes y puntos críticos de forma mucho más intuitiva."
+        },
+        {
+          title: "Herramientas de Python que más conviene recordar",
+          body: "Esta clase también sirve para ubicar qué herramienta usar según el objetivo.",
+          comparisonTable: {
+            columns: ["Librería", "Para qué la usaría", "Valor dentro del aprendizaje"],
+            rows: [
+              ["`SymPy`", "Derivación simbólica, gradiente y Hessiana.", "Entender la matemática sin hacer todo a mano."],
+              ["`NumPy`", "Cálculo numérico y operaciones vectorizadas.", "Mover esto a datos reales y arreglos grandes."],
+              ["`Matplotlib` / `Plotly`", "Graficar funciones y superficies.", "Visualizar mejor mínimos, pendientes y curvatura."],
+              ["`SciPy`", "Optimización numérica con `minimize()`.", "Encontrar mínimos en problemas multivariables."]
+            ]
+          }
+        },
+        {
+          title: "Caso típico: función de costo de regresión",
+          body: "En regresión lineal con parámetros como `w` y `b`, las derivadas parciales muestran cómo cambia el error al mover cada uno. El gradiente resume ese ajuste, y la Hessiana ayuda a entender la curvatura de la función de costo para analizar mejor la estabilidad del punto encontrado."
+        },
+        {
+          title: "Qué ventajas trae esto y qué dificultades aparecen",
+          body: "Lo bueno del cálculo multivariable es que mejora mucho la comprensión del entrenamiento y la optimización. Lo complejo es que en modelos grandes el cálculo de gradientes y, sobre todo, de Hessianas puede costar mucha memoria, tiempo de cómputo y estabilidad numérica."
+        },
+        {
+          title: "Para recordar",
+          body: "Si las derivadas parciales me muestran el efecto de cada parámetro, el gradiente me marca la dirección de ajuste y la Hessiana me cuenta cómo se curva la función. Entender esas tres piezas es acercarse bastante a entender cómo optimiza un modelo de Machine Learning dentro de Python."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 3 / Clase 4: Gradiente y matriz Hessiana en Machine Learning</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S4 – Lectura: Cálculo diferencial multivariable</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "derivatives-and-optimization-foundations-for-machine-learning",
+        "linear-systems-and-transformations-for-machine-learning",
+        "python-libraries-modules-and-numpy"
+      ]
+    },
+    {
+      id: "optimization-methods-for-machine-learning",
+      slug: "metodos-de-optimizacion-para-machine-learning",
+      title: "Métodos de optimización para Machine Learning",
+      summary: "Una guía para comparar descenso de gradiente, SGD, Adam, Newton, BFGS y Levenberg-Marquardt, entendiendo cuándo conviene cada método y cómo cambia su trayectoria al optimizar una función de costo.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "intermediate",
+      readingTime: "15 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Optimización", "Gradiente", "Adam"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta parte sí importa en Machine Learning",
+          body: "Cuando entreno un modelo, no basta con tener una función de costo bonita en teoría. Necesito un método que realmente encuentre buenos parámetros sin gastar tiempo de más ni volver inestable el entrenamiento. Por eso los métodos de optimización son parte central del aprendizaje automático."
+        },
+        {
+          title: "La idea base: minimizar una función de costo",
+          body: "Todos estos métodos buscan lo mismo: mover los parámetros del modelo hasta reducir la pérdida. Lo que cambia entre uno y otro es cómo usan el gradiente, cuánta información adicional aprovechan, cuánto cuestan computacionalmente y qué tan estables son cuando la superficie de error se vuelve compleja."
+        },
+        {
+          title: "Primer orden vs segundo orden",
+          body: "La gran diferencia está en cuánta información matemática usan para decidir el siguiente paso.",
+          comparisonTable: {
+            columns: ["Familia", "Qué utiliza", "Ventajas", "Limitaciones"],
+            rows: [
+              ["Primer orden", "Gradiente o aproximaciones basadas en gradiente.", "Escala bien, es más barato y domina en deep learning.", "Puede converger más lento y depende mucho de la tasa de aprendizaje."],
+              ["Segundo orden", "Gradiente más curvatura mediante Hessiana o aproximaciones.", "Converge más rápido y suele ser más preciso cerca del mínimo.", "Cuesta más memoria y tiempo, sobre todo con muchos parámetros."]
+            ]
+          }
+        },
+        {
+          title: "Descenso de gradiente clásico (GD)",
+          body: "El descenso de gradiente completo calcula el gradiente usando todos los datos antes de actualizar parámetros. Es ordenado y estable, pero en datasets grandes puede volverse lento.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-gd-trajectory.png",
+              alt: "Evolución del costo y trayectoria del descenso de gradiente sobre una función cuadrática.",
+              caption: "Aquí se ve bien la lógica de GD: el costo cae de forma suave y la trayectoria baja paso a paso hacia el mínimo."
+            }
+          ]
+        },
+        {
+          title: "SGD y mini-batch: velocidad a cambio de ruido",
+          body: "El descenso estocástico usa una observación por vez, y mini-batch usa pequeños grupos. Ambos aceleran el entrenamiento en problemas grandes y permiten aprender de forma más escalable, pero introducen más variación en las actualizaciones.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-gd-vs-sgd.png",
+              alt: "Comparación entre descenso de gradiente y descenso estocástico mostrando evolución del costo y parámetros.",
+              caption: "GD suele verse más suave; SGD llega más rápido a zonas útiles, pero con oscilaciones más marcadas."
+            }
+          ],
+          comparisonTable: {
+            columns: ["Método", "Cómo actualiza", "Cuándo conviene"],
+            rows: [
+              ["GD", "Usa todo el dataset por iteración.", "Problemas pequeños o cuando priorizo estabilidad."],
+              ["SGD", "Usa un dato por actualización.", "Escenarios grandes, entrenamiento rápido y aprendizaje online."],
+              ["Mini-batch", "Usa pequeños bloques de datos.", "El equilibrio más usado entre estabilidad y eficiencia."]
+            ]
+          }
+        },
+        {
+          title: "Adam: el favorito práctico en redes neuronales",
+          body: "Adam combina la intuición de Momentum con una adaptación automática del paso por parámetro. Por eso suele funcionar muy bien cuando entreno redes neuronales, especialmente si el problema tiene muchas variables y gradientes ruidosos.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-adam-convergence.png",
+              alt: "Convergencia del entrenamiento con Adam y ajuste del modelo en datos con ruido.",
+              caption: "Adam destaca porque reduce la pérdida mientras mantiene un ajuste práctico incluso cuando los datos no son perfectos."
+            }
+          ]
+        },
+        {
+          title: "Momentum, NAG, Adagrad y RMSprop en una sola idea",
+          body: "Estas variantes intentan mejorar el descenso de gradiente clásico. Momentum acumula dirección, NAG mira un poco hacia adelante, Adagrad ajusta el paso según historial y RMSprop evita que ese ajuste se vuelva demasiado agresivo. Adam, en el fondo, nace de combinar varias de estas intuiciones."
+        },
+        {
+          title: "Método de Newton: usar también la curvatura",
+          body: "Newton no se queda solo con el gradiente: también usa la Hessiana para entender la curvatura de la función. Eso le permite dar saltos mucho más directos al mínimo, aunque calcular esa información puede ser caro.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-newton-method.png",
+              alt: "Trayectoria del método de Newton sobre una función cuadrática.",
+              caption: "Newton suele necesitar menos pasos porque aprovecha la forma de la curva, no solo la pendiente local."
+            }
+          ]
+        },
+        {
+          title: "BFGS y L-BFGS: aproximar la Hessiana sin pagar todo el costo",
+          body: "BFGS es una estrategia cuasi-Newton: no calcula la Hessiana exacta, sino una aproximación útil para avanzar más rápido que un método de primer orden. Su variante L-BFGS reduce memoria y por eso suele ser más viable en problemas grandes.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-bfgs-contours.png",
+              alt: "Optimización con BFGS sobre curvas de nivel, convergiendo al mínimo.",
+              caption: "La gran gracia de BFGS es que entiende mejor la geometría del problema sin construir toda la Hessiana exacta."
+            }
+          ]
+        },
+        {
+          title: "Levenberg-Marquardt: muy útil para ajuste de curvas",
+          body: "Levenberg-Marquardt mezcla ideas de Gauss-Newton y descenso de gradiente. En la práctica se usa mucho en problemas de mínimos cuadrados no lineales, como ajustes de modelos y calibraciones donde el objetivo es seguir bien una trayectoria observada.",
+          illustrations: [
+            {
+              src: "img/atlas/optimization-levenberg-marquardt-fit.png",
+              alt: "Ajuste lineal estimado mediante Levenberg-Marquardt sobre datos con ruido.",
+              caption: "Este método brilla cuando la tarea es ajustar parámetros para seguir datos observados con buena precisión."
+            }
+          ]
+        },
+        {
+          title: "Comparación rápida de los métodos más conocidos",
+          body: "No existe un optimizador perfecto para todos los escenarios. Lo útil es reconocer el tipo de problema y saber por qué elegir uno por sobre otro.",
+          comparisonTable: {
+            columns: ["Método", "Familia", "Fortaleza principal", "Costo relativo"],
+            rows: [
+              ["GD", "Primer orden", "Estabilidad conceptual y lectura clara.", "Bajo a medio."],
+              ["SGD", "Primer orden", "Escalabilidad y rapidez inicial.", "Bajo."],
+              ["Adam", "Primer orden adaptativo", "Buen desempeño práctico en deep learning.", "Medio."],
+              ["Newton", "Segundo orden", "Convergencia muy rápida cerca del mínimo.", "Alto."],
+              ["BFGS / L-BFGS", "Cuasi-Newton", "Buen equilibrio entre curvatura y costo.", "Medio a alto."],
+              ["Levenberg-Marquardt", "Segundo orden híbrido", "Excelente para ajuste de curvas y mínimos cuadrados.", "Alto."]
+            ]
+          }
+        },
+        {
+          title: "Entonces, ¿cuál usaría yo?",
+          body: "Si estoy en deep learning o en un problema con muchos parámetros, normalmente pensaría primero en mini-batch con Adam. Si el problema es pequeño, bien condicionado o muy enfocado en ajuste fino, métodos como Newton, BFGS o Levenberg-Marquardt pueden ser mejores. La decisión depende del tamaño del problema, el costo computacional y la forma de la función de pérdida."
+        },
+        {
+          title: "Para recordar",
+          body: "Los métodos de primer orden suelen ser más baratos y escalables; los de segundo orden suelen converger mejor, pero cuestan más. La clave no es memorizar nombres por separado, sino entender qué información usa cada método para decidir el siguiente paso y cómo eso cambia su trayectoria al aprender."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S5 – Lectura: Optimización para Machine Learning</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM3S5 – Lección: Métodos de optimización para Machine Learning</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "python-multivariable-calculus-for-machine-learning",
+        "derivatives-and-optimization-foundations-for-machine-learning",
+        "pythonic-optimization-and-jit-for-ml"
+      ]
+    },
+    {
+      id: "hyperparameter-search-strategies-for-machine-learning",
+      slug: "busqueda-de-hiperparametros-para-machine-learning",
+      title: "Búsqueda de hiperparámetros para Machine Learning",
+      summary: "Una comparativa práctica entre `Grid Search`, `Random Search`, `Optimización Bayesiana` y `Algoritmos Genéticos`, explicando cuándo cada búsqueda conviene más y cómo pensarla como si estuviera criando y armando un equipo Pokémon competitivo.",
+      category: "Machine Learning",
+      type: "Comparativa",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Hiperparámetros", "Grid Search", "Optimización"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: buscar la mejor combinación",
+          body: "Ajustar hiperparámetros se parece mucho a confeccionar un equipo Pokémon competitivo. No basta con elegir un Pokémon fuerte por separado: también importan sus stats, el tipo, la habilidad, el rol que cumple y la sinergia con el resto del team. En Machine Learning pasa lo mismo: un modelo no mejora solo por existir, mejora cuando encuentro una combinación útil de decisiones externas como profundidad, regularización, vecinos, `C`, `gamma` o tasa de aprendizaje."
+        },
+        {
+          title: "Qué es un hiperparámetro y por qué no se aprende solo",
+          body: "Los hiperparámetros son decisiones que defino antes o durante el entrenamiento, pero que no salen directamente del ajuste interno del modelo. Son como las decisiones de armado antes de entrar a una batalla Pokémon: yo decido qué stats priorizar, qué cobertura de tipos me conviene, qué habilidad me aporta más valor y qué combinación tiene mejor sinergia general."
+        },
+        {
+          title: "La analogía Pokémon para no olvidarlo",
+          body: "Si quisiera encontrar el mejor equipo para una batalla, no me fijaría solo en quién pega más fuerte. También revisaría stats base, tipos para cubrir debilidades, habilidades para activar ventajas, roles como atacante o soporte, y la sinergia entre todos los integrantes. Con los hiperparámetros pasa igual: no busco un valor aislado 'bonito', busco una combinación que funcione bien como conjunto. Luego puedo revisar todas las opciones, escoger algunas al azar, usar experiencia previa para predecir mejores combinaciones o hacer evolucionar soluciones generación tras generación."
+        },
+        {
+          title: "Cómo se traduce la analogía al modelo",
+          body: "Pensarlo así ayuda a recordar qué estoy ajustando realmente cuando hago tuning.",
+          comparisonTable: {
+            columns: ["En un equipo Pokémon", "En Machine Learning", "Qué representa"],
+            rows: [
+              ["Stats", "Magnitud de parámetros como `max_depth`, `n_neighbors` o regularización.", "Qué tan agresivo, preciso o flexible puede volverse el modelo."],
+              ["Tipos", "Familia de configuración o enfoque del modelo.", "Qué tan bien cubre distintos patrones del problema y qué debilidades arrastra."],
+              ["Habilidades", "Funciones especiales como `early_stopping`, `class_weight` o kernels.", "Ventajas específicas que cambian el comportamiento del entrenamiento."],
+              ["Sinergia del team", "Compatibilidad entre varios hiperparámetros.", "Que una buena elección aislada no siempre funciona bien combinada con otras."],
+              ["Rol de cada Pokémon", "Objetivo del modelo dentro del problema.", "No se ajusta igual un clasificador interpretable que uno enfocado en máximo rendimiento."]
+            ]
+          }
+        },
+        {
+          title: "Las cuatro estrategias principales del curso",
+          body: "Cada método busca buenos hiperparámetros, pero no todos exploran igual ni cuestan lo mismo.",
+          comparisonTable: {
+            columns: ["Método", "Cómo busca", "Fortaleza principal", "Costo típico"],
+            rows: [
+              ["Grid Search", "Prueba sistemáticamente todas las combinaciones definidas.", "Cobertura ordenada y fácil de explicar.", "Alto cuando el espacio crece."],
+              ["Random Search", "Prueba combinaciones al azar dentro de rangos establecidos.", "Explora más rápido espacios amplios.", "Medio."],
+              ["Optimización Bayesiana", "Usa resultados previos para decidir qué probar después.", "Ahorra intentos en modelos caros.", "Medio a alto, pero eficiente."],
+              ["Algoritmos Genéticos", "Evoluciona poblaciones de soluciones mediante selección, cruce y mutación.", "Flexible para espacios complejos o multiobjetivo.", "Variable, a veces alto."]
+            ]
+          }
+        },
+        {
+          title: "Grid Search: revisar cada combinación posible",
+          body: "Grid Search es como hacer una tabla completa con todas las naturalezas, roles, objetos y spreads que quiero probar para mi equipo Pokémon, y evaluarlas una por una sin saltarme ninguna. Es muy claro, muy ordenado y muy defendible, pero se vuelve caro cuando el espacio de búsqueda crece demasiado.",
+          comparisonTable: {
+            columns: ["Cuándo lo usaría", "Ventaja", "Desventaja"],
+            rows: [
+              ["Pocos hiperparámetros y rangos acotados.", "No deja huecos dentro de la grilla definida.", "Escala mal si agrego muchas variables o muchos valores por variable."],
+              ["Cuando necesito trazabilidad total.", "Es fácil comparar combinaciones entre sí.", "Puede desperdiciar mucho tiempo en zonas poco prometedoras."],
+              ["Modelos rápidos de entrenar.", "Funciona muy bien con validación cruzada clásica.", "No es ideal para redes o modelos caros."]
+            ]
+          }
+        },
+        {
+          title: "Random Search: cubrir más espacio con menos pruebas",
+          body: "Random Search es como decir: no voy a probar todas las combinaciones posibles del equipo, pero sí voy a tomar muchas muestras variadas y medir cuáles rinden mejor. Cuando el espacio es amplio, esto suele ser más eficiente que recorrerlo completo, porque algunos hiperparámetros pesan mucho más que otros.",
+          comparisonTable: {
+            columns: ["Cuándo conviene", "Qué aporta", "Qué debo cuidar"],
+            rows: [
+              ["Cuando el espacio de búsqueda es muy grande.", "Explora más diversidad con menos intentos.", "Puede no tocar una combinación muy buena por simple azar."],
+              ["Cuando no sé qué parámetros importan más.", "Permite descubrir zonas interesantes rápido.", "Conviene fijar semilla para reproducibilidad."],
+              ["Cuando necesito balancear tiempo y cobertura.", "Es más práctico que Grid Search en muchos casos reales.", "El número de iteraciones (`n_iter`) afecta mucho el resultado."]
+            ]
+          }
+        },
+        {
+          title: "Optimización Bayesiana: aprender de lo ya probado",
+          body: "La Optimización Bayesiana se parece a un entrenador competitivo que ya vio varios combates y empieza a intuir qué combinaciones de Pokémon tienen más potencial antes de probarlas todas. En vez de lanzar intentos ciegos, construye una idea probabilística del espacio y usa esa experiencia para elegir las próximas pruebas con más inteligencia.",
+          comparisonTable: {
+            columns: ["Herramienta del curso", "Qué aporta", "Uso típico"],
+            rows: [
+              ["`scikit-optimize`", "Integra una búsqueda bayesiana simple y compatible con scikit-learn.", "Comparar rápido con Grid Search en pipelines clásicos."],
+              ["`Hyperopt`", "Usa TPE y maneja bien espacios categóricos, continuos y condicionales.", "Modelos con hiperparámetros variados y espacios más flexibles."],
+              ["`Optuna`", "Tiene una API muy cómoda y podado de pruebas poco prometedoras.", "Tuning moderno en modelos más caros o experimentos iterativos."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo elegir Bayesiana",
+          body: "La usaría cuando entrenar el modelo es costoso, cuando el espacio de búsqueda ya no cabe en una grilla razonable o cuando quiero exprimir mejor cada intento. Si cada prueba equivale a jugar una batalla completa muy cara, tiene mucho sentido usar lo aprendido de las batallas anteriores para no malgastar recursos."
+        },
+        {
+          title: "Algoritmos Genéticos: dejar que las combinaciones evolucionen",
+          body: "Esta estrategia es casi la analogía Pokémon perfecta. Empiezo con varios equipos candidatos, mido su rendimiento, selecciono a los mejores, mezclo partes útiles y aplico mutaciones para generar nuevas versiones. Con el tiempo, la población debería acercarse a soluciones mejores sin necesidad de revisar todas las combinaciones posibles.",
+          comparisonTable: {
+            columns: ["Componente", "En la búsqueda", "Analogía Pokémon"],
+            rows: [
+              ["Población", "Conjunto inicial de soluciones.", "Varios equipos o sets candidatos."],
+              ["Fitness", "Medida de calidad de cada solución.", "Qué tan bien rinde el equipo en batalla."],
+              ["Cruce", "Combinar soluciones buenas.", "Tomar lo mejor de dos equipos y mezclarlo."],
+              ["Mutación", "Introducir cambios aleatorios controlados.", "Cambiar un movimiento, objeto o spread para salir de un estancamiento."]
+            ]
+          }
+        },
+        {
+          title: "Dónde brillan los algoritmos genéticos",
+          body: "Son especialmente útiles cuando el problema es raro, cuando hay muchas combinaciones complejas o cuando quiero optimizar varios objetivos a la vez, como maximizar precisión y a la vez minimizar tiempo de entrenamiento. En el material del curso aparece `DEAP`, que encaja bien para este tipo de búsquedas evolutivas."
+        },
+        {
+          title: "Qué método es más eficiente según la situación",
+          body: "No existe un campeón universal; depende del tamaño del espacio, del costo del entrenamiento y del tipo de variables.",
+          comparisonTable: {
+            columns: ["Situación", "Método más razonable", "Por qué"],
+            rows: [
+              ["Pocos hiperparámetros y pocas combinaciones.", "Grid Search", "La cobertura completa sigue siendo manejable."],
+              ["Espacio amplio pero entrenamiento moderado.", "Random Search", "Da buena cobertura sin explotar el costo."],
+              ["Entrenamiento caro o tiempo limitado.", "Optimización Bayesiana", "Cada prueba se aprovecha mejor."],
+              ["Problema muy flexible, raro o multiobjetivo.", "Algoritmos Genéticos", "La evolución permite explorar sin exigir una grilla rígida."],
+              ["Necesidad de explicar fácilmente el proceso.", "Grid Search o Random Search", "Son más intuitivos para documentar."],
+              ["Necesidad de máxima adaptabilidad.", "Bayesiana o Genéticos", "Aprenden o evolucionan según resultados previos."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes al hacer tuning",
+          body: "A veces el problema no es el método, sino cómo lo uso. Querer ajustar demasiados hiperparámetros a la vez, usar métricas poco alineadas con el problema, ignorar validación cruzada o no fijar semillas puede volver engañoso todo el proceso."
+        },
+        {
+          title: "Cómo lo pensaría yo en la práctica",
+          body: "Si el modelo es rápido y el espacio pequeño, partiría con Grid Search. Si el espacio se amplía, saltaría a Random Search. Si cada prueba ya cuesta bastante, usaría Bayesiana con `Optuna`, `Hyperopt` o `skopt`. Y si el problema mezcla varios objetivos o reglas poco cómodas, evaluaría un enfoque genético con `DEAP`."
+        },
+        {
+          title: "Para recordar",
+          body: "Grid Search revisa todo lo definido, Random Search cubre más con menos estructura, la Optimización Bayesiana aprende de lo ya probado y los Algoritmos Genéticos evolucionan soluciones prometedoras. Si lo llevo a Pokémon: una estrategia recorre toda la tabla, otra prueba candidatos variados, otra aprende de cada combate y la última va criando equipos cada vez mejores."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M4-S2 – Lectura: Grid Search y Random Search para ajuste de hiperparámetros</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M4-S3 – Lectura: Optimización Bayesiana con scikit-optimize, Hyperopt y Optuna</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M4-S4 – Lectura: Algoritmos Genéticos para búsqueda de hiperparámetros con DEAP</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "optimization-methods-for-machine-learning",
+        "algorithm-efficiency-and-big-o-for-ml",
+        "python-multivariable-calculus-for-machine-learning"
+      ]
+    },
+    {
+      id: "ray-tune-for-distributed-hyperparameter-optimization",
+      slug: "ray-tune-para-optimizacion-distribuida",
+      title: "Ray Tune para optimización distribuida",
+      summary: "Una guía para entender por qué `Ray Tune` destaca cuando el ajuste de hiperparámetros ya no cabe en un solo notebook: permite paralelizar ensayos, usar schedulers como `ASHA` o `HyperBand`, descartar modelos débiles antes de tiempo y coordinar búsquedas más grandes en CPU, GPU o clúster.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "12 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Ray Tune", "Hiperparámetros", "Distribuido"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La duda más común: qué hace Ray Tune que otros no hagan",
+          body: "La gracia de `Ray Tune` no está en inventar una búsqueda completamente nueva, sino en coordinar búsquedas de hiperparámetros a mayor escala. Si `Grid Search`, `Random Search` u `Optuna` me ayudan a decidir qué probar, `Ray Tune` me ayuda mucho cuando además necesito lanzar muchos ensayos en paralelo, repartirlos entre CPU o GPU y cortar rápido los que ya muestran poco potencial."
+        },
+        {
+          title: "La ventaja real en una frase",
+          body: "`Ray Tune` sirve cuando el tuning deja de ser una prueba cómoda en un notebook y pasa a convertirse en una operación distribuida, repetitiva y costosa que conviene administrar con más inteligencia."
+        },
+        {
+          title: "Qué problema resuelve en la práctica",
+          body: "Cuando entrenar un modelo cuesta tiempo, memoria o GPU, no basta con elegir buenos hiperparámetros: también importa cómo organizo los ensayos. `Ray Tune` aparece justo ahí. Su fortaleza es tomar muchas pruebas, repartirlas bien, monitorearlas y detener temprano las que no valen la pena.",
+          comparisonTable: {
+            columns: ["Necesidad", "Cómo responde Ray Tune"],
+            rows: [
+              ["Muchos ensayos", "Ejecuta múltiples `trials` en paralelo."],
+              ["Entrenamientos caros", "Usa descarte temprano para no gastar de más."],
+              ["Clúster o varias GPUs", "Distribuye carga entre nodos o recursos disponibles."],
+              ["Experimentos grandes", "Centraliza logging, métricas, estado y resultados."],
+              ["Espacios de búsqueda complejos", "Permite definir configuraciones dinámicas y flexibles."]
+            ]
+          }
+        },
+        {
+          title: "Por qué no se siente igual que Optuna",
+          body: "`Optuna` brilla mucho en notebooks, investigación aplicada y tuning bayesiano elegante. `Ray Tune` también puede usar algoritmos inteligentes de búsqueda, pero su gran salto está en la orquestación. Dicho simple: Optuna suele sentirse muy fuerte para decidir bien qué probar; Ray Tune se vuelve especialmente poderoso cuando además necesito ejecutar y administrar muchas pruebas a escala."
+        },
+        {
+          title: "Las piezas que hacen fuerte a Ray Tune",
+          body: "Su ventaja nace de varias capas trabajando juntas.",
+          comparisonTable: {
+            columns: ["Componente", "Qué hace", "Por qué importa"],
+            rows: [
+              ["Search space", "Define parámetros continuos, discretos, categóricos o condicionales.", "Permite tuning flexible sin una grilla rígida."],
+              ["Search algorithm", "Puede usar búsquedas aleatorias, bayesianas u otras estrategias.", "No me obliga a un solo estilo de exploración."],
+              ["Scheduler", "Decide qué ensayos continúan, pausan o se detienen.", "Ahorra recursos eliminando opciones débiles."],
+              ["Parallel trials", "Corre múltiples pruebas al mismo tiempo.", "Reduce el tiempo total del tuning."],
+              ["Checkpointing", "Guarda progreso y permite retomar sesiones.", "Evita perder trabajo en procesos largos."]
+            ]
+          }
+        },
+        {
+          title: "Qué aportan ASHA, HyperBand y PBT",
+          body: "Aquí suele aparecer la verdadera magia. `ASHA` y `HyperBand` son schedulers pensados para asignar recursos de forma progresiva: si un ensayo parte mal, no sigo malgastando tiempo en él. `Population Based Training (PBT)` va más allá y deja que distintas configuraciones evolucionen mientras entrenan. En vez de esperar al final para decidir, Ray Tune puede ir tomando decisiones durante el proceso."
+        },
+        {
+          title: "Cómo lo leería sin tanto tecnicismo",
+          body: "Imagina que estoy probando muchos equipos Pokémon para un torneo. Una cosa es definir varias combinaciones y otra muy distinta es tener un sistema que las ponga a pelear en paralelo, descarte temprano a los equipos que pierden feo, copie ideas de los que van mejor y me deje seguir desde donde quedé si se corta la sesión. Eso último se parece mucho más a `Ray Tune`."
+        },
+        {
+          title: "Cuándo sí conviene usarlo",
+          body: "No siempre necesito `Ray Tune`, pero hay casos donde empieza a tener mucho sentido.",
+          comparisonTable: {
+            columns: ["Situación", "Recomendación"],
+            rows: [
+              ["Pocos parámetros y pruebas simples", "`GridSearchCV` o `RandomizedSearchCV` siguen bastando."],
+              ["Notebook de clase o laboratorio pequeño", "`Optuna` suele sentirse más liviano y directo."],
+              ["Proyecto productivo sobre varias CPU o GPU", "`Ray Tune` gana mucho valor."],
+              ["NLP, Deep Learning o RL con muchos ensayos", "`Ray Tune` destaca por paralelización y scheduling."],
+              ["Entrenamientos largos con riesgo de interrupción", "`Ray Tune` ayuda con checkpoints y reanudación."]
+            ]
+          }
+        },
+        {
+          title: "Ventajas concretas que sí se notan",
+          body: "La principal ventaja es el ahorro de tiempo total cuando el tuning es grande. La segunda es el mejor uso de recursos, porque no sigo alimentando modelos que ya muestran bajo potencial. La tercera es la escalabilidad: puedo pasar de pruebas locales a escenarios más distribuidos sin rediseñar toda la lógica del experimento."
+        },
+        {
+          title: "Limitaciones o costo de entrada",
+          body: "También hay que decirlo claro: `Ray Tune` no siempre es la opción más simple. Si el problema es pequeño, puede sentirse como una infraestructura más pesada de lo necesario. Requiere entender mejor recursos, schedulers, integración con frameworks y estructura del experimento. O sea, entrega más poder, pero también pide más orden técnico."
+        },
+        {
+          title: "Para recordarlo fácil",
+          body: "Si solo quiero probar hiperparámetros, muchas veces basta con Optuna o con búsquedas clásicas. Si quiero además repartir ensayos, cortar malos resultados temprano, usar varias máquinas o GPUs y administrar el tuning como un proceso serio de entrenamiento, ahí `Ray Tune` empieza a mostrar su ventaja real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M4-S5 – Lectura: Librerías de tuning automatizado y casos de uso de Ray Tune, Optuna y búsquedas distribuidas</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM4S5 – Cuestionario Clase 5: características, ventajas y recomendaciones de uso para Ray Tune</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "hyperparameter-search-strategies-for-machine-learning",
+        "optimization-methods-for-machine-learning",
+        "pythonic-optimization-and-jit-for-machine-learning"
+      ]
+    },
+    {
+      id: "oop-principles-for-machine-learning-projects",
+      slug: "poo-y-principios-de-diseno-para-proyectos-de-machine-learning",
+      title: "POO y principios de diseño para proyectos de Machine Learning",
+      summary: "Una guía para llevar la programación orientada a objetos hacia proyectos de Machine Learning más ordenados, aplicando modularidad, reutilización y principios como `SOLID`, `DRY` y `KISS` para construir soluciones más mantenibles y escalables.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "11 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "POO", "SOLID", "Diseño"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué la POO cambia de nivel cuando entro a ML",
+          body: "En ejercicios pequeños, la POO ayuda a ordenar. Pero en Machine Learning su valor crece mucho más, porque los proyectos dejan de ser una sola función y pasan a integrar carga de datos, preprocesamiento, entrenamiento, validación, métricas, serialización y despliegue. Ahí la orientación a objetos deja de ser solo teoría y se vuelve estructura."
+        },
+        {
+          title: "Del script suelto al sistema modular",
+          body: "La programación procedimental funciona bien para probar ideas rápidas. El problema aparece cuando el proyecto crece y empiezo a repetir lógica, mezclar responsabilidades o depender de variables dispersas. La POO permite convertir ese caos potencial en componentes con roles más claros."
+        },
+        {
+          title: "Qué gana un proyecto de ML con este enfoque",
+          body: "Cuando organizo mejor las piezas, también mejoro el flujo de trabajo técnico.",
+          comparisonTable: {
+            columns: ["Necesidad en ML", "Cómo ayuda la POO"],
+            rows: [
+              ["Modularidad", "Separar cargadores de datos, transformadores, modelos y evaluadores."],
+              ["Reutilización", "Reusar clases o métodos en distintos experimentos."],
+              ["Escalabilidad", "Agregar nuevos modelos sin reescribir todo el pipeline."],
+              ["Mantenibilidad", "Detectar y corregir errores en módulos específicos."],
+              ["Pruebas", "Validar componentes por separado con mayor facilidad."]
+            ]
+          }
+        },
+        {
+          title: "Los cuatro pilares siguen importando, pero ahora con foco práctico",
+          body: "En ML, abstracción, encapsulación, herencia y polimorfismo no son solo definiciones: sirven para construir componentes que puedan crecer sin romper todo alrededor.",
+          comparisonTable: {
+            columns: ["Pilar", "Idea breve", "Aplicación en ML"],
+            rows: [
+              ["Abstracción", "Mostrar solo lo esencial.", "Definir interfaces claras para entrenar o predecir."],
+              ["Encapsulación", "Proteger el estado interno.", "Guardar parámetros, transformaciones y resultados dentro de objetos."],
+              ["Herencia", "Reutilizar y extender comportamiento.", "Crear variantes de modelos o procesadores desde una clase base."],
+              ["Polimorfismo", "Mismo método, distintas respuestas.", "Usar `train()` o `predict()` en clases distintas con comportamientos propios."]
+            ]
+          }
+        },
+        {
+          title: "Pensar en clases como piezas del pipeline",
+          body: "Una forma útil de aterrizar la POO en ML es imaginar que cada parte importante del flujo puede vivir en su propia clase: un lector de datos, un limpiador, un generador de features, un modelo o un evaluador.",
+          code: "class CargadorDatos:\n    def cargar(self, ruta):\n        ...\n\nclass Preprocesador:\n    def transformar(self, df):\n        ...\n\nclass ModeloClasificacion:\n    def entrenar(self, X, y):\n        ...\n\n    def predecir(self, X):\n        ..."
+        },
+        {
+          title: "SOLID: reglas para no desordenar un proyecto grande",
+          body: "Los principios SOLID ayudan mucho cuando el código empieza a vivir más tiempo del esperado. En ML eso pasa seguido, porque un experimento chico puede terminar convertido en una solución que crece, cambia y se reentrena. Por eso conviene recordarlos con su nombre completo y no solo como siglas.",
+          comparisonTable: {
+            columns: ["Abreviatura", "Principio", "Qué propone", "Ejemplo aplicado a ML"],
+            rows: [
+              ["SRP", "Single Responsibility Principle (Principio de Responsabilidad Única)", "Una clase, una responsabilidad.", "Separar la carga de datos del entrenamiento del modelo."],
+              ["OCP", "Open/Closed Principle (Principio Abierto/Cerrado)", "Extender sin modificar demasiado.", "Agregar un nuevo clasificador sin romper la estructura existente."],
+              ["LSP", "Liskov Substitution Principle (Principio de Sustitución de Liskov)", "Una subclase debe reemplazar a su base sin problemas.", "Cambiar `ModeloBase` por `RandomForestModel` sin alterar el flujo general."],
+              ["ISP", "Interface Segregation Principle (Principio de Segregación de Interfaces)", "Interfaces pequeñas y útiles.", "No obligar a todas las clases a implementar métodos que no necesitan."],
+              ["DIP", "Dependency Inversion Principle (Principio de Inversión de Dependencias)", "Depender de abstracciones, no de detalles rígidos.", "Diseñar pipelines que trabajen contra interfaces de modelo, no contra un algoritmo único."]
+            ]
+          }
+        },
+        {
+          title: "DRY y KISS también entran aquí",
+          body: "Además de SOLID, dos reglas prácticas ordenan muchísimo el trabajo. `DRY` significa `Don't Repeat Yourself`, o sea, no repetir la misma lógica una y otra vez. `KISS` significa `Keep It Simple, Stupid`, y recuerda que, si una solución simple ya funciona bien, no conviene complejizarla sin necesidad.",
+          bestPractices: [
+            "Si repito la misma limpieza en varios scripts, conviene encapsularla.",
+            "Si dos modelos usan la misma validación, puedo centralizar esa lógica.",
+            "Si una clase hace demasiadas cosas, probablemente hay que separarla.",
+            "Si la solución se volvió difícil de explicar, tal vez perdió claridad."
+          ]
+        },
+        {
+          title: "Métodos de instancia, clase y estáticos: por qué sí importan",
+          body: "En proyectos más estructurados, no todos los métodos cumplen el mismo rol. Entender esa diferencia ayuda a no meter todo en el mismo saco.",
+          comparisonTable: {
+            columns: ["Tipo de método", "Cuándo usarlo", "Ejemplo mental"],
+            rows: [
+              ["Instancia", "Cuando trabaja con datos del objeto.", "Un modelo que usa sus propios parámetros entrenados."],
+              ["`@classmethod`", "Cuando necesito construir o configurar desde la clase.", "Crear un modelo con configuración por defecto."],
+              ["`@staticmethod`", "Cuando la función está relacionada con la clase, pero no depende ni de `self` ni de `cls`.", "Validar formato de una entrada antes del entrenamiento."]
+            ]
+          }
+        },
+        {
+          title: "Encapsular ayuda también a probar y depurar",
+          body: "Cuando cada componente tiene una responsabilidad clara, es mucho más fácil probarlo por separado. Puedo validar si el problema está en la lectura, en el preprocesamiento o en la predicción, en vez de revisar un bloque inmenso donde todo está mezclado."
+        },
+        {
+          title: "Cuándo lo usaría de verdad en Machine Learning",
+          body: "Si el trabajo es un notebook breve para explorar una idea, quizás no necesito demasiada estructura. Pero si el proyecto ya incluye varias etapas, múltiples modelos, validaciones, retraining o colaboración con otras personas, la POO pasa a ser una base muy útil para que el código no se desordene."
+        },
+        {
+          title: "Para recordar",
+          body: "En Machine Learning, la POO no sirve solo para definir clases bonitas: sirve para diseñar mejor. Modularidad, encapsulación, reutilización y principios como `Single Responsibility Principle`, `Open/Closed Principle`, `Don't Repeat Yourself` y `Keep It Simple, Stupid` ayudan a que un proyecto pase de ser un experimento aislado a una solución más clara, mantenible y escalable."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Lectura sesión 3: Programación orientada a objetos en Python</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 2 / Clase 3: Programación orientada a objetos en Python</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "object-oriented-programming-basics",
+        "advanced-data-structures-for-ml",
+        "python-exception-handling-for-data-workflows"
+      ]
+    },
+    {
       id: "python-functions-conditionals-and-operators",
       slug: "funciones-condicionales-y-operadores-en-python",
       title: "Funciones, condicionales y operadores en Python",
@@ -3048,6 +4075,476 @@
       ]
     },
     {
+      id: "advanced-data-structures-for-ml",
+      slug: "estructuras-de-datos-avanzadas-para-machine-learning",
+      title: "Estructuras de datos avanzadas para Machine Learning",
+      summary: "Una nota puente para repasar listas, tuplas y diccionarios, y luego subir a pilas, colas, árboles y grafos con foco en cuándo conviene usar cada estructura dentro de flujos analíticos y de ML.",
+      category: "Programación",
+      type: "Guía",
+      level: "intermediate",
+      readingTime: "13 min",
+      updatedAt: "2026-08-03",
+      tags: ["Python", "Estructuras", "Machine Learning", "Algoritmos"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Por qué esta clase sí merece una nota aparte",
+          body: "Las estructuras básicas sirven para empezar, pero cuando los problemas crecen en tamaño o complejidad ya no basta con guardar datos: también importa muchísimo cómo se organizan, cómo se recorren y qué operaciones deben ser rápidas. Por eso esta clase funciona bien como puente entre Python base y Machine Learning."
+        },
+        {
+          title: "Recordatorio rápido de estructuras básicas",
+          body: "Antes de subir a lo avanzado, conviene fijar qué aporta cada estructura que ya vimos.",
+          comparisonTable: {
+            columns: ["Estructura", "Idea central", "Fortaleza principal"],
+            rows: [
+              ["Lista", "Colección ordenada y mutable.", "Modificar, recorrer y hacer slicing."],
+              ["Tupla", "Colección ordenada e inmutable.", "Guardar configuraciones o grupos estables."],
+              ["Diccionario", "Pares clave-valor.", "Acceso rápido por clave."],
+              ["Conjunto", "Valores únicos sin duplicados.", "Limpiar y comparar presencia de elementos."]
+            ]
+          }
+        },
+        {
+          title: "Lo avanzado no reemplaza lo básico",
+          body: "Las pilas, colas, árboles y grafos no vienen a reemplazar listas o diccionarios. Más bien aparecen cuando necesito modelar flujos, jerarquías o relaciones complejas con mayor claridad y eficiencia."
+        },
+        {
+          title: "Pilas: estructura LIFO",
+          body: "Una pila o stack sigue la lógica Last In, First Out: el último en entrar es el primero en salir. Sirve muy bien cuando el proceso necesita deshacer o retroceder por pasos recientes.",
+          code: "stack = []\nstack.append('paso_1')\nstack.append('paso_2')\nstack.append('paso_3')\n\nultimo = stack.pop()\nprint(ultimo)\nprint(stack)",
+          bestPractices: [
+            "Pensarla como una pila de platos.",
+            "Usar `append()` para empujar y `pop()` para retirar el último.",
+            "Es útil en backtracking, historial y evaluación por pasos."
+          ]
+        },
+        {
+          title: "Cuándo una pila sí aporta valor en análisis o ML",
+          body: "Las pilas aparecen cuando quiero deshacer procesos, recorrer decisiones recientes o mantener un orden de trabajo donde lo último cargado es lo primero que conviene revisar. También ayudan a modelar ciertos recorridos de estructuras más complejas."
+        },
+        {
+          title: "Colas: estructura FIFO",
+          body: "Una cola o queue sigue la lógica First In, First Out: el primero en entrar es el primero en salir. Esto la vuelve muy útil cuando el orden de llegada importa.",
+          code: "from collections import deque\n\nqueue = deque()\nqueue.append('cliente_1')\nqueue.append('cliente_2')\nqueue.append('cliente_3')\n\nprimero = queue.popleft()\nprint(primero)\nprint(queue)",
+          bestPractices: [
+            "Para colas reales, preferir `collections.deque` sobre listas.",
+            "Usar `append()` para agregar y `popleft()` para extraer desde el inicio.",
+            "Sirve mucho en procesamiento por turnos o pipelines."
+          ]
+        },
+        {
+          title: "Pila vs cola en una sola mirada",
+          body: "Se parecen porque ambas ordenan el flujo, pero no resuelven el mismo problema.",
+          comparisonTable: {
+            columns: ["Estructura", "Regla", "Imagen mental"],
+            rows: [
+              ["Pila", "LIFO", "Lo último que dejas arriba es lo primero que retiras."],
+              ["Cola", "FIFO", "La primera persona que llega es la primera que avanza."]
+            ]
+          }
+        },
+        {
+          title: "Árboles: relaciones jerárquicas",
+          body: "Los árboles modelan relaciones padre-hijo. Son ideales cuando la información tiene una estructura jerárquica, con un nodo raíz y distintos niveles que se van ramificando.",
+          example: "Una carpeta con subcarpetas, una estructura de decisión o una taxonomía de categorías son ejemplos muy intuitivos de árbol."
+        },
+        {
+          title: "Por qué los árboles importan tanto en ML",
+          body: "En Machine Learning aparecen mucho en árboles de decisión, Random Forest y otros enfoques donde las reglas se van separando por ramas. Entender la lógica jerárquica del árbol ayuda mucho a interpretar cómo un modelo divide el espacio de decisiones."
+        },
+        {
+          title: "Árbol de búsqueda binaria como referencia mental",
+          body: "Una versión clásica es el árbol de búsqueda binaria: cada nodo tiene a lo más dos hijos, y se cumple que los valores menores van a la izquierda y los mayores a la derecha. Eso permite búsquedas más ordenadas.",
+          comparisonTable: {
+            columns: ["Concepto", "Idea"],
+            rows: [
+              ["Raíz", "Nodo inicial del árbol."],
+              ["Nodo hijo", "Elemento que depende de otro nodo."],
+              ["Hoja", "Nodo sin hijos."],
+              ["ABB", "Izquierda < nodo < derecha."]
+            ]
+          }
+        },
+        {
+          title: "Grafos: relaciones entre entidades",
+          body: "Los grafos representan conexiones entre nodos. A diferencia del árbol, no están pensados solo para jerarquías: sirven para modelar redes, rutas, recomendaciones, dependencias o relaciones sociales.",
+          example: "Usuarios conectados entre sí, ciudades unidas por rutas o productos relacionados por comportamiento de compra pueden pensarse como grafos."
+        },
+        {
+          title: "Tipos de grafos que conviene reconocer",
+          body: "No hace falta dominar teoría de grafos completa desde el día uno, pero sí vale la pena ubicar estas diferencias.",
+          comparisonTable: {
+            columns: ["Tipo", "Qué significa", "Ejemplo"],
+            rows: [
+              ["Dirigido", "La conexión tiene dirección.", "Seguir a alguien en una red social."],
+              ["No dirigido", "La conexión vale en ambos sentidos.", "Dos personas que son amigas."],
+              ["Ponderado", "La conexión tiene peso o costo.", "Distancia entre ciudades."],
+              ["No ponderado", "Solo importa si existe o no la conexión.", "Relación sí/no."]
+            ]
+          }
+        },
+        {
+          title: "Por qué los grafos se conectan tan bien con ML",
+          body: "Los grafos aparecen mucho en recomendación, detección de comunidades, análisis de redes y sistemas donde las relaciones entre entidades importan tanto como los atributos individuales."
+        },
+        {
+          title: "Elegir la estructura adecuada también es eficiencia",
+          body: "La gracia no es usar lo más complejo porque sí, sino elegir lo que mejor representa el problema y hace más natural la operación que necesito.",
+          comparisonTable: {
+            columns: ["Si necesito...", "Conviene pensar en..."],
+            rows: [
+              ["Modificar una colección y recorrerla fácil", "Lista"],
+              ["Guardar una configuración estable", "Tupla"],
+              ["Acceder rápido por nombre o clave", "Diccionario"],
+              ["Quitar duplicados o comparar pertenencia", "Conjunto"],
+              ["Deshacer o retroceder por pasos", "Pila"],
+              ["Respetar el orden de llegada", "Cola"],
+              ["Modelar jerarquías", "Árbol"],
+              ["Modelar redes o conexiones", "Grafo"]
+            ]
+          }
+        },
+        {
+          title: "Aplicaciones concretas en Machine Learning",
+          body: "El material de clase conecta estas estructuras con tareas reales de ML y análisis.",
+          comparisonTable: {
+            columns: ["Estructura", "Aplicación posible"],
+            rows: [
+              ["Árboles", "Árboles de decisión y Random Forest."],
+              ["Grafos", "Sistemas de recomendación y análisis de redes."],
+              ["Diccionarios y listas", "Guardar hiperparámetros, métricas y resultados."],
+              ["Colas y pilas", "Ordenar pipelines, recorridos o procesos de backtracking."]
+            ]
+          }
+        },
+        {
+          title: "Herramientas de Python que ayudan",
+          body: "Python ya trae varias ayudas para este mundo: listas para pilas, `collections.deque` para colas y librerías como `networkx` cuando los grafos empiezan a crecer de verdad. Esa mezcla entre estructuras nativas y ecosistema externo es una de las razones por las que Python funciona tan bien en ML."
+        },
+        {
+          title: "Para recordar",
+          body: "Esta clase no solo amplía el repertorio de estructuras: también cambia la forma de pensar problemas. Elegir bien entre lista, pila, cola, árbol o grafo puede impactar directamente en la claridad del código, la complejidad de las operaciones y la calidad del flujo analítico o del modelo."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum - Talento Digital. (2026). <em>Apuntes de Repaso - Modulo 2 / Clase 1: Estructuras de Datos Avanzadas en Python</em>.",
+          url: "https://www.kibernumacademy.com/"
+        },
+        {
+          citation:
+            "Kibernum - Talento Digital. (2026). <em>MLM2S1-Lectura: Estructuras de Datos Avanzadas</em>.",
+          url: "https://www.kibernumacademy.com/"
+        },
+        {
+          citation:
+            "Kibernum - Talento Digital. (2026). <em>MLM2S1-Leccion</em>.",
+          url: "https://www.kibernumacademy.com/"
+        }
+      ],
+      relatedIds: [
+        "python-lists-tuples-and-mutability",
+        "python-dictionaries-and-sets",
+        "python-loops-break-and-continue"
+      ]
+    },
+    {
+      id: "algorithm-efficiency-and-big-o-for-ml",
+      slug: "optimizacion-y-eficiencia-algoritmica-para-machine-learning",
+      title: "Optimización y eficiencia algorítmica para Machine Learning",
+      summary: "Una guía para entender por qué el análisis de algoritmos importa tanto en Machine Learning, cómo leer las notaciones `Big O`, cuándo preocuparse por tiempo vs memoria y qué herramientas usar en Python para detectar cuellos de botella reales.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "12 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Big O", "Algoritmos", "Optimización"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta parte sí importa en ML",
+          body: "Cuando un dataset es pequeño, muchas veces cualquier solución parece suficiente. El problema aparece cuando el volumen crece, el pipeline se repite o el entrenamiento empieza a consumir demasiado tiempo o memoria. Ahí el análisis de algoritmos deja de ser teoría y pasa a ser una herramienta para decidir mejor."
+        },
+        {
+          title: "Eficiencia no es solo velocidad",
+          body: "Analizar un algoritmo implica mirar al menos dos dimensiones: cuánto tarda y cuánta memoria adicional necesita. En Machine Learning ambas importan, porque un flujo puede ser rápido pero gastar demasiados recursos, o usar poca memoria pero volverse muy lento.",
+          comparisonTable: {
+            columns: ["Tipo de eficiencia", "Qué mide", "Por qué importa en ML"],
+            rows: [
+              ["Temporal", "Tiempo de ejecución.", "Afecta entrenamiento, predicción y tiempos de espera."],
+              ["Espacial", "Memoria adicional usada.", "Afecta escalabilidad, costos y estabilidad del sistema."]
+            ]
+          }
+        },
+        {
+          title: "Qué representa realmente Big O",
+          body: "La notación `Big O` no busca decir exactamente cuántos segundos tardará un algoritmo, sino cómo crece su costo cuando aumenta el tamaño de entrada `n`. Eso permite comparar soluciones sin depender tanto de un computador específico o de una medición puntual."
+        },
+        {
+          title: "Curvas de crecimiento para entenderlo visualmente",
+          body: "Esta gráfica ayuda mucho a ver por qué algunas complejidades escalan de forma amable y otras se disparan muy rápido cuando `n` empieza a crecer.",
+          illustrations: [
+            {
+              src: "img/atlas/big-o-growth-curves.png",
+              alt: "Curvas de crecimiento de las notaciones Big O mostrando O(1), O(log n), O(n), O(n log n) y O(n^2).",
+              caption: "Mientras más rápido sube la curva, más costoso se vuelve el algoritmo al crecer la entrada. En proyectos grandes, esta diferencia deja de ser detalle y pasa a ser un factor de diseño."
+            }
+          ]
+        },
+        {
+          title: "Complejidades que más conviene reconocer",
+          body: "No hace falta obsesionarse con todas las notaciones desde el día uno, pero sí conviene reconocer cuáles suelen ser aceptables y cuáles se vuelven pesadas al escalar.",
+          comparisonTable: {
+            columns: ["Notación", "Cómo crece", "Lectura rápida"],
+            rows: [
+              ["`O(1)`", "Constante", "Muy eficiente: no depende de `n`."],
+              ["`O(log n)`", "Logarítmica", "Excelente cuando la entrada puede dividirse por mitades."],
+              ["`O(n)`", "Lineal", "Aceptable en muchos recorridos simples."],
+              ["`O(n log n)`", "Lineal-logarítmica", "Muy buena en ordenamientos eficientes."],
+              ["`O(n^2)`", "Cuadrática", "Se vuelve costosa rápido con volúmenes grandes."],
+              ["`O(2^n)`", "Exponencial", "Escala muy mal; se evita salvo casos muy específicos."]
+            ]
+          }
+        },
+        {
+          title: "Tiempo vs memoria: el trade-off clásico",
+          body: "Muchas optimizaciones no son gratis. A veces conviene usar memoria extra para ahorrar tiempo, como cuando guardo resultados intermedios. Otras veces me conviene evitar estructuras muy pesadas aunque el código tarde un poco más. El criterio depende del contexto."
+        },
+        {
+          title: "Casos de análisis: mejor, promedio y peor caso",
+          body: "Un algoritmo no siempre se comporta igual. Por eso conviene diferenciar varios escenarios de análisis.",
+          comparisonTable: {
+            columns: ["Caso", "Qué describe", "Ejemplo con búsqueda lineal"],
+            rows: [
+              ["Mejor caso", "El escenario más favorable.", "El valor está en la primera posición: `O(1)`."],
+              ["Caso promedio", "Lo esperable en condiciones normales.", "En promedio recorro parte importante de la lista: `O(n)`."],
+              ["Peor caso", "El escenario más desfavorable.", "El valor está al final o no existe: `O(n)`."]
+            ]
+          }
+        },
+        {
+          title: "Búsqueda lineal vs búsqueda binaria",
+          body: "Esta comparación es de las más útiles para fijar el concepto. La búsqueda lineal recorre elemento por elemento; la binaria divide el problema por mitades, pero exige que la lista esté ordenada.",
+          comparisonTable: {
+            columns: ["Algoritmo", "Complejidad", "Condición clave", "Cuándo conviene"],
+            rows: [
+              ["Búsqueda lineal", "`O(n)`", "No exige orden previo.", "Útil cuando la lista es pequeña o no está ordenada."],
+              ["Búsqueda binaria", "`O(log n)`", "La lista debe estar ordenada.", "Muy eficiente cuando trabajo con datos ordenados y búsquedas frecuentes."]
+            ]
+          },
+          code: "def busqueda_lineal(lista, objetivo):\n    for i, valor in enumerate(lista):\n        if valor == objetivo:\n            return i\n    return -1\n\n\ndef busqueda_binaria(lista, objetivo):\n    izquierda, derecha = 0, len(lista) - 1\n    while izquierda <= derecha:\n        medio = (izquierda + derecha) // 2\n        if lista[medio] == objetivo:\n            return medio\n        if lista[medio] < objetivo:\n            izquierda = medio + 1\n        else:\n            derecha = medio - 1\n    return -1"
+        },
+        {
+          title: "La estructura de datos también cambia la eficiencia",
+          body: "A veces el problema no es solo el algoritmo, sino la estructura que elegí para resolverlo. Un `dict` puede ofrecer búsquedas casi constantes, mientras que una lista obliga a recorrer más.",
+          comparisonTable: {
+            columns: ["Estructura", "Operación fuerte", "Lectura práctica"],
+            rows: [
+              ["Lista", "Recorrido secuencial", "Flexible, pero las búsquedas pueden ser más lentas."],
+              ["Diccionario", "Búsqueda por clave", "Muy útil cuando necesito acceso rápido `O(1)` aproximado."],
+              ["Cola o pila", "Inserción/extracción estructurada", "Sirven cuando importa mucho el orden del procesamiento."],
+              ["Árbol o grafo", "Relaciones jerárquicas o de conexión", "Aportan mucho cuando la estructura del problema lo exige."]
+            ]
+          }
+        },
+        {
+          title: "Técnicas que suelen mejorar algoritmos",
+          body: "Más allá de medir, también conviene reconocer enfoques clásicos que suelen volver más eficientes ciertas soluciones.",
+          comparisonTable: {
+            columns: ["Técnica", "Idea central", "Dónde ayuda"],
+            rows: [
+              ["Divide y vencerás", "Dividir el problema en partes pequeñas y combinar resultados.", "Ordenamientos y búsquedas eficientes."],
+              ["Programación dinámica", "Guardar resultados intermedios para no recalcular.", "Problemas con subproblemas repetidos."],
+              ["Greedy o voraz", "Tomar decisiones locales rápidas esperando una buena solución global.", "Casos donde esa heurística sí funciona bien."],
+              ["Memoización", "Reusar resultados ya calculados.", "Ahorra tiempo cuando hay repetición de llamadas."]
+            ]
+          }
+        },
+        {
+          title: "No optimizar sin medir",
+          body: "Una regla que vale oro: antes de reescribir medio pipeline, conviene medir. Muchas veces la intuición sobre el cuello de botella falla, y las herramientas de profiling muestran otra historia."
+        },
+        {
+          title: "Herramientas útiles en Python",
+          body: "Python tiene varias herramientas sencillas para comparar implementaciones y encontrar dónde se va el tiempo.",
+          comparisonTable: {
+            columns: ["Herramienta", "Para qué sirve", "Cuándo la usaría"],
+            rows: [
+              ["`time`", "Mediciones básicas.", "Comparaciones rápidas y simples."],
+              ["`timeit`", "Medir fragmentos pequeños con más precisión.", "Comparar versiones concretas de una función."],
+              ["`cProfile`", "Perfilar funciones y ver dónde se consume más tiempo.", "Cuando el flujo ya es más grande y quiero detectar cuellos de botella."],
+              ["`line_profiler`", "Medir por línea.", "Cuando necesito hilar más fino en una función compleja."]
+            ]
+          },
+          code: "import timeit\n\ntiempo = timeit.timeit(\"sum(range(1000))\", number=1000)\nprint(tiempo)"
+        },
+        {
+          title: "Por qué esto pega fuerte en Machine Learning",
+          body: "En ML, eficiencia significa poder iterar más, probar más modelos, procesar más datos y gastar mejor los recursos. Un algoritmo ineficiente puede volver inviable una etapa de preprocesamiento, una búsqueda de parámetros o un flujo de inferencia repetido muchas veces."
+        },
+        {
+          title: "Para recordar",
+          body: "Big O no predice segundos exactos: muestra cómo escala el costo. `O(1)` y `O(log n)` suelen sentirse ligeros, `O(n)` es manejable, `O(n log n)` sigue siendo razonable, y `O(n^2)` o peor ya obliga a pensar más. En Machine Learning, analizar algoritmos es una forma directa de ahorrar tiempo, memoria y frustración."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Lectura sesión 4: Análisis de algoritmos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 2 / Clase 4: Análisis y optimización de algoritmos en Python</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "advanced-data-structures-for-ml",
+        "oop-principles-for-machine-learning-projects",
+        "python-libraries-modules-and-numpy"
+      ]
+    },
+    {
+      id: "pythonic-optimization-and-jit-for-ml",
+      slug: "optimizacion-pythonic-y-jit-para-machine-learning",
+      title: "Optimización Pythonic y JIT para Machine Learning",
+      summary: "Una guía para optimizar código en Python sin perder claridad, entendiendo cuándo conviene usar estilo `Pythonic`, vectorización, generadores, profiling y compilación `JIT` para consumir mejor CPU y memoria dentro de flujos de Machine Learning.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "12 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Pythonic", "Numba", "JIT"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Optimizar no es solo hacerlo más rápido",
+          body: "Cuando hablo de optimización en Python, no se trata únicamente de bajar milisegundos. También se trata de consumir mejor CPU, usar menos memoria cuando haga falta, mantener el código legible y evitar que un flujo crezca de forma desordenada a medida que sube el volumen de datos."
+        },
+        {
+          title: "Qué significa escribir código Pythonic",
+          body: "El estilo `Pythonic` busca escribir código idiomático, claro y coherente con la filosofía del lenguaje. En la práctica, eso suele mejorar legibilidad y muchas veces también rendimiento, porque aprovecha herramientas internas ya optimizadas.",
+          comparisonTable: {
+            columns: ["Enfoque", "Versión más recomendable"],
+            rows: [
+              ["Revisar lista vacía", "`if not lista:`"],
+              ["Sumar elementos", "`sum(lista)` en vez de un `for` manual cuando aplique"],
+              ["Crear listas filtradas", "List comprehensions en vez de varios `append()` dispersos"],
+              ["Abrir archivos", "`with open(...) as f:`"]
+            ]
+          }
+        },
+        {
+          title: "Primera regla sana: medir antes de optimizar",
+          body: "Antes de tocar el código, conviene confirmar dónde está el cuello de botella real. Optimizar sin medir suele terminar en micro-ajustes bonitos pero irrelevantes.",
+          bestPractices: [
+            "Usar `timeit` para comparar fragmentos pequeños.",
+            "Usar `cProfile` cuando el flujo ya tiene varias funciones.",
+            "Evitar suponer que el problema está donde más me molesta leer el código.",
+            "Priorizar cambios con impacto real antes que micro-optimizaciones."
+          ]
+        },
+        {
+          title: "Herramientas de profiling que sí conviene recordar",
+          body: "Cada herramienta sirve mejor en un nivel distinto del análisis de rendimiento.",
+          comparisonTable: {
+            columns: ["Herramienta", "Para qué sirve", "Cuándo la usaría"],
+            rows: [
+              ["`timeit`", "Medir bloques pequeños con más precisión.", "Comparar dos implementaciones de una misma operación."],
+              ["`cProfile`", "Ver qué funciones consumen más tiempo.", "Analizar pipelines completos o scripts más largos."],
+              ["`line_profiler`", "Revisar costo línea por línea.", "Detectar el punto exacto donde una función pesada se ralentiza."]
+            ]
+          }
+        },
+        {
+          title: "Funciones integradas: pequeñas decisiones que sí suman",
+          body: "Muchas funciones nativas de Python como `sum()`, `min()`, `max()` o `sorted()` ya están optimizadas internamente. Por eso muchas veces conviene usarlas antes que reconstruir la lógica con bucles manuales."
+        },
+        {
+          title: "List comprehensions y generadores",
+          body: "Las comprehensions ayudan a escribir código más compacto y normalmente más rápido que un `for` con `append`. Los generadores, en cambio, destacan cuando necesito procesar muchos datos sin cargarlos completos en memoria.",
+          comparisonTable: {
+            columns: ["Herramienta", "Ventaja principal", "Cuándo aporta más"],
+            rows: [
+              ["List comprehension", "Más legible y compacta.", "Cuando necesito construir una lista final."],
+              ["Generador", "Ahorra memoria al producir bajo demanda.", "Cuando trabajo con grandes volúmenes o streaming."]
+            ]
+          },
+          code: "cuadrados = [x**2 for x in range(10) if x % 2 == 0]\n\npares = (x for x in range(10) if x % 2 == 0)"
+        },
+        {
+          title: "Context managers: también son optimización",
+          body: "Optimizar no es solo acelerar cálculos; también es manejar mejor recursos. Un `context manager` ayuda a abrir y cerrar archivos o conexiones de forma segura y automática, evitando fugas o bloqueos innecesarios.",
+          code: "with open('datos.txt', encoding='utf-8') as f:\n    datos = f.read()"
+        },
+        {
+          title: "Vectorización con NumPy y Pandas",
+          body: "Una de las optimizaciones más importantes en Python para datos es evitar bucles explícitos cuando puedo usar operaciones vectorizadas. NumPy y Pandas delegan muchas operaciones a rutinas optimizadas en C y Fortran, por eso suelen rendir mucho mejor que iterar fila por fila en Python puro.",
+          code: "import numpy as np\n\narr = np.array([1, 2, 3, 4])\nresultado = arr * 2"
+        },
+        {
+          title: "Elegir bien los contenedores también optimiza",
+          body: "La estructura elegida puede cambiar drásticamente el rendimiento sin tocar demasiado el algoritmo.",
+          comparisonTable: {
+            columns: ["Estructura", "Fortaleza", "Uso típico"],
+            rows: [
+              ["Lista", "Orden y recorrido secuencial.", "Colecciones donde importa el orden."],
+              ["Set", "Pertenencia rápida.", "Eliminar duplicados o validar existencia."],
+              ["Diccionario", "Acceso rápido por clave.", "Mapeos, configuraciones y búsquedas frecuentes."]
+            ]
+          }
+        },
+        {
+          title: "JIT con Numba: qué hace realmente",
+          body: "La compilación `Just-In-Time` traduce ciertas funciones numéricas de Python a código máquina optimizado durante la ejecución. En la práctica, `Numba` sirve sobre todo para acelerar cálculos intensivos en **CPU**, especialmente cuando hay bucles numéricos o trabajo repetitivo que Python puro ejecuta lento.",
+          code: "from numba import njit\n\n@njit\ndef suma_rapida(a):\n    total = 0\n    for x in a:\n        total += x\n    return total"
+        },
+        {
+          title: "Entonces, ¿JIT cuida CPU o GPU?",
+          body: "Si hablo de `Numba` en este contexto, el foco principal está en usar mejor **CPU** y reducir tiempos de ejecución del código numérico. Eso también puede evitar gasto innecesario de memoria y bajar presión general del sistema. La **GPU** entra más claramente cuando uso herramientas como `CuPy` o flujos diseñados para computación paralela en tarjeta gráfica."
+        },
+        {
+          title: "CuPy, Dask y Ray: cuándo aparecen",
+          body: "Estas herramientas apuntan a escenarios más grandes o más específicos de escalado.",
+          comparisonTable: {
+            columns: ["Herramienta", "Qué hace", "Dónde aporta"],
+            rows: [
+              ["`CuPy`", "Replica muchas operaciones tipo NumPy pero en GPU.", "Cálculo numérico masivo sobre tarjeta gráfica."],
+              ["`Dask`", "Distribuye arrays y dataframes.", "Procesar datasets grandes sin cambiar tanto la lógica."],
+              ["`Ray`", "Facilita tareas distribuidas o paralelas.", "Pipelines y cargas que ya escalan más allá de un solo proceso."]
+            ]
+          }
+        },
+        {
+          title: "Qué sí buscar al optimizar en ML",
+          body: "La meta no es exprimir la máquina por deporte. La idea es consumir menos recursos, entrenar con más estabilidad, iterar mejor y no matar tan rápido CPU, memoria o incluso GPU cuando el caso ya usa aceleración. Optimizar bien también hace que el pipeline sea más sostenible y más barato de ejecutar."
+        },
+        {
+          title: "Para recordar",
+          body: "Código Pythonic no es solo estilo bonito: también puede ser más eficiente. Primero conviene medir, luego usar funciones integradas, comprehensions, generadores, context managers y vectorización. `Numba` con `JIT` apunta sobre todo a acelerar trabajo numérico en CPU; si el problema ya es de GPU, el paralelo más natural en esta clase va más por `CuPy`."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Lectura sesión 5: Optimización de código</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Apuntes de repaso – Módulo 2 / Clase 5: Optimización y código Pythonic</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "algorithm-efficiency-and-big-o-for-ml",
+        "python-libraries-modules-and-numpy",
+        "python-exception-handling-for-data-workflows"
+      ]
+    },
+    {
       id: "python-libraries-modules-and-numpy",
       slug: "librerias-modulos-y-numpy-en-python",
       title: "Librerías, módulos y NumPy en Python",
@@ -3495,6 +4992,105 @@
         "python-libraries-modules-and-numpy",
         "pandas-dataframes-masks-and-groupby",
         "python-introduction-and-comparison"
+      ]
+    },
+    {
+      id: "python-exception-handling-for-data-workflows",
+      slug: "manejo-de-excepciones-en-python-para-flujos-de-datos",
+      title: "Manejo de excepciones en Python para flujos de datos",
+      summary: "Una guía avanzada para usar `try`, `except`, `else`, `finally` y `raise` al leer archivos, validar datos y evitar que un error interrumpa por completo un flujo de análisis o Machine Learning.",
+      category: "Programación",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "11 min",
+      updatedAt: "2026-08-03",
+      tags: ["Python", "Excepciones", "Errores", "Machine Learning"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Por qué este tema sí importa en análisis y ML",
+          body: "Cuando trabajo con datos reales, rara vez todo viene perfecto. Puede faltar un archivo, aparecer un valor inválido, cambiar el tipo de dato de una columna o romperse una conversión. El manejo de excepciones sirve justamente para que esos fallos no boten todo el flujo y para decidir con más criterio cómo responder."
+        },
+        {
+          title: "Excepción no es lo mismo que error de sintaxis",
+          body: "Una excepción ocurre en tiempo de ejecución. Es decir, el programa sí parte, pero en algún punto se encuentra con una situación inesperada. Eso es distinto a un error de sintaxis, donde el código ni siquiera puede ejecutarse."
+        },
+        {
+          title: "Qué gano al manejar excepciones bien",
+          body: "Un buen control de excepciones mejora la robustez del sistema, evita caídas bruscas, ayuda a entregar mensajes más claros y hace más fácil mantener procesos largos como cargas de datos, limpieza, entrenamiento o validación de modelos.",
+          comparisonTable: {
+            columns: ["Beneficio", "Aplicación en datos"],
+            rows: [
+              ["Robustez", "Evitar que una lectura defectuosa detenga todo el pipeline."],
+              ["Trazabilidad", "Identificar con claridad qué falló y dónde."],
+              ["Mejor experiencia", "Entregar mensajes entendibles en vez de un quiebre abrupto."],
+              ["Mantenibilidad", "Separar mejor los casos esperados de error."]
+            ]
+          }
+        },
+        {
+          title: "La estructura base: try, except, else y finally",
+          body: "La lógica general es simple: `try` contiene el bloque riesgoso, `except` captura errores concretos, `else` corre solo si no hubo problema y `finally` se ejecuta siempre, ideal para cerrar archivos o liberar recursos.",
+          code: "try:\n    archivo = open('numeros.txt', 'r', encoding='utf-8')\n    datos = [int(linea.strip()) for linea in archivo]\nexcept FileNotFoundError:\n    print('Archivo no encontrado.')\nexcept ValueError:\n    print('Se detectó un dato inválido.')\nelse:\n    print('Lectura exitosa:', datos)\nfinally:\n    try:\n        archivo.close()\n    except NameError:\n        pass\n    print('Fin del proceso.')"
+        },
+        {
+          title: "Errores comunes que sí conviene reconocer",
+          body: "Hay excepciones que aparecen una y otra vez cuando uno manipula información en Python.",
+          comparisonTable: {
+            columns: ["Excepción", "Cuándo aparece", "Ejemplo típico"],
+            rows: [
+              ["`FileNotFoundError`", "Cuando el archivo no existe.", "Ruta mal escrita o archivo faltante."],
+              ["`ValueError`", "Cuando el tipo base es correcto, pero el valor no sirve.", "Intentar convertir `'abc'` a entero."],
+              ["`TypeError`", "Cuando la operación no calza con el tipo de dato.", "Sumar texto con números."],
+              ["`KeyError`", "Cuando no existe una clave en un diccionario.", "Acceder a una columna mapeada que no está."],
+              ["`IndexError`", "Cuando se pide una posición fuera de rango.", "Tomar una fila inexistente de una lista."],
+              ["`ZeroDivisionError`", "Cuando se divide por cero.", "Cálculo de ratios sin control previo."]
+            ]
+          }
+        },
+        {
+          title: "Aplicado a lectura de archivos y datos",
+          body: "En flujos de datos, las excepciones ayudan a distinguir si falló la ruta, el formato, la conversión o la estructura del contenido. Eso permite reaccionar distinto según el problema en vez de tratar todo como un error genérico.",
+          code: "def cargar_puntajes(ruta):\n    try:\n        with open(ruta, 'r', encoding='utf-8') as archivo:\n            return [float(linea.strip()) for linea in archivo if linea.strip()]\n    except FileNotFoundError:\n        print('No se encontró el archivo de puntajes.')\n        return []\n    except ValueError:\n        print('Hay un valor no numérico dentro del archivo.')\n        return []"
+        },
+        {
+          title: "Else y finally dan más control del flujo",
+          body: "Muchas veces `else` se subestima, pero sirve mucho para separar el camino exitoso del manejo de errores. `finally`, en cambio, ayuda a asegurar cierres, limpieza o mensajes finales sin depender de si todo salió bien."
+        },
+        {
+          title: "Raise: provocar un error con intención",
+          body: "No siempre basta con esperar a que Python falle solo. A veces conviene lanzar una excepción manualmente cuando una regla de negocio o una validación no se cumple.",
+          code: "def validar_edad(edad):\n    if edad < 0:\n        raise ValueError('La edad no puede ser negativa.')\n    return edad"
+        },
+        {
+          title: "Excepciones personalizadas cuando el dominio lo pide",
+          body: "Si el proyecto necesita distinguir errores propios del negocio o del pipeline, crear excepciones personalizadas puede dar mucha más claridad que reciclar siempre las mismas clases genéricas.",
+          code: "class ErrorDeConexionDatos(Exception):\n    pass\n\n\ndef consultar_fuente(activa):\n    if not activa:\n        raise ErrorDeConexionDatos('La fuente de datos no está disponible.')"
+        },
+        {
+          title: "Buenas prácticas que sí valen la pena",
+          body: "Manejar excepciones no significa esconder cualquier error. La idea es capturar solo lo esperable y dejar que el código siga siendo claro.",
+          bestPractices: [
+            "Capturar excepciones específicas en vez de usar `except:` para todo.",
+            "Mantener el bloque `try` pequeño, centrado solo en el código riesgoso.",
+            "Usar `finally` o `with` para liberar recursos.",
+            "Registrar errores importantes con `logging` cuando el flujo sea productivo.",
+            "Crear excepciones personalizadas solo cuando realmente aporten contexto."
+          ]
+        },
+        {
+          title: "Qué pasa si un error coincide con varios except",
+          body: "Python evalúa los bloques `except` de arriba hacia abajo y ejecuta solo el primero que coincide. Por eso el orden importa: primero conviene atrapar casos específicos y dejar los más generales para después."
+        },
+        {
+          title: "Para recordar",
+          body: "En análisis de datos y Machine Learning, las excepciones no son un adorno del código: son una capa de control. `try` protege el bloque riesgoso, `except` decide cómo responder, `else` separa el camino exitoso, `finally` asegura limpieza y `raise` permite validar reglas antes de que el problema escale."
+        }
+      ],
+      relatedIds: [
+        "pandas-dataframes-masks-and-groupby",
+        "analysis-libraries-python-and-r",
+        "advanced-data-structures-for-ml"
       ]
     },
     {
@@ -7498,6 +9094,8 @@
     if (!cvModal) return;
     cvModal.classList.remove("is-open");
     cvModal.setAttribute("aria-hidden", "true");
+    closeCvExperiencePopovers();
+    closeCvPhonePopover();
     syncBodyScrollState();
   };
 
@@ -7515,6 +9113,38 @@
       panel.classList.toggle("is-active", isActive);
       panel.hidden = !isActive;
     });
+  };
+
+  const closeCvExperiencePopovers = (exceptBadge = null) => {
+    cvExperienceBadges.forEach((badge) => {
+      if (badge === exceptBadge) return;
+      badge.classList.remove("is-open");
+      const button = badge.querySelector(".cv-experience-icon");
+      button?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  const closeCvPhonePopover = () => {
+    if (!cvPhoneToggle) return;
+    cvPhoneToggle.classList.remove("is-open");
+    cvPhoneToggle.setAttribute("aria-expanded", "false");
+  };
+
+  const toggleCvExperiencePopover = (badge) => {
+    const button = badge.querySelector(".cv-experience-icon");
+    const isOpen = badge.classList.contains("is-open");
+    closeCvExperiencePopovers(badge);
+    closeCvPhonePopover();
+    badge.classList.toggle("is-open", !isOpen);
+    button?.setAttribute("aria-expanded", String(!isOpen));
+  };
+
+  const toggleCvPhonePopover = () => {
+    if (!cvPhoneToggle) return;
+    const isOpen = cvPhoneToggle.classList.contains("is-open");
+    closeCvExperiencePopovers();
+    cvPhoneToggle.classList.toggle("is-open", !isOpen);
+    cvPhoneToggle.setAttribute("aria-expanded", String(!isOpen));
   };
 
   const applyFilter = (filter) => {
@@ -8040,6 +9670,19 @@
     });
   });
 
+  cvExperienceBadges.forEach((badge) => {
+    const button = badge.querySelector(".cv-experience-icon");
+    button?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleCvExperiencePopover(badge);
+    });
+  });
+
+  cvPhoneToggle?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    toggleCvPhonePopover();
+  });
+
   modalPrev?.addEventListener("click", () => {
     renderProjectModal(currentProjectIndex - 1);
   });
@@ -8057,6 +9700,19 @@
     }
     if (event.key === "Escape" && cvModal?.classList.contains("is-open")) {
       closeCvModal();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    if (!target.closest(".cv-experience-badge")) {
+      closeCvExperiencePopovers();
+    }
+
+    if (!target.closest("[data-cv-phone-toggle]")) {
+      closeCvPhonePopover();
     }
   });
 

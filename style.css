@@ -2186,6 +2186,12 @@ body.is-intro-active .panel-layout {
   border-color: rgba(239, 111, 125, 0.28);
 }
 
+.cv-hero-phone.is-open {
+  transform: translateY(-2px);
+  color: #c43d55;
+  border-color: rgba(239, 111, 125, 0.28);
+}
+
 .cv-hero-phone::after {
   content: attr(title);
   position: absolute;
@@ -2208,6 +2214,11 @@ body.is-intro-active .panel-layout {
 }
 
 .cv-hero-phone:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+.cv-hero-phone.is-open::after {
   opacity: 1;
   transform: translateX(-50%) translateY(-2px);
 }
@@ -2550,7 +2561,8 @@ body.is-intro-active .panel-layout {
 }
 
 .cv-experience-badge:hover .cv-experience-popover,
-.cv-experience-badge:focus-within .cv-experience-popover {
+.cv-experience-badge:focus-within .cv-experience-popover,
+.cv-experience-badge.is-open .cv-experience-popover {
   opacity: 1;
   transform: translate(-50%, 0);
 }
@@ -5588,15 +5600,29 @@ body.is-intro-active .panel-layout {
     position: static;
     width: 100%;
     margin-top: 14px;
-    opacity: 1;
-    pointer-events: auto;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
     transform: none;
     box-shadow: none;
     border-style: dashed;
+    transition: max-height 0.22s ease, opacity 0.18s ease, padding 0.18s ease;
   }
 
   .cv-experience-popover::after {
     display: none;
+  }
+
+  .cv-experience-badge.is-open .cv-experience-popover,
+  .cv-experience-badge:focus-within .cv-experience-popover {
+    max-height: 480px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .cv-insight-cards {
