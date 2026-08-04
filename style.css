@@ -5762,9 +5762,8 @@ body.is-intro-active .panel-layout {
 .complexity-badge__copy strong {
   color: #5a4838;
   font-family: "Manrope", sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   line-height: 1.15;
-  overflow-wrap: anywhere;
 }
 
 .complexity-badge__copy small {
@@ -5792,7 +5791,7 @@ body.is-intro-active .panel-layout {
 
 .complexity-badge--filter .complexity-badge__copy strong,
 .complexity-badge--detail .complexity-badge__copy strong {
-  font-size: 0.8rem;
+  font-size: 0.76rem;
 }
 
 @media (max-width: 1080px) {
