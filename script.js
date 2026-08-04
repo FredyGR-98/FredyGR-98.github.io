@@ -101,8 +101,18 @@
     "Hojas de c\u00E1lculo",
     "SQL",
     "Programación",
+    "Código",
     "Machine Learning",
     "Visualizaciones"
+  ];
+
+  const atlasMlSubcategories = [
+    "Fundamentos ML",
+    "Modelos supervisados",
+    "Clustering y reducción de dimensionalidad",
+    "Deep Learning",
+    "NLP",
+    "MLOps e interpretabilidad"
   ];
 
   const atlasCategoryMeta = {
@@ -118,8 +128,12 @@
       iconClass: "fa-solid fa-database",
       label: "SQL"
     },
-    Programación: {
+    Código: {
       iconClass: "fa-brands fa-python",
+      label: "Código"
+    },
+    Programación: {
+      iconClass: "fa-solid fa-code",
       label: "Programación"
     },
     "Machine Learning": {
@@ -3193,6 +3207,3328 @@
       ]
     },
     {
+      id: "regularization-overfitting-and-linear-penalties",
+      slug: "regularizacion-overfitting-y-penalizaciones-lineales",
+      title: "Regularización, overfitting y penalizaciones lineales",
+      summary: "Una guía para entender por qué aparecen el overfitting y el underfitting, cómo actúan las penalizaciones dentro de un modelo y cuándo conviene elegir `Ridge`, `Lasso` o `Elastic Net`.",
+      category: "Machine Learning",
+      type: "Comparativa",
+      level: "advanced",
+      readingTime: "14 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Regularización", "Overfitting", "Ridge"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: mejorar sin memorizar de más",
+          body: "Un modelo puede verse muy inteligente dentro del conjunto de entrenamiento y aun así fallar cuando recibe datos nuevos. Ese es el corazón del `overfitting`: el modelo aprende demasiado bien los detalles, el ruido o las rarezas del entrenamiento, pero generaliza mal. La regularización aparece justo para frenar ese exceso de libertad."
+        },
+        {
+          title: "El equilibrio sesgo-varianza es la idea de fondo",
+          body: "El corazón de la regularización está en balancear sesgo y varianza. Cuando un modelo se vuelve muy complejo, suele tener bajo sesgo pero alta varianza: aprende demasiado del entrenamiento y se vuelve inestable frente a datos nuevos. Cuando simplifico demasiado, sube el sesgo y aparece underfitting. Regularizar no significa 'hacer el modelo peor', sino moverlo hacia una zona donde generalice mejor."
+        },
+        {
+          title: "Qué es overfitting y qué es underfitting",
+          body: "Si el modelo es demasiado flexible, puede capturar patrones reales y también ruido, y ahí se sobreajusta. Si en cambio lo dejo demasiado rígido, no logra aprender ni siquiera la señal importante, y aparece el `underfitting`. En la práctica, casi todo el juego consiste en encontrar un punto medio entre sesgo y varianza.",
+          comparisonTable: {
+            columns: ["Situación", "Qué suele pasar", "Señal típica"],
+            rows: [
+              ["Overfitting", "Aprende demasiado del entrenamiento.", "Error bajo en train y claramente peor en validación o test."],
+              ["Buen equilibrio", "Captura señal útil sin memorizar ruido.", "Rendimiento parecido entre train y validación."],
+              ["Underfitting", "El modelo queda demasiado simple o castigado.", "Mal desempeño incluso en entrenamiento."]
+            ]
+          }
+        },
+        {
+          title: "Dónde entra la regularización",
+          body: "Regularizar significa agregar un castigo al tamaño o complejidad de los coeficientes. En vez de dejar que el modelo use pesos enormes para perseguir cualquier oscilación del dataset, le pongo una presión extra para que prefiera soluciones más sobrias. No elimina la pérdida original: la complementa con una penalización."
+        },
+        {
+          title: "La función de costo cambia de forma explícita",
+          body: "En modelos lineales, la regularización se entiende muy bien viendo cómo cambia la función de costo. Ya no optimizo solo el error del ajuste, sino el error más un castigo por complejidad. Esa es la razón de fondo por la que los coeficientes se encogen y el modelo se vuelve más controlado.",
+          comparisonTable: {
+            columns: ["Método", "Forma simplificada de la función de costo", "Qué castiga"],
+            rows: [
+              ["Ridge", "`RSS + λ Σβ²`", "Coeficientes grandes en magnitud, pero sin llevarlos normalmente a cero."],
+              ["Lasso", "`RSS + λ Σ|β|`", "Coeficientes grandes y favorece que algunos desaparezcan por completo."],
+              ["Elastic Net", "`RSS + λ(α Σ|β| + (1-α) Σβ²)`", "Combina castigo de selección y estabilización en una sola expresión."]
+            ]
+          }
+        },
+        {
+          title: "La intuición de la penalización",
+          body: "Si un coeficiente crece demasiado, la regularización lo castiga. Eso obliga al modelo a pensar mejor qué variables realmente necesita y cuánto debe confiar en cada una. En términos simples: mientras más alto sea `λ` o la fuerza de regularización, más caro se vuelve usar pesos grandes.",
+          comparisonTable: {
+            columns: ["Fuerza del castigo", "Qué ocurre con el modelo", "Riesgo principal"],
+            rows: [
+              ["Muy baja", "El modelo queda casi libre.", "Puede sobreajustarse."],
+              ["Intermedia", "Se moderan coeficientes y mejora la generalización.", "Suele ser la zona más útil."],
+              ["Muy alta", "Los coeficientes se encogen demasiado.", "Puede aparecer underfitting."]
+            ]
+          }
+        },
+        {
+          title: "Ridge (L2): encoger sin eliminar",
+          body: "`Ridge` usa penalización `L2`, es decir, castiga la suma de coeficientes al cuadrado. Su efecto principal es reducirlos de tamaño, pero normalmente sin llevarlos exactamente a cero. Eso lo vuelve muy útil cuando muchas variables sí aportan algo, aunque no quiera que ninguna domine demasiado.",
+          comparisonTable: {
+            columns: ["Qué hace bien", "Qué debo recordar"],
+            rows: [
+              ["Estabiliza modelos con variables correlacionadas.", "No suele hacer selección dura de variables."],
+              ["Reduce varianza y ayuda a generalizar.", "Todos los predictores suelen seguir vivos, pero más controlados."],
+              ["Funciona bien cuando muchas features tienen aporte pequeño.", "Conviene escalar variables antes de aplicarlo."]
+            ]
+          }
+        },
+        {
+          title: "Lasso (L1): castigar y seleccionar",
+          body: "`Lasso` usa penalización `L1`, basada en la suma de valores absolutos de los coeficientes. La gran diferencia es que sí puede empujar algunos coeficientes exactamente a cero. Por eso se vuelve muy atractivo cuando quiero simplificar el modelo y quedarme con un subconjunto más reducido de variables.",
+          comparisonTable: {
+            columns: ["Ventaja fuerte", "Costo o cuidado"],
+            rows: [
+              ["Hace selección automática de variables.", "Puede volverse inestable si hay muchas variables muy correlacionadas."],
+              ["Ayuda a interpretar mejor qué quedó activo.", "Si la penalización es muy agresiva, puede borrar señal útil."],
+              ["Sirve cuando sospecho que no todas las features aportan.", "La solución puede cambiar más entre muestras que con Ridge."]
+            ]
+          }
+        },
+        {
+          title: "Elastic Net: mezclar control y selección",
+          body: "`Elastic Net` combina `L1` y `L2`. En la práctica es una solución muy útil cuando tengo bastantes variables y varias de ellas están correlacionadas. Toma la capacidad de selección de `Lasso`, pero añade la estabilidad de `Ridge`.",
+          comparisonTable: {
+            columns: ["Qué combina", "Cuándo luce más", "Qué ajusto"],
+            rows: [
+              ["Selección de variables + encogimiento estable.", "Datasets con muchas features y grupos correlacionados.", "La fuerza total de regularización y la mezcla entre `L1` y `L2`."],
+              ["Menos rigidez que usar solo Lasso.", "Escenarios donde no quiero eliminar variables demasiado fácil.", "Parámetros como `alpha` y `l1_ratio`."],
+              ["Más flexible para tuning.", "Problemas donde quiero balancear interpretación y robustez.", "Necesita mejor validación para elegir la mezcla adecuada."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo se vuelve especialmente útil Elastic Net",
+          body: "Elastic Net luce mucho cuando tengo muchas variables, bastante correlación entre ellas o incluso escenarios donde el número de variables se acerca o supera al número de observaciones. Ahí Lasso puede volverse demasiado agresivo o inestable, mientras Ridge mantiene todo vivo pero sin seleccionar. Elastic Net aparece justo como punto medio útil."
+        },
+        {
+          title: "Tabla resumen: Ridge vs Lasso vs Elastic Net",
+          body: "Si tuviera que recordarlo rápido, lo resumiría así.",
+          comparisonTable: {
+            columns: ["Método", "Tipo de penalización", "Qué hace con coeficientes", "Cuándo conviene más"],
+            rows: [
+              ["Ridge", "L2", "Los encoge, pero rara vez los deja en cero.", "Cuando muchas variables aportan y quiero estabilidad."],
+              ["Lasso", "L1", "Puede llevar algunos coeficientes exactamente a cero.", "Cuando también quiero selección de variables."],
+              ["Elastic Net", "L1 + L2", "Encoge y puede seleccionar, pero con más equilibrio.", "Cuando hay muchas variables correlacionadas y quiero flexibilidad."]
+            ]
+          }
+        },
+        {
+          title: "Cómo lo conecto con overfitting",
+          body: "La regularización no 'cura mágicamente' el overfitting, pero sí reduce una de sus causas más comunes: permitir que el modelo se vuelva demasiado sensible al entrenamiento. Si el problema es sobreajuste, añadir penalización puede mejorar la generalización. Si el problema ya era underfitting, castigar todavía más puede empeorarlo."
+        },
+        {
+          title: "Qué hiperparámetros vigilaría",
+          body: "Aquí el tuning importa mucho. En `Ridge` y `Lasso`, el parámetro principal suele ser la fuerza del castigo (`alpha` o `lambda`, según librería). En `Elastic Net`, además debo decidir cuánto peso doy a `L1` frente a `L2`. Esa mezcla es parte del valor del método, pero también parte de su complejidad."
+        },
+        {
+          title: "Cómo evaluaría el impacto real de la regularización",
+          body: "La gracia no es solo decir 'apliqué Ridge' o 'apliqué Lasso', sino ver qué cambió después. Lo esperable es mirar si bajó el sobreajuste, si mejoró la generalización en test o validación cruzada, si los coeficientes se hicieron más estables y si el modelo sigue siendo suficientemente expresivo.",
+          comparisonTable: {
+            columns: ["Qué observar", "Qué esperaría ver"],
+            rows: [
+              ["Complejidad del modelo", "Coeficientes más pequeños o algunos coeficientes exactamente en cero."],
+              ["Generalización", "Mejor comportamiento en validación o prueba respecto a un modelo demasiado libre."],
+              ["Overfitting", "Menor brecha entre entrenamiento y validación."],
+              ["Riesgo de underfitting", "Puede aparecer si `lambda` o `alpha` es demasiado alto."],
+              ["Interpretabilidad", "Lasso y Elastic Net suelen facilitar más lectura de variables relevantes."]
+            ]
+          }
+        },
+        {
+          title: "Cómo cambian los coeficientes según el método",
+          body: "Si comparo resultados, lo típico es esto: Ridge deja coeficientes más pequeños pero casi nunca en cero; Lasso sí puede eliminar variables completas; Elastic Net suele dejar algunos coeficientes casi nulos y otros encogidos, combinando selección con estabilidad. Esa lectura es muy útil porque conecta directamente la teoría con lo que efectivamente veré en un modelo entrenado."
+        },
+        {
+          title: "Errores comunes al usar regularización",
+          body: "Uno de los errores más comunes es pensar que más regularización siempre es mejor. Otro es aplicar estos métodos sin escalar variables, lo que vuelve injusta la penalización entre features. También es fácil confundirse y creer que si Lasso deja coeficientes en cero entonces siempre será la mejor opción; no necesariamente, porque Ridge o Elastic Net pueden generalizar mejor dependiendo del problema."
+        },
+        {
+          title: "Cómo lo pensaría yo en un flujo real",
+          body: "Si mi prioridad es estabilidad y sé que varias variables sí aportan, pensaría primero en `Ridge`. Si necesito simplificar el modelo o hacer selección automática, probaría `Lasso`. Si hay muchas features correlacionadas o quiero equilibrio entre selección y robustez, me iría a `Elastic Net` y lo ajustaría con validación cruzada."
+        },
+        {
+          title: "Para recordar",
+          body: "Overfitting es aprender demasiado del entrenamiento; underfitting es no aprender suficiente. `Ridge` encoge, `Lasso` selecciona y `Elastic Net` mezcla ambas ideas. La gracia no está solo en memorizar la fórmula, sino en entender qué tipo de problema tengo y cuánta libertad conviene quitarle al modelo para que generalice mejor."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M5-S1 – Lectura: regularización, penalizaciones y prevención del overfitting en modelos lineales</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM5S1 – Cuestionario Clase 1: Ridge, Lasso, Elastic Net y señales de sobreajuste</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M5-S5 – Lectura: el concepto de regularización, sesgo-varianza e impacto de Ridge, Lasso y Elastic Net</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM5S5 – Cuestionario Clase 5: regularización, coeficientes y generalización</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "hyperparameter-search-strategies-for-machine-learning",
+        "optimization-methods-for-machine-learning",
+        "ray-tune-for-distributed-hyperparameter-optimization"
+      ]
+    },
+    {
+      id: "quantile-regression-for-risk-and-scenarios",
+      slug: "regresion-cuantilica-para-riesgo-y-escenarios",
+      title: "Regresión cuantílica para riesgo y escenarios",
+      summary: "Una guía para entender por qué la regresión cuantílica no busca solo el promedio, sino distintos percentiles de la variable objetivo, y por qué resulta tan útil en contextos con riesgo, asimetría y variabilidad no constante.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "13 min",
+      updatedAt: "2026-08-03",
+      tags: ["Machine Learning", "Regresión", "Cuantiles", "Riesgo"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: no todo se resume en el promedio",
+          body: "La regresión cuantílica extiende la lógica de la regresión tradicional, pero en vez de estimar solo el valor medio esperado de `y` dado `X`, permite modelar distintos cuantiles o percentiles de la variable objetivo. Eso significa que puedo mirar el centro de la distribución, pero también escenarios más conservadores o más extremos."
+        },
+        {
+          title: "No confundirla con regresión lineal o múltiple",
+          body: "Aunque el nombre se parece, la regresión cuantílica no es simplemente otra forma de decir regresión lineal o regresión múltiple. La regresión lineal clásica busca estimar la media condicional, y la regresión múltiple solo indica que uso varias variables explicativas. La regresión cuantílica, en cambio, cambia el objetivo mismo del ajuste: en lugar de perseguir el promedio, busca un cuantil específico como la mediana (`q = 0.5`) o un percentil alto o bajo."
+        },
+        {
+          title: "La comparación rápida para no volver a mezclarlas",
+          body: "Si lo quiero separar mentalmente de forma simple, lo dejaría así.",
+          comparisonTable: {
+            columns: ["Modelo", "Qué estima", "Para qué suele usarse"],
+            rows: [
+              ["Regresión lineal", "La media condicional de `y`.", "Ver tendencia promedio y relación lineal general."],
+              ["Regresión múltiple", "La media condicional usando varias variables.", "Explicar una respuesta con varios predictores."],
+              ["Regresión cuantílica", "Un cuantil específico de `y`.", "Analizar riesgo, asimetría y distintos escenarios posibles."]
+            ]
+          }
+        },
+        {
+          title: "Por qué sí aporta algo distinto",
+          body: "En muchos problemas la media no cuenta toda la historia. Si la distribución está sesgada, si hay colas pesadas o si me interesa un escenario conservador, trabajar solo con el promedio puede ocultar comportamientos importantes. La regresión cuantílica me deja mirar, por ejemplo, el percentil 90 de tiempos de entrega, el percentil 95 de riesgo de default o la mediana de ingresos cuando el promedio está distorsionado por outliers."
+        },
+        {
+          title: "La función de pérdida cambia el juego",
+          body: "Aquí no se minimiza el mismo error cuadrático que en regresión lineal tradicional. La regresión cuantílica usa una pérdida asimétrica que castiga de forma diferente los errores por encima y por debajo del cuantil elegido. Por eso logra adaptar el ajuste al escenario que realmente me interesa modelar."
+        },
+        {
+          title: "Cuándo conviene usarla",
+          body: "Brilla cuando quiero analizar más de un escenario y cuando la variabilidad no se comporta igual en toda la muestra.",
+          comparisonTable: {
+            columns: ["Situación", "Por qué la cuantílica ayuda"],
+            rows: [
+              ["Distribuciones asimétricas", "La media puede ser poco representativa."],
+              ["Heterocedasticidad", "Permite leer mejor cómo cambia la dispersión según el nivel de `y`."],
+              ["Análisis de riesgo", "Sirve para percentiles altos o bajos, no solo para el centro."],
+              ["Planificación conservadora", "Ayuda a trabajar con escenarios más seguros o más agresivos."],
+              ["Outliers relevantes", "La mediana o cuantiles intermedios pueden ser más robustos que la media."]
+            ]
+          }
+        },
+        {
+          title: "Ejemplos donde tiene mucho sentido",
+          body: "En créditos puedo estimar percentiles altos del riesgo para diseñar políticas más conservadoras. En logística puedo predecir el percentil 90 del tiempo de entrega para prometer plazos más seguros. En recursos humanos puedo revisar cuantiles salariales y no solo el ingreso medio. En retail puedo usar percentiles altos de demanda para dimensionar mejor inventario."
+        },
+        {
+          title: "Cómo leer sus cuantiles en la práctica",
+          body: "Si entreno un modelo con `q = 0.5`, estoy modelando la mediana. Si uso `q = 0.9`, me enfoco en un escenario alto o conservador. Si uso `q = 0.1`, miro una cola baja. La gracia es que puedo entrenar varios cuantiles y obtener una lectura mucho más completa de la distribución de resultados."
+        },
+        {
+          title: "Qué no hace por sí sola",
+          body: "No reemplaza automáticamente a la regresión lineal clásica. Si solo necesito una tendencia promedio simple, una regresión tradicional puede bastar perfectamente. La cuantílica vale la pena cuando la pregunta del negocio o del análisis realmente necesita mirar dispersión, percentiles o escenarios de riesgo."
+        },
+        {
+          title: "Errores comunes al interpretarla",
+          body: "Uno de los errores más comunes es creer que por llamarse 'regresión' debe significar lo mismo que la lineal. Otro es interpretar un cuantil como si fuera probabilidad directa de que ocurra un evento. También pasa que a veces se usa `q = 0.5` y se olvida que eso es mediana, no media."
+        },
+        {
+          title: "Para recordar",
+          body: "La regresión lineal y múltiple siguen siendo muy útiles, pero apuntan al promedio. La regresión cuantílica cambia el foco: permite modelar distintos percentiles de la respuesta. Si quiero entender centro, extremos o escenarios conservadores dentro de un problema, ahí la cuantílica empieza a mostrar su valor real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M5-S2 – Lectura: técnicas de regresión y uso de regresión cuantílica en escenarios de riesgo</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM5S2 – Cuestionario Clase 2: regresión cuantílica y casos de uso</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "regularization-overfitting-and-linear-penalties",
+        "hyperparameter-search-strategies-for-machine-learning",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "boosting-and-classification-metrics",
+      slug: "boosting-y-metricas-de-clasificacion",
+      title: "Boosting y métricas de clasificación",
+      summary: "Una guía para entender cómo funciona `Boosting`, por qué reduce sesgo combinando modelos débiles de forma secuencial y cómo leer sus resultados con matriz de confusión, sensibilidad, especificidad, precisión y valor predictivo.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Boosting", "Clasificación", "Métricas"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: convertir varios modelos débiles en uno fuerte",
+          body: "Boosting es una técnica de ensamble que entrena modelos de forma secuencial. Cada nuevo modelo intenta corregir los errores del anterior, de modo que el sistema completo va mejorando iteración tras iteración. La lógica no es promediar a ciegas, sino poner cada vez más atención donde el modelo viene fallando."
+        },
+        {
+          title: "Qué problema intenta resolver",
+          body: "Mientras `Bagging` suele enfocarse en reducir varianza, `Boosting` se concentra más en reducir sesgo. Por eso suele rendir muy bien en datos tabulares y en problemas donde un modelo simple por sí solo se queda corto. La mejora viene de ir construyendo una secuencia de correcciones parciales."
+        },
+        {
+          title: "Cómo funciona en pasos simples",
+          body: "Primero entreno un modelo base. Después identifico sus errores o residuos y entreno otro modelo que se concentre en esa parte mal resuelta. Luego repito la lógica varias veces y combino las salidas ponderadamente. En clasificación esto equivale a reforzar los casos difíciles; en regresión, a corregir residuos de forma aditiva."
+        },
+        {
+          title: "Los nombres que más aparecen",
+          body: "Dentro del ecosistema de Boosting, estos son los algoritmos más comunes.",
+          comparisonTable: {
+            columns: ["Algoritmo", "Qué destaca", "Cuándo suele lucir"],
+            rows: [
+              ["AdaBoost", "Repondera observaciones mal clasificadas en cada ronda.", "Ejercicios conceptuales o problemas relativamente limpios."],
+              ["Gradient Boosting", "Optimiza secuencialmente una función de pérdida.", "Problemas donde quiero control fino del ajuste."],
+              ["XGBoost", "Añade regularización, manejo fuerte de tabulares y mucha precisión.", "Competencias y flujos productivos con datos estructurados."],
+              ["LightGBM", "Entrena rápido y escala muy bien.", "Datasets grandes y tiempos de entrenamiento apretados."],
+              ["CatBoost", "Maneja muy bien variables categóricas.", "Problemas con muchas categorías y menos preprocesamiento manual."]
+            ]
+          }
+        },
+        {
+          title: "Ventajas reales de Boosting",
+          body: "Su gran fortaleza es la precisión. También puede capturar relaciones no lineales sin exigir demasiada ingeniería manual. Además, muchos algoritmos modernos de boosting permiten trabajar con funciones de pérdida distintas, regularización, early stopping y ajuste fino de hiperparámetros."
+        },
+        {
+          title: "Sus riesgos también importan",
+          body: "Como entrena secuencialmente y aprende corrigiendo errores, puede sobreajustarse si lo dejo crecer demasiado o si el dataset tiene mucho ruido. También suele costar más explicarlo que una regresión o un árbol simple, y el entrenamiento puede ser más caro en tiempo y recursos."
+        },
+        {
+          title: "Por qué aquí aparecen VP, FP, FN y VN",
+          body: "Cuando uso Boosting para clasificación binaria, no me basta con saber si la exactitud general salió alta. Necesito entender qué tipos de aciertos y errores está cometiendo el modelo. Ahí entra la matriz de confusión: separa verdaderos positivos, falsos positivos, falsos negativos y verdaderos negativos para interpretar mejor el rendimiento."
+        },
+        {
+          title: "La matriz de confusión para recordarlo visualmente",
+          body: "Esta card sirve como recordatorio rápido de la estructura y de las fórmulas más comunes.",
+          illustrations: [
+            {
+              src: "img/atlas/confusion-matrix-metrics.svg",
+              alt: "Matriz de confusión con VP, FP, FN y VN, más fórmulas de sensibilidad, especificidad, precisión y VPN.",
+              caption: "Si recuerdo bien esta tabla, después las métricas salen casi solas."
+            }
+          ]
+        },
+        {
+          title: "Qué significa cada componente",
+          body: "Los `VP` son positivos reales que el modelo detectó como positivos. Los `FP` son casos que el modelo marcó como positivos, pero en realidad no lo eran. Los `FN` son positivos reales que el modelo dejó escapar. Y los `VN` son negativos reales bien clasificados como negativos."
+        },
+        {
+          title: "Las fórmulas que más conviene memorizar",
+          body: "En clase, normalmente estas son las primeras cuatro métricas que más aparecen.",
+          comparisonTable: {
+            columns: ["Métrica", "Fórmula", "Qué responde"],
+            rows: [
+              ["Sensibilidad / Recall", "VP / (VP + FN)", "¿Qué proporción de los positivos reales logré detectar?"],
+              ["Especificidad", "VN / (VN + FP)", "¿Qué tan bien reconozco a los negativos reales?"],
+              ["Precisión / VPP", "VP / (VP + FP)", "De todo lo que marqué como positivo, ¿cuánto era realmente positivo?"],
+              ["Valor Predictivo Negativo", "VN / (VN + FN)", "De todo lo que marqué como negativo, ¿cuánto era realmente negativo?"]
+            ]
+          }
+        },
+        {
+          title: "Cómo leerlas sin enredarme",
+          body: "Si me preocupa detectar enfermedad, fraude o default, probablemente miraré mucho la sensibilidad. Si me cuesta mucho acusar falsamente un positivo, la precisión gana peso. Si me interesa descartar bien casos sanos o normales, la especificidad se vuelve más crítica. La métrica importante depende del costo del error."
+        },
+        {
+          title: "Qué relación tiene esto con Boosting",
+          body: "Boosting puede entregar muy buenos resultados, pero también puede esconder errores importantes si solo miro una métrica global. Un modelo puede verse potente en accuracy y aun así tener demasiados falsos negativos o demasiados falsos positivos. Por eso estas métricas no son un adorno: son parte de la evaluación real."
+        },
+        {
+          title: "Métricas y decisiones de negocio",
+          body: "En crédito, un falso negativo puede significar no detectar un cliente riesgoso. En salud, puede significar no detectar una enfermedad. En marketing, un falso positivo puede implicar contactar a personas que no eran objetivo real. La misma matriz de confusión se interpreta distinto según el costo del error."
+        },
+        {
+          title: "Qué hiperparámetros suelen mover más el resultado",
+          body: "En boosting aparecen muy seguido `learning_rate`, `n_estimators`, `max_depth`, subsampling y regularización. Si los exagero, el modelo puede memorizar demasiado; si los dejo muy conservadores, puede quedarse corto. Por eso conviene conectar siempre boosting con validación cruzada, early stopping y control de overfitting."
+        },
+        {
+          title: "Para recordar",
+          body: "Boosting mejora secuencialmente modelos débiles para construir uno más fuerte, y suele dar gran precisión en clasificación tabular. Pero no basta con mirar accuracy: conviene revisar matriz de confusión, sensibilidad, especificidad, precisión y VPN para entender realmente qué está acertando y qué está dejando pasar."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M5-S3 – Lectura: técnicas de clasificación, métodos de ensamble y boosting</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM5S3 – Cuestionario Clase 3: boosting, clasificación binaria y métricas de evaluación</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "regularization-overfitting-and-linear-penalties",
+        "hyperparameter-search-strategies-for-machine-learning",
+        "ray-tune-for-distributed-hyperparameter-optimization"
+      ]
+    },
+    {
+      id: "cross-validation-and-model-evaluation-metrics",
+      slug: "validacion-cruzada-y-metricas-de-evaluacion",
+      title: "Validación cruzada y métricas de evaluación",
+      summary: "Una guía para entender cómo se evalúan realmente los modelos con `Cross-Validation`, cuándo usar `K-Fold`, `Stratified K-Fold`, `LOOCV` o `Time Series Split`, y cómo interpretar métricas como `accuracy`, `precision`, `recall`, `F1` y su relación con VP, FP, FN y VN.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "17 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Cross Validation", "Métricas", "F1"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: evaluar bien importa tanto como entrenar bien",
+          body: "Un modelo no se juzga solo por cómo rinde una vez sobre una partición cualquiera. Si quiero saber si realmente generaliza, necesito validarlo de una forma más robusta. Ahí entra la validación cruzada: me permite estimar cómo se comportará el modelo en datos nuevos sin depender tanto de una sola división train-test."
+        },
+        {
+          title: "Qué es validación cruzada",
+          body: "La validación cruzada divide los datos en múltiples particiones o `folds`. En cada ronda entreno con una parte y valido con otra, repitiendo el proceso varias veces. Al final no me quedo con un único resultado aislado, sino con una mirada más estable del comportamiento del modelo."
+        },
+        {
+          title: "Por qué sí mejora la evaluación",
+          body: "Su mayor valor está en que reduce la dependencia de una sola partición. Eso ayuda a detectar sobreajuste, subajuste y sensibilidad del modelo a distintos subconjuntos del dataset. También me obliga a mirar media y dispersión, no solo un numerito bonito."
+        },
+        {
+          title: "Los métodos principales de validación cruzada",
+          body: "No existe un solo tipo de `Cross-Validation`; el mejor depende del problema y de la estructura de los datos.",
+          comparisonTable: {
+            columns: ["Método", "Ideal para", "Ventaja principal", "Cuidado"],
+            rows: [
+              ["K-Fold", "Modelos generales con datos tabulares comunes.", "Entrega una estimación más estable que una sola partición.", "Puede desbalancear clases si no cuido la distribución."],
+              ["LOOCV", "Datasets muy pequeños.", "Aprovecha casi toda la muestra para entrenar en cada ronda.", "Es costoso y puede tener alta varianza."],
+              ["Stratified K-Fold", "Clasificación con clases desbalanceadas.", "Mantiene la proporción de clases en cada fold.", "Sigue sin resolver por sí solo otros problemas del dataset."],
+              ["Time Series Split", "Series temporales.", "Respeta el orden del tiempo y evita fuga de información.", "No sirve como si los datos fueran aleatorios."]
+            ]
+          }
+        },
+        {
+          title: "K-Fold: la base más conocida",
+          body: "En `K-Fold`, divido el dataset en `K` bloques similares. Entreno con `K-1` y valido con el restante, repitiendo hasta usar todos los folds como validación. Luego promediar los resultados me da una estimación más robusta del rendimiento general."
+        },
+        {
+          title: "Stratified K-Fold: clave en clasificación",
+          body: "Cuando trabajo con clases desbalanceadas, no me conviene que un fold tenga demasiados positivos y otro casi ninguno. `Stratified K-Fold` corrige eso manteniendo proporciones similares de clase en cada partición. Para clasificación real, muchas veces esta es la opción más sana por defecto."
+        },
+        {
+          title: "LOOCV: exhaustivo, pero caro",
+          body: "`Leave-One-Out Cross-Validation` usa cada observación como validación una vez y entrena con todas las demás. Es muy exhaustivo y útil en datasets pequeños, pero se vuelve costoso rápidamente y a veces entrega resultados muy variables."
+        },
+        {
+          title: "Time Series Split: no viajar en el tiempo",
+          body: "En series temporales, validar como si las filas fueran intercambiables rompe la lógica del problema. Aquí la regla clave es simple: nunca uso el futuro para entrenar el pasado. Por eso `Time Series Split` avanza con ventanas deslizantes o acumulativas y respeta la estructura temporal."
+        },
+        {
+          title: "Qué mirar después de hacer Cross-Validation",
+          body: "No basta con promediar los folds y seguir de largo. Conviene mirar al menos dos cosas: la media del desempeño y su desviación estándar. Si el promedio se ve alto pero la dispersión es grande, el modelo puede estar siendo poco estable."
+        },
+        {
+          title: "Media y desviación estándar sí importan",
+          body: "La media resume rendimiento promedio entre folds. La desviación estándar muestra cuánto varía ese rendimiento. Un modelo más estable suele tener dispersión baja. Si veo scores que cambian demasiado de un fold a otro, eso puede ser una señal de mala generalización o sensibilidad al muestreo."
+        },
+        {
+          title: "Señales de sobreajuste detectables en validación",
+          body: "Hay varias pistas típicas: rendimiento casi perfecto en entrenamiento pero moderado en validación, gran diferencia entre folds o una precisión media alta con desviación estándar muy grande. La validación cruzada no elimina el sobreajuste, pero sí ayuda mucho a detectarlo antes."
+        },
+        {
+          title: "Accuracy no siempre alcanza",
+          body: "`Accuracy` puede ser útil, pero engaña fácilmente cuando las clases están desbalanceadas. Si casi todos los casos son negativos, un modelo puede acertar mucho solo por predecir siempre negativo. Por eso en clasificación necesito revisar métricas más enfocadas en positivos, errores y equilibrio."
+        },
+        {
+          title: "La relación directa con VP, FP, FN y VN",
+          body: "Muchas de las métricas más importantes salen directamente de la matriz de confusión. Si entiendo `VP`, `FP`, `FN` y `VN`, después puedo reconstruir casi todo lo demás con bastante facilidad.",
+          illustrations: [
+            {
+              src: "img/atlas/confusion-matrix-metrics.svg",
+              alt: "Matriz de confusión con VP, FP, FN y VN, más fórmulas de métricas básicas.",
+              caption: "La matriz de confusión es la base para leer casi todas las métricas importantes de clasificación."
+            }
+          ]
+        },
+        {
+          title: "Tabla resumen de métricas clave",
+          body: "Aquí conviene recordar no solo la fórmula, sino también qué pregunta responde cada métrica.",
+          comparisonTable: {
+            columns: ["Métrica", "Fórmula", "Qué responde", "Cuándo gana importancia"],
+            rows: [
+              ["Accuracy", "(VP + VN) / Total", "¿Qué proporción total clasifiqué bien?", "Cuando las clases están equilibradas y el costo del error es similar."],
+              ["Precision", "VP / (VP + FP)", "De todo lo que marqué como positivo, ¿cuánto era realmente positivo?", "Cuando los falsos positivos son costosos."],
+              ["Recall / Sensibilidad", "VP / (VP + FN)", "¿Qué parte de los positivos reales logré detectar?", "Cuando perder un positivo real es grave."],
+              ["Especificidad", "VN / (VN + FP)", "¿Qué tan bien detecto los negativos reales?", "Cuando también importa descartar bien casos sanos o normales."],
+              ["F1-Score", "2 · (Precision · Recall) / (Precision + Recall)", "¿Qué tan equilibrado está el modelo entre precisión y recall?", "Cuando necesito balance entre falsos positivos y falsos negativos."],
+              ["VPN", "VN / (VN + FN)", "De todo lo que marqué como negativo, ¿cuánto era realmente negativo?", "Cuando me importa confiar en los negativos predichos."]
+            ]
+          }
+        },
+        {
+          title: "El punto clave sobre F1",
+          body: "`F1` no sale de la nada ni es una métrica separada del resto: nace directamente de `Precision` y `Recall`, y esas dos a su vez nacen de `VP`, `FP` y `FN`. O sea, aunque la fórmula final de `F1` use precisión y recall, en el fondo sigue dependiendo completamente de la matriz de confusión."
+        },
+        {
+          title: "Cómo elegir la métrica correcta",
+          body: "La métrica correcta depende del costo del error. En fraude o medicina, suele importar mucho no dejar pasar positivos reales, así que `Recall` pesa más. Si acusar falsamente a alguien es caro, entonces `Precision` gana protagonismo. Si quiero equilibrio, `F1` se vuelve muy útil. Y si las clases están equilibradas, `Accuracy` puede seguir siendo razonable."
+        },
+        {
+          title: "Cómo conecto esto con modelos reales",
+          body: "Cuando comparo algoritmos como Random Forest, XGBoost o Logistic Regression, no me conviene mirar solo el score promedio. Lo más sano es revisar qué métrica refleja mejor el problema, aplicar validación cruzada y luego comparar media, dispersión y tipo de error. Ahí recién la evaluación se vuelve seria."
+        },
+        {
+          title: "Para recordar",
+          body: "La validación cruzada me ayuda a evaluar si el modelo generaliza; la media y la desviación estándar me hablan de estabilidad; y métricas como `Precision`, `Recall`, `Especificidad`, `F1` y `VPN` se entienden mucho mejor si primero tengo clara la matriz de confusión. En clasificación, evaluar bien casi siempre significa mirar más de una métrica al mismo tiempo."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M5-S4 – Lección: técnicas de validación cruzada y análisis de métricas de evaluación</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM5S4 – Cuestionario Clase 4: Cross-Validation, métricas y matriz de confusión</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "boosting-and-classification-metrics",
+        "regularization-overfitting-and-linear-penalties",
+        "hyperparameter-search-strategies-for-machine-learning"
+      ]
+    },
+    {
+      id: "feature-selection-methods-for-machine-learning",
+      slug: "seleccion-de-caracteristicas-para-machine-learning",
+      title: "Selección de características para Machine Learning",
+      summary: "Una guía para entender por qué conviene seleccionar variables antes de modelar, cómo se diferencian filtros, wrappers y métodos embebidos, y cuándo usar técnicas como `Lasso`, `RFE`, `SelectKBest` o importancia de variables.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Feature Selection", "Lasso", "RFE"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: no todas las variables ayudan",
+          body: "Tener más columnas no siempre significa tener un mejor modelo. Muchas veces algunas variables aportan señal útil, pero otras solo agregan ruido, redundancia, costo computacional o interpretaciones engañosas. La selección de características aparece justo para quedarme con las variables que realmente sostienen el aprendizaje."
+        },
+        {
+          title: "Qué es selección de características",
+          body: "La selección de características es el proceso de identificar y conservar solo las variables más relevantes del dataset original. Su objetivo es mejorar eficiencia, interpretabilidad y generalización, eliminando variables irrelevantes o redundantes antes o durante el entrenamiento."
+        },
+        {
+          title: "No confundirla con extracción de características",
+          body: "Aquí no estoy creando variables nuevas, sino eligiendo mejor entre las que ya existen. La extracción de características transforma o sintetiza información, como pasa con `PCA` o autoencoders. La selección, en cambio, mantiene el universo original pero lo depura."
+        },
+        {
+          title: "Por qué conviene hacerla",
+          body: "Seleccionar mejor puede reducir overfitting, acelerar entrenamiento e inferencia, facilitar la interpretación del modelo y ayudar a controlar la maldición de la dimensionalidad. En producción, además, menos variables suele significar menos costo y menor dependencia de fuentes poco valiosas."
+        },
+        {
+          title: "Las tres familias principales",
+          body: "La clase 6 ordena muy bien este tema: casi todas las técnicas caen dentro de filtros, wrappers o métodos embebidos.",
+          comparisonTable: {
+            columns: ["Familia", "Cómo decide", "Ventaja principal", "Costo típico"],
+            rows: [
+              ["Filtro", "Usa criterios estadísticos antes de entrenar el modelo.", "Rápido y simple para depurar mucho ruido inicial.", "Bajo."],
+              ["Wrapper", "Prueba subconjuntos entrenando modelos repetidamente.", "Puede capturar mejor interacciones entre variables.", "Medio a alto."],
+              ["Embebido", "Selecciona durante el propio entrenamiento del modelo.", "Combina automatización, eficiencia y rendimiento.", "Medio."]
+            ]
+          }
+        },
+        {
+          title: "Filtros: partir limpiando antes de modelar",
+          body: "Los métodos de filtro no dependen del modelo final para seleccionar variables. Usan señales estadísticas como correlación, ANOVA, `chi²`, información mutua o herramientas como `SelectKBest`. Son muy útiles cuando tengo muchísimas columnas y quiero hacer una primera poda rápida antes de experimentar más en serio."
+        },
+        {
+          title: "Wrappers: evaluar subconjuntos con el modelo puesto",
+          body: "Los wrappers sí involucran entrenamiento repetido. La idea es probar subconjuntos de variables y medir qué combinación rinde mejor con un modelo específico. Eso los vuelve más costosos, pero también más cercanos al desempeño real que me interesa optimizar."
+        },
+        {
+          title: "Forward y backward selection",
+          body: "En `Forward Selection` parto sin variables y voy agregando la que más mejora el modelo en cada paso. En `Backward Elimination` parto con todas y voy quitando la que menos aporta. Ambas técnicas son wrappers y sirven bien cuando el conjunto de variables todavía es manejable y quiero una lógica gradual de selección."
+        },
+        {
+          title: "RFE: una versión más estructurada del descarte",
+          body: "`Recursive Feature Elimination (RFE)` entrena un modelo base, mide importancia o coeficientes y elimina de forma recursiva la variable menos relevante hasta llegar a un número deseado. La gracia es que evita revisar todas las combinaciones posibles y aun así entrega una búsqueda bastante útil del subconjunto óptimo."
+        },
+        {
+          title: "Métodos embebidos: seleccionar mientras el modelo aprende",
+          body: "Los métodos embebidos integran la selección dentro del entrenamiento. Ahí entran `Lasso`, árboles con `feature_importances_`, Random Forest, Gradient Boosting, XGBoost y otros modelos que ya generan una medida de aporte por variable."
+        },
+        {
+          title: "Dónde se conecta esto con Lasso y Elastic Net",
+          body: "Aquí sí vale la pena conectarlo con el post de regularización. `Lasso` no solo regulariza: también hace selección automática porque puede llevar coeficientes exactamente a cero. `Elastic Net` puede servir como selector más estable cuando hay variables muy correlacionadas, porque mezcla la lógica de `Lasso` con la robustez de `Ridge`."
+        },
+        {
+          title: "Tabla rápida de técnicas útiles",
+          body: "Si tuviera que resumir las que más aparecen en práctica, lo dejaría así.",
+          comparisonTable: {
+            columns: ["Técnica", "Familia", "Qué hace mejor", "Cuándo la usaría"],
+            rows: [
+              ["SelectKBest", "Filtro", "Elimina rápido variables poco asociadas al objetivo.", "EDA o datasets muy anchos con muchas columnas."],
+              ["Forward / Backward Selection", "Wrapper", "Construye subconjuntos paso a paso.", "Modelos pequeños donde el tiempo no es crítico."],
+              ["RFE", "Wrapper", "Elimina recursivamente variables poco importantes.", "Cuando tengo un modelo base con `.coef_` o `.feature_importances_`."],
+              ["Lasso", "Embebido", "Regulariza y elimina variables directamente.", "Cuando quiero selección automática e interpretación."],
+              ["Random Forest / XGBoost importance", "Embebido", "Entrega ranking de importancia en modelos no lineales.", "Cuando trabajo con árboles y quiero priorización de variables."],
+              ["Elastic Net", "Embebido", "Selecciona con más estabilidad bajo correlación.", "Cuando Lasso solo se vuelve demasiado agresivo o inestable."]
+            ]
+          }
+        },
+        {
+          title: "Cómo evaluaría si la selección realmente ayudó",
+          body: "No basta con eliminar columnas y asumir que el modelo mejoró. Lo correcto es comparar antes y después usando métricas, validación cruzada, estabilidad, tiempo de entrenamiento y capacidad de generalización. A veces menos variables mejora el modelo; otras veces elimina señal importante y lo empeora."
+        },
+        {
+          title: "Qué observaría en la práctica",
+          body: "Yo revisaría al menos estas cuatro cosas: si mejora la métrica principal, si baja el overfitting, si el modelo se entrena más rápido y si la interpretación se vuelve más clara. El punto óptimo no siempre es usar menos variables, sino usar las correctas."
+        },
+        {
+          title: "Errores comunes al seleccionar variables",
+          body: "Uno de los errores más comunes es elegir variables solo porque 'suena lógico' sin validar su impacto real. Otro es quedarse con una técnica rápida de filtro y no comprobar si eso ayuda de verdad al modelo. También es fácil confiar demasiado en una importancia aislada sin considerar correlación, sesgo del modelo base o contexto del problema."
+        },
+        {
+          title: "Para recordar",
+          body: "La selección de características no es una moda: es una forma de quedarme con variables más útiles, reducir ruido y mejorar generalización. Los filtros podan rápido, los wrappers prueban subconjuntos con más detalle y los métodos embebidos seleccionan mientras entrenan. `Lasso` y `Elastic Net` entran aquí no solo por regularizar, sino también porque ayudan a decidir qué variables vale la pena conservar."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M5-S6 – Lectura: selección de características, filtros, wrappers y métodos embebidos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM5S6 – Cuestionario Clase 6: feature selection, RFE, Lasso e importancia de variables</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "regularization-overfitting-and-linear-penalties",
+        "cross-validation-and-model-evaluation-metrics",
+        "boosting-and-classification-metrics"
+      ]
+    },
+    {
+      id: "clustering-and-dimensionality-reduction-foundations",
+      slug: "clustering-y-reduccion-de-dimensionalidad",
+      title: "Clustering y reducción de dimensionalidad",
+      summary: "Una guía base para entender cómo explorar datos sin etiquetas con `clustering`, por qué el clustering jerárquico organiza grupos en forma de árbol y cómo técnicas como `PCA`, `T-SNE` y `UMAP` ayudan a reducir complejidad y visualizar patrones ocultos.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "intermediate",
+      readingTime: "18 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Clustering", "PCA", "No supervisado"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea base: explorar cuando no hay etiquetas",
+          body: "En muchos problemas reales no tengo una columna objetivo clara que me diga qué predecir o cómo separar los casos. Ahí entran las técnicas no supervisadas: ayudan a descubrir estructura, patrones o segmentos sin depender de etiquetas previas. En este bloque, la base es entender cómo agrupar observaciones y cómo simplificar datasets muy anchos para poder leerlos mejor."
+        },
+        {
+          title: "Qué significa que sea no supervisado",
+          body: "Cuando digo que una técnica es no supervisada, significa que el algoritmo no recibe una respuesta correcta esperada. No sabe de antemano qué grupo debería existir ni cómo se llaman los segmentos. Su trabajo es detectar similitudes, distancias y estructuras latentes dentro del conjunto de datos."
+        },
+        {
+          title: "Para qué sirve clustering en la práctica",
+          body: "Clustering sirve para encontrar agrupaciones naturales, descubrir perfiles, detectar comportamientos atípicos y preparar etapas posteriores de análisis. También puede apoyar tareas de segmentación de clientes, perfiles de pacientes, patrones industriales o agrupación de genes sin tener que etiquetar manualmente miles de observaciones."
+        },
+        {
+          title: "Dónde entra la reducción de dimensionalidad",
+          body: "La reducción de dimensionalidad complementa muy bien al clustering porque muchos datasets tienen demasiadas variables para ser leídos directamente. Reducir dimensiones ayuda a compactar la información relevante, disminuir redundancia y visualizar mejor el espacio de datos antes o después de agrupar."
+        },
+        {
+          title: "No hacen exactamente lo mismo",
+          body: "Aunque clustering y reducción de dimensionalidad suelen aparecer juntos, no son equivalentes. Uno busca grupos; el otro busca representar mejor la información con menos dimensiones.",
+          comparisonTable: {
+            columns: ["Técnica", "Objetivo principal", "Resultado típico"],
+            rows: [
+              ["Clustering jerárquico", "Descubrir grupos naturales.", "Árbol de clústeres o dendrograma."],
+              ["K-Means", "Agrupar en K grupos planos.", "Asignación de cada observación a un clúster."],
+              ["PCA", "Reducir variables conservando varianza.", "Componentes principales no correlacionados."],
+              ["T-SNE", "Visualizar estructura local en pocas dimensiones.", "Mapa 2D/3D para exploración visual."],
+              ["UMAP", "Reducir dimensión preservando relaciones locales y parte de la global.", "Representación compacta y rápida para exploración."]
+            ]
+          }
+        },
+        {
+          title: "Clustering jerárquico: la idea del árbol",
+          body: "El clustering jerárquico organiza las observaciones como si construyera un árbol invertido. Los elementos más parecidos se unen primero, y luego esos grupos se siguen fusionando en niveles más amplios. Eso lo vuelve muy útil cuando no solo quiero una segmentación final, sino también entender cómo se van formando los grupos."
+        },
+        {
+          title: "Aglomerativo vs divisivo",
+          body: "Hay dos grandes enfoques para construir esa jerarquía.",
+          comparisonTable: {
+            columns: ["Enfoque", "Cómo parte", "Cómo avanza", "Cuándo ayuda a entenderlo mejor"],
+            rows: [
+              ["Aglomerativo (bottom-up)", "Cada dato comienza como clúster individual.", "Fusiona progresivamente los clústeres más cercanos.", "Es el enfoque más común y el más fácil de visualizar con dendrogramas."],
+              ["Divisivo (top-down)", "Todos los datos parten en un solo gran clúster.", "Se va dividiendo recursivamente en subgrupos.", "Sirve para pensar segmentaciones de arriba hacia abajo."]
+            ]
+          }
+        },
+        {
+          title: "Cómo leer un dendrograma sin perderse",
+          body: "El dendrograma muestra la historia de fusiones del clustering jerárquico. La altura a la que dos ramas se unen representa su distancia o disimilitud. Si veo una unión muy alta, eso sugiere grupos bastante distintos; si las ramas se juntan muy abajo, eran observaciones o clústeres muy parecidos."
+        },
+        {
+          title: "La analogía más simple para recordarlo",
+          body: "Si tuviera muchas fotos familiares mezcladas, podría empezar agrupándolas por persona, luego por evento y después por año. Cada nivel agrega una capa de organización. El clustering jerárquico hace algo parecido: construye una jerarquía de grupos desde decisiones pequeñas hasta estructuras más grandes."
+        },
+        {
+          title: "PCA: compactar sin perder lo más importante",
+          body: "`PCA` busca combinaciones lineales de variables que expliquen la mayor cantidad posible de varianza. No agrupa, pero sí ayuda a resumir el dataset con nuevas dimensiones que contienen gran parte de la información útil. Suele ser una gran puerta de entrada para visualizar y preprocesar."
+        },
+        {
+          title: "T-SNE y UMAP: cuando quiero ver mejor la forma del espacio",
+          body: "`T-SNE` y `UMAP` son técnicas no lineales muy usadas para visualización. `T-SNE` destaca preservando relaciones locales y suele usarse mucho para ver subgrupos en 2D. `UMAP` también preserva estructura local, pero además suele ser más rápido y en varios casos mantiene mejor parte de la estructura global."
+        },
+        {
+          title: "Tabla rápida: PCA vs T-SNE vs UMAP",
+          body: "Esta comparación sirve mucho para no mezclarlas.",
+          comparisonTable: {
+            columns: ["Método", "Tipo", "Qué prioriza", "Uso típico"],
+            rows: [
+              ["PCA", "Lineal", "Máxima varianza explicada.", "Preprocesamiento, compresión y visualización inicial."],
+              ["T-SNE", "No lineal", "Vecindades locales.", "Visualización exploratoria de subgrupos complejos."],
+              ["UMAP", "No lineal", "Relaciones locales y parte de la estructura global.", "Visualización rápida y reducción previa a clustering o inspección."]
+            ]
+          }
+        },
+        {
+          title: "Flujo real de trabajo",
+          body: "Una forma muy natural de usar estas técnicas en proyectos reales es: limpiar y estandarizar datos, reducir dimensionalidad si el espacio es muy grande, aplicar clustering para encontrar segmentos y luego visualizar e interpretar esos grupos con ayuda del negocio o del dominio."
+        },
+        {
+          title: "Sectores donde esto brilla",
+          body: "En salud puede servir para perfilar pacientes. En e-commerce, para segmentar compradores según navegación o compra. En bioinformática, para agrupar genes o muestras. En manufactura, para detectar patrones normales o anómalos en sensores. En finanzas, para segmentar riesgo cuando no tengo etiquetas previas."
+        },
+        {
+          title: "Qué problemas ayuda a resolver",
+          body: "Este bloque es especialmente útil cuando tengo datos sin etiquetas, demasiadas variables, dificultad para visualizar patrones o necesidad de detectar grupos ocultos sin una hipótesis rígida previa."
+        },
+        {
+          title: "Errores comunes al empezar con clustering",
+          body: "Uno de los errores más comunes es tratar clustering como si entregara 'la verdad' del dataset. Otro es olvidar estandarizar variables antes de medir distancias. También pasa mucho que se interpreta una visualización reducida en 2D como si fuera una foto exacta del espacio original, cuando en realidad es una representación útil, pero simplificada."
+        },
+        {
+          title: "Para recordar",
+          body: "Clustering ayuda a descubrir grupos cuando no tengo etiquetas. La reducción de dimensionalidad ayuda a simplificar y visualizar espacios complejos. El clustering jerárquico construye un árbol de agrupaciones; `PCA`, `T-SNE` y `UMAP` ayudan a leer mejor la forma del dataset. En conjunto, estas técnicas sirven como mapa inicial antes de entrenar modelos supervisados o incluso para encontrar hallazgos que todavía no sabía que estaban ahí."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M6-S1 – Lectura: clustering jerárquico e introducción a la reducción de dimensionalidad</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM6S1 – Cuestionario Clase 1: técnicas no supervisadas, clustering y reducción de dimensionalidad</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "feature-selection-methods-for-machine-learning",
+        "cross-validation-and-model-evaluation-metrics",
+        "pandas-dataframes-masking-and-grouping"
+      ]
+    },
+    {
+      id: "advanced-grouping-techniques-for-clustering",
+      slug: "tecnicas-de-agrupamiento-avanzadas-para-clustering",
+      title: "Técnicas de agrupamiento avanzadas para clustering",
+      summary: "Una guía para entender cuándo conviene pasar de métodos clásicos a enfoques basados en densidad como `DBSCAN` y `HDBSCAN`, cómo detectan ruido y grupos irregulares, y de qué forma evaluar la calidad de un agrupamiento sin etiquetas previas.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Clustering", "DBSCAN", "HDBSCAN"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Por qué aparecen técnicas más avanzadas",
+          body: "Cuando los datos reales dejan de verse ordenados, balanceados o esféricos, los métodos clásicos como `K-Means` o incluso el clustering jerárquico empiezan a quedarse cortos. En imágenes, sensores, tráfico web, finanzas o series temporales, los grupos pueden tener formas irregulares, densidades distintas y bastante ruido. Ahí es donde entran técnicas más adaptativas."
+        },
+        {
+          title: "La idea central: agrupar por densidad",
+          body: "En lugar de asumir que todos los grupos tienen una forma simple, los métodos basados en densidad buscan zonas donde los puntos están muy concentrados y las separan de regiones donde la densidad cae. Esa lógica les permite descubrir clústeres más realistas y, al mismo tiempo, marcar observaciones aisladas como ruido u outliers."
+        },
+        {
+          title: "Qué resuelven mejor que los métodos clásicos",
+          body: "Estas técnicas brillan cuando no sé cuántos grupos hay, cuando hay valores atípicos, cuando los clústeres tienen formas curvas o irregulares, y cuando la densidad de las observaciones no es homogénea en todo el espacio."
+        },
+        {
+          title: "DBSCAN: el punto de partida más conocido",
+          body: "`DBSCAN` significa `Density-Based Spatial Clustering of Applications with Noise`. Su lógica es simple pero potente: si un punto tiene suficientes vecinos dentro de un radio dado, se considera parte de una región densa. Desde ahí, el algoritmo expande el grupo conectando zonas densamente enlazadas."
+        },
+        {
+          title: "Conceptos clave de DBSCAN",
+          body: "Para recordar DBSCAN conviene grabarse cuatro piezas: `eps` define el radio de vecindad; `MinPts` indica cuántos puntos mínimos se necesitan para considerar una zona como densa; un `core point` cumple esa densidad mínima; un `border point` queda cerca de una zona densa, pero no alcanza el mínimo por sí solo; y un `outlier` termina etiquetado como ruido."
+        },
+        {
+          title: "La analogía más fácil para recordar DBSCAN",
+          body: "Piensa en una plaza vista desde un dron. Si varias personas están juntas conversando, forman un grupo denso. Si alguien está caminando solo lejos del resto, el algoritmo lo verá como ruido. DBSCAN no necesita saber cuántos grupos hay: solo necesita una regla razonable para decidir cuándo hay suficiente gente junta como para decir 'acá hay un grupo'."
+        },
+        {
+          title: "Dónde suele fallar DBSCAN",
+          body: "Su principal limitación aparece cuando distintos grupos tienen densidades muy diferentes. Un `eps` que funciona bien para un grupo puede ser demasiado pequeño para otro o demasiado grande para mezclar varios. Además, si elijo mal `eps`, puedo terminar con muchos puntos marcados como ruido o con todo fusionado en un solo clúster."
+        },
+        {
+          title: "HDBSCAN: la versión más robusta",
+          body: "`HDBSCAN` es una extensión jerárquica de DBSCAN pensada para resolver justamente esas limitaciones. Su gran ventaja es que no obliga a fijar un `eps` único de antemano. En cambio, construye una jerarquía basada en densidad y selecciona los agrupamientos más estables, lo que le permite adaptarse mejor a datasets heterogéneos."
+        },
+        {
+          title: "Qué hace especial a HDBSCAN",
+          body: "`HDBSCAN` permite detectar clústeres con diferentes densidades, genera una interpretación jerárquica y, además, puede entregar una probabilidad de pertenencia para cada observación. Por eso suele sentirse como una evolución más moderna y flexible cuando el problema es ruidoso o desigual."
+        },
+        {
+          title: "DBSCAN vs HDBSCAN vs K-Means",
+          body: "La comparación rápida ayuda mucho para elegir.",
+          comparisonTable: {
+            columns: ["Criterio", "K-Means", "DBSCAN", "HDBSCAN"],
+            rows: [
+              ["Necesita definir cantidad de clústeres", "Sí", "No", "No"],
+              ["Tolera ruido y outliers", "No", "Sí", "Sí"],
+              ["Detecta formas arbitrarias", "No, prioriza formas esféricas", "Sí", "Sí"],
+              ["Maneja densidades diferentes", "No", "Difícil", "Sí"],
+              ["Entrega jerarquía de agrupamientos", "No", "No", "Sí"],
+              ["Puede dar probabilidad de pertenencia", "No", "No", "Sí"]
+            ]
+          }
+        },
+        {
+          title: "Cuándo usar cada algoritmo",
+          body: "Si busco rapidez, grupos relativamente simples y ya tengo una noción de cuántos segmentos espero, `K-Means` sigue siendo útil. Si no conozco la cantidad de clústeres y necesito detectar ruido o formas irregulares, `DBSCAN` suele ser una buena primera opción. Si además sospecho que los grupos tienen densidades distintas o el espacio es más complejo, `HDBSCAN` normalmente ofrece mejores resultados."
+        },
+        {
+          title: "Cómo validar clustering si no tengo etiquetas",
+          body: "Como no existe una respuesta correcta predefinida, toca usar métricas internas y validación visual. Dos métricas muy útiles en este bloque son el coeficiente de silueta y el índice de Davies-Bouldin."
+        },
+        {
+          title: "Coeficiente de silueta e índice Davies-Bouldin",
+          body: "El coeficiente de silueta mide qué tan bien ubicado está cada punto dentro de su grupo frente a los demás clústeres: mientras más alto, mejor separación suele haber. El índice de Davies-Bouldin compara compacidad interna con separación entre grupos: mientras más bajo, mejor."
+        },
+        {
+          title: "Flujo recomendado de trabajo",
+          body: "En la práctica conviene limpiar datos, estandarizar escalas, reducir dimensiones cuando el espacio es muy grande y luego aplicar clustering. Para visualización, `PCA` y `UMAP` suelen ser aliados más seguros que `T-SNE` si después quiero analizar agrupamientos. Finalmente, el resultado se revisa con métricas, gráficos y criterio de negocio."
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "Los errores más típicos son elegir `eps` al azar, no estandarizar variables antes de medir distancias, usar `T-SNE` como si fuera una base exacta para clustering y asumir que los puntos etiquetados como `-1` son basura. Muchas veces esos outliers son justo los casos más valiosos: fraudes, fallas, anomalías o eventos raros."
+        },
+        {
+          title: "Aplicaciones donde realmente destaca",
+          body: "En bioinformática puede ayudar a encontrar grupos de genes coexpresados; en monitoreo industrial, a detectar comportamientos normales y anomalías de sensores; en e-commerce, a segmentar usuarios sin etiquetas; en seguridad urbana, a marcar trayectorias poco comunes; y en finanzas, a detectar transacciones sospechosas sin reglas rígidas previas."
+        },
+        {
+          title: "Para recordar",
+          body: "Si los grupos son raros, desbalanceados o ruidosos, conviene pensar en clustering basado en densidad. `DBSCAN` sirve muy bien para descubrir grupos sin definir `k` y detectar ruido. `HDBSCAN` va un paso más allá cuando las densidades cambian entre zonas. Y como no hay etiquetas verdaderas, la evaluación debe apoyarse en métricas, visualización y contexto del problema."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M6-S2 – Lectura: técnicas avanzadas de clustering, DBSCAN, HDBSCAN y evaluación de agrupamientos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM6S2 – Cuestionario Clase 2: clustering basado en densidad, evaluación y aplicaciones</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "clustering-and-dimensionality-reduction-foundations",
+        "cross-validation-and-model-evaluation-metrics",
+        "boosting-and-classification-metrics"
+      ]
+    },
+    {
+      id: "impact-of-pca-on-clustering",
+      slug: "impacto-del-pca-en-clustering",
+      title: "Impacto del PCA en clustering",
+      summary: "Una guía para entender por qué `PCA` ayuda tanto antes de agrupar datos, cómo combina variables originales para crear componentes principales, qué gana el clustering al trabajar en un espacio más compacto y qué errores conviene evitar al aplicar esta técnica.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "15 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "PCA", "Clustering", "Reducción de dimensionalidad"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Qué problema intenta resolver PCA",
+          body: "Cuando un dataset tiene muchas variables, aparecen redundancias, correlaciones fuertes, ruido y dificultades para visualizar patrones. `PCA` aparece como una forma de reorganizar ese espacio para conservar lo más importante en menos dimensiones, sin depender de etiquetas previas."
+        },
+        {
+          title: "La aclaración más importante",
+          body: "`PCA` no busca explicar una variable objetivo como lo hace una regresión. Su meta es distinta: encontrar nuevas direcciones del espacio que concentren la mayor varianza posible del dataset. Por eso se usa tan bien en exploración, preprocesamiento y clustering no supervisado."
+        },
+        {
+          title: "Cómo combina las variables originales",
+          body: "Cada componente principal es una combinación lineal de las variables originales. En vez de quedarme con columnas sueltas como edad, ingreso o deuda por separado, `PCA` crea nuevos ejes que mezclan esas variables de forma ordenada según cuánta variabilidad logran capturar."
+        },
+        {
+          title: "La analogía más fácil para recordarlo",
+          body: "Imagina una nube de puntos en 3D. `PCA` rota el sistema de coordenadas para alinear el primer eje con la dirección donde más se dispersan los datos, el segundo con la siguiente dirección más informativa y así sucesivamente. Luego proyecta los datos en esos nuevos ejes para quedarse con una versión más compacta del problema."
+        },
+        {
+          title: "Qué significa cada componente principal",
+          body: "El primer componente principal (`PC1`) captura la mayor cantidad de varianza posible. El segundo (`PC2`) captura la mayor varianza restante, pero sin repetir lo ya explicado por `PC1`. Eso hace que los componentes queden no correlacionados entre sí y resulten muy útiles para resumir la estructura del dataset."
+        },
+        {
+          title: "Fundamento técnico simplificado",
+          body: "`PCA` analiza la matriz de covarianza de las variables, calcula autovalores y autovectores, y usa esa información para definir nuevas direcciones del espacio. Los autovectores marcan hacia dónde apuntan los componentes, y los autovalores indican cuánta varianza explica cada uno."
+        },
+        {
+          title: "Por qué ayuda al clustering",
+          body: "Cuando agrupo datos en un espacio con muchas variables correlacionadas, el algoritmo puede confundirse con ruido, escalas redundantes o dimensiones que no aportan. `PCA` simplifica ese espacio, reduce colinealidad y deja una representación más limpia, lo que puede mejorar separación visual, velocidad y estabilidad del clustering."
+        },
+        {
+          title: "Impacto concreto en el agrupamiento",
+          body: "El efecto práctico suele sentirse en cuatro frentes: menos ruido, menor complejidad computacional, mejor visualización en 2D o 3D y mayor facilidad para detectar grupos ocultos. En muchos casos, agrupar después de `PCA` permite que algoritmos como `K-Means` o `DBSCAN` trabajen sobre una estructura más legible."
+        },
+        {
+          title: "Dónde encaja dentro del flujo de trabajo",
+          body: "Una secuencia muy común es: limpiar datos, escalar variables, aplicar `PCA`, revisar la varianza explicada, visualizar componentes y recién después agrupar. También puede servir como paso previo antes de `UMAP` o `T-SNE` si quiero explorar visualmente un espacio muy complejo."
+        },
+        {
+          title: "PCA frente a otras herramientas",
+          body: "Esta comparación ayuda a ubicar bien su rol.",
+          comparisonTable: {
+            columns: ["Técnica", "Qué hace", "Qué devuelve", "Cuándo conviene"],
+            rows: [
+              ["PCA", "Reduce dimensión preservando varianza.", "Nuevos componentes lineales.", "Preprocesamiento, compresión y apoyo al clustering."],
+              ["T-SNE / UMAP", "Proyectan datos complejos para visualización.", "Mapa 2D o 3D.", "Exploración visual avanzada."],
+              ["Selección de variables", "Elimina columnas menos útiles.", "Subset de variables originales.", "Cuando necesito mayor interpretabilidad."]
+            ]
+          }
+        },
+        {
+          title: "Cuántos componentes conservar",
+          body: "No conviene elegir el número de componentes al azar. Lo habitual es revisar la varianza acumulada explicada y conservar suficientes componentes para cubrir cerca del 90–95 % de la información. Así gano compresión sin perder patrones importantes."
+        },
+        {
+          title: "Ejemplo mental simple",
+          body: "Si tengo variables como edad, altura y peso, `PCA` puede crear un `PC1` que mezcle parte de las tres porque juntas describen una dirección dominante del dataset. Después puede crear un `PC2` con otra combinación que explique una segunda estructura importante. El clustering trabajaría sobre esos nuevos ejes en vez de hacerlo sobre todas las columnas originales."
+        },
+        {
+          title: "Sectores donde esto aporta mucho",
+          body: "En bioinformática permite comprimir miles de genes antes de segmentar pacientes. En finanzas ayuda a tratar variables muy correlacionadas en riesgo crediticio. En manufactura resume señales de sensores para detectar fallas. En e-commerce mejora la segmentación por comportamiento y en retail puede acelerar modelos con muchas variables de contexto."
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "Los errores más habituales son aplicar `PCA` sin escalar datos, interpretar los componentes como si fueran variables originales, usarlo como reemplazo automático de selección de variables, conservar demasiados o muy pocos componentes y aplicarlo sobre variables categóricas sin una codificación previa adecuada."
+        },
+        {
+          title: "Malentendidos típicos",
+          body: "No, `PCA` no selecciona 'las mejores columnas'; crea nuevas variables. No, no siempre mejora cualquier modelo; depende del problema. No, el primer componente no es 'la variable más importante'; es la dirección de mayor varianza. Y no, no sirve de forma directa para cualquier tipo de dato."
+        },
+        {
+          title: "Buenas prácticas resumidas",
+          body: "Estandarizar antes de aplicar `PCA`, revisar la varianza explicada, interpretar la matriz de cargas, comparar resultados con y sin reducción y validar si realmente mejora el clustering o el modelo posterior. `PCA` es útil, pero rinde mejor cuando se usa con criterio y no por costumbre."
+        },
+        {
+          title: "Para recordar",
+          body: "`PCA` combina variables originales para construir componentes más compactos y no correlacionados. No explica una variable objetivo, sino la estructura del dataset. Su gran valor en clustering está en reducir ruido, colinealidad y complejidad para que los grupos se vean y se detecten mejor."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M6-S3 – Lectura: técnicas avanzadas de reducción de dimensionalidad y PCA</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM6S3 – Cuestionario Clase 3: PCA, varianza explicada y aplicaciones en clustering</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "clustering-and-dimensionality-reduction-foundations",
+        "advanced-grouping-techniques-for-clustering",
+        "matrices-libraries-and-numpy-for-eda"
+      ]
+    },
+    {
+      id: "tsne-and-umap-for-complex-structure-visualization",
+      slug: "tsne-y-umap-para-visualizar-estructuras-complejas",
+      title: "T-SNE y UMAP para visualizar estructuras complejas",
+      summary: "Una guía para entender cuándo `PCA` ya no basta, cómo `T-SNE` y `UMAP` reducen dimensionalidad de forma no lineal, qué preserva cada técnica y por qué son tan útiles para explorar embeddings, patrones ocultos y agrupamientos difíciles de ver.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "T-SNE", "UMAP", "Visualización"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Cuando PCA se empieza a quedar corto",
+          body: "`PCA` funciona muy bien cuando la estructura del dataset puede resumirse de forma lineal. Pero en problemas reales muchas veces los datos siguen formas curvas, ramificadas, espirales o relaciones no euclidianas que una proyección lineal no captura del todo bien. Ahí es donde `T-SNE` y `UMAP` ganan mucho valor."
+        },
+        {
+          title: "La idea general de estas técnicas",
+          body: "`T-SNE` y `UMAP` son métodos no lineales de reducción de dimensionalidad pensados sobre todo para visualizar datos complejos en 2D o 3D. Su trabajo no es crear variables fáciles de interpretar como en PCA, sino construir una representación visual donde las relaciones relevantes del espacio original se puedan apreciar mejor."
+        },
+        {
+          title: "Qué tipo de problemas ayudan a resolver",
+          body: "Sirven mucho cuando quiero explorar embeddings de texto, imágenes o redes neuronales, visualizar grupos ocultos, detectar outliers, revisar espacios latentes o comunicar hallazgos complejos a personas que no van a leer una matriz de cientos de variables."
+        },
+        {
+          title: "T-SNE: cercanía local por sobre todo",
+          body: "`T-SNE` busca que los puntos que están cerca en alta dimensión se mantengan cerca en la proyección final. Su fortaleza principal está en preservar vecindades locales, por eso suele mostrar clústeres muy marcados y visualmente atractivos. El costo es que puede distorsionar bastante la estructura global."
+        },
+        {
+          title: "UMAP: equilibrio entre detalle y contexto",
+          body: "`UMAP` también es no lineal, pero intenta conservar mejor tanto relaciones locales como parte de la estructura global. Suele ser más rápido que `T-SNE`, escala mejor con muchos datos y en varios casos resulta más práctico cuando luego quiero usar esa proyección como apoyo a otras etapas exploratorias."
+        },
+        {
+          title: "La analogía del metro",
+          body: "Si imaginamos un mapa de metro, `PCA` intentaría respetar las distancias lineales del sistema. `T-SNE` se enfoca en mostrar qué estaciones están cerca entre sí, aunque el mapa total quede algo deformado. `UMAP`, en cambio, intenta que sigan viéndose las cercanías locales sin perder del todo la forma general de la red."
+        },
+        {
+          title: "Qué preserva cada una",
+          body: "Esa diferencia es clave para no confundirlas.",
+          comparisonTable: {
+            columns: ["Técnica", "Qué prioriza", "Fortaleza principal", "Limitación principal"],
+            rows: [
+              ["PCA", "Varianza global lineal.", "Preprocesamiento e interpretación inicial.", "No capta bien estructuras no lineales."],
+              ["T-SNE", "Relaciones locales muy cercanas.", "Separa clústeres visualmente de forma excelente.", "No preserva bien la estructura global y es más lenta."],
+              ["UMAP", "Relaciones locales y parte de la global.", "Rápida, escalable y útil para exploración visual robusta.", "Su interpretación geométrica sigue siendo limitada."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo usar cada una",
+          body: "Si necesito preprocesamiento o una base más interpretable, `PCA` sigue siendo una excelente opción. Si quiero ver clústeres locales con mucha claridad, `T-SNE` suele lucirse. Si tengo muchos datos, quiero velocidad y además una representación más balanceada entre lo local y lo global, `UMAP` normalmente tiene ventaja."
+        },
+        {
+          title: "Parámetros que sí importan",
+          body: "En `T-SNE`, `perplexity`, `learning_rate` y `n_iter` afectan mucho la forma final del mapa. En `UMAP`, `n_neighbors`, `min_dist` y la métrica de distancia pueden cambiar bastante el resultado. Estas técnicas no conviene correrlas solo con valores por defecto y confiar ciegamente en lo que salga."
+        },
+        {
+          title: "Relación con clustering",
+          body: "Ambas pueden ayudar a ver grupos antes de agrupar formalmente. `UMAP` suele ser más razonable como apoyo previo al clustering exploratorio, mientras que `T-SNE` debe usarse con más cuidado porque puede separar visualmente clústeres que no están tan claramente separados en el espacio original."
+        },
+        {
+          title: "El matiz más importante con T-SNE",
+          body: "`T-SNE` no debería tratarse como base automática para clustering formal o como input directo para modelos supervisados. Su fuerte es la visualización. Si lo uso como si fuera una representación geométrica exacta del dataset, puedo terminar viendo separaciones artificiales que no existen de verdad."
+        },
+        {
+          title: "Ejemplos donde brillan",
+          body: "En bioinformática ayudan a ver subgrupos de pacientes a partir de miles de genes. En visión por computadora permiten inspeccionar embeddings extraídos de CNNs. En NLP ayudan a comparar relaciones semánticas entre palabras o documentos. En e-commerce apoyan la segmentación de usuarios, y en ciberseguridad pueden hacer visibles eventos anómalos dentro de grandes volúmenes de logs."
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "Los errores más típicos son no estandarizar antes de proyectar, interpretar literalmente la posición de los grupos, usar `T-SNE` más allá de visualización, dejar hiperparámetros arbitrarios sin probar alternativas y olvidar comparar contra una base lineal como `PCA`."
+        },
+        {
+          title: "Malentendidos frecuentes",
+          body: "No, `UMAP` no es solo una versión rápida de `T-SNE`; también cambia qué tipo de estructura preserva. No, los clústeres que se ven separados en una figura no siempre son grupos reales del problema. Y no, estas proyecciones no reemplazan por sí solas una validación seria del análisis."
+        },
+        {
+          title: "Buenas prácticas resumidas",
+          body: "Estandarizar antes de proyectar, fijar `random_state` para reproducibilidad, usar `T-SNE` principalmente como visualización, ajustar parámetros según el dataset y comparar resultados con `PCA` para tener un punto de referencia más estable e interpretable."
+        },
+        {
+          title: "Para recordar",
+          body: "Mientras `PCA` simplifica de forma lineal, `T-SNE` y `UMAP` ayudan a revelar estructuras que no se ven fácilmente en espacios complejos. `T-SNE` destaca en separación visual local; `UMAP` ofrece un equilibrio más útil entre detalle local, estructura global y velocidad. Las dos son herramientas muy potentes, pero deben leerse con criterio y no como una foto exacta del mundo real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M6-S4 – Lectura: técnicas avanzadas de reducción de dimensionalidad, T-SNE y UMAP</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM6S4 – Cuestionario Clase 4: reducción no lineal, visualización y comparación entre T-SNE y UMAP</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "clustering-and-dimensionality-reduction-foundations",
+        "impact-of-pca-on-clustering",
+        "advanced-grouping-techniques-for-clustering"
+      ]
+    },
+    {
+      id: "anomaly-detection-find-the-rare-and-learn-from-it",
+      slug: "deteccion-de-anomalias-encontrar-lo-raro-y-aprender-de-ello",
+      title: "Detección de anomalías: encontrar lo raro y aprender de ello",
+      summary: "Una guía para entender cómo detectar casos atípicos con `Isolation Forest` y `One-Class SVM`, por qué las anomalías no siempre son errores y cómo esos casos raros pueden revelar fraudes, fallas, sesgos o patrones nuevos que vale la pena estudiar.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "17 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Anomalías", "Isolation Forest", "One-Class SVM"],
+      featured: false,
+      contentSections: [
+        {
+          title: "Por qué esta técnica importa tanto",
+          body: "En muchos proyectos, lo más valioso no está en lo común, sino en lo raro. Una anomalía puede representar fraude, un fallo incipiente, un comportamiento clínico inusual, un error de datos o incluso una oportunidad de descubrimiento. Por eso detectar outliers no solo ayuda a limpiar información: también ayuda a aprender qué casos se salen del patrón y por qué.",
+          highlights: [
+            {
+              icon: "fa-solid fa-triangle-exclamation",
+              title: "Lo raro puede ser crítico",
+              text: "Una anomalía puede advertir un fraude, una falla de sensor o una condición clínica poco común antes de que el daño sea mayor."
+            },
+            {
+              icon: "fa-solid fa-magnifying-glass-chart",
+              title: "No todo outlier es basura",
+              text: "Algunos casos anómalos son errores, pero otros son señales nuevas que conviene estudiar y no descartar automáticamente."
+            }
+          ]
+        },
+        {
+          title: "Qué se considera una anomalía",
+          body: "Una anomalía es una observación que se desvía de forma importante del comportamiento general del dataset. Puede ser un evento raro pero válido, un error de registro o una señal temprana de un problema más grande. La clave no es solo detectarla, sino interpretarla con contexto."
+        },
+        {
+          title: "Tres tipos de anomalías que conviene recordar",
+          body: "No todas las anomalías se ven igual.",
+          comparisonTable: {
+            columns: ["Tipo", "Qué significa", "Ejemplo simple"],
+            rows: [
+              ["Puntual", "Un solo dato muy distinto al resto.", "Una transacción extremadamente alta frente al patrón normal."],
+              ["Contextual", "Solo se vuelve extraña bajo cierto contexto.", "Una temperatura alta durante la madrugada, pero no al mediodía."],
+              ["Colectiva", "Un grupo de casos que juntos se ve raro.", "Una secuencia inusual de accesos en una red corporativa."]
+            ]
+          }
+        },
+        {
+          title: "La lógica detrás del problema",
+          body: "A diferencia de la clasificación tradicional, en anomalías muchas veces no tengo una etiqueta clara de qué estoy buscando. Lo anómalo puede ser muy poco frecuente, cambiante y difícil de capturar con reglas fijas. Por eso estos métodos suelen modelar primero lo normal y luego detectar desviaciones."
+        },
+        {
+          title: "Isolation Forest: aislar lo raro rápido",
+          body: "`Isolation Forest` detecta anomalías usando árboles aleatorios. La idea es que un punto raro suele aislarse con pocas divisiones, mientras que un punto normal necesita más cortes para quedar separado del resto. Esa lógica lo vuelve eficiente, escalable y muy útil cuando tengo bastantes datos."
+        },
+        {
+          title: "One-Class SVM: dibujar la frontera de lo normal",
+          body: "`One-Class SVM` aprende una frontera que encierra la región donde vive el comportamiento normal. Todo lo que queda fuera se trata como anómalo. Es especialmente útil cuando tengo ejemplos de datos normales, pero muy pocos o ningún ejemplo confiable de casos extraños."
+        },
+        {
+          title: "Comparación rápida entre ambos enfoques",
+          body: "Los dos sirven para detectar rarezas, pero no brillan igual en todos los escenarios.",
+          comparisonTable: {
+            columns: ["Criterio", "Isolation Forest", "One-Class SVM"],
+            rows: [
+              ["Base del método", "Árboles de aislamiento aleatorios.", "Frontera de soporte alrededor de lo normal."],
+              ["Escalabilidad", "Alta, funciona bien con muchos datos.", "Más limitada en datasets grandes."],
+              ["Necesita kernel", "No.", "Sí, y requiere tuning."],
+              ["Interpretabilidad", "Media: se entiende por aislamiento.", "Más compleja: depende del espacio transformado."],
+              ["Cuándo suele convenir", "Detección rápida en grandes volúmenes.", "Cuando el espacio normal es complejo y quiero modelarlo mejor."]
+            ]
+          }
+        },
+        {
+          title: "La analogía más simple para recordar ambos",
+          body: "`Isolation Forest` es como cortar un bosque al azar: si un árbol está solo, cae con pocos hachazos. `One-Class SVM` es como dibujar una burbuja alrededor de todo lo que considero normal: lo que cae fuera, llama la atención."
+        },
+        {
+          title: "No solo detecto fallos: también aprendo de ellos",
+          body: "Este es el punto más interesante. Una anomalía no debería verse solo como algo a eliminar. Puede enseñarme qué comportamientos no estaba midiendo bien, qué sesgo existe en el sistema, qué cliente se está comportando distinto, qué sensor está fallando o qué proceso cambió sin que nadie lo notara."
+        },
+        {
+          title: "Qué preguntas conviene hacer cuando aparece una anomalía",
+          body: "Detectar el caso es solo el primer paso.",
+          bestPractices: [
+            "Preguntar si el caso raro es un error de dato o un evento legítimo.",
+            "Revisar si la anomalía anticipa un riesgo real, como fraude, fuga, falla o deterioro.",
+            "Mirar qué variables explican que ese punto se vea distinto al patrón general.",
+            "Comparar si el mismo caso también luce extraño con otras técnicas o reglas de negocio.",
+            "Conversar con expertos del dominio antes de eliminar o corregir automáticamente."
+          ]
+        },
+        {
+          title: "Dónde conecta con otras áreas",
+          body: "La detección de anomalías conversa muy bien con preprocesamiento, clustering, reducción de dimensionalidad, visualización y explicabilidad. Muchas veces el punto raro aparece lejos de cualquier grupo, otras veces resalta mejor después de `PCA` o `UMAP`, y casi siempre pide una segunda lectura con criterio de negocio."
+        },
+        {
+          title: "Métricas para evaluar sin confiar a ciegas",
+          body: "Cuando sí tengo etiquetas de referencia para probar el método, conviene medir cosas como `ROC-AUC` y `F1-score`. `ROC-AUC` me ayuda a ver capacidad general de separación; `F1` balancea precisión y recall cuando las anomalías son escasas. Aun así, ninguna métrica reemplaza la interpretación contextual.",
+          comparisonTable: {
+            columns: ["Métrica", "Qué resume", "Cuándo ayuda más"],
+            rows: [
+              ["ROC-AUC", "Qué tan bien separa normales y anómalos en distintos umbrales.", "Cuando quiero comparar capacidad discriminante general."],
+              ["F1-score", "Equilibrio entre precisión y recall.", "Cuando me importa no llenarme de falsas alarmas ni dejar pasar casos raros."],
+              ["Matriz de confusión", "Cuántos TP, FP, FN y TN obtengo.", "Cuando necesito entender el tipo exacto de error del detector."]
+            ]
+          },
+          illustrations: [
+            {
+              src: "img/atlas/confusion-matrix-metrics.svg",
+              alt: "Ilustración de matriz de confusión y métricas asociadas.",
+              caption: "Si tengo etiquetas para validar, esta base ayuda a entender qué tan bien detecto anomalías sin disparar falsas alarmas de más."
+            }
+          ]
+        },
+        {
+          title: "Sectores donde esto realmente genera valor",
+          body: "En finanzas ayuda a detectar fraude sin reglas rígidas. En salud puede revelar combinaciones clínicas inusuales. En manufactura sirve para mantenimiento predictivo. En data engineering mejora la calidad de los pipelines. Y en productos digitales permite reconocer comportamientos raros de usuarios antes de que se vuelvan un problema."
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "Los errores más típicos son asumir que toda anomalía debe eliminarse, usar proporciones de contaminación arbitrarias, entrenar con demasiados casos anómalos mezclados en el supuesto conjunto normal, interpretar las salidas del modelo como verdad absoluta y olvidar escalar variables antes de aplicar `One-Class SVM`."
+        },
+        {
+          title: "Malentendidos frecuentes",
+          body: "No, un outlier no siempre es un error. No, `Isolation Forest` no necesita etiquetas. No, `One-Class SVM` no siempre supera a `Isolation Forest`; depende mucho del dataset. Y no, la detección automática no debería reemplazar por completo el criterio humano ni las reglas de negocio."
+        },
+        {
+          title: "Flujo recomendado de análisis",
+          body: "Una secuencia bastante sana es: preparar y escalar datos, entrenar el detector, revisar scores de anomalía, contrastar resultados con visualizaciones y luego inspeccionar manualmente algunos casos antes de tomar decisiones automáticas fuertes. Eso permite pasar de 'marqué lo raro' a 'entendí por qué era raro'."
+        },
+        {
+          title: "Para recordar",
+          body: "La detección de anomalías sirve para encontrar lo que no encaja con el patrón normal, pero su valor real está en interpretar esos casos. A veces el dato raro es un error; otras veces es la pista más importante de todo el análisis. `Isolation Forest` destaca por velocidad y escalabilidad, `One-Class SVM` por modelar fronteras complejas de normalidad, y ambos funcionan mejor cuando se acompañan con contexto, visualización y criterio de negocio."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>M6-S5 – Lectura: técnicas de detección de anomalías, Isolation Forest y One-Class SVM</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2025). <em>MLM6S5 – Cuestionario Clase 5: detección de anomalías, métricas y aplicaciones</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "advanced-grouping-techniques-for-clustering",
+        "tsne-and-umap-for-complex-structure-visualization",
+        "cross-validation-and-model-evaluation-metrics"
+      ]
+    },
+    {
+      id: "deep-neural-network-fundamentals-and-learning-flow",
+      slug: "fundamentos-de-redes-neuronales-profundas-y-como-aprenden",
+      title: "Fundamentos de redes neuronales profundas y cómo aprenden",
+      summary: "Una guía base para entender cómo se compone una red neuronal profunda, qué papel cumplen sus capas, activaciones, pérdidas y optimizadores, y cómo aprende paso a paso a partir de un dataset hasta mejorar sus predicciones.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Redes neuronales", "Deep Learning", "DNN"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué las redes neuronales se volvieron tan importantes",
+          body: "Las redes neuronales profundas despegaron de verdad cuando coincidieron tres cosas: más datos, más poder computacional y mejores algoritmos de entrenamiento. Su gran ventaja es que pueden aprender representaciones complejas directamente desde los datos, sin depender tanto de una ingeniería manual de variables como ocurre en varios modelos clásicos.",
+          highlights: [
+            {
+              icon: "fa-solid fa-microchip",
+              title: "Aprenden representaciones",
+              text: "No solo ajustan una fórmula: transforman progresivamente la información para descubrir patrones útiles por sí mismas."
+            },
+            {
+              icon: "fa-solid fa-layer-group",
+              title: "Funcionan en capas",
+              text: "Cada nivel procesa una versión más refinada del dato hasta llegar a una decisión final o una predicción."
+            }
+          ]
+        },
+        {
+          title: "Qué es una red neuronal en términos simples",
+          body: "Una red neuronal artificial es una estructura computacional formada por neuronas organizadas en capas. Cada neurona recibe entradas, las pondera con pesos, suma un sesgo, aplica una transformación y entrega una salida. Esa salida luego sirve como entrada para otras neuronas en la siguiente capa."
+        },
+        {
+          title: "Cómo se compone una red neuronal",
+          body: "La estructura base conviene fijarla bien desde el principio.",
+          comparisonTable: {
+            columns: ["Componente", "Qué hace", "Idea rápida para recordarlo"],
+            rows: [
+              ["Capa de entrada", "Recibe los datos originales.", "Es la puerta de entrada del vector o matriz de features."],
+              ["Capas ocultas", "Transforman y refinan la información.", "Aquí la red empieza a aprender patrones."],
+              ["Capa de salida", "Entrega la predicción final.", "Puede devolver una clase, una probabilidad o un valor continuo."],
+              ["Pesos", "Indican cuánto importa cada conexión.", "Son el conocimiento ajustable del modelo."],
+              ["Sesgos", "Desplazan la activación.", "Le dan flexibilidad adicional a la neurona."],
+              ["Función de activación", "Introduce no linealidad.", "Permite aprender relaciones más complejas que una suma lineal."]
+            ]
+          }
+        },
+        {
+          title: "La neurona artificial como fórmula",
+          body: "Matemáticamente, una neurona suele resumirse como una combinación lineal seguida de una activación: `z = W·x + b` y luego `a = f(z)`. Esa secuencia se repite una y otra vez a lo largo de la red. Por eso lo que aprendiste antes de vectores, matrices, derivadas y gradientes sí importa aquí de verdad."
+        },
+        {
+          title: "Qué significa que una red sea profunda",
+          body: "Una red se considera profunda cuando tiene dos o más capas ocultas. La gracia no está solo en tener más capas, sino en que cada una puede aprender un nivel distinto de abstracción. En una imagen, por ejemplo, una capa puede detectar bordes, otra formas simples y otra patrones más complejos como ojos, letras o expresiones."
+        },
+        {
+          title: "La analogía más amigable: una cocina automatizada",
+          body: "Si lo pienso como cocina, los datos son ingredientes crudos. Cada estación hace una transformación: cortar, mezclar, hornear o emplatar. Al final no tengo los ingredientes originales, sino una salida lista: pizza, diagnóstico, clasificación o recomendación. Esa lógica ayuda mucho a recordar que cada capa transforma, no solo reenvía datos."
+        },
+        {
+          title: "DNN vs modelos clásicos",
+          body: "Las redes neuronales no reemplazan mágicamente a todos los modelos, pero sí tienen diferencias claras frente a regresión, árboles o SVM.",
+          comparisonTable: {
+            columns: ["Criterio", "Redes neuronales profundas", "Modelos clásicos"],
+            rows: [
+              ["Ingeniería manual de variables", "Menos dependencia, aprenden representaciones.", "Más dependencia de features bien diseñadas."],
+              ["No linealidades complejas", "Muy buena capacidad.", "Más limitada o dependiente de configuraciones extra."],
+              ["Escalabilidad con grandes datos", "Muy buena cuando hay infraestructura.", "Más variable según el modelo."],
+              ["Interpretabilidad", "Menor.", "Suele ser mayor."],
+              ["Entrenamiento distribuido", "Muy común con GPU y aceleradores.", "Menos habitual."]
+            ]
+          }
+        },
+        {
+          title: "Funciones de activación: la parte que evita que todo sea lineal",
+          body: "Si una red solo hiciera sumas lineales una tras otra, no ganaría casi nada frente a un modelo lineal más grande. Las activaciones rompen esa limitación.",
+          comparisonTable: {
+            columns: ["Activación", "Qué devuelve", "Cuándo suele aparecer"],
+            rows: [
+              ["ReLU", "Activa si el valor es positivo.", "Capas ocultas por eficiencia y simplicidad."],
+              ["Sigmoid", "Valores entre 0 y 1.", "Salidas probabilísticas o clasificación binaria."],
+              ["Tanh", "Valores entre -1 y 1.", "Alternativa cuando quiero una salida centrada en cero."],
+              ["Softmax", "Probabilidades que suman 1.", "Capa de salida en clasificación multiclase."]
+            ]
+          }
+        },
+        {
+          title: "Cómo aprende realmente una red neuronal",
+          body: "El aprendizaje ocurre ajustando pesos y sesgos para reducir el error del modelo. La red hace una predicción, compara esa salida con la respuesta real, calcula cuánto se equivocó usando una función de pérdida y luego actualiza sus parámetros con un optimizador. Ese ciclo se repite muchísimas veces hasta que el error baja o deja de mejorar."
+        },
+        {
+          title: "El flujo de aprendizaje paso a paso",
+          body: "Si quisiera recordarlo como pipeline mental, sería este.",
+          bestPractices: [
+            "Entro con un dataset ya preprocesado y normalizado.",
+            "La red hace una propagación hacia adelante y genera una predicción.",
+            "La función de pérdida mide qué tan lejos quedó de la respuesta correcta.",
+            "La retropropagación calcula cómo influyó cada peso en ese error.",
+            "El optimizador corrige pesos y sesgos para reducir la pérdida.",
+            "Repito el proceso por épocas hasta estabilizar el aprendizaje."
+          ]
+        },
+        {
+          title: "Qué medidas usa para funcionar y evaluarse",
+          body: "Aquí aparecen varias medidas importantes, y conviene no mezclarlas entre sí.",
+          comparisonTable: {
+            columns: ["Medida", "Para qué sirve", "Ejemplo de uso"],
+            rows: [
+              ["Función de pérdida", "Mide el error durante el entrenamiento.", "`MSE` en regresión, `cross-entropy` en clasificación."],
+              ["Accuracy", "Mide cuántas predicciones acierta.", "Clasificación balanceada o problemas simples de reconocimiento."],
+              ["Precision / Recall / F1", "Evalúan calidad más allá del acierto bruto.", "Problemas desbalanceados o clases sensibles."],
+              ["ROC-AUC", "Mide capacidad de separar clases.", "Clasificación binaria con enfoque en discriminación."],
+              ["Batch size", "Cuántas muestras procesa antes de actualizar pesos.", "Afecta memoria, estabilidad y velocidad."],
+              ["Epochs", "Cantidad de pasadas completas por el dataset.", "Afecta cuánto tiempo aprende la red."]
+            ]
+          }
+        },
+        {
+          title: "Pérdida y optimizador: no son lo mismo",
+          body: "La función de pérdida responde 'qué tan mal lo estoy haciendo'; el optimizador responde 'cómo corrijo mis pesos para hacerlo mejor'. Esa diferencia es clave.",
+          comparisonTable: {
+            columns: ["Elemento", "Rol", "Ejemplos comunes"],
+            rows: [
+              ["Función de pérdida", "Cuantifica el error.", "`MSE`, `binary_crossentropy`, `categorical_crossentropy`."],
+              ["Optimizador", "Actualiza parámetros para reducir el error.", "`SGD`, `Adam`, `RMSProp`."]
+            ]
+          }
+        },
+        {
+          title: "Optimizadores que conviene recordar",
+          body: "No todos corrigen igual los pesos.",
+          comparisonTable: {
+            columns: ["Optimizador", "Idea principal", "Dónde suele brillar"],
+            rows: [
+              ["SGD", "Actualiza con pasos simples y robustos.", "Líneas base, control fino o configuraciones más manuales."],
+              ["Adam", "Combina momentum y ajuste adaptativo del paso.", "Muy usado en deep learning por practicidad."],
+              ["RMSProp", "Ajusta el paso según la historia reciente del gradiente.", "Frecuente en secuencias o escenarios dinámicos."]
+            ]
+          }
+        },
+        {
+          title: "Qué necesita el dataset para que la red aprenda bien",
+          body: "Las redes neuronales suelen ser muy sensibles a la calidad y escala de los datos. Normalizar, codificar correctamente etiquetas, evitar ruido innecesario y separar bien entrenamiento, validación y test no es un detalle opcional: es parte del aprendizaje exitoso."
+        },
+        {
+          title: "Una solución de deep learning no parte desde el modelo",
+          body: "Uno de los errores más comunes es enamorarse primero de la arquitectura y después buscarle problema. En la práctica debería ser al revés: parto del problema de negocio o del caso real, reviso qué datos existen, qué tipo de salida necesito, qué costo tolero y recién ahí defino si una red neuronal profunda tiene sentido."
+        },
+        {
+          title: "Qué piezas componen una solución real",
+          body: "Cuando paso de la teoría al mundo real, una red deja de ser solo capas y pesos.",
+          comparisonTable: {
+            columns: ["Componente", "Qué hace", "Por qué importa"],
+            rows: [
+              ["Datos y etiquetado", "Define con qué aprende el modelo.", "Si esta base falla, todo lo demás se contamina."],
+              ["Preprocesamiento", "Normaliza, transforma y ordena entradas.", "Asegura coherencia entre entrenamiento e inferencia."],
+              ["Modelo", "Aprende representaciones y genera predicciones.", "Es el núcleo técnico, pero no trabaja solo."],
+              ["Métricas", "Evalúan el comportamiento.", "Permiten decidir si el modelo realmente sirve."],
+              ["Interpretabilidad", "Explica por qué predijo eso.", "Clave en salud, finanzas o contextos sensibles."],
+              ["Despliegue y monitoreo", "Lleva el modelo a uso real y lo vigila.", "Sin esto, no hay solución mantenible."]
+            ]
+          }
+        },
+        {
+          title: "Cómo detectar si la red está aprendiendo bien o mal",
+          body: "Mirar solo un número final suele ser insuficiente.",
+          comparisonTable: {
+            columns: ["Señal", "Qué podría significar"],
+            rows: [
+              ["La pérdida baja de forma estable", "La red está aprendiendo sin demasiada inestabilidad."],
+              ["Accuracy de train sube, validación no mejora", "Posible overfitting."],
+              ["Train y validación muy bajas", "Arquitectura pobre, poco aprendizaje o mal preprocesamiento."],
+              ["Oscilaciones bruscas en pérdida", "Tasa de aprendizaje, batch o datos pueden estar afectando la convergencia."],
+              ["Validación estable y test alto", "Buen equilibrio general del modelo."]
+            ]
+          }
+        },
+        {
+          title: "Interpretabilidad: no siempre basta con acertar",
+          body: "En muchos casos no alcanza con que la red clasifique bien; también necesito entender qué regiones, señales o variables influyeron más. Herramientas como `Grad-CAM` ayudan justamente a eso en visión computacional, porque permiten visualizar qué partes de una imagen activaron con más fuerza la decisión del modelo."
+        },
+        {
+          title: "Qué revisar antes de llevar la red al mundo real",
+          body: "Una red bien entrenada todavía puede fallar como solución si no se prueba en condiciones realistas.",
+          comparisonTable: {
+            columns: ["Chequeo", "Qué valida", "Riesgo si lo ignoro"],
+            rows: [
+              ["Datos parecidos al uso real", "Que el modelo vea escenarios creíbles.", "Desempeño inflado en laboratorio y pobre en producción."],
+              ["Costo computacional", "Si el modelo cabe en el entorno objetivo.", "Latencia alta o despliegue inviable."],
+              ["Interpretabilidad", "Si puedo justificar decisiones.", "Pérdida de confianza o rechazo del sistema."],
+              ["Robustez", "Si soporta ruido, casos raros o cambios pequeños.", "Errores inesperados con entradas reales."],
+              ["Mantenimiento", "Si puedo actualizar, monitorear y recalibrar.", "El modelo envejece y deja de servir."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes en redes neuronales",
+          body: "La clase también deja varias alertas que conviene fijar desde ya.",
+          bestPractices: [
+            "No asumir que más capas o más neuronas siempre mejoran el modelo.",
+            "No entrenar sin normalizar o estandarizar entradas.",
+            "No elegir activaciones sin pensar en el contexto del problema.",
+            "No usar una función de pérdida incorrecta para la tarea.",
+            "No evaluar solo con accuracy si los datos están desbalanceados.",
+            "No ignorar señales de overfitting durante el entrenamiento.",
+            "No diseñar la solución desde la arquitectura y olvidar el problema real.",
+            "No omitir interpretabilidad, validación realista o monitoreo posterior."
+          ]
+        },
+        {
+          title: "Dónde se usan hoy en la práctica",
+          body: "Las DNN aparecen en visión por computadora, NLP, series de tiempo, recomendadores, generación de contenido, mantenimiento predictivo, ciberseguridad y herramientas inteligentes de desarrollo. No son solo una teoría de laboratorio: ya viven dentro de productos diarios como traductores, asistentes, motores de recomendación y copilotos de código."
+        },
+        {
+          title: "Para recordar",
+          body: "Una red neuronal profunda aprende ajustando pesos y sesgos en capas sucesivas para reducir una función de pérdida. Su fuerza está en construir representaciones cada vez más complejas a partir del dataset, usando activaciones para introducir no linealidad y optimizadores para corregirse. Pero una solución real de deep learning también exige datos bien alineados, validación realista, interpretación de resultados, costo computacional razonable y capacidad de mantenimiento una vez desplegada."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S1 – Lectura: fundamentos de redes neuronales profundas, componentes y entrenamiento base</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S1 – Cuestionario Clase 1: introducción a DNNs, activaciones, pérdidas y aprendizaje con datos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S7 – Lectura: soluciones basadas en deep learning, interpretabilidad, despliegue y validación aplicada</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S7 – Cuestionario Clase 7: diseño de soluciones, Grad-CAM, validación realista y mantenimiento</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "matrix-and-vector-foundations-for-data-and-ml",
+        "gradients-hessians-and-their-role-in-machine-learning",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "sequential-neural-networks-memory-and-lstm-basics",
+      slug: "redes-neuronales-secuenciales-memoria-y-fundamentos-de-lstm",
+      title: "Redes neuronales secuenciales, memoria y fundamentos de LSTM",
+      summary: "Una guía para entender por qué una red tradicional se queda corta cuando el orden importa, cómo una `RNN` aprende de secuencias usando memoria interna y por qué `LSTM` aparece para recordar información útil durante más tiempo.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "17 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "RNN", "LSTM", "Secuencias"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué una red normal no basta cuando hay secuencia",
+          body: "Una red densa tradicional trata cada entrada como si fuera un caso aislado. Eso funciona bien en muchos problemas tabulares, pero se queda corta cuando necesito entender frases, melodías, logs, sensores o series de tiempo. Ahí el orden sí importa, y lo que ocurrió antes cambia la interpretación de lo que viene después.",
+          highlights: [
+            {
+              icon: "fa-solid fa-timeline",
+              title: "El contexto cambia el significado",
+              text: "Una palabra, una nota o un valor numérico no significan lo mismo si los miro fuera de la secuencia completa."
+            },
+            {
+              icon: "fa-solid fa-memory",
+              title: "La red necesita recordar",
+              text: "Para trabajar bien con secuencias, el modelo debe conservar parte de lo que ya vio y usarlo al decidir el siguiente paso."
+            }
+          ]
+        },
+        {
+          title: "Qué es una red neuronal recurrente",
+          body: "Una `RNN` es una arquitectura diseñada para procesar datos secuenciales. Su diferencia clave frente a una red feedforward es que mantiene un estado interno u oculto que se actualiza paso a paso. Ese estado actúa como memoria de corto plazo y permite que la salida actual dependa no solo de la entrada del momento, sino también del historial procesado."
+        },
+        {
+          title: "Cómo se compone una RNN en lo esencial",
+          body: "La estructura base es simple, pero potente.",
+          comparisonTable: {
+            columns: ["Pieza", "Qué hace", "Cómo recordarla"],
+            rows: [
+              ["Entrada en el tiempo `t`", "Entrega el dato actual de la secuencia.", "La palabra, nota, sensor o evento del momento."],
+              ["Estado oculto", "Guarda contexto del pasado reciente.", "La memoria interna de la red."],
+              ["Pesos compartidos", "Se reutilizan en cada paso temporal.", "La misma lógica se aplica a toda la secuencia."],
+              ["Salida", "Genera predicción o representación del paso.", "Lo que la red concluye en ese instante."],
+              ["BPTT", "Ajusta pesos a través del tiempo.", "La retropropagación adaptada a secuencias."]
+            ]
+          }
+        },
+        {
+          title: "La idea matemática sin complicarla de más",
+          body: "En una `RNN`, el estado oculto del tiempo `t` se calcula usando la entrada actual y el estado anterior. Eso significa que la red se va actualizando como una especie de cuaderno vivo: cada paso agrega información nueva, pero sin borrar por completo lo anterior. Esa es la base de que pueda aprender contexto."
+        },
+        {
+          title: "La analogía de una conversación",
+          body: "Si digo `Estoy feliz porque...`, una red tradicional podría mirar cada palabra por separado. Una `RNN`, en cambio, entiende que `porque` viene después de una emoción y anticipa que se dará una explicación. Su fortaleza está justamente en ir construyendo significado a medida que avanza la secuencia."
+        },
+        {
+          title: "Qué aprende realmente una red secuencial",
+          body: "No aprende solo valores sueltos. Aprende dependencias entre pasos: patrones gramaticales, relaciones temporales, continuidad melódica, cambios de tendencia, evolución de signos vitales o comportamiento de usuarios en el tiempo. En otras palabras, aprende cómo el pasado influye en el presente y condiciona el siguiente paso probable."
+        },
+        {
+          title: "Feedforward vs RNN vs GAN",
+          body: "La clase mezcla varias familias, así que conviene separarlas mentalmente.",
+          comparisonTable: {
+            columns: ["Característica", "Feedforward", "RNN", "GAN"],
+            rows: [
+              ["¿Procesa secuencias?", "No.", "Sí.", "No de forma base, aunque puede adaptarse."],
+              ["¿Tiene memoria interna?", "No.", "Sí.", "No, son dos redes en competencia."],
+              ["¿Genera datos nuevos?", "No.", "A veces con arquitecturas decodificadoras.", "Sí, ese es su foco principal."],
+              ["¿Para qué brilla?", "Clasificación o regresión general.", "Texto, series, audio, eventos secuenciales.", "Generación de imágenes, audio o datos sintéticos."]
+            ]
+          }
+        },
+        {
+          title: "Cómo aprende una RNN paso a paso",
+          body: "El aprendizaje sigue una lógica parecida a otras redes, pero extendida en el tiempo.",
+          bestPractices: [
+            "La red recibe una secuencia ordenada y procesa un paso a la vez.",
+            "En cada paso actualiza su estado oculto usando el estado anterior más la entrada actual.",
+            "Genera una salida o representación para ese instante.",
+            "Compara la predicción con la respuesta real mediante una función de pérdida.",
+            "Usa `Backpropagation Through Time (BPTT)` para repartir el error hacia pasos anteriores.",
+            "Actualiza los mismos pesos compartidos para mejorar el comportamiento en toda la secuencia."
+          ]
+        },
+        {
+          title: "BPTT: la retropropagación cuando hay tiempo de por medio",
+          body: "`Backpropagation Through Time` desenrolla la red como si cada paso temporal fuera una copia conectada de la misma arquitectura. Luego acumula gradientes a lo largo de toda la secuencia y actualiza pesos compartidos. Ese mecanismo es el que permite que la red aprenda qué partes del pasado ayudan de verdad a minimizar el error."
+        },
+        {
+          title: "El gran problema de las RNN puras",
+          body: "Las `RNN` clásicas sufren mucho cuando la secuencia es larga. Los gradientes pueden hacerse tan pequeños que la red olvida lo importante del pasado, o tan grandes que el entrenamiento se vuelve inestable. Por eso, aunque conceptualmente son bellas, en la práctica muchas veces se reemplazan por variantes más robustas."
+        },
+        {
+          title: "Desvanecimiento y explosión del gradiente",
+          body: "Estos dos conceptos conviene fijarlos bien porque aparecen una y otra vez en deep learning.",
+          comparisonTable: {
+            columns: ["Problema", "Qué ocurre", "Consecuencia práctica", "Respuesta común"],
+            rows: [
+              ["Desvanecimiento del gradiente", "Los gradientes se vuelven muy pequeños.", "La red deja de aprender dependencias largas.", "Usar `LSTM`, `GRU` o ventanas más cortas."],
+              ["Explosión del gradiente", "Los gradientes crecen demasiado.", "El entrenamiento se vuelve inestable.", "Aplicar `gradient clipping` y mejor control del entrenamiento."]
+            ]
+          }
+        },
+        {
+          title: "Por qué aparece LSTM",
+          body: "`LSTM` nace justamente para resolver la dificultad de recordar información útil durante secuencias largas. En vez de confiar en una sola memoria simple, incorpora mecanismos que deciden qué olvidar, qué guardar y qué mostrar como salida. Por eso se convirtió en el estándar clásico para muchos problemas secuenciales antes del auge de los Transformers."
+        },
+        {
+          title: "Las compuertas de LSTM sin volverlo un infierno",
+          body: "Lo más importante de `LSTM` no es memorizar todas las fórmulas, sino entender el rol de sus compuertas.",
+          comparisonTable: {
+            columns: ["Componente", "Qué decide", "Idea práctica"],
+            rows: [
+              ["Forget gate", "Qué parte de la memoria anterior conviene olvidar.", "Limpia ruido o contexto que ya no sirve."],
+              ["Input gate", "Qué información nueva merece entrar.", "Filtra qué vale la pena aprender ahora."],
+              ["Output gate", "Qué parte de la memoria mostrar en la salida.", "Decide qué contexto usar para responder en este paso."]
+            ]
+          }
+        },
+        {
+          title: "Qué gana LSTM frente a una RNN simple",
+          body: "Gana control. En vez de arrastrar memoria de forma demasiado frágil, la administra de forma explícita. Eso la vuelve mucho mejor para lenguaje, música, series temporales clínicas, logs y otras secuencias donde una pista importante puede haber aparecido varios pasos antes."
+        },
+        {
+          title: "Y GRU dónde entra",
+          body: "`GRU` suele verse como una alternativa intermedia: menos compleja que `LSTM`, pero más robusta que una `RNN` básica. No siempre `LSTM` gana; en secuencias cortas o cuando quiero menos costo computacional, `GRU` puede rendir muy bien sin tanta complejidad."
+        },
+        {
+          title: "Qué medidas y señales conviene mirar aquí",
+          body: "En redes secuenciales sigo mirando varias de las métricas base del deep learning, pero con algunas alertas extra.",
+          comparisonTable: {
+            columns: ["Elemento", "Qué me dice", "Por qué importa"],
+            rows: [
+              ["Loss", "Qué tan lejos está el modelo del objetivo.", "Sigue guiando el aprendizaje paso a paso."],
+              ["Accuracy / F1 / Recall", "Qué tan bien resuelve la tarea final.", "Depende del problema: clasificación, intención, sentimiento, etc."],
+              ["Longitud de secuencia", "Cuánto contexto estoy dejando entrar.", "Afecta memoria, costo y dificultad del entrenamiento."],
+              ["Padding", "Si igualé secuencias de distinto tamaño.", "Evita errores y hace entrenable el batch."],
+              ["Validación vs entrenamiento", "Si generaliza o memoriza.", "Permite detectar sobreajuste también aquí."]
+            ]
+          }
+        },
+        {
+          title: "Dónde brillan las redes secuenciales",
+          body: "Se usan mucho en traducción, análisis de sentimiento, reconocimiento de intenciones, resumen automático, predicción de demanda energética, precios financieros, monitoreo de signos vitales, música generativa y modelado de conversaciones. Siempre que el orden importe y el pasado afecte el presente, vale la pena pensar en ellas."
+        },
+        {
+          title: "Errores comunes con RNN y LSTM",
+          body: "Hay varios tropiezos muy repetidos que esta clase remarca bien.",
+          bestPractices: [
+            "No usar `RNN` para datos que en realidad no tienen estructura secuencial.",
+            "No ignorar el desvanecimiento del gradiente en secuencias largas.",
+            "No entrenar texto o secuencias sin padding o sin control del vocabulario.",
+            "No asumir que `LSTM` siempre será mejor que una `RNN` o `GRU`.",
+            "No olvidar regularización, `dropout`, `early stopping` o `gradient clipping`."
+          ]
+        },
+        {
+          title: "Para recordar",
+          body: "Las redes secuenciales existen porque el orden importa. Una `RNN` aprende usando memoria interna y contexto acumulado, pero puede sufrir con dependencias largas. `LSTM` aparece para administrar mejor esa memoria mediante compuertas, permitiendo recordar lo relevante durante más tiempo. Si quiero entender cómo aprenden por dentro, la clave es pensar en estado oculto, contexto, BPTT y control del gradiente."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S2 – Lectura: redes neuronales secuenciales y generativas, fundamentos de RNN, LSTM y aplicaciones</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S2 – Cuestionario Clase 2: memoria en secuencias, BPTT, LSTM y uso práctico de arquitecturas recurrentes</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "deep-neural-network-fundamentals-and-learning-flow",
+        "gradients-hessians-and-their-role-in-machine-learning",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "autoencoders-latent-space-and-controlled-reconstruction",
+      slug: "autoencoders-espacio-latente-y-reconstruccion-controlada",
+      title: "Autoencoders, espacio latente y reconstrucción controlada",
+      summary: "Una guía para entender cómo un autoencoder comprime y reconstruye datos, qué papel cumplen el `encoder`, el `decoder` y el espacio latente, y cuándo conviene usar variantes como `denoising autoencoders` o `VAE` para limpieza, detección de anomalías y generación de nuevas muestras.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Autoencoder", "Decoder", "VAE"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué esta arquitectura importa tanto",
+          body: "Uno de los grandes retos del aprendizaje automático es reducir complejidad sin perder lo esencial. Los autoencoders atacan justo ese problema: aprenden una representación comprimida de los datos y luego intentan reconstruir la entrada original. Esa idea abre puertas para compresión, limpieza, detección de anomalías, visualización y generación controlada de nuevas muestras.",
+          highlights: [
+            {
+              icon: "fa-solid fa-minimize",
+              title: "Comprimir sin tirar lo importante",
+              text: "El modelo aprende qué partes del dato son esenciales para reconstruirlo después con el menor error posible."
+            },
+            {
+              icon: "fa-solid fa-wand-magic-sparkles",
+              title: "También sirve para crear variantes",
+              text: "Cuando el espacio latente queda bien aprendido, variantes como `VAE` permiten muestrear y decodificar nuevas muestras similares."
+            }
+          ]
+        },
+        {
+          title: "Qué es un autoencoder en términos simples",
+          body: "Un autoencoder es una red neuronal no supervisada que aprende a copiar su entrada en su salida, pero obligándose a pasar por una representación comprimida llamada espacio latente. Como no puede simplemente memorizar la entrada completa sin costo, termina aprendiendo una versión más compacta y significativa del dato."
+        },
+        {
+          title: "Cómo se compone la arquitectura",
+          body: "La estructura base es bastante limpia y conviene fijarla bien.",
+          comparisonTable: {
+            columns: ["Componente", "Qué hace", "Cómo recordarlo"],
+            rows: [
+              ["Encoder", "Comprime la entrada a una representación más pequeña.", "Es el traductor que resume el dato."],
+              ["Espacio latente", "Guarda la codificación compacta.", "Es la esencia comprimida del patrón."],
+              ["Decoder", "Reconstruye la entrada desde la codificación.", "Es el intérprete que expande el resumen."],
+              ["Reconstrucción", "Salida final comparada con la entrada.", "Es la versión que el modelo intenta imitar."],
+              ["Pérdida de reconstrucción", "Mide qué tan distinta quedó la salida.", "Es la brújula del aprendizaje."]
+            ]
+          }
+        },
+        {
+          title: "Encoder y decoder: el corazón del proceso",
+          body: "El `encoder` recibe los datos originales y los reduce paso a paso hasta llegar a un vector más compacto. El `decoder` toma esa codificación y la expande nuevamente para reconstruir una aproximación de la entrada original. La gracia está en que el decoder no hace una copia trivial: aprende a interpretar ese resumen abstracto y convertirlo otra vez en un patrón útil."
+        },
+        {
+          title: "La analogía del compresor inteligente",
+          body: "Piensa en una imagen pesada. El encoder sería como un compresor que guarda solo estructura, colores dominantes y patrones esenciales. Luego el decoder actúa como un descompresor inteligente que intenta recuperar una imagen lo más parecida posible a la original. Si la reconstrucción sale bien, significa que la red sí entendió qué era importante conservar."
+        },
+        {
+          title: "Qué es el espacio latente y por qué vale oro",
+          body: "El espacio latente es el núcleo conceptual del autoencoder. Cada punto ahí resume características relevantes del dato original. Si dos imágenes, señales o clientes son parecidos, sus representaciones latentes también deberían parecerse. Por eso ese espacio sirve para visualizar, clusterizar, detectar rarezas o incluso generar variaciones nuevas en arquitecturas generativas."
+        },
+        {
+          title: "Cómo aprende el modelo paso a paso",
+          body: "El entrenamiento sigue una lógica bastante clara.",
+          bestPractices: [
+            "Entro con un dato original `x`.",
+            "El encoder lo transforma en una codificación latente `z`.",
+            "El decoder toma `z` y produce una reconstrucción `x^`.",
+            "Comparo `x` con `x^` usando una pérdida de reconstrucción.",
+            "La red ajusta pesos para que la reconstrucción se acerque más al original.",
+            "Repito el ciclo hasta bajar el error y mejorar la calidad de la reconstrucción."
+          ]
+        },
+        {
+          title: "Qué pérdida suele usarse aquí",
+          body: "La función de pérdida depende del tipo de dato que quiero reconstruir.",
+          comparisonTable: {
+            columns: ["Loss", "Cuándo se usa", "Qué evalúa"],
+            rows: [
+              ["`MSE`", "Datos continuos.", "Qué tan lejos quedó la reconstrucción respecto al valor real."],
+              ["`binary_crossentropy`", "Datos binarios o valores normalizados entre 0 y 1.", "Qué tan bien la salida reproduce activaciones tipo probabilidad o píxeles normalizados."]
+            ]
+          }
+        },
+        {
+          title: "Autoencoder vs PCA vs GAN",
+          body: "Aquí está una de las diferencias que querías dejar clara.",
+          comparisonTable: {
+            columns: ["Técnica", "¿Supervisado?", "¿Aprende representaciones?", "¿Reconstruye o genera?", "¿Necesita etiquetas?"],
+            rows: [
+              ["Autoencoder clásico", "No.", "Sí.", "Reconstruye la entrada.", "No."],
+              ["PCA", "No.", "Sí, pero de forma lineal.", "No reconstruye como objetivo principal del modelo aplicado aquí.", "No."],
+              ["GAN", "No.", "Sí de forma implícita.", "Genera datos nuevos desde ruido o condiciones.", "No."]
+            ]
+          }
+        },
+        {
+          title: "Entonces, ¿dónde entran las GAN?",
+          body: "Las `GANs` sí entran en esta conversación, pero no hacen exactamente lo mismo. Un autoencoder clásico aprende a reconstruir lo que ya existe. Una `GAN` aprende a generar ejemplos nuevos y realistas a partir de ruido, mediante la competencia entre generador y discriminador. Donde se tocan es en la idea de crear datos sintéticos o poner a prueba sistemas con ejemplos nuevos, pero el camino técnico es distinto."
+        },
+        {
+          title: "Cuándo sí puedo generar datos nuevos con esta familia",
+          body: "Si quiero generación más controlada dentro del mundo autoencoder, la variante importante es `VAE` (`Variational Autoencoder`). A diferencia del autoencoder clásico, no solo codifica puntos aislados: modela una distribución en el espacio latente, lo que permite muestrear e interpolar para generar nuevos datos parecidos a los originales."
+        },
+        {
+          title: "Variantes que conviene recordar",
+          body: "Cada variante empuja la idea base hacia un objetivo distinto.",
+          comparisonTable: {
+            columns: ["Variante", "Propósito", "Qué la hace útil"],
+            rows: [
+              ["Denoising Autoencoder", "Quitar ruido.", "Aprende a reconstruir datos limpios desde entradas corruptas."],
+              ["Sparse Autoencoder", "Forzar representaciones más selectivas.", "Activa pocas neuronas y ayuda a resaltar patrones claros."],
+              ["VAE", "Generar datos nuevos.", "Permite muestrear e interpolar en el espacio latente."],
+              ["Convolutional Autoencoder", "Trabajar mejor con imágenes.", "Usa convoluciones para respetar estructura espacial."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo usar autoencoders y cuándo no",
+          body: "No todo problema necesita esta arquitectura.",
+          comparisonTable: {
+            columns: ["Escenario", "¿Conviene?", "Por qué"],
+            rows: [
+              ["Reducción de dimensionalidad no lineal", "Sí.", "Captura relaciones más complejas que PCA."],
+              ["Limpieza de ruido", "Sí.", "Los denoising autoencoders destacan aquí."],
+              ["Detección de anomalías", "Sí.", "El error de reconstrucción sirve como señal de rareza."],
+              ["Clustering o visualización sin etiquetas", "Sí.", "El espacio latente puede organizar mejor los datos."],
+              ["Clasificación supervisada directa", "No como primera opción.", "Suele convenir usar modelos diseñados para clasificación."]
+            ]
+          }
+        },
+        {
+          title: "Detección de anomalías con error de reconstrucción",
+          body: "Si entreno el autoencoder con datos normales, aprenderá a reconstruir bien ese patrón. Cuando le entrego un caso raro, su reconstrucción empeora y el error sube. Esa lógica lo vuelve muy útil para fraude, ciberseguridad, monitoreo de señales médicas o fallas industriales, porque no solo marca el caso raro: también muestra que ese caso no encaja con lo que la red aprendió como normal."
+        },
+        {
+          title: "Limpieza de datos y eliminación de ruido",
+          body: "Los `denoising autoencoders` reciben una versión dañada o ruidosa de la entrada y aprenden a devolver una versión limpia. Esto tiene mucho valor en imágenes médicas, documentos antiguos, audio, telecomunicaciones o señales con interferencia, porque el modelo aprende a distinguir mejor entre señal útil y ruido accidental."
+        },
+        {
+          title: "Reducción de dimensionalidad y clustering",
+          body: "Otra utilidad muy fuerte está en comprimir cientos o miles de variables a un espacio latente más pequeño para luego visualizar, clusterizar o entrenar otros modelos. Ahí el autoencoder puede actuar como una alternativa no lineal a `PCA`, preservando relaciones más complejas y dejando una base más compacta para análisis posteriores."
+        },
+        {
+          title: "Impacto real en testing y generación de casos",
+          body: "En software e IA esto es especialmente interesante porque un decoder o un `VAE` pueden ayudar a simular entradas válidas, variantes de prueba y datos sintéticos que desafíen a otros modelos. No reemplaza una `GAN` en generación fotorealista, pero sí puede servir para construir casos consistentes, explorar variaciones del espacio latente y poner a prueba robustez, cobertura y auditoría de sistemas inteligentes."
+        },
+        {
+          title: "Qué señales conviene mirar al entrenarlo",
+          body: "No basta con ver una pérdida final bonita.",
+          comparisonTable: {
+            columns: ["Señal", "Qué debería pasar"],
+            rows: [
+              ["`loss` y `val_loss`", "Deberían bajar de forma estable y parecida."],
+              ["Reconstrucción visual", "La salida debería mantener rasgos esenciales del original."],
+              ["Espacio latente", "Casos similares deberían quedar cerca o formar estructuras coherentes."],
+              ["Tamaño latente", "Muy pequeño puede perder información; muy grande puede memorizar demasiado."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "Esta clase deja varias alertas bien concretas.",
+          bestPractices: [
+            "No elegir el tamaño latente o la arquitectura de forma arbitraria.",
+            "No olvidar normalizar correctamente los datos.",
+            "No evaluar solo con métricas numéricas si hay reconstrucción visual disponible.",
+            "No usar autoencoders para tareas que en realidad piden otro tipo de modelo.",
+            "No asumir que por comprimir más, el modelo automáticamente aprenderá mejor."
+          ]
+        },
+        {
+          title: "Para recordar",
+          body: "El autoencoder aprende a comprimir y reconstruir. El `encoder` resume, el espacio latente conserva la esencia y el `decoder` reconstruye. Sirve muchísimo para reducción no lineal, limpieza de ruido, detección de anomalías y extracción de representaciones. Si quiero generar datos nuevos de forma más natural dentro de esta familia, la variante importante es `VAE`; si quiero generación más agresiva o realista desde ruido, ahí ya entro al terreno de las `GANs`."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S3 – Lectura: autoencoders, decoders, espacio latente y aplicaciones en compresión, anomalías y generación</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S3 – Cuestionario Clase 3: autoencoders, reconstrucción, variantes y usos reales</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "deep-neural-network-fundamentals-and-learning-flow",
+        "sequential-neural-networks-memory-and-lstm-basics",
+        "anomaly-detection-find-the-rare-and-learn-from-it"
+      ]
+    },
+    {
+      id: "modern-neural-networks-resnet-vs-efficientnet",
+      slug: "redes-neuronales-modernas-resnet-vs-efficientnet",
+      title: "Redes neuronales modernas: ResNet vs EfficientNet",
+      summary: "Una guía para entender por qué arquitecturas modernas como `ResNet` y `EfficientNet` marcan diferencia frente a redes más tradicionales, cómo se evalúan en la práctica y qué criterios conviene mirar al elegir entre profundidad, interpretabilidad, eficiencia y despliegue.",
+      category: "Machine Learning",
+      type: "Comparativa",
+      level: "advanced",
+      readingTime: "15 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "ResNet", "EfficientNet", "Deep Learning"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué aparecen estas arquitecturas modernas",
+          body: "A medida que las redes neuronales se hicieron más profundas, empezaron a aparecer problemas técnicos importantes: gradientes que se desvanecen o explotan, redes cada vez más difíciles de entrenar, degradación del rendimiento y modelos que consumen demasiados recursos. `ResNet` y `EfficientNet` nacen justamente para responder a esos límites.",
+          highlights: [
+            {
+              icon: "fa-solid fa-building-columns",
+              title: "No todo se arregla agregando capas",
+              text: "Hacer una red más profunda no siempre mejora el desempeño: a veces empeora el entrenamiento y la generalización."
+            },
+            {
+              icon: "fa-solid fa-gauge-high",
+              title: "Rendimiento y eficiencia importan juntos",
+              text: "Hoy no basta con acertar: también importa cuánto cuesta entrenar, inferir y desplegar el modelo."
+            }
+          ]
+        },
+        {
+          title: "Qué las hace modernas frente a una red tradicional",
+          body: "Las redes tradicionales profundas suelen crecer de forma más directa: más capas, más filtros o más parámetros. Las arquitecturas modernas, en cambio, incorporan principios de diseño más inteligentes. `ResNet` mejora el flujo de información con conexiones residuales. `EfficientNet` mejora la forma de escalar la red para no sobredimensionarla sin necesidad."
+        },
+        {
+          title: "La comparación más simple para recordarlas",
+          body: "Si lo pienso en una sola línea, lo recordaría así.",
+          comparisonTable: {
+            columns: ["Arquitectura", "Idea central", "Problema que resuelve mejor"],
+            rows: [
+              ["ResNet", "Agregar atajos para que la información y el gradiente fluyan mejor.", "Entrenar redes muy profundas sin degradación tan fuerte."],
+              ["EfficientNet", "Escalar profundidad, anchura y resolución de forma equilibrada.", "Lograr más eficiencia con mejor uso de recursos."]
+            ]
+          }
+        },
+        {
+          title: "Qué es ResNet",
+          body: "`ResNet` (`Residual Network`) fue introducida en 2015 y su gran innovación fueron los bloques residuales con `skip connections`. En vez de obligar a cada grupo de capas a aprender toda la transformación desde cero, la red aprende el residuo o diferencia respecto a la entrada. Eso facilita el entrenamiento y mejora la propagación del gradiente."
+        },
+        {
+          title: "Cómo funciona un bloque residual",
+          body: "En un bloque residual, la entrada original se suma con la salida transformada del bloque. Esa suma permite que la información tome un atajo y no dependa completamente de pasar por todas las operaciones intermedias. La idea parece simple, pero fue una de las claves para entrenar redes de muchas más capas sin que el rendimiento colapsara."
+        },
+        {
+          title: "Qué es EfficientNet",
+          body: "`EfficientNet`, propuesta en 2019, replantea cómo hacer crecer una red de forma inteligente. En lugar de aumentar solo profundidad o solo tamaño de entrada, usa `compound scaling`: ajusta al mismo tiempo profundidad (`depth`), anchura (`width`) y resolución (`resolution`) para mantener un mejor equilibrio entre precisión y costo computacional."
+        },
+        {
+          title: "Qué tiene por dentro EfficientNet",
+          body: "Su diseño se apoya en bloques `MBConv`, activación `Swish` y mecanismos `squeeze-and-excitation`. Todo eso busca aprovechar mejor los parámetros disponibles. Por eso variantes como `EfficientNetB0` a `B7` permiten moverse desde modelos livianos hasta opciones mucho más potentes, pero sin perder la lógica de eficiencia como criterio de diseño."
+        },
+        {
+          title: "Diferencias clave entre ResNet y EfficientNet",
+          body: "Esta es probablemente la tabla que más conviene guardar mentalmente.",
+          comparisonTable: {
+            columns: ["Criterio", "ResNet", "EfficientNet"],
+            rows: [
+              ["Año", "2015", "2019"],
+              ["Innovación central", "Conexiones residuales o skip connections.", "Compound scaling equilibrado."],
+              ["Arquitectura base", "Bloques residuales.", "Bloques MBConv con atención."],
+              ["Fortaleza principal", "Entrenamiento profundo y robusto.", "Mejor relación rendimiento/eficiencia."],
+              ["Transfer learning", "Muy usada, por ejemplo `ResNet50` o `ResNet101`.", "Muy usada, por ejemplo `EfficientNetB0` a `B7`."],
+              ["Cuándo suele convenir", "Problemas donde la robustez y la profundidad pesan más.", "Sistemas móviles, edge o escenarios con recursos más limitados."]
+            ]
+          }
+        },
+        {
+          title: "ResNet y EfficientNet frente a redes tradicionales",
+          body: "Las dos siguen siendo redes convolucionales profundas dentro del gran mundo del deep learning visual, pero se diferencian de enfoques más tradicionales por su diseño interno. Las redes clásicas crecían de forma más arbitraria; estas redes modernas fueron pensadas para resolver limitaciones concretas del entrenamiento y el despliegue."
+        },
+        {
+          title: "Cómo se miden en la práctica",
+          body: "Aquí es muy importante no mirar solo una métrica.",
+          comparisonTable: {
+            columns: ["Medida", "Qué me dice", "Por qué importa aquí"],
+            rows: [
+              ["Accuracy o precisión de validación", "Qué tan bien clasifica.", "Es la base para comparar desempeño general."],
+              ["Loss / val_loss", "Cómo evoluciona el error durante el entrenamiento.", "Permite ver convergencia y señales de sobreajuste."],
+              ["Tiempo de entrenamiento", "Cuánto tarda en aprender.", "Importa mucho en producción o experimentación rápida."],
+              ["Tiempo de inferencia", "Qué tan rápido responde una vez entrenado.", "Clave en móviles, edge o tiempo real."],
+              ["Tamaño del modelo", "Cuánto pesa en memoria o almacenamiento.", "Impacta portabilidad y despliegue."],
+              ["Compatibilidad de despliegue", "Qué tan fácil es llevarlo a producción.", "Importa para TensorFlow Lite, ONNX o hardware limitado."]
+            ]
+          }
+        },
+        {
+          title: "Qué señales buscaría durante el entrenamiento",
+          body: "La clase sugiere una lógica muy sana para revisar checkpoints.",
+          bestPractices: [
+            "Verificar que el modelo compile sin errores.",
+            "Revisar si desde las primeras épocas ya logra una validación razonable.",
+            "Comparar curvas de entrenamiento y validación para detectar sobreajuste.",
+            "Mirar si la velocidad de entrenamiento e inferencia es coherente con el tamaño del modelo.",
+            "Revisar si la arquitectura elegida tiene sentido para el dispositivo donde terminará corriendo."
+          ]
+        },
+        {
+          title: "Transfer learning: donde más suelen lucirse",
+          body: "Tanto `ResNet` como `EfficientNet` son bases muy usadas en `transfer learning`. Eso significa que parto de una red ya preentrenada en datasets grandes como `ImageNet`, congelo parte de su conocimiento y luego adapto solo la cabeza final a mi problema real. Esto reduce costo de entrenamiento y permite trabajar bien incluso cuando no tengo millones de imágenes propias."
+        },
+        {
+          title: "Ejemplos reales donde sí cambia la decisión",
+          body: "`ResNet` suele verse muy fuerte en diagnóstico por imagen, análisis satelital y escenarios donde también me interesa cierta explicabilidad con técnicas como `Grad-CAM`. `EfficientNet` suele destacar en clasificación de imágenes en móviles, control de calidad industrial y despliegues edge, donde cada megabyte y cada milisegundo importan más."
+        },
+        {
+          title: "Qué errores comunes conviene evitar",
+          body: "La clase deja varias alertas bien prácticas.",
+          comparisonTable: {
+            columns: ["Error", "Por qué daña el resultado"],
+            rows: [
+              ["No ajustar el tamaño de entrada", "La arquitectura espera formatos específicos y puede fallar o rendir mal."],
+              ["No usar `preprocess_input()` oficial", "Los datos dejan de ser compatibles con los pesos preentrenados."],
+              ["Descongelar todo desde el inicio", "Se puede destruir el conocimiento aprendido en el preentrenamiento."],
+              ["Elegir un modelo enorme para una tarea pequeña", "Se pierde eficiencia sin una mejora real equivalente."],
+              ["Mirar solo accuracy", "Oculta problemas de sobreajuste, costo o mala calibración."]
+            ]
+          }
+        },
+        {
+          title: "Malentendidos que conviene borrar",
+          body: "No, `EfficientNet` no siempre es mejor que `ResNet`; depende del contexto, del dataset y de los recursos disponibles. No, más profundidad no garantiza mejores resultados. No, la arquitectura base no se puede usar tal cual sin adaptar la cabeza del modelo. Y no, el despliegue no es un detalle menor: un modelo excelente pero inviable de correr puede dejar de servir en la práctica."
+        },
+        {
+          title: "Cómo elegiría entre ambas",
+          body: "Si mi prioridad es robustez, profundidad, prototipado fuerte y una integración cómoda con explicabilidad visual, pensaría primero en `ResNet`. Si necesito mejor balance entre precisión, tamaño, velocidad y despliegue en producción o edge, `EfficientNet` suele volverse una opción más natural. La clave no es cuál es 'más famosa', sino cuál se alinea mejor con el problema real."
+        },
+        {
+          title: "Para recordar",
+          body: "`ResNet` resolvió gran parte del problema de entrenar redes muy profundas gracias a sus bloques residuales. `EfficientNet` llevó el foco hacia una pregunta más moderna: cómo escalar una red sin desperdiciar recursos. Las dos se evalúan no solo por accuracy, sino también por pérdida, eficiencia, tiempo, tamaño y viabilidad de despliegue. Ahí está la verdadera diferencia frente a redes tradicionales: no solo aprenden, sino que están diseñadas para aprender mejor bajo restricciones reales."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S4 – Lectura: redes neuronales modernas y escalables, ResNet y EfficientNet</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S4 – Cuestionario Clase 4: arquitectura moderna, transfer learning, métricas y despliegue</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "deep-neural-network-fundamentals-and-learning-flow",
+        "autoencoders-latent-space-and-controlled-reconstruction",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "deep-neural-network-optimization-and-regularization",
+      slug: "optimizacion-y-regularizacion-en-redes-neuronales-profundas",
+      title: "Optimización y regularización en redes neuronales profundas",
+      summary: "Una guía para entender cómo se optimizan de verdad las redes neuronales profundas, qué diferencia hay entre regularizar y optimizar, y cuándo conviene usar técnicas como `Dropout`, `L1/L2`, `EarlyStopping`, `learning rate scheduling`, `Lookahead` o `Ranger`.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "17 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Optimización", "Regularización", "Dropout"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué optimizar bien una red cambia todo",
+          body: "En deep learning no basta con tener una buena arquitectura. Una red puede ser potente y aun así fallar por sobreajuste, convergencia inestable, mala generalización o simplemente por entrenar de forma ineficiente. Por eso optimización y regularización no son detalles extra: son parte del núcleo del entrenamiento real.",
+          highlights: [
+            {
+              icon: "fa-solid fa-shield-heart",
+              title: "Regularizar evita memorizar ruido",
+              text: "Ayuda a que la red no aprenda de memoria el entrenamiento ni se aferre a patrones espurios."
+            },
+            {
+              icon: "fa-solid fa-route",
+              title: "Optimizar mejora la ruta de aprendizaje",
+              text: "Busca que el ajuste de pesos sea más estable, rápido y útil para llegar a una buena solución."
+            }
+          ]
+        },
+        {
+          title: "Regularización y optimización no son lo mismo",
+          body: "Las dos se tocan todo el tiempo, pero cumplen roles distintos.",
+          comparisonTable: {
+            columns: ["Concepto", "Qué busca", "Ejemplos típicos"],
+            rows: [
+              ["Regularización", "Controlar la complejidad del modelo para generalizar mejor.", "`Dropout`, `L1`, `L2`, reducción de capacidad."],
+              ["Optimización", "Ajustar pesos de forma más estable y eficiente.", "`Adam`, `SGD`, `Lookahead`, `Ranger`, scheduling del learning rate."],
+              ["Callbacks de control", "Detener o ajustar el entrenamiento según señales.", "`EarlyStopping`, `ReduceLROnPlateau`, `ModelCheckpoint`."]
+            ]
+          }
+        },
+        {
+          title: "Qué pasa si no regulamos ni optimizamos bien",
+          body: "Lo típico es ver precisión engañosa en entrenamiento, curvas que no convergen, modelos que aprenden correlaciones irrelevantes, desperdicio de recursos computacionales y sistemas que fallan apenas salen del notebook y enfrentan datos del mundo real."
+        },
+        {
+          title: "Dropout: apagar para obligar a aprender mejor",
+          body: "`Dropout` desactiva aleatoriamente una parte de las neuronas durante el entrenamiento. Eso evita que la red dependa demasiado de conexiones específicas y la obliga a aprender representaciones más distribuidas y robustas.",
+          comparisonTable: {
+            columns: ["Qué aporta", "Cuándo ayuda", "Cuidado importante"],
+            rows: [
+              ["Reduce sobreajuste", "Cuando el modelo empieza a memorizar demasiado.", "Si lo exagero, puedo subentrenar la red."],
+              ["Introduce aleatoriedad útil", "Cuando necesito robustez interna.", "No conviene ponerlo sin criterio en cualquier capa."],
+              ["Es fácil de aplicar", "En capas densas o algunas arquitecturas específicas.", "Evitar usarlo justo antes de la capa de salida."]
+            ]
+          }
+        },
+        {
+          title: "L1 y L2 en redes profundas",
+          body: "Las penalizaciones `L1` y `L2` siguen siendo muy útiles dentro de deep learning, sobre todo en capas densas o escenarios con alto riesgo de sobreajuste.",
+          comparisonTable: {
+            columns: ["Regularización", "Qué hace sobre los pesos", "Cuándo suele lucir más"],
+            rows: [
+              ["L1", "Empuja algunos pesos a cero.", "Cuando quiero más sparsity o cierta selección implícita."],
+              ["L2", "Suaviza los pesos grandes y estabiliza la solución.", "Es la más común en redes densas y convolucionales."],
+              ["Elastic Net", "Combina sparsity y suavizado.", "Cuando quiero una mezcla entre control y selección."]
+            ]
+          }
+        },
+        {
+          title: "Learning rate: el ritmo al que aprende la red",
+          body: "La tasa de aprendizaje es uno de los hiperparámetros más sensibles del entrenamiento. Si es demasiado alta, el modelo puede oscilar o divergir; si es demasiado baja, aprende lento o se queda atrapado perdiendo tiempo. Por eso en redes modernas conviene tratarla como algo dinámico y no como un número fijo para siempre."
+        },
+        {
+          title: "Learning rate scheduling: ajustar el paso a medida que avanza",
+          body: "El `learning rate scheduling` cambia la tasa de aprendizaje durante el entrenamiento para adaptarse a distintas etapas del proceso.",
+          comparisonTable: {
+            columns: ["Estrategia", "Qué hace", "Cuándo ayuda"],
+            rows: [
+              ["`ReduceLROnPlateau`", "Baja el learning rate si la validación deja de mejorar.", "Cuando el modelo se estanca tarde en el entrenamiento."],
+              ["`ExponentialDecay`", "Reduce el paso de forma gradual según las épocas.", "Cuando quiero un descenso suave y programado."],
+              ["`Cyclical Learning Rates`", "Hace subir y bajar el learning rate en ciclos.", "Cuando quiero explorar mejor la superficie de pérdida."]
+            ]
+          }
+        },
+        {
+          title: "Early Stopping: parar antes de arruinarlo",
+          body: "`EarlyStopping` detiene el entrenamiento cuando la validación deja de mejorar. Su valor no es solo ahorrar tiempo: también protege contra el sobreajuste y permite conservar la mejor versión del modelo si uso `restore_best_weights=True`."
+        },
+        {
+          title: "Lookahead: aprender con pasos rápidos y controlados",
+          body: "`Lookahead` combina dos ritmos: un optimizador base da pasos rápidos y una versión más lenta de los pesos avanza de forma más estable hacia él. Esa mezcla tiende a suavizar la convergencia y reducir oscilaciones, especialmente en arquitecturas profundas o entrenamientos más nerviosos."
+        },
+        {
+          title: "Ranger: combinación pensada para estabilidad práctica",
+          body: "`Ranger` une `RAdam` con `Lookahead`. `RAdam` mejora la fase inicial del entrenamiento y `Lookahead` ayuda a suavizar la trayectoria general. Por eso suele verse como una opción interesante cuando quiero rapidez, robustez y cierta tolerancia a entrenamientos complejos o ruidosos."
+        },
+        {
+          title: "Resumen comparativo de técnicas",
+          body: "Si quisiera verlas todas en una sola foto mental, sería esta.",
+          comparisonTable: {
+            columns: ["Técnica", "Categoría", "Objetivo principal", "Ventaja destacada"],
+            rows: [
+              ["Dropout", "Regularización", "Evitar sobreajuste.", "Simple y efectiva para mejorar generalización."],
+              ["L1 / L2", "Regularización", "Controlar pesos grandes o sparsity.", "Da estabilidad o selección implícita."],
+              ["Learning rate scheduling", "Optimización", "Ajustar el ritmo de aprendizaje.", "Mejora convergencia y precisión."],
+              ["Early Stopping", "Control del entrenamiento", "Detener antes del sobreajuste.", "Ahorra recursos y conserva la mejor época."],
+              ["Lookahead", "Optimización", "Suavizar trayectoria de entrenamiento.", "Reduce oscilaciones."],
+              ["Ranger", "Optimización", "Combinar rapidez y robustez.", "Muy útil en arquitecturas profundas o inestables."]
+            ]
+          }
+        },
+        {
+          title: "Cómo se optimiza una red en la práctica",
+          body: "Más que una técnica aislada, suele funcionar una combinación ordenada.",
+          bestPractices: [
+            "Partir con un optimizador base razonable como `Adam` o `SGD` bien configurado.",
+            "Agregar `L2` o `Dropout` si aparecen señales de sobreajuste.",
+            "Monitorear `loss` y `val_loss` desde las primeras épocas.",
+            "Usar `EarlyStopping` para cortar cuando la validación deja de mejorar.",
+            "Aplicar `ReduceLROnPlateau` o algún scheduler si el aprendizaje se estanca.",
+            "Explorar optimizadores como `Lookahead` o `Ranger` cuando la convergencia se vuelve inestable."
+          ]
+        },
+        {
+          title: "Cómo saber si la red está bien optimizada",
+          body: "No basta con ver una accuracy linda.",
+          comparisonTable: {
+            columns: ["Señal", "Qué indicaría"],
+            rows: [
+              ["`loss` baja y `val_loss` acompaña", "El modelo aprende y generaliza de forma razonable."],
+              ["Train mejora mucho, validación no", "Sobreajuste probable."],
+              ["Curvas muy erráticas", "Learning rate, batch o optimizador pueden estar mal calibrados."],
+              ["Entrenamiento se frena sin mejorar", "Conviene scheduler, ajuste de arquitectura o revisión de datos."],
+              ["Demasiadas épocas para poca mejora", "Falta eficiencia o control de entrenamiento."]
+            ]
+          }
+        },
+        {
+          title: "Casos donde estas técnicas marcan diferencia",
+          body: "En salud ayudan mucho cuando hay pocas muestras y necesito evitar sobreajuste. En manufactura mejoran generalización en clasificación visual con clases desbalanceadas. En finanzas aportan estabilidad frente a series ruidosas. En bioinformática ayudan a controlar redes con miles de variables. En NLP o educación digital permiten ajustar modelos sin que se vuelvan innecesariamente pesados."
+        },
+        {
+          title: "Errores comunes que conviene evitar",
+          body: "La clase deja varios que aparecen mucho en la práctica.",
+          comparisonTable: {
+            columns: ["Error", "Consecuencia", "Corrección sugerida"],
+            rows: [
+              ["Usar Dropout sin criterio", "Modelo subentrenado o pérdida de capacidad.", "Moverse normalmente en rangos de 0.2 a 0.5 y revisar la arquitectura."],
+              ["Ignorar EarlyStopping", "Sobreajuste y pérdida de tiempo.", "Usarlo con `restore_best_weights=True` y paciencia razonable."],
+              ["Elegir mal la regularización", "Pesos inestables, overfitting o underfitting.", "Usar `L2` como base habitual y `L1` si realmente busco sparsity."],
+              ["Pensar que entrenar más siempre ayuda", "Peor generalización en test.", "Monitorear validación y callbacks."],
+              ["Confiar solo en una métrica", "Conclusiones incompletas.", "Cruzar accuracy, loss y señales de validación."]
+            ]
+          }
+        },
+        {
+          title: "Cómo lo conectaría con producción real",
+          body: "Optimizar una red no es solo hacerla llegar a una precisión alta. También es hacer que aprenda en tiempos razonables, que no desperdicie GPU o CPU, que no colapse con ruido, que generalice fuera del dataset inicial y que pueda mantenerse estable cuando se despliegue en un entorno real."
+        },
+        {
+          title: "Para recordar",
+          body: "Regularización y optimización son dos lados del mismo problema: uno controla qué tanto puede memorizar la red y el otro guía cómo debe aprender. `Dropout`, `L1/L2`, `EarlyStopping`, `learning rate scheduling`, `Lookahead` y `Ranger` no son adornos; son herramientas clave para que una red profunda deje de ser solo un prototipo bonito y se convierta en un modelo útil y estable."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S5 – Lectura: optimización y regularización en redes neuronales profundas</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S5 – Cuestionario Clase 5: Dropout, L1/L2, EarlyStopping, scheduling y optimizadores avanzados</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "deep-neural-network-fundamentals-and-learning-flow",
+        "regularization-overfitting-and-linear-penalties",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "transfer-learning-freezing-fine-tuning-and-real-adaptation",
+      slug: "transfer-learning-congelar-ajustar-y-adaptar-modelos-preentrenados",
+      title: "Transfer Learning: congelar, ajustar y adaptar modelos preentrenados",
+      summary: "Una guía para entender qué es `Transfer Learning`, cuándo conviene congelar capas, cuándo hacer `fine-tuning` y por qué reutilizar un modelo preentrenado puede ahorrar tiempo, datos y costo sin partir desde cero.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "14 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Transfer Learning", "Fine-Tuning", "Deep Learning"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Qué es transfer learning y por qué hoy importa tanto",
+          body: "`Transfer Learning` consiste en tomar un modelo ya entrenado en una tarea grande y reutilizar parte de ese conocimiento en un problema nuevo. En vez de enseñar desde cero a una red a reconocer patrones básicos, aprovecho filtros, representaciones o estructuras que ya aprendieron con datasets enormes y luego adapto solo lo necesario a mi caso real."
+        },
+        {
+          title: "La idea más simple para recordarlo",
+          body: "Si entrenar desde cero fuera como formar a alguien desde primero básico, `Transfer Learning` sería contratar a alguien que ya domina la base y solo necesita aprender el contexto específico del nuevo trabajo."
+        },
+        {
+          title: "Por qué suele ganar frente al entrenamiento desde cero",
+          body: "La gran ventaja práctica es que parte con una base ya útil.",
+          comparisonTable: {
+            columns: ["Criterio", "Transfer Learning", "Entrenar desde cero"],
+            rows: [
+              ["Tiempo de entrenamiento", "Menor.", "Mucho mayor."],
+              ["Cantidad de datos requerida", "Puede funcionar bien con menos datos.", "Suele necesitar datasets grandes."],
+              ["Costo computacional", "Más controlado.", "Más alto."],
+              ["Riesgo inicial de mal desempeño", "Menor si el modelo base se parece a la tarea.", "Más alto hasta que la red aprende patrones básicos."],
+              ["Flexibilidad total", "Media: parte de una base ya hecha.", "Alta: todo se aprende desde cero."]
+            ]
+          }
+        },
+        {
+          title: "Las dos formas principales de aplicarlo",
+          body: "No todo transfer learning se usa igual. En la práctica suelo moverme entre extracción de características y fine-tuning.",
+          comparisonTable: {
+            columns: ["Estrategia", "Qué hago", "Cuándo conviene más"],
+            rows: [
+              ["Extracción de características", "Congelo el modelo base y entreno solo la cabeza final.", "Cuando tengo pocos datos o quiero una solución rápida y estable."],
+              ["Fine-tuning", "Descongelo parte de las capas superiores y ajusto el modelo con learning rate bajo.", "Cuando necesito adaptar mejor el modelo a mi dominio real."]
+            ]
+          }
+        },
+        {
+          title: "Qué significa congelar capas",
+          body: "Congelar capas significa impedir que ciertos pesos cambien durante el entrenamiento. Normalmente se congelan las capas iniciales porque ya aprendieron bordes, texturas, contrastes y patrones generales. Así evito destruir conocimiento útil y reduzco el costo de entrenamiento."
+        },
+        {
+          title: "Qué significa hacer fine-tuning",
+          body: "El `fine-tuning` consiste en descongelar una parte del modelo preentrenado, normalmente las capas más altas, para adaptarlo mejor a mi problema. La clave aquí es usar una tasa de aprendizaje más baja, porque no quiero reescribir brutalmente lo aprendido, sino refinarlo."
+        },
+        {
+          title: "Qué capas suele convenir adaptar",
+          body: "No hay una receta única, pero la lógica general suele ser esta.",
+          comparisonTable: {
+            columns: ["Zona del modelo", "Qué suele aprender", "Qué hago normalmente"],
+            rows: [
+              ["Capas iniciales", "Patrones muy generales.", "Las dejo congeladas."],
+              ["Capas intermedias", "Combinaciones más complejas de patrones.", "Las evalúo según tamaño y similitud del dataset."],
+              ["Capas finales", "Rasgos más cercanos a la tarea original.", "Aquí suele tener sentido ajustar o reemplazar."]
+            ]
+          }
+        },
+        {
+          title: "Por qué funciona tan bien",
+          body: "Funciona porque muchas tareas comparten estructura. Un modelo entrenado con millones de imágenes ya aprendió conceptos visuales que también sirven para salud, industria, agricultura o retail. Lo mismo pasa en texto, audio y otras modalidades: el modelo base no parte ciego, parte con intuición."
+        },
+        {
+          title: "Cómo se evalúa un modelo transferido",
+          body: "No basta con ver si la accuracy sube.",
+          comparisonTable: {
+            columns: ["Medida", "Qué reviso", "Señal útil"],
+            rows: [
+              ["Accuracy / precisión", "Desempeño general en validación o test.", "Sirve como referencia inicial."],
+              ["Loss y val_loss", "Estabilidad del aprendizaje.", "Ayuda a detectar sobreajuste o mala convergencia."],
+              ["Tiempo de entrenamiento", "Costo real de adaptar el modelo.", "Permite justificar si valió la pena reutilizarlo."],
+              ["Métricas específicas", "F1, recall, AUC u otras.", "Dependen del problema real y del costo del error."],
+              ["Comparación contra baseline", "Si mejora de verdad frente a entrenar simple o desde cero.", "Evita enamorarse del nombre del modelo."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes que sí conviene evitar",
+          body: "La clase deja varias malas prácticas muy repetidas.",
+          comparisonTable: {
+            columns: ["Error", "Qué problema provoca"],
+            rows: [
+              ["Descongelar todo desde el inicio", "Puede destruir el conocimiento base y volver inestable el entrenamiento."],
+              ["Usar learning rate alto en fine-tuning", "Hace que el modelo olvide demasiado rápido lo útil."],
+              ["No adaptar la cabeza final", "La salida no queda alineada con la nueva tarea."],
+              ["No respetar el preprocesamiento oficial", "Los datos dejan de parecerse a lo que el modelo espera."],
+              ["Elegir un modelo enorme para un caso pequeño", "Se consume más recurso del necesario sin una mejora proporcional."]
+            ]
+          }
+        },
+        {
+          title: "Casos donde más se nota su valor",
+          body: "`Transfer Learning` se usa mucho en visión computacional, análisis médico, clasificación de defectos industriales, reconocimiento de especies, NLP, audio, biometría y sistemas donde no tengo millones de datos propios. También es clave cuando necesito prototipos funcionales más rápido para iterar negocio, no solo investigación."
+        },
+        {
+          title: "Cuándo sí podría no bastar",
+          body: "Si mi dominio es demasiado distinto al dataset original, si necesito aprender señales muy especializadas o si tengo suficientes datos y recursos para construir algo desde cero, entonces el beneficio puede reducirse. Transfer learning ayuda mucho, pero no reemplaza el juicio técnico sobre similitud de dominio y objetivo final."
+        },
+        {
+          title: "Para recordar",
+          body: "`Transfer Learning` no es magia: es reutilización inteligente de conocimiento. Congelar capas sirve para conservar lo general. Hacer `fine-tuning` sirve para adaptar lo específico. Su mayor valor está en ahorrar tiempo, datos y costo computacional, siempre que el modelo base tenga relación real con la tarea nueva."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M7-S6 – Lectura: fundamentos, estrategias, evaluación y errores frecuentes en transfer learning</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM7S6 – Cuestionario Clase 6: congelamiento de capas, fine-tuning y adaptación de modelos preentrenados</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "modern-neural-networks-resnet-vs-efficientnet",
+        "deep-neural-network-optimization-and-regularization",
+        "deep-neural-network-fundamentals-and-learning-flow"
+      ]
+    },
+    {
+      id: "nlp-fundamentals-from-text-to-meaning",
+      slug: "fundamentos-de-nlp-del-texto-al-significado",
+      title: "Fundamentos de NLP: del texto al significado",
+      summary: "Una guía base para entender qué es el `Procesamiento de Lenguaje Natural`, cómo una máquina transforma texto en números, por qué importa distinguir sintaxis y semántica, y qué papel cumplen técnicas como `Bag of Words`, `TF-IDF` y la similaridad textual.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "basic",
+      readingTime: "15 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "NLP", "TF-IDF", "Texto"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Qué es NLP y por qué se siente tan cercano",
+          body: "El `Procesamiento de Lenguaje Natural` (`NLP`) busca que una máquina pueda trabajar con lenguaje humano: leerlo, interpretarlo, resumirlo, clasificarlo o responder a partir de él. Por eso se siente tan cercano a cómo nos comunicamos en el día a día: correos, chats, buscadores, asistentes virtuales, traducción, análisis de opiniones y mucho más."
+        },
+        {
+          title: "La idea más simple para recordarlo",
+          body: "Si una persona escucha palabras y trata de entender intención, contexto y significado, `NLP` intenta enseñar algo parecido a una máquina, pero partiendo desde texto, patrones, estadísticas y representaciones numéricas."
+        },
+        {
+          title: "Por qué hoy es tan relevante",
+          body: "NLP no vive solo en laboratorios.",
+          highlights: [
+            {
+              icon: "fa-solid fa-comments",
+              title: "Convierte texto en información útil",
+              text: "Permite clasificar mensajes, detectar temas, resumir contenido y automatizar respuestas."
+            },
+            {
+              icon: "fa-solid fa-brain",
+              title: "Conecta con muchas otras áreas de IA",
+              text: "Se mezcla con machine learning, deep learning, recomendadores, motores de búsqueda y asistentes inteligentes."
+            }
+          ]
+        },
+        {
+          title: "Cómo entiende una máquina el lenguaje humano",
+          body: "La máquina no entiende una oración como lo hace una persona. Primero necesita convertir texto en una forma estructurada y numérica. Ese puente entre palabras y números es una de las bases más importantes de NLP, porque sin representación numérica no puede comparar, clasificar ni aprender patrones."
+        },
+        {
+          title: "Etapas clásicas del NLP tradicional",
+          body: "Antes de llegar a modelos más modernos, conviene recordar el flujo tradicional.",
+          bestPractices: [
+            "Limpiar el texto y normalizarlo para reducir ruido.",
+            "Separar el contenido en unidades más pequeñas como palabras o tokens.",
+            "Representar el texto numéricamente.",
+            "Analizar frecuencia, estructura, sintaxis o relaciones semánticas.",
+            "Comparar textos o entrenar modelos sobre esas representaciones."
+          ]
+        },
+        {
+          title: "Representar texto: convertir palabras en números",
+          body: "Una de las primeras barreras de NLP es que las palabras no son números. Por eso necesito técnicas que traduzcan documentos, frases o términos a vectores que una máquina sí pueda procesar. Aquí aparecen enfoques como `Bag of Words`, `TF-IDF` y luego métodos más avanzados como embeddings."
+        },
+        {
+          title: "BoW, TF-IDF y embeddings: cómo pensarlos",
+          body: "No todas las representaciones capturan el texto con la misma profundidad.",
+          comparisonTable: {
+            columns: ["Técnica", "Qué hace", "Qué limitación tiene"],
+            rows: [
+              ["Bag of Words", "Cuenta apariciones de palabras en un documento.", "Pierde orden y contexto."],
+              ["TF-IDF", "Pondera palabras según frecuencia local y rareza global.", "Sigue siendo una representación bastante superficial."],
+              ["Embeddings", "Aprenden relaciones semánticas y cercanía entre términos.", "Requieren modelos más avanzados y más contexto técnico."]
+            ]
+          }
+        },
+        {
+          title: "Sintaxis y semántica no son lo mismo",
+          body: "La sintaxis mira cómo está construida la oración: orden, estructura y relaciones gramaticales. La semántica intenta acercarse al significado. Esa diferencia es muy importante porque un texto puede estar bien escrito sintácticamente y aun así ser ambiguo o cambiar de sentido según el contexto."
+        },
+        {
+          title: "El caso clásico de palabras ambiguas",
+          body: "Palabras como `banco` muestran por qué NLP no puede quedarse solo en frecuencia. Según el contexto, `banco` puede referirse a una institución financiera o a un asiento. Ahí se vuelve evidente que entender lenguaje no es solo contar palabras, sino aproximarse a intención y contexto."
+        },
+        {
+          title: "Términos frecuentes y análisis exploratorio de texto",
+          body: "Una de las formas más simples de empezar un análisis textual es revisar qué términos aparecen más veces, qué combinaciones se repiten o cómo cambian por grupo. Esto sirve para tener una primera fotografía del corpus, detectar ruido, palabras dominantes o posibles temas antes de pasar a modelos más complejos."
+        },
+        {
+          title: "Similaridad textual: medir qué tan parecidos son dos textos",
+          body: "Cuando transformo textos a vectores, ya puedo medir cercanía entre documentos. La `similaridad de coseno` es una de las métricas más comunes porque compara dirección entre vectores más que longitud. Eso ayuda a detectar textos parecidos aunque no tengan exactamente el mismo tamaño."
+        },
+        {
+          title: "Qué técnica usaría en cada caso",
+          body: "La elección depende de lo que necesito resolver.",
+          comparisonTable: {
+            columns: ["Necesidad", "Técnica útil", "Por qué"],
+            rows: [
+              ["Clasificación simple de textos", "`BoW` o `TF-IDF`", "Son rápidos, interpretables y buenos como base."],
+              ["Buscar documentos parecidos", "Similaridad de coseno sobre `TF-IDF` o embeddings", "Permite comparar cercanía textual."],
+              ["Capturar significado más profundo", "Embeddings y modelos más modernos", "Aprovechan mejor contexto y semántica."],
+              ["EDA de comentarios o corpus", "Frecuencia de términos y n-gramas", "Dan una lectura inicial muy útil."]
+            ]
+          }
+        },
+        {
+          title: "Casos de uso en la industria",
+          body: "La clase aterriza muy bien que NLP no se limita a chatbots.",
+          comparisonTable: {
+            columns: ["Industria", "Aplicación típica", "Valor que aporta"],
+            rows: [
+              ["Salud", "Análisis de notas clínicas o informes.", "Ordena información textual sensible y agiliza revisión."],
+              ["Finanzas", "Clasificación de riesgo o análisis documental.", "Acelera decisiones y reduce revisión manual."],
+              ["E-commerce y marketing", "Análisis de reseñas y sentimiento.", "Ayuda a entender clientes y productos."],
+              ["Educación", "Clasificación de respuestas abiertas.", "Escala revisión y apoyo personalizado."],
+              ["Medios y redes sociales", "Detección de temas, tendencias o toxicidad.", "Permite monitoreo masivo en tiempo real."]
+            ]
+          }
+        },
+        {
+          title: "Qué errores comunes conviene evitar desde el inicio",
+          body: "NLP se puede complicar rápido si olvido lo básico.",
+          bestPractices: [
+            "No pensar que la máquina entiende palabras como una persona.",
+            "No elegir el modelo antes de revisar la calidad y cantidad del texto disponible.",
+            "No confundir frecuencia de términos con comprensión semántica real.",
+            "No evaluar solo por exactitud si el problema tiene clases sensibles o desbalanceadas.",
+            "No olvidar que lenguaje, contexto y dominio cambian mucho entre industrias."
+          ]
+        },
+        {
+          title: "Para recordar",
+          body: "`NLP` busca transformar lenguaje humano en una forma que una máquina pueda analizar. El paso clave es representar el texto numéricamente. `Bag of Words` y `TF-IDF` son bases muy útiles para comenzar; la sintaxis ayuda a entender estructura y la semántica intenta acercarse al significado. Desde ahí ya puedo medir similaridad, clasificar textos, detectar temas y construir soluciones más avanzadas."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M8-S1 – Lectura: fundamentos del procesamiento de lenguaje natural, representación textual y casos de uso</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM8S1 – Cuestionario Clase 1: conceptos base de NLP, TF-IDF, similaridad y aplicaciones</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "python-vs-other-languages-for-data-work",
+        "pandas-dataframes-masking-and-grouped-analysis",
+        "deep-neural-network-fundamentals-and-learning-flow"
+      ]
+    },
+    {
+      id: "nlp-preprocessing-embeddings-and-transformer-based-models",
+      slug: "preprocesamiento-embeddings-y-modelos-avanzados-de-nlp",
+      title: "Preprocesamiento, embeddings y modelos avanzados de NLP",
+      summary: "Una guía para conectar el `NLP` clásico con el moderno: cómo limpiar y normalizar texto, cuándo usar `Bag of Words`, `TF-IDF` o `word embeddings`, y por qué modelos como `BERT` y `Transformers` marcan una diferencia tan grande frente a enfoques más tradicionales.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "18 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "NLP", "BERT", "Transformers"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué estas dos clases conviene pensarlas juntas",
+          body: "La primera enseña a preparar bien el texto y la segunda muestra qué pasa cuando ese texto llega a modelos más potentes. Juntas forman una sola historia: primero dejo el lenguaje en una forma más limpia y útil; después elijo qué nivel de representación y qué modelo necesito para extraer significado real."
+        },
+        {
+          title: "Preprocesar no es adornar: es preparar el terreno",
+          body: "En NLP, el preprocesamiento reduce ruido, homologa formatos y hace que el texto sea más consistente para el análisis. Si esta etapa está mal hecha, incluso un modelo muy potente puede aprender patrones pobres, ambiguos o directamente engañosos."
+        },
+        {
+          title: "Técnicas básicas de limpieza y normalización",
+          body: "Las decisiones cambian según el caso, pero estas son las bases más comunes.",
+          comparisonTable: {
+            columns: ["Técnica", "Qué hace", "Cuándo ayuda más"],
+            rows: [
+              ["Lowercasing", "Pasa todo a minúsculas.", "Cuando mayúsculas no aportan significado útil."],
+              ["Eliminar signos o ruido", "Quita caracteres irrelevantes.", "En textos sucios, reseñas o logs textuales."],
+              ["Tokenización", "Divide el texto en unidades.", "Es base para casi cualquier pipeline de NLP."],
+              ["Eliminar stopwords", "Quita palabras muy frecuentes con poco contenido.", "En análisis temático o frecuencia de términos."],
+              ["Lematización / stemming", "Reduce variantes de una palabra a una forma más estable.", "Cuando quiero agrupar significados parecidos."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo el preprocesamiento puede jugar en contra",
+          body: "No toda limpieza mejora el modelo. A veces eliminar tildes, signos, emojis o palabras muy frecuentes destruye información valiosa. En análisis legal, clínico o emocional, detalles que parecen ruido pueden cambiar totalmente el sentido. Por eso preprocesar sin contexto también puede ser una mala práctica."
+        },
+        {
+          title: "Del texto limpio a la representación vectorial",
+          body: "Una vez limpio el texto, todavía necesito convertirlo a números. Ahí entran tres niveles bien recordables: conteo simple, ponderación estadística y representaciones semánticas aprendidas."
+        },
+        {
+          title: "BoW, TF-IDF y embeddings: la escalera natural",
+          body: "Si lo quisiera ordenar de más simple a más expresivo, sería así.",
+          comparisonTable: {
+            columns: ["Representación", "Qué captura", "Límite principal"],
+            rows: [
+              ["Bag of Words", "Frecuencia de palabras.", "Ignora orden y contexto."],
+              ["TF-IDF", "Importancia relativa de las palabras.", "Sigue siendo poco contextual."],
+              ["Word Embeddings", "Cercanía semántica entre palabras.", "Aún puede quedarse corto en polisemia contextual."],
+              ["Transformers / BERT", "Contexto dinámico según la oración completa.", "Requiere más cómputo y ajuste técnico."]
+            ]
+          }
+        },
+        {
+          title: "Word embeddings: cuando el significado empieza a importar más",
+          body: "Los `word embeddings` representan palabras como vectores donde cercanía geométrica sugiere similitud semántica. Eso permite que la máquina deje de ver solo frecuencia y empiece a relacionar conceptos. Así, palabras como `doctor` y `médico` terminan más cerca que `doctor` y `árbol`, aunque las tres sean solo texto para un conteo básico."
+        },
+        {
+          title: "El gran salto: autoatención",
+          body: "La `self-attention` permite que una palabra mire a las demás dentro de la misma secuencia para decidir qué tan relevantes son en su interpretación. Eso cambia mucho el juego, porque el significado de una palabra ya no depende solo de verla aislada, sino de qué otras la rodean y cómo se relacionan."
+        },
+        {
+          title: "Qué vuelve especial a BERT",
+          body: "`BERT` (`Bidirectional Encoder Representations from Transformers`) procesa el contexto mirando a ambos lados de la palabra dentro de la oración. Eso le permite capturar significados más finos y resolver mejor ambigüedades que los modelos tradicionales o embeddings estáticos. En simple: ya no solo representa palabras, sino palabras dentro de su contexto."
+        },
+        {
+          title: "Diferencia frente al NLP más tradicional",
+          body: "Esta comparación ayuda mucho a no mezclar enfoques.",
+          comparisonTable: {
+            columns: ["Aspecto", "NLP tradicional", "Modelos avanzados como BERT"],
+            rows: [
+              ["Contexto", "Muy limitado o indirecto.", "Se modela explícitamente dentro de la secuencia."],
+              ["Representación", "BoW, TF-IDF o embeddings estáticos.", "Representaciones contextuales profundas."],
+              ["Interpretación de ambigüedad", "Más difícil.", "Mejor manejo del sentido según la oración."],
+              ["Costo computacional", "Más bajo.", "Más alto."],
+              ["Potencia en tareas complejas", "Buena como base.", "Mucho mejor en comprensión fina del texto."]
+            ]
+          }
+        },
+        {
+          title: "Hugging Face: el puente práctico hacia estos modelos",
+          body: "`Hugging Face Transformers` se volvió una de las puertas más cómodas para usar modelos avanzados de NLP. Facilita cargar tokenizadores, modelos preentrenados y pipelines de tareas como clasificación, embeddings, análisis de sentimiento, resumen o extracción de información sin tener que construir todo desde cero."
+        },
+        {
+          title: "Cuándo usaría cada nivel de solución",
+          body: "No todos los problemas necesitan un transformer gigante.",
+          comparisonTable: {
+            columns: ["Escenario", "Qué usaría primero", "Por qué"],
+            rows: [
+              ["Clasificación simple con pocos recursos", "`TF-IDF` + modelo clásico", "Es rápido, interpretable y barato."],
+              ["Detección de similitud textual", "Embeddings o coseno sobre buenas representaciones", "Aporta noción de cercanía semántica."],
+              ["Análisis multilingüe o contexto fino", "`BERT` o transformer similar", "Entiende mejor contexto y matices."],
+              ["Prototipado rápido con modelos preentrenados", "`Hugging Face`", "Acelera pruebas reales sin partir de cero."]
+            ]
+          }
+        },
+        {
+          title: "Sectores donde esto se nota mucho",
+          body: "Las clases aterrizan bien cómo cambia según el dominio.",
+          comparisonTable: {
+            columns: ["Sector", "Qué aporta el preprocesamiento", "Qué aportan los modelos avanzados"],
+            rows: [
+              ["Salud", "Estandarizar términos clínicos.", "Entender mejor contexto médico y entidades sensibles."],
+              ["LegalTech", "Ordenar cláusulas y formatos repetitivos.", "Extraer relaciones más complejas entre secciones."],
+              ["E-commerce", "Limpiar reseñas y comentarios.", "Captar sentimiento, matices y lenguaje informal."],
+              ["Educación", "Normalizar respuestas abiertas.", "Evaluar contenido con mejor comprensión contextual."],
+              ["Redes sociales", "Reducir ruido extremo y abreviaturas.", "Manejar ironía parcial, temas y clasificación más robusta."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes y mitos que conviene borrar",
+          body: "Aquí hay varias trampas típicas.",
+          bestPractices: [
+            "No creer que un modelo preentrenado arregla texto mal preparado por arte de magia.",
+            "No aplicar limpieza agresiva sin pensar si destruye significado.",
+            "No asumir que `BERT` siempre es la mejor opción si el problema era resoluble con algo más simple.",
+            "No olvidar costo computacional, latencia y mantenimiento al elegir transformers.",
+            "No evaluar una técnica solo porque suena moderna: primero hay que mirar el problema real."
+          ]
+        },
+        {
+          title: "Para recordar",
+          body: "El NLP moderno no reemplaza por completo al tradicional: lo extiende. Primero preparo bien el texto con limpieza y normalización. Luego lo represento con el nivel de profundidad que el caso exige: `BoW`, `TF-IDF`, embeddings o modelos contextuales como `BERT`. La gran diferencia de los transformers está en que ya no leen palabras aisladas, sino relaciones dentro de toda la secuencia."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M8-S2 – Lectura: técnicas de preprocesamiento de texto, normalización, embeddings y librerías en NLP</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM8S2 – Cuestionario Clase 2: limpieza, tokenización, embeddings y buenas prácticas en NLP</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>Sesión 3 – Modelos avanzados de NLP: autoatención, BERT, Hugging Face y aplicaciones reales</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM8S3 – Cuestionario Clase 3: modelos avanzados de NLP, transformers y usos aplicados</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "nlp-fundamentals-from-text-to-meaning",
+        "transfer-learning-freezing-fine-tuning-and-real-adaptation",
+        "deep-neural-network-fundamentals-and-learning-flow"
+      ]
+    },
+    {
+      id: "nlp-model-evaluation-metrics-and-good-practices",
+      slug: "evaluacion-de-modelos-nlp-metricas-y-buenas-practicas",
+      title: "Evaluación de modelos NLP: métricas y buenas prácticas",
+      summary: "Una guía para entender cómo se evalúan de verdad los modelos de `NLP`, qué métricas conviene usar según la tarea, por qué `accuracy` no siempre basta y cómo leer resultados de clasificación, generación de texto y similaridad semántica sin caer en conclusiones engañosas.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "NLP", "Métricas", "Evaluación"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué evaluar en NLP no es solo mirar accuracy",
+          body: "En NLP una métrica alta no siempre significa que el modelo realmente entienda, generalice o sirva para el negocio. Todo depende de la tarea: clasificar textos, generar contenido, medir similaridad o detectar intención no se evalúa igual. Por eso esta parte es tan importante: define cómo interpreto si el modelo aporta valor real o solo se ve bonito en una tabla."
+        },
+        {
+          title: "Qué es una métrica de evaluación",
+          body: "Una métrica es una forma concreta de medir el rendimiento del modelo frente al objetivo que quiero resolver. No es lo mismo medir cuántas veces acierta una clase que medir qué tan bien redacta un resumen, qué tan parecidos considera dos textos o si está dejando pasar clases críticas."
+        },
+        {
+          title: "Primera regla de oro: la métrica depende de la tarea",
+          body: "No existe una única métrica reina para todo NLP.",
+          comparisonTable: {
+            columns: ["Tipo de tarea", "Qué quiero medir", "Métricas más útiles"],
+            rows: [
+              ["Clasificación de texto", "Acierto por clase y balance general.", "`Accuracy`, `Precision`, `Recall`, `F1`."],
+              ["Generación de texto", "Calidad, cercanía y cobertura respecto al texto esperado.", "`BLEU`, `ROUGE`, `METEOR`."],
+              ["Similaridad o embeddings", "Qué tan cerca están dos textos en significado.", "Coseno, distancia euclidiana, correlaciones."],
+              ["Tareas específicas", "Fenómenos puntuales del dominio.", "Métricas personalizadas según el caso."]
+            ]
+          }
+        },
+        {
+          title: "Clasificación de texto: las métricas que sí debo recordar",
+          body: "Cuando un modelo etiqueta textos, opiniones, intenciones o categorías, las métricas más comunes siguen siendo las derivadas de la matriz de confusión.",
+          comparisonTable: {
+            columns: ["Métrica", "Qué responde", "Cuándo pesa más"],
+            rows: [
+              ["Accuracy", "¿Cuántos casos acerté en total?", "Cuando las clases están relativamente balanceadas."],
+              ["Precision", "De lo que predije como positivo, ¿cuánto era correcto?", "Cuando me importa no llenarme de falsos positivos."],
+              ["Recall", "De los positivos reales, ¿cuántos encontré?", "Cuando me importa no dejar pasar casos importantes."],
+              ["F1-score", "¿Cómo balanceo precision y recall?", "Cuando necesito una visión más justa en clases desbalanceadas."]
+            ]
+          }
+        },
+        {
+          title: "Por qué accuracy puede engañar",
+          body: "Si tengo una clase muy dominante, el modelo puede acertar mucho solo repitiendo la clase mayoritaria. En un clasificador de spam, fraude, intención crítica o riesgo, eso puede dejar una accuracy alta pero un rendimiento malísimo justo donde más importa. Ahí `F1`, `precision` y `recall` suelen dar una lectura mucho más honesta."
+        },
+        {
+          title: "Generación de texto: no se mide igual que clasificación",
+          body: "Cuando el modelo genera texto, no basta con preguntar si 'acertó' una etiqueta. Aquí necesito comparar calidad de salida respecto a referencias humanas o esperadas.",
+          comparisonTable: {
+            columns: ["Métrica", "Qué observa", "Uso típico"],
+            rows: [
+              ["BLEU", "Coincidencia de n-gramas con texto de referencia.", "Traducción automática y generación controlada."],
+              ["ROUGE", "Cobertura de contenido relevante frente a una referencia.", "Resumen automático."],
+              ["METEOR", "Coincidencia flexible considerando variantes y alineación.", "Evaluación más semántica que BLEU en algunos contextos."]
+            ]
+          }
+        },
+        {
+          title: "Embeddings y similaridad semántica",
+          body: "Cuando comparo representaciones vectoriales de texto, las métricas cambian otra vez. Ya no estoy evaluando etiquetas o frases generadas, sino la cercanía semántica entre textos, preguntas, respuestas o documentos."
+        },
+        {
+          title: "Métricas útiles para similaridad textual",
+          body: "Estas son las más recordables para esa línea.",
+          comparisonTable: {
+            columns: ["Métrica", "Qué mira", "Cuándo conviene"],
+            rows: [
+              ["Similaridad de coseno", "Dirección entre vectores.", "Cuando me importa la cercanía semántica relativa."],
+              ["Distancia euclidiana", "Separación geométrica absoluta.", "Cuando la escala también tiene sentido."],
+              ["Correlación", "Alineación entre patrones de valores.", "Cuando comparo rankings o consistencia entre embeddings."]
+            ]
+          }
+        },
+        {
+          title: "Qué sectores muestran mejor esta diferencia",
+          body: "La clase aterriza muy bien que el contexto cambia la evaluación.",
+          comparisonTable: {
+            columns: ["Sector", "Tarea común", "Métrica que suele pesar más"],
+            rows: [
+              ["Salud", "Clasificación de notas clínicas.", "`Recall` y `F1`, porque perder casos sensibles puede ser grave."],
+              ["Legal", "Detección o clasificación de cláusulas.", "`Precision` y `F1`, para no mezclar categorías críticas."],
+              ["E-commerce", "Análisis de sentimiento.", "`F1` y revisión por clase, porque suele haber desbalance."],
+              ["Asistentes virtuales", "Clasificación de intención.", "`Accuracy` + `F1`, según diversidad de intenciones."],
+              ["Educación", "Clasificación o evaluación de respuestas.", "Combinación de métricas y validación cualitativa."]
+            ]
+          }
+        },
+        {
+          title: "Buenas prácticas que sí conviene fijar",
+          body: "No se trata solo de calcular métricas, sino de interpretarlas bien.",
+          bestPractices: [
+            "Elegir la métrica en función del problema y no de costumbre.",
+            "Usar más de una métrica cuando el problema lo exige.",
+            "Mirar el desempeño por clase y no solo el promedio global.",
+            "Complementar la evaluación numérica con ejemplos reales de errores.",
+            "Alinear la métrica con el costo real del error para el negocio."
+          ]
+        },
+        {
+          title: "Errores comunes y mitos",
+          body: "La sesión remarca varias trampas muy típicas.",
+          comparisonTable: {
+            columns: ["Error o mito", "Por qué es problemático"],
+            rows: [
+              ["Confiar solo en accuracy", "Puede ocultar fallos graves en clases minoritarias."],
+              ["Pensar que una métrica alta basta", "No siempre refleja utilidad real ni generalización."],
+              ["No adaptar la métrica a la tarea", "Comparo mal el desempeño y saco conclusiones pobres."],
+              ["Creer que modelos grandes siempre ganan", "A veces cuestan más y no mejoran lo que de verdad importa."],
+              ["Usar una sola métrica para todo", "Reduce demasiado la lectura del modelo."]
+            ]
+          }
+        },
+        {
+          title: "Cómo leería una evaluación de NLP de forma madura",
+          body: "Primero preguntaría qué tarea resolvía el modelo. Después revisaría si la métrica elegida tiene sentido para ese objetivo. Luego miraría resultados globales, resultados por clase, errores reales y posibles sesgos. Recién ahí concluiría si el modelo es bueno. Esa secuencia evita caer en el clásico autoengaño de confundir un número alto con una solución útil."
+        },
+        {
+          title: "Para recordar",
+          body: "Evaluar un modelo de NLP significa medirlo con la métrica correcta para la tarea correcta. `Accuracy` puede servir, pero muchas veces se queda corta. En clasificación suelen pesar `Precision`, `Recall` y `F1`; en generación aparecen `BLEU`, `ROUGE` o `METEOR`; y en embeddings importan métricas de similaridad. La mejor evaluación no es la que da el número más lindo, sino la que describe con más honestidad cómo se comporta el modelo en el problema real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M8-S4 – Lectura: evaluación de modelos NLP, métricas por tarea, errores comunes y buenas prácticas</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM8S4 – Cuestionario Clase 4: métricas de clasificación, generación y similaridad en NLP</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "nlp-fundamentals-from-text-to-meaning",
+        "nlp-preprocessing-embeddings-and-transformer-based-models",
+        "cross-validation-and-model-evaluation-in-practice"
+      ]
+    },
+    {
+      id: "ethical-nlp-bias-transparency-and-human-review",
+      slug: "nlp-etico-sesgos-transparencia-y-revision-humana",
+      title: "NLP ético: sesgos, transparencia y revisión humana",
+      summary: "Una guía para entender por qué un modelo de `NLP` no se vuelve justo solo por tener buena métrica, cómo detectar sesgos, qué principios éticos conviene aplicar y por qué fenómenos como ironía o sarcasmo también pueden distorsionar resultados si no se consideran en la evaluación.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "15 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "NLP", "Ética", "Sesgos"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué la ética en NLP no es un detalle extra",
+          body: "Cuando un modelo trabaja con lenguaje humano, no solo clasifica texto: también puede amplificar prejuicios, interpretar mal grupos sociales, invisibilizar contextos o tomar decisiones injustas si fue entrenado o desplegado sin cuidado. Por eso en NLP la ética no va después del modelo; va metida dentro de cómo recolecto datos, entreno, evalúo y monitoreo."
+        },
+        {
+          title: "Qué es un sesgo en NLP",
+          body: "Un sesgo aparece cuando el modelo favorece, castiga o representa de forma desigual a ciertos grupos, expresiones, idiomas o contextos. A veces viene del dataset, a veces del etiquetado, a veces del modelo y muchas veces del sistema completo en que se usa."
+        },
+        {
+          title: "Tipos de sesgo que más conviene recordar",
+          body: "No todos los sesgos nacen del mismo lugar.",
+          comparisonTable: {
+            columns: ["Tipo de sesgo", "Dónde aparece", "Qué problema causa"],
+            rows: [
+              ["Sesgo en datos", "Corpus, recolección o muestreo.", "El modelo aprende una realidad incompleta o distorsionada."],
+              ["Sesgo de etiquetado", "Anotación humana o criterios poco consistentes.", "La verdad de referencia ya viene torcida."],
+              ["Sesgo del modelo", "Arquitectura, embeddings o entrenamiento.", "Reproduce asociaciones injustas o atajos pobres."],
+              ["Sesgo de despliegue", "Uso real fuera del entorno de entrenamiento.", "El modelo falla distinto según contexto, grupo o idioma."]
+            ]
+          }
+        },
+        {
+          title: "Buena accuracy no significa que el modelo sea justo",
+          body: "Ese es uno de los mitos más peligrosos. Un modelo puede verse muy bien en métricas globales y aun así tratar peor a ciertos grupos, dialectos, géneros, regiones o estilos de escritura. La ética exige revisar desempeño por subgrupos y no solo un promedio general bonito."
+        },
+        {
+          title: "Cómo se detectan los sesgos",
+          body: "La detección no es solo técnica ni solo estadística; también es contextual.",
+          bestPractices: [
+            "Comparar desempeño del modelo por subgrupos relevantes.",
+            "Revisar matrices de confusión separadas por grupo o contexto.",
+            "Inspeccionar ejemplos reales donde el modelo falla de forma repetitiva.",
+            "Evaluar si el dataset representa bien acentos, registros, géneros o idiomas.",
+            "Incluir revisión humana cuando el impacto del error es sensible."
+          ]
+        },
+        {
+          title: "Principios éticos que sí conviene fijar",
+          body: "La clase empuja una idea bien sana: no basta con optimizar, también hay que responder por el efecto del sistema.",
+          comparisonTable: {
+            columns: ["Principio", "Qué propone", "Cómo se aterriza en NLP"],
+            rows: [
+              ["Justicia", "Reducir tratamientos desiguales injustificados.", "Revisar sesgos por grupo o contexto lingüístico."],
+              ["Transparencia", "Explicar límites, datos y comportamiento.", "Documentar corpus, métricas y riesgos del modelo."],
+              ["Responsabilidad", "Asumir consecuencias del uso.", "No desplegar a ciegas ni esconder errores críticos."],
+              ["Supervisión humana", "No delegar todo en la máquina.", "Mantener revisión humana en casos sensibles o ambiguos."]
+            ]
+          }
+        },
+        {
+          title: "Mitigar sesgos: qué sí se puede hacer",
+          body: "No existe un botón mágico, pero sí varias palancas útiles.",
+          comparisonTable: {
+            columns: ["Etapa", "Acción de mitigación", "Valor que aporta"],
+            rows: [
+              ["Recolección", "Construir datasets más diversos y balanceados.", "Reduce representación incompleta."],
+              ["Etiquetado", "Definir criterios claros y auditar consistencia.", "Baja ruido humano y ambigüedad."],
+              ["Entrenamiento", "Monitorear sesgo por subgrupos.", "Evita confiar solo en la métrica global."],
+              ["Despliegue", "Seguir auditando resultados en producción.", "Detecta degradación o nuevos sesgos contextuales."],
+              ["Operación", "Comunicar límites del modelo.", "Aumenta transparencia y uso responsable."]
+            ]
+          }
+        },
+        {
+          title: "El sarcasmo también importa",
+          body: "Tu observación acá suma muchísimo: fenómenos como ironía, sarcasmo, dobles sentidos o humor pueden alterar por completo el significado de una frase. Un comentario como 'sí, excelente servicio, me dejaron esperando tres horas' puede parecer positivo si el modelo solo mira palabras aisladas. Si no considero estos casos en testeo y evaluación, puedo inflar métricas o interpretar mal el sentimiento real."
+        },
+        {
+          title: "Dónde el sarcasmo y la ambigüedad pegan más fuerte",
+          body: "No afecta todas las tareas por igual.",
+          comparisonTable: {
+            columns: ["Tarea NLP", "Riesgo con sarcasmo o ironía", "Qué haría para cuidarlo"],
+            rows: [
+              ["Análisis de sentimiento", "Puede invertir completamente la polaridad.", "Agregar ejemplos irónicos al test y revisar errores manualmente."],
+              ["Moderación de contenido", "Puede esconder agresión o burla indirecta.", "Combinar reglas, contexto y validación humana."],
+              ["Asistentes conversacionales", "Puede responder fuera de tono.", "Agregar contexto conversacional y fallback seguro."],
+              ["Análisis de reseñas", "Puede subestimar frustración real del cliente.", "Auditar ejemplos ambiguos y no depender solo de keywords."]
+            ]
+          }
+        },
+        {
+          title: "Sectores donde un NLP ético pesa más",
+          body: "La clase lo aterriza muy bien por industria.",
+          comparisonTable: {
+            columns: ["Sector", "Riesgo ético principal", "Qué conviene cuidar más"],
+            rows: [
+              ["Salud", "Clasificar mal información sensible.", "Sesgos por población y revisión humana."],
+              ["Legal", "Interpretar mal cláusulas o lenguaje jurídico.", "Transparencia y validación fuerte por expertos."],
+              ["E-commerce", "Leer mal reseñas o reclamos.", "Sarcasmo, lenguaje informal y desbalance."],
+              ["Multilingüismo", "Tratar peor ciertos idiomas o variantes.", "Representación diversa y evaluación por idioma."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes y mitos",
+          body: "La sesión enumera varias ideas peligrosas que conviene borrar rápido.",
+          comparisonTable: {
+            columns: ["Mito o error", "Por qué es problemático"],
+            rows: [
+              ["Si la accuracy es alta, el modelo es ético", "Puede ocultar sesgos por subgrupo."],
+              ["Los sesgos viven solo en los datos", "También aparecen en el modelo, el uso y el despliegue."],
+              ["Si el dataset es grande, ya no hay sesgo", "Escala no garantiza diversidad ni justicia."],
+              ["Detectar sesgos es solo una tarea técnica", "También requiere contexto, dominio y criterio humano."],
+              ["Solo importa mitigar sesgos en entrenamiento", "El despliegue también cambia el comportamiento real."]
+            ]
+          }
+        },
+        {
+          title: "Qué evitar sí o sí antes de desplegar",
+          body: "Si quisiera resumir la clase en una alerta práctica, sería esta.",
+          bestPractices: [
+            "No ignorar sesgos desde la recolección de datos.",
+            "No entrenar sin revisar desempeño por subgrupos.",
+            "No desplegar modelos sin monitoreo continuo.",
+            "No ocultar límites, supuestos ni errores conocidos.",
+            "No reemplazar toda evaluación humana en tareas sensibles."
+          ]
+        },
+        {
+          title: "Para recordar",
+          body: "Un modelo de NLP ético no es el que solo acierta mucho, sino el que también reduce sesgos, comunica sus límites, incorpora revisión humana cuando hace falta y se monitorea después del despliegue. Además, si quiero una evaluación más fiel, debo considerar fenómenos difíciles como sarcasmo, ironía, ambigüedad y contexto cultural, porque también afectan cómo el lenguaje expresa intención real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>M8-S5 – Lectura: ética en NLP, sesgos, mitigación, transparencia y monitoreo</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM8S5 – Cuestionario Clase 5: sesgos, principios éticos y despliegue responsable en NLP</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "nlp-model-evaluation-metrics-and-good-practices",
+        "nlp-preprocessing-embeddings-and-transformer-based-models",
+        "open-data-privacy-and-ethics"
+      ]
+    },
+    {
+      id: "xai-with-lime-and-shap-for-model-interpretation",
+      slug: "xai-con-lime-y-shap-para-interpretar-modelos",
+      title: "XAI con LIME y SHAP: cómo interpretar modelos de IA",
+      summary: "Una guía para entender por qué la explicabilidad importa en IA, qué diferencias reales hay entre `LIME` y `SHAP`, cuándo conviene usar cada enfoque y qué cuidados éticos y legales debo considerar antes de confiar en una explicación automática.",
+      category: "Machine Learning",
+      type: "Comparativa",
+      level: "advanced",
+      readingTime: "17 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "XAI", "LIME", "SHAP"],
+      featured: true,
+      contentSections: [
+        {
+          title: "Por qué ya no basta con que el modelo acierte",
+          body: "A medida que los modelos se vuelven más complejos, también se vuelven más opacos. En salud, finanzas, justicia, educación o riesgo crediticio no basta con decir 'el modelo predijo esto'; también necesito entender por qué lo hizo. Ahí entra la `IA explicable` o `XAI`, que busca traducir parte del comportamiento del modelo a una lógica más interpretable para humanos."
+        },
+        {
+          title: "Interpretabilidad y explicabilidad no son exactamente lo mismo",
+          body: "La interpretabilidad suele apuntar a modelos que ya son comprensibles por diseño, como una regresión lineal o un árbol pequeño. La explicabilidad aparece cuando el modelo es más complejo y necesito herramientas externas para aproximarme a sus decisiones. `LIME` y `SHAP` viven justamente en ese segundo mundo."
+        },
+        {
+          title: "Qué hacen LIME y SHAP en simple",
+          body: "Las dos técnicas intentan responder la misma gran pregunta: qué variables empujaron una predicción. Pero no llegan ahí del mismo modo.",
+          comparisonTable: {
+            columns: ["Método", "Idea central", "Qué entrega mejor"],
+            rows: [
+              ["LIME", "Aproxima localmente el comportamiento del modelo cerca de un caso específico.", "Explicaciones locales rápidas e intuitivas."],
+              ["SHAP", "Usa valores inspirados en teoría de juegos para repartir contribuciones entre variables.", "Explicaciones locales y globales más consistentes."]
+            ]
+          }
+        },
+        {
+          title: "Qué es LIME",
+          body: "`LIME` (`Local Interpretable Model-agnostic Explanations`) crea pequeñas perturbaciones alrededor de un caso y ajusta un modelo interpretable local para ver qué variables parecen mover más la predicción. Su foco está en explicar un caso puntual, no necesariamente el comportamiento total del modelo."
+        },
+        {
+          title: "Qué es SHAP",
+          body: "`SHAP` (`Shapley Additive Explanations`) reparte la contribución de cada variable usando una lógica inspirada en los valores de Shapley de teoría de juegos. Eso permite estimar cuánto aporta cada variable a una predicción y también construir lecturas globales del modelo con más estabilidad conceptual."
+        },
+        {
+          title: "La diferencia clave entre ambos",
+          body: "Si quisiera recordarlo rápido: `LIME` explica por aproximación local y `SHAP` por contribución aditiva más estructurada. `LIME` suele ser más liviano para revisar casos puntuales; `SHAP` suele dar una base más sólida cuando quiero comparar importancias, consistencia y visión más global."
+        },
+        {
+          title: "LIME vs SHAP en una tabla útil",
+          body: "Esta es probablemente la comparación que más conviene tener a mano.",
+          comparisonTable: {
+            columns: ["Criterio", "LIME", "SHAP"],
+            rows: [
+              ["Enfoque", "Explicación local aproximada.", "Explicación basada en contribuciones Shapley."],
+              ["Cobertura", "Principalmente local.", "Local y global."],
+              ["Velocidad", "Suele ser más rápido en ejemplos simples.", "Puede ser más costoso computacionalmente."],
+              ["Consistencia", "Puede variar más según perturbaciones.", "Tiende a ser más estable conceptualmente."],
+              ["Interpretación visual", "Muy útil para casos puntuales.", "Muy fuerte en summary plots y análisis global."],
+              ["Cuándo suele lucir más", "Auditar una predicción concreta.", "Entender patrones del modelo y comparar variables."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo usaría cada uno",
+          body: "No es una competencia absoluta; depende del objetivo.",
+          comparisonTable: {
+            columns: ["Escenario", "Qué usaría primero", "Por qué"],
+            rows: [
+              ["Quiero explicar un caso individual a alguien no técnico", "LIME", "Suele ser más directo para explicaciones locales simples."],
+              ["Quiero ver impacto de variables en muchas predicciones", "SHAP", "Da una lectura más rica del comportamiento general."],
+              ["Necesito comparar contribuciones entre variables con más base teórica", "SHAP", "La lógica aditiva ayuda más."],
+              ["Necesito una herramienta rápida para prototipar explicaciones", "LIME", "Permite comenzar con menos carga conceptual."]
+            ]
+          }
+        },
+        {
+          title: "Dónde se usan de verdad",
+          body: "Las clases aterrizan muy bien varios sectores.",
+          comparisonTable: {
+            columns: ["Sector", "Uso típico", "Por qué la explicación importa"],
+            rows: [
+              ["Salud", "Diagnóstico o triage asistido.", "No basta con predecir; hay que justificar señales relevantes."],
+              ["Finanzas", "Aprobación o rechazo de crédito.", "La persona afectada necesita criterios más transparentes."],
+              ["Justicia / legal", "Modelos de riesgo o clasificación documental.", "Una mala explicación puede legitimar decisiones injustas."],
+              ["Opiniones médicas o sentimiento", "Revisar qué palabras empujan una clasificación.", "Ayuda a detectar atajos, ruido o sesgos."]
+            ]
+          }
+        },
+        {
+          title: "Qué beneficios sí aportan",
+          body: "Usadas con criterio, estas herramientas ayudan bastante.",
+          bestPractices: [
+            "Aumentan confianza y transparencia frente a usuarios o stakeholders.",
+            "Permiten detectar variables dominantes o sospechosas.",
+            "Ayudan a descubrir sesgos o atajos del modelo.",
+            "Facilitan depuración cuando una predicción parece absurda.",
+            "Abren una conversación más responsable sobre despliegue de IA."
+          ]
+        },
+        {
+          title: "Qué límites no debo olvidar",
+          body: "Una explicación no es la verdad absoluta del modelo.",
+          comparisonTable: {
+            columns: ["Límite", "Por qué importa"],
+            rows: [
+              ["La explicación es una aproximación", "No reemplaza comprender el pipeline completo."],
+              ["Puede depender del contexto de entrada", "Una misma variable no pesa igual en todos los casos."],
+              ["Puede inducir falsa confianza", "Ver un gráfico bonito no significa que el modelo sea justo o correcto."],
+              ["Tiene costo computacional o sensibilidad técnica", "Especialmente en `SHAP`, según el modelo y tamaño de datos."]
+            ]
+          }
+        },
+        {
+          title: "Buenas prácticas al usar LIME y SHAP",
+          body: "La clase deja varias ideas sanas para no usarlos a ciegas.",
+          bestPractices: [
+            "No usar explicaciones sin revisar primero calidad del modelo base.",
+            "Comparar varias predicciones y no quedarse con un solo ejemplo llamativo.",
+            "Cruzar explicación local con métricas globales y revisión de errores.",
+            "Verificar que las variables influyentes tengan sentido de negocio o dominio.",
+            "Usar evaluación humana en contextos sensibles."
+          ]
+        },
+        {
+          title: "Ética y legalidad: la explicación también tiene responsabilidad",
+          body: "Acá está la parte más delicada: explicar un modelo no lo vuelve automáticamente ético ni legalmente seguro. En decisiones de alto impacto, la organización debe poder justificar por qué usa el modelo, qué datos procesó, qué límites tiene y cómo evita daño injustificado. La explicabilidad ayuda, pero no reemplaza gobernanza, documentación, consentimiento, monitoreo ni revisión humana."
+        },
+        {
+          title: "Qué riesgos éticos y legales tendría presentes",
+          body: "Esta es la tabla que más conviene guardar cuando el modelo toca personas reales.",
+          comparisonTable: {
+            columns: ["Riesgo", "Qué puede pasar", "Qué haría para mitigarlo"],
+            rows: [
+              ["Falsa sensación de transparencia", "Creer que por tener explicación el modelo ya es confiable.", "Combinar explicabilidad con auditoría, métricas y revisión humana."],
+              ["Sesgos ocultos", "La explicación puede mostrar variables influyentes injustas o proxies sensibles.", "Revisar subgrupos y fairness de forma explícita."],
+              ["Uso indebido de datos", "Explicar decisiones sobre datos sensibles puede exponer información delicada.", "Aplicar minimización, anonimización y control de acceso."],
+              ["Incumplimiento regulatorio", "En sectores regulados puede no bastar con una caja negra sin justificación.", "Documentar modelo, datos, límites y criterios de uso."],
+              ["Sobredependencia operativa", "El equipo puede delegar decisiones humanas críticas al modelo.", "Mantener supervisión humana y protocolos de excepción."]
+            ]
+          }
+        },
+        {
+          title: "Mitos que conviene borrar",
+          body: "Estas clases también derriban varias ideas tramposas.",
+          comparisonTable: {
+            columns: ["Mito", "Realidad"],
+            rows: [
+              ["Si puedo explicarlo, entonces es justo", "No: una explicación puede revelar justamente que es injusto."],
+              ["Un modelo grande siempre explica mejor", "No necesariamente; a veces solo complica más la lectura."],
+              ["LIME y SHAP reemplazan la evaluación del modelo", "No: complementan, no sustituyen."],
+              ["La explicabilidad es solo un tema técnico", "También es un tema ético, legal y de negocio."]
+            ]
+          }
+        },
+        {
+          title: "Para recordar",
+          body: "`LIME` y `SHAP` no son IAs que evalúan todo por sí solas, sino herramientas de `XAI` para interpretar cómo un modelo llega a una predicción. `LIME` brilla más en explicaciones locales rápidas; `SHAP` suele dar una visión más consistente y también global. Pero ninguna explicación sirve sola: debe ir acompañada de métricas, auditoría de sesgos, contexto de negocio, revisión humana y cuidado ético-legal."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S1 – Presentación: fundamentos de interpretabilidad y explicabilidad, comparación entre LIME y SHAP</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S1 – Cuestionario Clase 1: interpretabilidad, explicabilidad y casos de uso</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S2 – Presentación: LIME, fundamentos técnicos, implementación y consideraciones éticas</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S2 – Cuestionario Clase 2: LIME, ventajas, límites y análisis de coherencia</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S3 – Presentación: SHAP, explicaciones globales, buenas prácticas y aplicación por sector</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM9S3 – Cuestionario Clase 3: SHAP, interpretabilidad y uso responsable</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "ethical-nlp-bias-transparency-and-human-review",
+        "cross-validation-and-model-evaluation-in-practice",
+        "deep-neural-network-fundamentals-and-learning-flow"
+      ]
+    },
+    {
+      id: "how-to-share-and-deploy-machine-learning-models",
+      slug: "como-compartir-y-desplegar-modelos-de-machine-learning",
+      title: "Cómo compartir y desplegar modelos de Machine Learning",
+      summary: "Una guía resumen para entender cómo un modelo pasa del notebook al uso real: `API REST`, serialización, `Docker`, `Kubernetes`, `CI/CD`, `MLOps` y plataformas cloud, con foco en qué hace cada capa y por qué no basta con solo entrenar el modelo.",
+      category: "Machine Learning",
+      type: "Guía",
+      level: "advanced",
+      readingTime: "18 min",
+      updatedAt: "2026-08-04",
+      tags: ["Machine Learning", "Despliegue", "Docker", "MLOps"],
+      featured: true,
+      contentSections: [
+        {
+          title: "La idea central: entrenar no es lo mismo que compartir",
+          body: "Un modelo puede funcionar perfecto dentro de un notebook y aun así no servirle a nadie si no logro exponerlo, empaquetarlo, escalarlo, monitorearlo y mantenerlo. Este bloque completo trata justamente de eso: cómo convertir un modelo en un servicio usable por otras personas, sistemas o productos."
+        },
+        {
+          title: "La ruta más simple para recordarlo",
+          body: "Si quisiera guardarlo como pipeline mental, lo resumiría así.",
+          bestPractices: [
+            "Entreno y valido el modelo.",
+            "Lo serializo para poder reutilizarlo.",
+            "Lo expongo mediante una API.",
+            "Lo empaqueto en un contenedor para que funcione igual en distintos entornos.",
+            "Si necesito escala, lo orquesto con Kubernetes.",
+            "Si quiero automatizar todo el ciclo, entro a CI/CD, MLOps y nube."
+          ]
+        },
+        {
+          title: "Paso 1: serializar el modelo",
+          body: "Serializar significa guardar el modelo entrenado en un formato reutilizable para poder cargarlo después sin volver a entrenar. Es el primer paso real para compartirlo, porque transforma un objeto de memoria en un artefacto portable."
+        },
+        {
+          title: "Paso 2: exponerlo con una API REST",
+          body: "Una `API REST` permite que otras aplicaciones envíen datos al modelo y reciban predicciones como respuesta. En términos simples, actúa como la puerta de entrada al modelo. `Flask` aparece mucho aquí porque permite construir endpoints predictivos rápidos, especialmente para prototipos y servicios livianos."
+        },
+        {
+          title: "Qué hace cada parte en una API de modelo",
+          body: "Esta tabla resume bien el primer bloque.",
+          comparisonTable: {
+            columns: ["Parte", "Qué hace", "Por qué importa"],
+            rows: [
+              ["Modelo serializado", "Guarda el conocimiento entrenado.", "Permite recargarlo sin reentrenar."],
+              ["Framework como Flask", "Crea la app web o API.", "Expone el modelo a otros sistemas."],
+              ["Endpoint predictivo", "Recibe datos y devuelve predicciones.", "Es la interfaz de uso real."],
+              ["Herramientas de prueba", "Postman, curl u otros clientes.", "Sirven para validar que el servicio responde bien."]
+            ]
+          }
+        },
+        {
+          title: "Paso 3: empaquetarlo con Docker",
+          body: "`Docker` mete el modelo, la API, las dependencias y la configuración en un contenedor reproducible. Eso evita el clásico problema de 'en mi máquina sí funciona'. Para ML esto ayuda muchísimo porque fija librerías, versiones y entorno de ejecución."
+        },
+        {
+          title: "Docker vs máquina virtual",
+          body: "La diferencia más recordable es esta.",
+          comparisonTable: {
+            columns: ["Criterio", "Contenedor Docker", "Máquina virtual"],
+            rows: [
+              ["Peso", "Más liviano.", "Más pesado."],
+              ["Arranque", "Rápido.", "Más lento."],
+              ["Aislamiento", "Bueno para apps y servicios.", "Más completo a nivel de sistema."],
+              ["Uso típico en ML", "Empaquetar APIs y servicios de modelo.", "Infraestructura más pesada o entornos completos."]
+            ]
+          }
+        },
+        {
+          title: "Qué aporta Docker en Machine Learning",
+          body: "Su mayor valor práctico es que hace repetible el despliegue. Si un modelo corre bien con sus dependencias dentro del contenedor, otro integrante del equipo o un servidor deberían poder correrlo igual. Eso mejora colaboración, reduce errores de entorno y acelera el paso a producción."
+        },
+        {
+          title: "Paso 4: orquestarlo con Kubernetes",
+          body: "`Kubernetes` entra cuando un solo contenedor ya no basta. Su rol es administrar muchos contenedores, escalar réplicas, reiniciar servicios que fallan, exponerlos de forma ordenada y sostener sistemas más robustos. Si Docker empaqueta, Kubernetes coordina."
+        },
+        {
+          title: "Las piezas más importantes de Kubernetes",
+          body: "Acá es donde más conviene simplificar nombres.",
+          comparisonTable: {
+            columns: ["Componente", "Qué hace", "Cómo lo pensaría"],
+            rows: [
+              ["Pod", "Unidad mínima que ejecuta contenedores.", "La cajita donde vive la app."],
+              ["ReplicaSet", "Mantiene varias copias activas.", "Evita quedarme con una sola instancia."],
+              ["Deployment", "Define y actualiza el estado deseado.", "Cómo administro versiones y cantidad de pods."],
+              ["Service", "Expone el acceso a los pods.", "La puerta estable hacia el conjunto desplegado."]
+            ]
+          }
+        },
+        {
+          title: "Cuándo tiene sentido pasar a Kubernetes",
+          body: "No todo proyecto lo necesita. Si tengo un prototipo simple o un uso pequeño, `Flask` con `Docker` puede bastar. Kubernetes empieza a hacer más sentido cuando necesito alta disponibilidad, varias réplicas, despliegues más ordenados o escalado automático."
+        },
+        {
+          title: "Paso 5: automatizar con CI/CD",
+          body: "`CI/CD` busca que cambios en código, configuración o modelo se prueben e integren de forma automática, y que el despliegue sea más repetible. En ML esto ayuda a evitar errores manuales y a conectar entrenamiento, testeo, empaquetado y publicación de forma más sana."
+        },
+        {
+          title: "Qué es MLOps y por qué va más allá de DevOps",
+          body: "`MLOps` toma ideas de `DevOps`, pero añade lo que ML necesita: manejo de datos, versionado de modelos, seguimiento de experimentos, validación, monitoreo de drift y gobierno del ciclo completo. No solo gestiona software; gestiona sistemas que aprenden y cambian con datos."
+        },
+        {
+          title: "DevOps vs MLOps",
+          body: "Se parecen, pero no cubren exactamente lo mismo.",
+          comparisonTable: {
+            columns: ["Enfoque", "DevOps", "MLOps"],
+            rows: [
+              ["Centro principal", "Código y despliegue de software.", "Código, datos, modelos y despliegue."],
+              ["Versionado", "Código e infraestructura.", "Código, datasets, features y modelos."],
+              ["Monitoreo", "Disponibilidad y rendimiento del servicio.", "También drift, degradación y calidad predictiva."],
+              ["Objetivo", "Entrega continua de software.", "Entrega y operación continua de sistemas de ML."]
+            ]
+          }
+        },
+        {
+          title: "Paso 6: usar plataformas cloud",
+          body: "Servicios como `AWS SageMaker`, `Google Vertex AI` o `Azure Machine Learning` facilitan entrenar, desplegar, versionar y monitorear modelos sin armar toda la infraestructura desde cero. Su gracia es acelerar trabajo productivo, aunque también implican costo, dependencia de proveedor y necesidad de buen criterio arquitectónico."
+        },
+        {
+          title: "Qué hace cada capa en el camino completo",
+          body: "Si quisiera resumir todo el módulo en una sola tabla, sería esta.",
+          comparisonTable: {
+            columns: ["Capa", "Se encarga de", "Función principal"],
+            rows: [
+              ["API REST", "Exponer el modelo.", "Permitir que otros sistemas hagan predicciones."],
+              ["Docker", "Empaquetar el entorno.", "Garantizar reproducibilidad y portabilidad."],
+              ["Kubernetes", "Orquestar múltiples contenedores.", "Escalar, reiniciar y administrar despliegues."],
+              ["CI/CD", "Automatizar integración y entrega.", "Reducir errores manuales y acelerar cambios."],
+              ["MLOps", "Gestionar el ciclo de vida del ML.", "Conectar datos, modelos, monitoreo y operación."],
+              ["Cloud", "Proveer infraestructura y servicios administrados.", "Facilitar despliegue y operación a escala."]
+            ]
+          }
+        },
+        {
+          title: "Errores comunes que el módulo repite harto",
+          body: "Hay varias alertas que conviene fijar desde ya.",
+          bestPractices: [
+            "Pensar que con entrenar el modelo ya está listo el proyecto.",
+            "No separar entrenamiento y despliegue como etapas distintas.",
+            "Empaquetar mal dependencias o dejar entornos frágiles.",
+            "Exponer mal el servicio o no probar el endpoint antes de publicar.",
+            "Creer que Kubernetes o la nube son necesarios en cualquier escenario pequeño.",
+            "Olvidar monitoreo, actualización y mantenimiento posterior."
+          ]
+        },
+        {
+          title: "Cómo decidir hasta dónde llegar",
+          body: "No todos los proyectos necesitan todo el stack. Un prototipo puede vivir feliz con modelo serializado + `Flask`. Un proyecto un poco más serio puede sumar `Docker`. Un servicio empresarial con escala y actualización continua puede necesitar `Kubernetes`, `CI/CD`, `MLOps` y cloud. La clave es no sobredimensionar antes de tiempo, pero tampoco olvidar que compartir un modelo de verdad exige más que una notebook bonita."
+        },
+        {
+          title: "Para recordar",
+          body: "Compartir un modelo de Machine Learning significa volverlo utilizable fuera del entorno de entrenamiento. Para eso lo serializo, lo expongo con una `API`, lo empaqueto con `Docker`, lo orquesto con `Kubernetes` si necesito escala y automatizo su ciclo con `CI/CD` y `MLOps`, idealmente apoyado por la nube cuando el contexto lo justifica. Cada capa cumple un rol distinto, y juntas convierten un modelo en un servicio real."
+        }
+      ],
+      references: [
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S1 – Presentación: despliegue de modelos ML con APIs REST, serialización y Flask</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S1 – Cuestionario Clase 1: despliegue, endpoints y buenas prácticas de exposición</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S2 – Presentación: contenedores, Docker y contenerización de modelos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S2 – Cuestionario Clase 2: Docker, arquitectura y colaboración reproducible</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S3 – Presentación: Kubernetes, pods, deployments, services y orquestación</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S3 – Cuestionario Clase 3: orquestación de contenedores y despliegue escalable</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S4 – Presentación: CI/CD, MLOps, nube y operación continua de modelos</em>.",
+          url: ""
+        },
+        {
+          citation:
+            "Kibernum Capacitación S. A. (2026). <em>MLM10S4 – Cuestionario Clase 4: DevOps, MLOps y plataformas cloud para ML</em>.",
+          url: ""
+        }
+      ],
+      relatedIds: [
+        "xai-with-lime-and-shap-for-model-interpretation",
+        "transfer-learning-freezing-fine-tuning-and-real-adaptation",
+        "oop-principles-for-machine-learning-projects"
+      ]
+    },
+    {
       id: "oop-principles-for-machine-learning-projects",
       slug: "poo-y-principios-de-diseno-para-proyectos-de-machine-learning",
       title: "POO y principios de diseño para proyectos de Machine Learning",
@@ -4079,7 +7415,7 @@
       slug: "estructuras-de-datos-avanzadas-para-machine-learning",
       title: "Estructuras de datos avanzadas para Machine Learning",
       summary: "Una nota puente para repasar listas, tuplas y diccionarios, y luego subir a pilas, colas, árboles y grafos con foco en cuándo conviene usar cada estructura dentro de flujos analíticos y de ML.",
-      category: "Programación",
+      category: "Machine Learning",
       type: "Guía",
       level: "intermediate",
       readingTime: "13 min",
@@ -4999,7 +8335,7 @@
       slug: "manejo-de-excepciones-en-python-para-flujos-de-datos",
       title: "Manejo de excepciones en Python para flujos de datos",
       summary: "Una guía avanzada para usar `try`, `except`, `else`, `finally` y `raise` al leer archivos, validar datos y evitar que un error interrumpa por completo un flujo de análisis o Machine Learning.",
-      category: "Programación",
+      category: "Código",
       type: "Guía",
       level: "advanced",
       readingTime: "11 min",
@@ -5091,6 +8427,1104 @@
         "pandas-dataframes-masks-and-groupby",
         "analysis-libraries-python-and-r",
         "advanced-data-structures-for-ml"
+      ]
+    },
+    {
+      id: "python-module-2-code-recipes-for-data-workflows",
+      slug: "recetario-de-codigo-python-modulo-2-para-flujos-de-datos",
+      title: "Manejo de excepciones, control de tiempo y optimización en Python",
+      summary: "Una nota práctica con snippets reutilizables para leer datos, validar errores, medir tiempos, perfilar procesos y optimizar código sin perder orden dentro del flujo de trabajo.",
+      category: "Código",
+      type: "Recetario",
+      level: "intermediate",
+      readingTime: "16 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "Código", "Excepciones", "Optimización"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí no es volver a explicar toda la teoría del módulo 2, sino dejar bloques de código que sí puedo reutilizar después. En simple: copiar, adaptar y usar según el problema."
+        },
+        {
+          title: "1. Leer un archivo línea por línea y validar números",
+          body: "Este patrón sirve cuando tengo archivos de texto con un dato por línea y necesito procesarlos sin que un error rompa todo el flujo.",
+          code: "class ValorNegativoError(Exception):\n    def __init__(self, valor):\n        super().__init__(f'Se detectó el valor negativo: {valor}')\n\n\ndef procesar_archivo(ruta_archivo):\n    try:\n        with open(ruta_archivo, 'r', encoding='utf-8') as archivo:\n            for linea in archivo:\n                try:\n                    numero = int(linea.strip())\n                    if numero < 0:\n                        raise ValorNegativoError(numero)\n                    print(f'Número válido: {numero} | cuadrado: {numero ** 2}')\n                except ValueError:\n                    print(f'Valor no numérico ignorado: {linea.strip()}')\n                except ValorNegativoError as e:\n                    print(e)\n    except FileNotFoundError:\n        print('No se encontró el archivo indicado.')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Abre un archivo, limpia cada línea con `strip()`, intenta convertirla a entero y controla dos casos: valores no numéricos y números negativos. Sirve mucho para lecturas simples de logs, puntajes, IDs o archivos preliminares antes de subir a `pandas`."
+        },
+        {
+          title: "2. Crear excepciones personalizadas para reglas del negocio",
+          body: "Esto ayuda cuando quiero diferenciar errores de contenido, no solo errores técnicos genéricos.",
+          code: "class TipoPokemonInvalido(Exception):\n    def __init__(self, nombre, tipo):\n        super().__init__(f\"El Pokémon '{nombre}' tiene un tipo inválido: {tipo}\")\n\n\nclass EntrenadorNoExisteError(Exception):\n    def __init__(self, pokemon, entrenador):\n        super().__init__(f\"El Pokémon '{pokemon}' tiene asignado un entrenador inexistente: {entrenador}\")"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "En vez de lanzar siempre `ValueError` para todo, puedo definir errores más claros según el dominio. Eso mejora trazabilidad y hace mucho más entendible el flujo cuando los datos tienen reglas propias."
+        },
+        {
+          title: "3. Cargar registros y validar estructura básica",
+          body: "Este patrón sirve cuando leo registros separados por comas y quiero controlar vacíos, cantidad de campos y relaciones válidas antes de guardar.",
+          code: "def cargar_pokemon(ruta, tipos_validos, entrenadores_validos, dic_pokemon):\n    try:\n        with open(ruta, 'r', encoding='utf-8') as archivo:\n            for linea in archivo:\n                if linea.strip() == '':\n                    continue\n                datos = linea.strip().split(',')\n                if len(datos) != 4:\n                    raise ValueError('Cantidad incorrecta de campos')\n                if any(campo.strip() == '' for campo in datos):\n                    raise ValueError('Uno o más campos están vacíos')\n\n                nombre, tipo, nivel, entrenador = datos\n                if tipo not in tipos_validos:\n                    raise TipoPokemonInvalido(nombre, tipo)\n                if entrenador not in entrenadores_validos:\n                    raise EntrenadorNoExisteError(nombre, entrenador)\n\n                dic_pokemon[nombre] = {\n                    'tipo': tipo,\n                    'nivel': int(nivel),\n                    'entrenador': entrenador\n                }\n    except FileNotFoundError:\n        print('Archivo no encontrado.')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Lee un archivo tipo CSV simple, valida estructura y guarda resultados en un diccionario. Es útil para flujos pequeños donde todavía no necesito `pandas`, pero sí quiero control sobre integridad del contenido."
+        },
+        {
+          title: "4. POO base para organizar entidades",
+          body: "Cuando el código empieza a crecer, tener clases ayuda a ordenar atributos y comportamientos relacionados.",
+          code: "class Vehiculo:\n    def __init__(self, marca, modelo, anio, conductor):\n        self.__marca = marca\n        self.__modelo = modelo\n        self.__anio = anio\n        self.__conductor = conductor\n\n    def acelerar(self):\n        print(f'{self.__conductor} acelera el vehículo.')\n\n    def get_modelo(self):\n        return self.__modelo\n\n\nclass AutoCarrera(Vehiculo):\n    def activar_turbo(self):\n        print('Turbo activado.')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "La clase base me deja encapsular atributos y reutilizar métodos comunes. La herencia sirve cuando quiero extender comportamiento sin reescribir todo. Esto ayuda mucho cuando paso de scripts sueltos a estructuras más mantenibles."
+        },
+        {
+          title: "5. Comparar búsqueda lineal y búsqueda binaria",
+          body: "Este snippet es útil para recordar cómo cambia la eficiencia según la estrategia.",
+          code: "def busqueda_lineal(lista, objetivo):\n    for i, valor in enumerate(lista):\n        if valor == objetivo:\n            return i\n    return -1\n\n\ndef busqueda_binaria(lista, objetivo):\n    izquierda, derecha = 0, len(lista) - 1\n    while izquierda <= derecha:\n        medio = (izquierda + derecha) // 2\n        if lista[medio] == objetivo:\n            return medio\n        if lista[medio] < objetivo:\n            izquierda = medio + 1\n        else:\n            derecha = medio - 1\n    return -1"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "La búsqueda lineal revisa uno por uno; la binaria parte el problema a la mitad, pero solo sirve si la lista ya está ordenada. Es una comparación simple, pero ayuda mucho a pensar rendimiento antes de escalar un flujo."
+        },
+        {
+          title: "6. Medir tiempos con timeit",
+          body: "Si quiero comparar implementaciones pequeñas, `timeit` es una salida rápida y clara.",
+          code: "import timeit\n\ntiempo = timeit.timeit('sum(range(1000))', number=1000)\nprint(tiempo)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Ejecuta el mismo bloque muchas veces y devuelve un tiempo total. Me sirve para comparar funciones simples y no quedarme solo con intuiciones sobre qué código 'se siente más rápido'."
+        },
+        {
+          title: "7. Perfilado básico con cProfile",
+          body: "Cuando el script ya creció, necesito ver no solo cuánto tarda, sino dónde se va el tiempo.",
+          code: "import cProfile\nimport pstats\nfrom io import StringIO\n\n\ndef compute_sum_squares(n):\n    total = 0\n    for i in range(n):\n        total += i * i\n    return total\n\nprofiler = cProfile.Profile()\nprofiler.enable()\ncompute_sum_squares(100000)\nprofiler.disable()\n\nstream = StringIO()\nstats = pstats.Stats(profiler, stream=stream).sort_stats('cumulative')\nstats.print_stats(10)\nprint(stream.getvalue())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Perfila una función y muestra qué partes consumen más tiempo. Es ideal cuando el cuello de botella ya no es obvio y quiero decidir con datos qué optimizar primero."
+        },
+        {
+          title: "8. Usar vectorización con NumPy",
+          body: "Este patrón deja clarísimo por qué a veces conviene dejar el bucle manual y pasar a operaciones vectorizadas.",
+          code: "import numpy as np\n\narr = np.array([1, 2, 3, 4])\nresultado = arr * 2\nprint(resultado)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Aplica una operación a todo el arreglo de una vez. Me sirve cuando trabajo con muchos datos numéricos y quiero que el cálculo sea más claro y normalmente también más rápido."
+        },
+        {
+          title: "9. Acelerar una función con JIT",
+          body: "Cuando sigo necesitando un bucle, `Numba` puede ayudar bastante en CPU.",
+          code: "from numba import njit\n\n@njit\ndef suma_rapida(a):\n    total = 0\n    for x in a:\n        total += x\n    return total"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Compila la función justo en ejecución para acelerar trabajo numérico repetitivo. Sirve cuando tengo lógica de bucle que no reemplacé fácil por vectorización, pero sí quiero bajar costo de CPU."
+        },
+        {
+          title: "10. Un mini flujo práctico para archivos numéricos",
+          body: "Si quiero mezclar lectura, validación y limpieza, esta versión compacta es una muy buena base.",
+          code: "def cargar_puntajes(ruta):\n    try:\n        with open(ruta, 'r', encoding='utf-8') as archivo:\n            return [float(linea.strip()) for linea in archivo if linea.strip()]\n    except FileNotFoundError:\n        print('No se encontró el archivo de puntajes.')\n        return []\n    except ValueError:\n        print('Hay un valor no numérico dentro del archivo.')\n        return []"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Carga números desde un archivo, ignora líneas vacías y devuelve una lista lista para seguir trabajando. Es uno de esos bloques chicos que aparecen una y otra vez cuando practico lectura de datos sin subir todavía a DataFrames."
+        },
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario no es memorizar todo, sino reconocer qué patrón necesito: lectura segura, validación, clase base, búsqueda, perfilado o aceleración. Desde ahí copio el bloque, lo renombro y lo ajusto a mi caso.",
+      references: [],
+      relatedIds: [
+        "python-exception-handling-for-data-workflows",
+        "python-functions-conditionals-and-operators",
+        "python-loops-break-and-continue",
+        "pythonic-optimization-and-jit-for-ml"
+      ]
+    },
+    {
+      id: "python-module-3-code-recipes-for-calculus-and-linear-algebra",
+      slug: "recetario-de-codigo-python-modulo-3-para-calculo-y-algebra",
+      title: "Cálculo, álgebra y optimización base en Python",
+      summary: "Una nota práctica con snippets reutilizables para generar datos, armar matrices, resolver sistemas, derivar funciones y ajustar modelos lineales con fórmula cerrada o descenso de gradiente.",
+      category: "Código",
+      type: "Recetario",
+      level: "intermediate",
+      readingTime: "18 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "NumPy", "Álgebra", "Optimización"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea de esta nota es dejar a mano los bloques de código más útiles del módulo 3. No para repetir teoría, sino para tener una base concreta al momento de generar datos, trabajar matrices, resolver sistemas o ajustar un modelo simple."
+        },
+        {
+          title: "Generar datos sintéticos y construir la matriz de diseño",
+          body: "Este bloque sirve para simular una regresión lineal simple con ruido y dejar lista la matriz `X = [1, x]` que luego se usa en fórmula cerrada o en otros cálculos matriciales.",
+          code: "import numpy as np\n\nnp.random.seed(42)\nn = 100\nx = np.random.rand(n, 1)\ny = 4 + 3 * x + np.random.randn(n, 1)\n\nX = np.c_[np.ones((n, 1)), x]\n\nprint(x[:5])\nprint(y[:5])\nprint(X[:5])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera una variable de entrada `x`, una salida `y` con ruido y la matriz de diseño que añade una columna de unos para el intercepto. Me sirve cuando quiero practicar regresión lineal, álgebra matricial o validar un flujo sin depender todavía de un dataset externo."
+        },
+        {
+          title: "Resolver un sistema lineal con solve o lstsq",
+          body: "Este patrón es útil para recordar la diferencia entre una solución exacta y una aproximación por mínimos cuadrados.",
+          code: "import numpy as np\n\nA = np.array([[3, -1, 2], [1, 2, 1], [2, 1, 3]], dtype=float)\nb = np.array([5, 6, 7], dtype=float)\n\nsolucion_exacta = np.linalg.solve(A, b)\nsolucion_lstsq, residuals, rank, s = np.linalg.lstsq(A, b, rcond=None)\n\nprint(solucion_exacta)\nprint(solucion_lstsq)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "`solve()` resuelve `Ax = b` cuando el sistema tiene solución única. `lstsq()` encuentra la mejor aproximación cuando el sistema es más incómodo o quiero pensar en mínimos cuadrados. Me sirve mucho para conectar la intuición de sistemas lineales con regresión y ajuste numérico."
+        },
+        {
+          title: "Aplicar una transformación matricial 2D",
+          body: "Este snippet deja muy clara la idea de que una matriz también puede transformar puntos, no solo guardarlos.",
+          code: "import numpy as np\n\nangulo = np.radians(45)\nescala = 1.5\n\nT = np.array([\n    [escala * np.cos(angulo), -escala * np.sin(angulo)],\n    [escala * np.sin(angulo),  escala * np.cos(angulo)]\n])\n\npuntos = np.array([\n    [1, 2],\n    [3, 1],\n    [2, 4],\n    [4, 3],\n    [0, 0],\n    [3, 3]\n], dtype=float)\n\npuntos_transformados = puntos @ T.T\nprint(puntos_transformados)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Define una matriz de transformación que combina rotación y escalado, y luego la aplica sobre un conjunto de puntos. Me sirve para recordar cómo una matriz cambia el espacio de los datos, algo muy útil antes de entrar a PCA, proyecciones o cambios de representación."
+        },
+        {
+          title: "Derivar una función y encontrar su punto crítico",
+          body: "Aquí queda una base corta para pasar desde álgebra simbólica a optimización simple.",
+          code: "import sympy as sp\n\nx = sp.Symbol('x')\nf = (x - 3) ** 2\nf_prime = sp.diff(f, x)\npunto_critico = sp.solve(f_prime, x)[0]\n\nprint('f(x) =', f)\nprint(\"f'(x) =\", f_prime)\nprint('Punto crítico =', punto_critico)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Construye una función simbólica, calcula su derivada y resuelve dónde esa derivada vale cero. Me sirve para entender por qué después aparecen gradientes, mínimos y optimizadores: antes de bajar error, necesito entender cómo cambia la función."
+        },
+        {
+          title: "Ajustar regresión lineal con fórmula cerrada",
+          body: "Este bloque es súper útil para recordar cómo se estiman parámetros directamente con álgebra matricial.",
+          code: "import numpy as np\n\ndef calcular_formula_cerrada(X, y):\n    try:\n        theta = np.linalg.inv(X.T @ X) @ X.T @ y\n        metodo = 'inversa'\n    except np.linalg.LinAlgError:\n        theta, _, _, _ = np.linalg.lstsq(X, y, rcond=None)\n        metodo = 'lstsq'\n    return theta, metodo\n\ntheta, metodo = calcular_formula_cerrada(X, y)\nprint(metodo)\nprint(theta)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Usa la fórmula de mínimos cuadrados y, si la matriz no es invertible, cae a `lstsq()` como respaldo. Me sirve cuando quiero una solución directa para regresión lineal y también cuando quiero dejar el código más robusto ante problemas numéricos."
+        },
+        {
+          title: "Ajustar con descenso de gradiente clásico",
+          body: "Este patrón deja listo un flujo corto para optimizar `w` y `b` iterativamente en una regresión lineal simple.",
+          code: "def funcion_costo(w, b, x, y):\n    pred = w * x + b\n    return np.sum((y - pred) ** 2) / len(x)\n\n\ndef calcular_gradientes(w, b, x, y):\n    error = y - (w * x + b)\n    grad_w = -2 * np.sum(x * error) / len(x)\n    grad_b = -2 * np.sum(error) / len(x)\n    return grad_w, grad_b\n\n\ndef descenso_gradiente(x, y, tasa_aprendizaje=0.1, epocas=100):\n    w, b = 0.0, 0.0\n    historial = []\n    for epoca in range(epocas):\n        grad_w, grad_b = calcular_gradientes(w, b, x, y)\n        w -= tasa_aprendizaje * grad_w\n        b -= tasa_aprendizaje * grad_b\n        historial.append(funcion_costo(w, b, x, y))\n    return w, b, historial\n\nw_final, b_final, historial = descenso_gradiente(x, y)\nprint(w_final, b_final)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula el costo, deriva respecto a `w` y `b`, y actualiza ambos parámetros durante varias épocas. Me sirve para visualizar cómo aprende un modelo paso a paso y para conectar derivadas, gradiente y optimización con algo concreto."
+        },
+        {
+          title: "Encapsular el flujo en una clase reutilizable",
+          body: "Cuando quiero más orden, este patrón me deja agrupar generación de datos, validación y métodos de ajuste en una sola estructura.",
+          code: "class ErrorParametrosInvalidos(Exception):\n    pass\n\n\nclass RegresionLineal:\n    def __init__(self, n=100, coef=3, inter=4, ruido_std=1, seed=42):\n        if n <= 1:\n            raise ErrorParametrosInvalidos(\"El número de muestras 'n' debe ser mayor a 1.\")\n        if ruido_std < 0:\n            raise ErrorParametrosInvalidos('La desviación estándar del ruido no puede ser negativa.')\n\n        self.n = n\n        self.coef = coef\n        self.inter = inter\n        self.ruido_std = ruido_std\n        self.seed = seed\n        self.x, self.y, self.X = self._generar_datos()\n\n    def _generar_datos(self):\n        np.random.seed(self.seed)\n        x = np.random.rand(self.n, 1)\n        ruido = np.random.randn(self.n, 1) * self.ruido_std\n        y = self.inter + self.coef * x + ruido\n        X = np.c_[np.ones((self.n, 1)), x]\n        return x, y, X"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Agrupa parámetros, validaciones y generación de datos dentro de una clase. Me sirve cuando el notebook ya no será un experimento suelto y quiero una base más ordenada para repetir pruebas, comparar métodos o extender el modelo."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es pensar qué necesito resolver: generar datos, armar una matriz, resolver un sistema, derivar una función o ajustar parámetros. Desde ahí copio el bloque, lo simplifico si hace falta y lo adapto a mi ejercicio.",
+      references: [],
+      relatedIds: [
+        "matrix-and-vector-foundations-for-machine-learning",
+        "linear-systems-and-transformations-for-machine-learning",
+        "derivatives-and-optimization-foundations-for-machine-learning",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "python-module-4-code-recipes-for-hyperparameter-tuning",
+      slug: "recetario-de-codigo-python-modulo-4-para-hiperparametros",
+      title: "Hiperparámetros y tuning práctico en Python",
+      summary: "Una nota práctica con snippets reutilizables para comparar un modelo base, lanzar búsquedas de hiperparámetros y automatizar tuning con scikit-learn, Optuna, búsquedas bayesianas, algoritmos genéticos y Ray Tune.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "20 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "Hiperparámetros", "Optuna", "Ray Tune"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar una chuleta práctica del módulo 4. No para reexplicar toda la teoría del tuning, sino para tener bloques de código claros que me permitan partir con un modelo base, probar búsquedas distintas y comparar resultados sin perder orden."
+        },
+        {
+          title: "Cargar, escalar y dividir datos antes del tuning",
+          body: "Casi todos los flujos del módulo parten por este bloque: cargar un dataset, escalar variables y separar entrenamiento y prueba para no mezclar evaluación con ajuste.",
+          code: "from sklearn.datasets import load_breast_cancer\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\n\nX, y = load_breast_cancer(return_X_y=True)\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X_scaled, y, test_size=0.2, random_state=42, stratify=y\n)\n\nprint(X_train.shape, X_test.shape)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Estandariza el dataset y deja separado un conjunto de entrenamiento y otro de prueba. Me sirve como punto de partida sano antes de lanzar cualquier búsqueda, porque evita que compare técnicas sobre datos desordenados o con escalas muy distintas."
+        },
+        {
+          title: "Entrenar un modelo base para tener referencia",
+          body: "Antes de optimizar, conviene saber cómo rinde el modelo por defecto. Si no, después no tengo cómo medir si el tuning realmente valió la pena.",
+          code: "import time\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import cross_val_score\n\ninicio = time.time()\nmodelo_base = RandomForestClassifier(random_state=42)\nf1_base = cross_val_score(modelo_base, X_train, y_train, cv=5, scoring='f1').mean()\ntiempo_base = time.time() - inicio\n\nprint(f'F1 base: {f1_base:.4f}')\nprint(f'Tiempo base: {tiempo_base:.2f}s')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula una línea base con validación cruzada. Me sirve para no enamorarme del tuning solo porque sí: primero veo el rendimiento normal y recién después comparo si las búsquedas mejoran el F1, la estabilidad o el costo temporal."
+        },
+        {
+          title: "Grid Search para recorrer una grilla fija",
+          body: "Este patrón es el más ordenado cuando el espacio de búsqueda es pequeño y quiero revisar combinaciones definidas manualmente.",
+          code: "from sklearn.model_selection import GridSearchCV\nfrom sklearn.ensemble import RandomForestClassifier\n\nparam_grid = {\n    'n_estimators': [50, 100, 150],\n    'max_depth': [3, 5, 10],\n    'min_samples_split': [2, 5, 10]\n}\n\nmodelo = RandomForestClassifier(random_state=42)\n\ngrid_search = GridSearchCV(\n    estimator=modelo,\n    param_grid=param_grid,\n    cv=5,\n    scoring='f1',\n    n_jobs=-1\n)\n\ngrid_search.fit(X_train, y_train)\nprint(grid_search.best_params_)\nprint(grid_search.best_score_)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prueba todas las combinaciones de la grilla y devuelve la mejor. Me sirve cuando tengo pocos hiperparámetros y quiero una búsqueda fácil de explicar, sobre todo en modelos tradicionales donde el costo aún es manejable."
+        },
+        {
+          title: "Randomized Search para cubrir más espacio",
+          body: "Si el espacio crece, esta variante suele ser más sana que probarlo todo.",
+          code: "import numpy as np\nfrom sklearn.model_selection import RandomizedSearchCV\n\nparam_distributions = {\n    'n_estimators': [int(x) for x in np.linspace(50, 200, 10)],\n    'max_depth': [3, 5, 10, None],\n    'min_samples_split': [2, 5, 10]\n}\n\nrandom_search = RandomizedSearchCV(\n    estimator=RandomForestClassifier(random_state=42),\n    param_distributions=param_distributions,\n    n_iter=10,\n    cv=5,\n    scoring='f1',\n    random_state=42,\n    n_jobs=-1\n)\n\nrandom_search.fit(X_train, y_train)\nprint(random_search.best_params_)\nprint(random_search.best_score_)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Explora combinaciones al azar dentro de un rango definido. Me sirve cuando la grilla ya se pone muy grande y quiero ahorrar tiempo sin dejar de cubrir zonas distintas del espacio de búsqueda."
+        },
+        {
+          title: "Optuna para búsqueda inteligente y limpia",
+          body: "Este bloque resume el patrón moderno del módulo para optimización bayesiana con una API bastante cómoda.",
+          code: "import optuna\nfrom sklearn.model_selection import cross_val_score\nfrom sklearn.ensemble import RandomForestClassifier\n\ndef objective_optuna(trial):\n    n_estimators = trial.suggest_int('n_estimators', 50, 200)\n    max_depth = trial.suggest_int('max_depth', 2, 32)\n    min_samples_split = trial.suggest_int('min_samples_split', 2, 10)\n\n    clf = RandomForestClassifier(\n        n_estimators=n_estimators,\n        max_depth=max_depth,\n        min_samples_split=min_samples_split,\n        random_state=42\n    )\n    return cross_val_score(clf, X_train, y_train, cv=3, scoring='f1').mean()\n\nstudy = optuna.create_study(direction='maximize', sampler=optuna.samplers.TPESampler(seed=42))\nstudy.optimize(objective_optuna, n_trials=20)\n\nprint(study.best_params)\nprint(study.best_value)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Define una función objetivo y deja que Optuna aprenda qué combinaciones prometen más. Me sirve cuando entrenar cada intento ya cuesta más y quiero que la búsqueda sea más eficiente que una grilla rígida."
+        },
+        {
+          title: "BayesSearchCV o Hyperopt para búsqueda bayesiana flexible",
+          body: "Acá quedan dos patrones bien útiles cuando quiero probar variantes de optimización bayesiana fuera de Optuna.",
+          code: "from skopt import BayesSearchCV\n\nsearch_space = {\n    'n_estimators': (50, 200),\n    'max_depth': (3, 20),\n    'min_samples_split': (2, 10)\n}\n\nopt = BayesSearchCV(\n    estimator=RandomForestClassifier(random_state=42),\n    search_spaces=search_space,\n    n_iter=20,\n    cv=5,\n    scoring='f1',\n    n_jobs=-1,\n    random_state=42\n)\n\nopt.fit(X_train, y_train)\nprint(opt.best_params_)\nprint(opt.best_score_)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Usa una búsqueda bayesiana integrada con la lógica de scikit-learn. Me sirve si quiero mantener una interfaz muy parecida a `GridSearchCV`, pero con una exploración más inteligente del espacio."
+        },
+        {
+          title: "Algoritmo genético con DEAP para búsquedas evolutivas",
+          body: "Este bloque resume la parte más flexible del módulo 4: crear individuos, evaluarlos y hacer evolucionar configuraciones de hiperparámetros.",
+          code: "from deap import base, creator, tools, algorithms\nimport random\nimport numpy as np\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import cross_val_score\n\nPARAM_RANGES = {\n    'n_estimators': (50, 300),\n    'max_depth': (2, 20),\n    'min_samples_split': (2, 10)\n}\n\ncreator.create('FitnessMax', base.Fitness, weights=(1.0,))\ncreator.create('Individual', list, fitness=creator.FitnessMax)\n\ntoolbox = base.Toolbox()\ntoolbox.register('attr_n_estimators', random.randint, *PARAM_RANGES['n_estimators'])\ntoolbox.register('attr_max_depth', random.randint, *PARAM_RANGES['max_depth'])\ntoolbox.register('attr_min_samples_split', random.randint, *PARAM_RANGES['min_samples_split'])\ntoolbox.register('individual', tools.initCycle, creator.Individual,\n                 (toolbox.attr_n_estimators, toolbox.attr_max_depth, toolbox.attr_min_samples_split), n=1)\ntoolbox.register('population', tools.initRepeat, list, toolbox.individual)\n\ndef evaluate(individual):\n    model = RandomForestClassifier(\n        n_estimators=max(1, int(individual[0])),\n        max_depth=max(1, int(individual[1])),\n        min_samples_split=max(2, int(individual[2])),\n        random_state=42\n    )\n    scores = cross_val_score(model, X_train, y_train, cv=3, scoring='f1')\n    return (np.mean(scores),)\n\ntoolbox.register('evaluate', evaluate)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prepara el entorno de DEAP para evolucionar hiperparámetros como si fueran individuos. Me sirve cuando el espacio es más raro, quiero experimentar con lógica evolutiva o necesito una búsqueda menos rígida que las estrategias clásicas."
+        },
+        {
+          title: "Ray Tune para escalar búsquedas",
+          body: "Cuando el tuning ya no cabe cómodo en un notebook simple, este patrón deja una base para lanzar pruebas paralelas.",
+          code: "import ray\nfrom ray import tune\nfrom ray.tune.schedulers import ASHAScheduler\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.model_selection import cross_val_score\n\nif ray.is_initialized():\n    ray.shutdown()\nray.init(ignore_reinit_error=True, log_to_driver=False)\n\ndef trainable_function(config):\n    model = RandomForestClassifier(\n        n_estimators=config['n_estimators'],\n        max_depth=config['max_depth'],\n        min_samples_split=config['min_samples_split'],\n        random_state=42,\n        n_jobs=-1\n    )\n    score = cross_val_score(model, X_train, y_train, cv=3, scoring='f1').mean()\n    tune.report(f1=score)\n\nsearch_space = {\n    'n_estimators': tune.randint(50, 201),\n    'max_depth': tune.randint(3, 21),\n    'min_samples_split': tune.randint(2, 11)\n}\n\nscheduler = ASHAScheduler(metric='f1', mode='max')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Inicializa Ray, define un `trainable` y deja lista una búsqueda distribuida con descarte temprano usando `ASHA`. Me sirve cuando ya necesito orquestar muchos ensayos, paralelizarlos y no gastar recursos en configuraciones que parten mal."
+        },
+        {
+          title: "Comparar resultados en una sola tabla",
+          body: "Después del tuning, esta estructura ayuda mucho a ordenar la conversación entre rendimiento, tiempo e iteraciones.",
+          code: "import pandas as pd\n\nresumen = pd.DataFrame([\n    {'metodo': 'Base', 'f1': f1_base, 'tiempo_s': tiempo_base, 'iteraciones': 1},\n    {'metodo': 'Grid Search', 'f1': grid_search.best_score_, 'tiempo_s': None, 'iteraciones': len(grid_search.cv_results_['params'])},\n    {'metodo': 'Random Search', 'f1': random_search.best_score_, 'tiempo_s': None, 'iteraciones': len(random_search.cv_results_['params'])},\n    {'metodo': 'Optuna', 'f1': study.best_value, 'tiempo_s': None, 'iteraciones': len(study.trials)}\n])\n\nprint(resumen)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Arma una tabla simple para comparar enfoques. Me sirve para cerrar mejor el análisis y no quedarse solo con “este método encontró algo bueno”, sino medir cuánto tardó y cuántos intentos necesitó."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es partir por un modelo base, elegir una estrategia de búsqueda según el costo del problema y luego comparar resultados con una tabla simple. No siempre gana el método más complejo: gana el que mejora el modelo sin volver absurdo el tiempo de trabajo.",
+      references: [],
+      relatedIds: [
+        "hyperparameter-search-strategies-for-machine-learning",
+        "ray-tune-for-distributed-hyperparameter-optimization",
+        "optimization-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "python-module-5-code-recipes-for-regularization-boosting-and-evaluation",
+      slug: "recetario-de-codigo-python-para-regularizacion-boosting-y-evaluacion",
+      title: "Regularización, boosting y evaluación de modelos en Python",
+      summary: "Una nota práctica con snippets reutilizables para preprocesar datos, comparar regularizaciones, trabajar regresión cuantílica, entrenar ensambles y validar modelos con métricas más completas.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "22 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "Regularización", "Boosting", "Métricas"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar bloques de código que sí pueda reutilizar cuando quiera comparar modelos lineales regularizados, probar ensambles o validar mejor un clasificador. En simple: menos teoría repetida y más patrones listos para adaptar."
+        },
+        {
+          title: "Cargar, separar y escalar antes de modelar",
+          body: "Casi todo el módulo parte desde esta base: cargar datos, separar entrenamiento y prueba, y escalar cuando voy a usar modelos sensibles a magnitudes como Ridge, Lasso, Elastic Net o regresión cuantílica.",
+          code: "from sklearn.datasets import fetch_california_housing\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\n\nX, y = fetch_california_housing(return_X_y=True)\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42\n)\n\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\nprint(X_train_scaled.shape, X_test_scaled.shape)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja una base limpia para entrenar modelos de regresión o clasificación sin mezclar train con test. Me sirve como punto de partida estándar antes de comparar técnicas, métricas y penalizaciones."
+        },
+        {
+          title: "Comparar Ridge, Lasso y Elastic Net en una sola pasada",
+          body: "Este patrón resume muy bien la parte de regularización: entreno varios modelos, comparo métricas y dejo una tabla simple para decidir cuál generaliza mejor.",
+          code: "import pandas as pd\nfrom sklearn.linear_model import Ridge, Lasso, ElasticNet\nfrom sklearn.metrics import mean_squared_error, r2_score\n\nmodelos = {\n    'Ridge': Ridge(alpha=1.0),\n    'Lasso': Lasso(alpha=0.1),\n    'Elastic Net': ElasticNet(alpha=0.1, l1_ratio=0.5)\n}\n\nresultados = []\nfor nombre, modelo in modelos.items():\n    modelo.fit(X_train_scaled, y_train)\n    pred = modelo.predict(X_test_scaled)\n    resultados.append({\n        'modelo': nombre,\n        'rmse': mean_squared_error(y_test, pred, squared=False),\n        'r2': r2_score(y_test, pred),\n        'coeficientes_cero': int((modelo.coef_ == 0).sum())\n    })\n\nprint(pd.DataFrame(resultados))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrena los tres enfoques clásicos de regularización y compara error, ajuste y cantidad de variables anuladas. Me sirve cuando quiero ver si me conviene solo estabilizar coeficientes o también seleccionar variables."
+        },
+        {
+          title: "Revisar qué variables apaga Lasso o Elastic Net",
+          body: "Cuando el foco está en selección de características, este bloque ayuda mucho porque deja claro qué columnas quedaron con coeficiente cero.",
+          code: "feature_names = fetch_california_housing().feature_names\nlasso = Lasso(alpha=0.1).fit(X_train_scaled, y_train)\n\ncoef_df = pd.DataFrame({\n    'variable': feature_names,\n    'coeficiente': lasso.coef_\n})\n\nvariables_eliminadas = coef_df[coef_df['coeficiente'] == 0]\nprint(variables_eliminadas)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Muestra directamente qué variables fueron anuladas por la penalización. Me sirve para interpretar mejor el modelo y conectar regularización con selección de variables en vez de dejarlo como algo abstracto."
+        },
+        {
+          title: "Regresión cuantílica para mirar escenarios",
+          body: "Este patrón es útil cuando no quiero quedarme solo con el promedio, sino mirar cuantiles como P10, P50 o P90.",
+          code: "from sklearn.linear_model import QuantileRegressor\nfrom sklearn.metrics import mean_pinball_loss\n\ncuantiles = [0.1, 0.5, 0.9]\nresultados_cuantiles = []\n\nfor q in cuantiles:\n    modelo_q = QuantileRegressor(quantile=q, alpha=0.1, solver='highs')\n    modelo_q.fit(X_train_scaled, y_train)\n    pred_q = modelo_q.predict(X_test_scaled)\n    resultados_cuantiles.append({\n        'cuantil': q,\n        'pinball_loss': mean_pinball_loss(y_test, pred_q, alpha=q)\n    })\n\nprint(pd.DataFrame(resultados_cuantiles))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrena un modelo distinto para varios cuantiles y mide `pinball loss`. Me sirve cuando quiero analizar riesgo, dispersión o escenarios conservadores sin confundir esto con una regresión promedio clásica."
+        },
+        {
+          title: "Entrenar un Random Forest como baseline de ensamble",
+          body: "Antes de meter boosting, conviene dejar un baseline fuerte con Random Forest para tener referencia clara.",
+          code: "from sklearn.datasets import fetch_openml\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.preprocessing import OneHotEncoder\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score\n\nadult = fetch_openml(name='adult', version=2, as_frame=True)\nX = adult.data\ny = (adult.target == '>50K').astype(int)\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\nnum_cols = X.select_dtypes(include=['number']).columns\ncat_cols = X.select_dtypes(exclude=['number']).columns\n\npreprocessor = ColumnTransformer([\n    ('num', Pipeline([\n        ('imputer', SimpleImputer(strategy='median'))\n    ]), num_cols),\n    ('cat', Pipeline([\n        ('imputer', SimpleImputer(strategy='most_frequent')),\n        ('onehot', OneHotEncoder(handle_unknown='ignore'))\n    ]), cat_cols)\n])\n\nrf = Pipeline([\n    ('prep', preprocessor),\n    ('model', RandomForestClassifier(random_state=42))\n])\n\nrf.fit(X_train, y_train)\npred_rf = rf.predict(X_test)\n\nprint({\n    'accuracy': accuracy_score(y_test, pred_rf),\n    'precision': precision_score(y_test, pred_rf),\n    'recall': recall_score(y_test, pred_rf),\n    'f1': f1_score(y_test, pred_rf)\n})"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prepara un flujo más realista con variables numéricas y categóricas, entrena Random Forest y devuelve métricas base. Me sirve como comparación sana antes de pasar a boosting y modelos más agresivos."
+        },
+        {
+          title: "Comparar varios modelos de boosting",
+          body: "Este bloque deja una plantilla útil para comparar AdaBoost, Gradient Boosting o XGBoost según las librerías que tenga disponibles.",
+          code: "from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier\nfrom xgboost import XGBClassifier\n\nboosting_models = {\n    'AdaBoost': AdaBoostClassifier(random_state=42),\n    'Gradient Boosting': GradientBoostingClassifier(random_state=42),\n    'XGBoost': XGBClassifier(\n        random_state=42,\n        eval_metric='logloss',\n        use_label_encoder=False\n    )\n}\n\nresultados_boosting = []\nfor nombre, modelo in boosting_models.items():\n    pipe = Pipeline([\n        ('prep', preprocessor),\n        ('model', modelo)\n    ])\n    pipe.fit(X_train, y_train)\n    pred = pipe.predict(X_test)\n    resultados_boosting.append({\n        'modelo': nombre,\n        'accuracy': accuracy_score(y_test, pred),\n        'precision': precision_score(y_test, pred),\n        'recall': recall_score(y_test, pred),\n        'f1': f1_score(y_test, pred)\n    })\n\nprint(pd.DataFrame(resultados_boosting))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrena varios ensambles de boosting bajo una misma estructura y compara métricas en una sola tabla. Me sirve cuando quiero ver rápido qué tan bien escalan frente al baseline y si vale la pena el costo extra."
+        },
+        {
+          title: "Sacar matriz de confusión y reporte de clasificación",
+          body: "Si voy a hablar de verdaderos positivos, falsos positivos y F1, conviene dejar un bloque simple para calcularlo directo.",
+          code: "from sklearn.metrics import confusion_matrix, classification_report\n\ncm = confusion_matrix(y_test, pred_rf)\nreporte = classification_report(y_test, pred_rf)\n\nprint(cm)\nprint(reporte)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrega la matriz de confusión y el resumen con `precision`, `recall` y `f1-score`. Me sirve cuando quiero evaluar más allá del accuracy y explicar mejor el impacto de cada error."
+        },
+        {
+          title: "Validación cruzada con varias métricas a la vez",
+          body: "Este patrón resume muy bien la lógica del módulo: no quedarse con una sola partición ni con una sola métrica.",
+          code: "from sklearn.model_selection import cross_validate, StratifiedKFold\n\ncv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)\nscoring = {\n    'accuracy': 'accuracy',\n    'precision': 'precision',\n    'recall': 'recall',\n    'f1': 'f1'\n}\n\ncv_resultados = cross_validate(\n    rf,\n    X,\n    y,\n    cv=cv,\n    scoring=scoring,\n    n_jobs=-1\n)\n\nprint({k: v.mean() for k, v in cv_resultados.items() if k.startswith('test_')})"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Ejecuta validación cruzada estratificada y promedia varias métricas al mismo tiempo. Me sirve para revisar estabilidad, comparar modelos con más justicia y no depender de una sola división train-test."
+        },
+        {
+          title: "Selección de variables con RFE",
+          body: "En algunos notebooks del módulo también aparece selección de variables, así que conviene dejar este bloque a mano para complementar regularización.",
+          code: "from sklearn.feature_selection import RFE\nfrom sklearn.linear_model import LogisticRegression\n\nselector = RFE(\n    estimator=LogisticRegression(max_iter=2000),\n    n_features_to_select=8\n)\n\nX_prepared = preprocessor.fit_transform(X_train)\nselector.fit(X_prepared, y_train)\n\nprint(selector.support_)\nprint(selector.ranking_)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Aplica eliminación recursiva de variables con un modelo base. Me sirve para contrastar selección por regularización contra una estrategia wrapper más explícita."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es partir por una base simple, luego comparar regularización, ensambles y métricas con la misma lógica de evaluación. Así evito mirar modelos aislados y puedo decidir con más claridad qué técnica realmente aporta valor.",
+      references: [],
+      relatedIds: [
+        "regularization-overfitting-and-linear-penalties",
+        "quantile-regression-for-risk-and-scenarios",
+        "boosting-and-classification-metrics",
+        "cross-validation-and-model-evaluation-metrics",
+        "feature-selection-methods-for-machine-learning"
+      ]
+    },
+    {
+      id: "python-module-6-code-recipes-for-clustering-and-dimensionality-reduction",
+      slug: "recetario-de-codigo-python-para-clustering-y-reduccion-de-dimensionalidad",
+      title: "Clustering y reducción de dimensionalidad en Python",
+      summary: "Una nota práctica con snippets reutilizables para escalar datos, reducir dimensiones, agrupar observaciones con técnicas jerárquicas y por densidad, y comparar resultados de clustering de forma más visual y ordenada.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "21 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "Clustering", "PCA", "DBSCAN"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar bloques de código listos para explorar datasets sin etiquetas, reducir dimensionalidad y probar distintos métodos de agrupamiento. En simple: una base reutilizable para segmentar, visualizar y detectar estructura sin partir siempre desde cero."
+        },
+        {
+          title: "Cargar y escalar un dataset antes de agrupar",
+          body: "En clustering, escalar casi siempre es una decisión sana porque varias técnicas dependen mucho de distancias y densidades. Si dejo una variable mucho más grande que otra, el agrupamiento puede sesgarse sin que me dé cuenta.",
+          code: "import pandas as pd\nfrom sklearn.datasets import load_wine\nfrom sklearn.preprocessing import StandardScaler\n\nwine = load_wine()\nX = pd.DataFrame(wine.data, columns=wine.feature_names)\n\nscaler = StandardScaler()\nX_scaled = scaler.fit_transform(X)\n\nprint(X.shape)\nprint(X.head())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Carga un dataset clásico y lo deja estandarizado para PCA, clustering jerárquico, DBSCAN o HDBSCAN. Me sirve como primer bloque base antes de comparar técnicas no supervisadas."
+        },
+        {
+          title: "Aplicar clustering jerárquico y dibujar el dendrograma",
+          body: "Este patrón es muy útil cuando quiero ver la jerarquía de agrupamiento antes de decidir cuántos grupos podría tener el dataset.",
+          code: "import matplotlib.pyplot as plt\nfrom scipy.cluster.hierarchy import linkage, dendrogram\n\nZ = linkage(X_scaled, method='ward')\n\nplt.figure(figsize=(12, 5))\ndendrogram(Z, truncate_mode='level', p=5)\nplt.title('Dendrograma - Clustering jerárquico')\nplt.xlabel('Observaciones')\nplt.ylabel('Distancia')\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula el agrupamiento jerárquico aglomerativo y muestra el dendrograma. Me sirve cuando quiero entender cómo se van fusionando los grupos y decidir un corte antes de pasar a una partición más concreta."
+        },
+        {
+          title: "Reducir a 2 componentes con PCA",
+          body: "PCA aparece mucho en el módulo porque ayuda a comprimir la información y volver más legible el espacio antes de visualizar o agrupar.",
+          code: "from sklearn.decomposition import PCA\n\npca = PCA(n_components=2, random_state=42)\nX_pca = pca.fit_transform(X_scaled)\n\nprint('Varianza explicada:', pca.explained_variance_ratio_)\nprint('Varianza acumulada:', pca.explained_variance_ratio_.sum())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Reduce el dataset a dos ejes principales y muestra cuánta varianza se conserva. Me sirve para visualizar clusters de forma rápida y también para simplificar el espacio antes de usar DBSCAN o comparar técnicas."
+        },
+        {
+          title: "Graficar el espacio PCA con colores por grupo",
+          body: "Cuando ya tengo etiquetas de un clustering, este bloque ayuda bastante a revisar si la separación visual tiene sentido.",
+          code: "from sklearn.cluster import AgglomerativeClustering\n\njerarquico = AgglomerativeClustering(n_clusters=3, linkage='ward')\nlabels_hc = jerarquico.fit_predict(X_scaled)\n\nplt.figure(figsize=(8, 6))\nplt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels_hc, cmap='viridis', s=50)\nplt.title('Clusters sobre proyección PCA')\nplt.xlabel('PC1')\nplt.ylabel('PC2')\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Agrupa con clustering jerárquico y proyecta los resultados sobre PCA. Me sirve para ver si los grupos se separan de forma razonable o si el clustering está generando zonas demasiado mezcladas."
+        },
+        {
+          title: "Comparar PCA y T-SNE para visualizar estructura",
+          body: "Este patrón sirve cuando quiero contrastar una reducción lineal como PCA con una no lineal como T-SNE.",
+          code: "from sklearn.manifold import TSNE\n\ntsne = TSNE(n_components=2, perplexity=30, random_state=42)\nX_tsne = tsne.fit_transform(X_scaled)\n\nfig, axes = plt.subplots(1, 2, figsize=(14, 5))\naxes[0].scatter(X_pca[:, 0], X_pca[:, 1], c=labels_hc, cmap='viridis', s=40)\naxes[0].set_title('PCA')\naxes[1].scatter(X_tsne[:, 0], X_tsne[:, 1], c=labels_hc, cmap='viridis', s=40)\naxes[1].set_title('T-SNE')\nplt.tight_layout()\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera una comparación visual entre PCA y T-SNE. Me sirve cuando sospecho que la estructura del dataset no es tan lineal y quiero una segunda mirada más sensible a vecindades locales."
+        },
+        {
+          title: "Medir la varianza explicada para decidir componentes",
+          body: "Si no quiero elegir componentes a ciegas, este bloque ayuda a revisar cuánto estoy reteniendo con PCA.",
+          code: "pca_full = PCA().fit(X_scaled)\nvar_exp = pca_full.explained_variance_ratio_\nvar_acum = var_exp.cumsum()\n\nplt.figure(figsize=(8, 5))\nplt.plot(range(1, len(var_exp) + 1), var_acum, marker='o')\nplt.axhline(0.90, color='red', linestyle='--', label='90%')\nplt.title('Varianza acumulada con PCA')\nplt.xlabel('Número de componentes')\nplt.ylabel('Varianza acumulada')\nplt.legend()\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Muestra la varianza acumulada para decidir cuántas componentes conviene conservar. Me sirve cuando quiero reducir dimensión sin perder demasiada información útil."
+        },
+        {
+          title: "Probar DBSCAN con distintos valores de epsilon",
+          body: "DBSCAN cambia mucho según `eps`, así que este patrón sirve para comparar rápido varios valores antes de elegir uno.",
+          code: "from sklearn.cluster import DBSCAN\nfrom sklearn.metrics import silhouette_score\n\neps_values = [0.3, 0.5, 0.7]\nfor eps in eps_values:\n    dbscan = DBSCAN(eps=eps, min_samples=5)\n    labels = dbscan.fit_predict(X_pca)\n    n_clusters = len(set(labels)) - (1 if -1 in labels else 0)\n    print(f'eps={eps} | clusters={n_clusters}')\n    if n_clusters > 1:\n        print('silhouette=', round(silhouette_score(X_pca, labels), 4))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Lanza DBSCAN con varios `eps` y revisa cantidad de clusters y silhouette. Me sirve para explorar sensibilidad antes de fijar una configuración final."
+        },
+        {
+          title: "Estimar epsilon con vecinos más cercanos",
+          body: "Este bloque deja una guía práctica para buscar un epsilon razonable usando la distancia al k-ésimo vecino.",
+          code: "import numpy as np\nfrom sklearn.neighbors import NearestNeighbors\n\nneighbors = NearestNeighbors(n_neighbors=4)\nneighbors_fit = neighbors.fit(X_pca)\ndistances, indices = neighbors_fit.kneighbors(X_pca)\n\nk_distances = np.sort(distances[:, -1])\nplt.figure(figsize=(8, 5))\nplt.plot(k_distances)\nplt.title('Curva k-distance para estimar epsilon')\nplt.xlabel('Puntos ordenados')\nplt.ylabel('Distancia al 4° vecino')\nplt.show()\n\nepsilon_recomendado = np.percentile(k_distances, 90)\nprint(epsilon_recomendado)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula la distancia al vecino relevante y la grafica para detectar el codo. Me sirve cuando no quiero elegir `eps` totalmente a ojo y necesito una referencia más defensable."
+        },
+        {
+          title: "Aplicar HDBSCAN sin fijar epsilon",
+          body: "Cuando el dataset tiene densidades distintas, HDBSCAN suele ser una salida más flexible que DBSCAN.",
+          code: "import hdbscan\n\nhdb = hdbscan.HDBSCAN(min_cluster_size=10)\nlabels_hdb = hdb.fit_predict(X_pca)\n\nn_clusters_hdb = len(set(labels_hdb)) - (1 if -1 in labels_hdb else 0)\nprint('clusters=', n_clusters_hdb)\nprint('ruido=', (labels_hdb == -1).sum())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Agrupa sin obligarme a fijar `eps` de forma manual. Me sirve cuando sospecho que el dataset tiene zonas de densidad desigual o cuando DBSCAN parte bien en unas áreas y mal en otras."
+        },
+        {
+          title: "Aplicar UMAP para reducción no lineal",
+          body: "En la evaluación modular aparece bastante UMAP como alternativa para conservar estructura local y global mejor que otras técnicas en ciertos casos.",
+          code: "import umap.umap_ as umap\n\nreducer = umap.UMAP(n_components=2, random_state=42)\nX_umap = reducer.fit_transform(X_scaled)\n\nplt.figure(figsize=(8, 6))\nplt.scatter(X_umap[:, 0], X_umap[:, 1], s=40)\nplt.title('Proyección UMAP')\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera una proyección 2D no lineal con UMAP. Me sirve para comparar contra PCA o T-SNE y para preparar un espacio más legible antes de clustering por densidad."
+        },
+        {
+          title: "Detectar anomalías con Isolation Forest",
+          body: "Aunque el foco del módulo es clustering, esta parte aparece como complemento útil cuando quiero separar comportamientos raros del patrón general.",
+          code: "from sklearn.ensemble import IsolationForest\n\niso = IsolationForest(contamination=0.05, random_state=42)\noutliers_if = iso.fit_predict(X_scaled)\n\nprint('anomalías=', (outliers_if == -1).sum())\nprint('normales=', (outliers_if == 1).sum())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Marca observaciones potencialmente anómalas según aislamiento. Me sirve para limpiar puntos raros antes del clustering o para analizar casos especiales fuera del comportamiento general."
+        },
+        {
+          title: "Comparar clustering y anomalías en una misma vista",
+          body: "Este bloque ayuda mucho cuando quiero revisar si los puntos raros coinciden con ruido de DBSCAN, HDBSCAN u otro método.",
+          code: "fig, axes = plt.subplots(1, 2, figsize=(14, 5))\naxes[0].scatter(X_umap[:, 0], X_umap[:, 1], c=labels_hdb, cmap='tab10', s=35)\naxes[0].set_title('HDBSCAN sobre UMAP')\naxes[1].scatter(X_umap[:, 0], X_umap[:, 1], c=outliers_if, cmap='coolwarm', s=35)\naxes[1].set_title('Isolation Forest sobre UMAP')\nplt.tight_layout()\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja una comparación visual rápida entre agrupamientos y puntos anómalos. Me sirve para ver si el ruido detectado por una técnica coincide con anomalías detectadas por otra."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es partir escalando, luego elegir una reducción de dimensionalidad para explorar el espacio y recién después comparar técnicas de agrupamiento. Así la lectura del clustering se vuelve mucho más clara y menos intuitiva a ciegas.",
+      references: [],
+      relatedIds: [
+        "clustering-and-dimensionality-reduction-foundations",
+        "advanced-clustering-techniques",
+        "pca-impact-on-clustering",
+        "dimensionality-reduction-techniques-beyond-pca",
+        "anomaly-detection-with-unsupervised-learning"
+      ]
+    },
+    {
+      id: "python-module-7-code-recipes-for-deep-learning-and-neural-networks",
+      slug: "recetario-de-codigo-python-para-deep-learning-y-redes-neuronales",
+      title: "Deep Learning y redes neuronales en Python",
+      summary: "Una nota práctica con snippets reutilizables para preparar datos, construir redes neuronales densas, secuenciales y convolucionales, entrenar autoencoders, aplicar transfer learning y comparar modelos profundos con métricas más completas.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "24 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "Deep Learning", "TensorFlow", "Redes neuronales"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar una base reutilizable para trabajar con redes neuronales en problemas de imágenes, texto y datos tabulares. En simple: menos repetir setup y más tener patrones claros para construir, entrenar, evaluar y comparar modelos profundos."
+        },
+        {
+          title: "Cargar y preparar Fashion-MNIST para una DNN o CNN",
+          body: "Este bloque sirve para dejar listas imágenes en escala de grises con una separación sana entre entrenamiento, validación y prueba.",
+          code: "import numpy as np\nimport tensorflow as tf\nfrom tensorflow.keras.datasets import fashion_mnist\n\n(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()\n\nx_train = x_train.astype('float32') / 255.0\nx_test = x_test.astype('float32') / 255.0\n\nx_train = x_train[..., np.newaxis]\nx_test = x_test[..., np.newaxis]\n\nx_val = x_train[:6000]\ny_val = y_train[:6000]\nx_train = x_train[6000:]\ny_train = y_train[6000:]\n\nprint(x_train.shape, x_val.shape, x_test.shape)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Normaliza imágenes a rango `[0,1]`, agrega el canal y separa validación. Me sirve como base rápida para entrenar una red densa simple, una CNN o comparar optimizadores sin partir desordenado."
+        },
+        {
+          title: "Construir una red densa simple para clasificación",
+          body: "Cuando quiero una base clara para clasificación de imágenes sin meter convoluciones todavía, esta plantilla funciona súper bien.",
+          code: "from tensorflow.keras import Sequential\nfrom tensorflow.keras.layers import Flatten, Dense, Dropout\n\nmodel_dnn = Sequential([\n    Flatten(input_shape=(28, 28, 1)),\n    Dense(256, activation='relu'),\n    Dense(128, activation='tanh'),\n    Dropout(0.3),\n    Dense(10, activation='softmax')\n])\n\nmodel_dnn.compile(\n    optimizer='adam',\n    loss='sparse_categorical_crossentropy',\n    metrics=['accuracy']\n)\n\nmodel_dnn.summary()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Arma una DNN con dos capas ocultas y activaciones distintas. Me sirve para comparar funciones de activación, optimizadores o pérdidas antes de pasar a arquitecturas más complejas."
+        },
+        {
+          title: "Entrenar y graficar curvas de aprendizaje",
+          body: "Este patrón resume el entrenamiento básico y además deja listas las curvas para revisar sobreajuste o subajuste.",
+          code: "import matplotlib.pyplot as plt\n\nearly_stop = tf.keras.callbacks.EarlyStopping(\n    monitor='val_loss', patience=3, restore_best_weights=True\n)\n\nhistory = model_dnn.fit(\n    x_train, y_train,\n    validation_data=(x_val, y_val),\n    epochs=15,\n    batch_size=64,\n    callbacks=[early_stop],\n    verbose=1\n)\n\nplt.figure(figsize=(12, 4))\nplt.subplot(1, 2, 1)\nplt.plot(history.history['loss'], label='train')\nplt.plot(history.history['val_loss'], label='val')\nplt.legend()\nplt.title('Pérdida')\n\nplt.subplot(1, 2, 2)\nplt.plot(history.history['accuracy'], label='train')\nplt.plot(history.history['val_accuracy'], label='val')\nplt.legend()\nplt.title('Accuracy')\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrena la red y deja visibles las curvas de pérdida y accuracy. Me sirve para revisar si el modelo mejora de forma estable o si empieza a memorizar demasiado rápido."
+        },
+        {
+          title: "Preparar IMDb y entrenar una LSTM",
+          body: "Cuando el problema es secuencial o de texto, este bloque deja lista una base bien clara para clasificación binaria con secuencias truncadas.",
+          code: "from tensorflow.keras.datasets import imdb\nfrom tensorflow.keras.preprocessing.sequence import pad_sequences\nfrom tensorflow.keras.layers import Embedding, LSTM\n\nmax_features = 10000\nmaxlen = 200\n\n(x_train_seq, y_train_seq), (x_test_seq, y_test_seq) = imdb.load_data(num_words=max_features)\n\nx_train_seq = pad_sequences(x_train_seq, maxlen=maxlen)\nx_test_seq = pad_sequences(x_test_seq, maxlen=maxlen)\n\nmodel_lstm = Sequential([\n    Embedding(max_features, 128, input_length=maxlen),\n    LSTM(64),\n    Dense(1, activation='sigmoid')\n])\n\nmodel_lstm.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\nmodel_lstm.summary()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Carga IMDb, recorta secuencias y arma una LSTM para clasificación binaria. Me sirve cuando quiero una base práctica para sentimiento, secuencias o tareas donde importa el orden del texto."
+        },
+        {
+          title: "Construir una CNN con regularización",
+          body: "Para imágenes, esta plantilla ya deja una arquitectura más realista con convoluciones, pooling, dropout y penalización L2.",
+          code: "from tensorflow.keras import regularizers\nfrom tensorflow.keras.layers import Conv2D, MaxPooling2D, GlobalAveragePooling2D\n\nmodel_cnn = Sequential([\n    Conv2D(32, (3, 3), activation='relu', kernel_regularizer=regularizers.l2(1e-4), input_shape=(28, 28, 1)),\n    MaxPooling2D((2, 2)),\n    Conv2D(64, (3, 3), activation='relu', kernel_regularizer=regularizers.l2(1e-4)),\n    MaxPooling2D((2, 2)),\n    GlobalAveragePooling2D(),\n    Dropout(0.3),\n    Dense(10, activation='softmax')\n])\n\nmodel_cnn.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Arma una CNN compacta y regularizada para clasificación de imágenes. Me sirve para comparar contra una DNN y para evaluar cómo cambia el aprendizaje al usar capas convolutivas."
+        },
+        {
+          title: "Comparar optimizadores sobre la misma CNN",
+          body: "En varios notebooks del módulo aparece esta lógica: misma arquitectura, distinto optimizador, misma evaluación.",
+          code: "from tensorflow.keras.models import clone_model\n\nbase_model = model_cnn\noptimizadores = {\n    'Adam': tf.keras.optimizers.Adam(),\n    'RMSprop': tf.keras.optimizers.RMSprop()\n}\n\nresultados_opt = []\nfor nombre, opt in optimizadores.items():\n    model_tmp = clone_model(base_model)\n    model_tmp.build((None, 28, 28, 1))\n    model_tmp.set_weights(base_model.get_weights())\n    model_tmp.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])\n    hist = model_tmp.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=5, batch_size=64, verbose=0)\n    resultados_opt.append({\n        'optimizador': nombre,\n        'val_accuracy_final': hist.history['val_accuracy'][-1]\n    })\n\nprint(resultados_opt)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Compara optimizadores manteniendo la misma arquitectura y pesos base. Me sirve para revisar si Adam, RMSprop o SGD están convergiendo mejor en un problema concreto sin mezclar cambios de modelo con cambios de optimización."
+        },
+        {
+          title: "Entrenar un autoencoder básico con MNIST",
+          body: "Este bloque deja una base simple para compresión y reconstrucción usando imágenes aplanadas.",
+          code: "from tensorflow.keras.layers import Input\nfrom tensorflow.keras.models import Model\n\n(x_train_mnist, _), (x_test_mnist, _) = tf.keras.datasets.mnist.load_data()\nx_train_mnist = x_train_mnist.astype('float32') / 255.0\nx_test_mnist = x_test_mnist.astype('float32') / 255.0\n\nx_train_flat = x_train_mnist.reshape((-1, 784))\nx_test_flat = x_test_mnist.reshape((-1, 784))\n\ninput_img = Input(shape=(784,))\nencoded = Dense(128, activation='relu')(input_img)\nlatent = Dense(32, activation='relu')(encoded)\ndecoded = Dense(128, activation='relu')(latent)\noutput_img = Dense(784, activation='sigmoid')(decoded)\n\nautoencoder = Model(input_img, output_img)\nautoencoder.compile(optimizer='adam', loss='mse')"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prepara MNIST aplanado y crea un autoencoder MLP básico. Me sirve para practicar reconstrucción, compresión y comparación futura con versiones denoising o más profundas."
+        },
+        {
+          title: "Agregar ruido y crear un denoising autoencoder",
+          body: "Si quiero que la red aprenda a limpiar ruido además de reconstruir, este patrón es la base más directa.",
+          code: "noise_factor = 0.3\nx_train_noisy = x_train_flat + noise_factor * np.random.normal(size=x_train_flat.shape)\nx_test_noisy = x_test_flat + noise_factor * np.random.normal(size=x_test_flat.shape)\n\nx_train_noisy = np.clip(x_train_noisy, 0., 1.)\nx_test_noisy = np.clip(x_test_noisy, 0., 1.)\n\nhistory_ae = autoencoder.fit(\n    x_train_noisy, x_train_flat,\n    validation_data=(x_test_noisy, x_test_flat),\n    epochs=10,\n    batch_size=256,\n    verbose=1\n)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Inyecta ruido gaussiano y entrena el autoencoder para reconstruir la imagen limpia. Me sirve cuando quiero mostrar cómo una red puede aprender señal útil y no solo copiar una entrada tal cual."
+        },
+        {
+          title: "Transfer learning con EfficientNetB0",
+          body: "En visión moderna, esta plantilla sirve mucho para no entrenar todo desde cero y aprovechar una base ya preentrenada.",
+          code: "from tensorflow.keras.applications import EfficientNetB0\nfrom tensorflow.keras import layers, Model\n\nbase_model = EfficientNetB0(include_top=False, weights='imagenet', input_shape=(224, 224, 3))\nbase_model.trainable = False\n\ninputs = tf.keras.Input(shape=(224, 224, 3))\nx = base_model(inputs, training=False)\nx = layers.GlobalAveragePooling2D()(x)\nx = layers.Dropout(0.3)(x)\noutputs = layers.Dense(5, activation='softmax')(x)\n\ntransfer_model = Model(inputs, outputs)\ntransfer_model.compile(\n    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),\n    loss='sparse_categorical_crossentropy',\n    metrics=['accuracy']\n)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Carga una EfficientNet preentrenada, congela la base y agrega una cabeza nueva. Me sirve cuando tengo pocas imágenes, poco tiempo o quiero un punto de partida muy fuerte para clasificación visual."
+        },
+        {
+          title: "Evaluar con matriz de confusión y reporte por clase",
+          body: "Una vez entrenada la red, este bloque ayuda a salir del accuracy global y mirar mejor dónde falla.",
+          code: "from sklearn.metrics import confusion_matrix, classification_report\n\npred_probs = model_dnn.predict(x_test, verbose=0)\npred_classes = pred_probs.argmax(axis=1)\n\ncm = confusion_matrix(y_test, pred_classes)\nreport = classification_report(y_test, pred_classes)\n\nprint(cm)\nprint(report)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula matriz de confusión y métricas por clase. Me sirve para ver si el modelo se desempeña parejo o si está fallando en clases específicas aunque el accuracy total se vea bonito."
+        },
+        {
+          title: "Base para redes profundas en datos tabulares",
+          body: "En la evaluación modular aparece este patrón para trabajar con datos tabulares usando DNN y variantes residuales.",
+          code: "from tensorflow.keras.layers import BatchNormalization\n\ndef build_tabular_dnn(input_dim):\n    model = Sequential([\n        Dense(128, activation='relu', input_shape=(input_dim,)),\n        BatchNormalization(),\n        Dropout(0.3),\n        Dense(64, activation='relu'),\n        Dropout(0.2),\n        Dense(1, activation='sigmoid')\n    ])\n    model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])\n    return model"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja una DNN base para clasificación binaria sobre datos tabulares. Me sirve para comparar contra modelos clásicos o contra arquitecturas más modernas como ResNet tabular o TabNet."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es partir por una arquitectura simple, revisar curvas y métricas, y recién después escalar a modelos más modernos como CNN más profundas, transfer learning o variantes especializadas para texto y tabulares. Así el deep learning se vuelve mucho más ordenado y menos intimidante.",
+      references: [],
+      relatedIds: [
+        "deep-neural-network-fundamentals-and-learning-flow",
+        "sequential-neural-networks-memory-and-lstm-basics",
+        "autoencoders-latent-space-and-controlled-reconstruction",
+        "modern-neural-networks-resnet-vs-efficientnet",
+        "deep-neural-network-optimization-and-regularization"
+      ]
+    },
+    {
+      id: "python-module-8-code-recipes-for-nlp-and-text-classification",
+      slug: "recetario-de-codigo-python-para-nlp-y-clasificacion-de-texto",
+      title: "NLP y clasificación de texto en Python",
+      summary: "Una nota práctica con snippets reutilizables para limpiar texto, tokenizar, vectorizar con BoW o TF-IDF, medir similitud, clasificar documentos con modelos clásicos y transformers, y explicar resultados de NLP con más orden.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "24 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "NLP", "TF-IDF", "BERT"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar una base práctica para trabajar texto sin partir siempre desde cero. En simple: limpieza, representación, clasificación y explicabilidad, todo con bloques que sí puedo adaptar después a textos clínicos, reseñas o documentos en español."
+        },
+        {
+          title: "Crear un dataset simple y mapear clases con diccionarios",
+          body: "Este bloque es importante porque en NLP muchas veces conviene construir diccionarios para clasificar, traducir etiquetas o agrupar salidas del modelo en categorías más legibles.",
+          code: "import pandas as pd\n\ndatos = pd.DataFrame({\n    'texto': [\n        'El paciente presenta dolor leve y fiebre moderada.',\n        'La atención fue excelente y el tratamiento resultó efectivo.',\n        'No volvería al centro, me sentí ignorado por el personal.'\n    ],\n    'clase': ['moderado', 'positivo', 'negativo']\n})\n\nmapeo_clases = {\n    'leve': 0,\n    'moderado': 1,\n    'grave': 2,\n    'negativo': 3,\n    'positivo': 4\n}\n\ndatos['clase_id'] = datos['clase'].map(mapeo_clases)\nprint(datos)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Construye un DataFrame base y usa un diccionario para convertir etiquetas a IDs. Me sirve para mantener consistencia entre clases, crear buckets y evitar clasificaciones desordenadas a mano."
+        },
+        {
+          title: "Limpiar texto manteniendo negaciones útiles",
+          body: "En varios notebooks aparece limpieza ligera, pero en NLP en español conviene no borrar todo ciegamente porque palabras como `no` o `sin` pueden cambiar por completo el significado.",
+          code: "import re\n\ndef limpiar_texto(texto):\n    texto = texto.lower()\n    texto = re.sub(r'http\\S+|www\\S+', ' ', texto)\n    texto = re.sub(r'\\S+@\\S+', ' ', texto)\n    texto = re.sub(r'[^a-záéíóúñü\\s]', ' ', texto)\n    texto = re.sub(r'\\s+', ' ', texto).strip()\n    return texto\n\ndatos['texto_limpio'] = datos['texto'].apply(limpiar_texto)\nprint(datos[['texto', 'texto_limpio']])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Normaliza a minúsculas, elimina URLs, correos y símbolos raros, pero deja el texto en una forma todavía interpretable. Me sirve como primera capa antes de tokenizar, vectorizar o comparar documentos."
+        },
+        {
+          title: "Tokenizar, lematizar y remover stopwords",
+          body: "Este patrón deja una base más seria para texto en español usando spaCy y una lista de stopwords ampliable.",
+          code: "import spacy\nfrom nltk.corpus import stopwords\n\nnlp = spacy.load('es_core_news_sm')\nstop_es = set(stopwords.words('spanish'))\nstop_es = stop_es - {'no', 'sin', 'nunca'}\n\ndef preprocesar(texto):\n    doc = nlp(texto)\n    tokens = [\n        tok.lemma_ for tok in doc\n        if tok.is_alpha and tok.lemma_ not in stop_es\n    ]\n    return ' '.join(tokens)\n\ndatos['texto_final'] = datos['texto_limpio'].apply(preprocesar)\nprint(datos[['texto_limpio', 'texto_final']])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Lematiza, filtra tokens alfabéticos y remueve stopwords dejando vivas negaciones importantes. Me sirve para modelos clásicos donde una buena limpieza cambia mucho la calidad del vector final."
+        },
+        {
+          title: "Vectorizar con Bag of Words y TF-IDF",
+          body: "Este bloque resume las dos representaciones más clásicas para transformar texto en números.",
+          code: "from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer\n\nbow = CountVectorizer()\nX_bow = bow.fit_transform(datos['texto_final'])\n\ntfidf = TfidfVectorizer(max_features=1000)\nX_tfidf = tfidf.fit_transform(datos['texto_final'])\n\nprint(X_bow.shape)\nprint(X_tfidf.shape)\nprint(tfidf.get_feature_names_out()[:15])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Convierte textos en matrices numéricas con frecuencia simple o frecuencia ponderada. Me sirve como base para clasificación clásica, similitud, clustering de documentos o exploración de términos."
+        },
+        {
+          title: "Calcular similitud coseno entre documentos",
+          body: "Cuando quiero medir qué textos se parecen más entre sí, este patrón es uno de los más útiles y simples.",
+          code: "from sklearn.metrics.pairwise import cosine_similarity\nimport seaborn as sns\nimport matplotlib.pyplot as plt\n\nsim_matrix = cosine_similarity(X_tfidf)\n\nplt.figure(figsize=(6, 4))\nsns.heatmap(sim_matrix, annot=True, cmap='Blues')\nplt.title('Similitud coseno entre documentos')\nplt.show()"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula una matriz de similitud a partir de TF-IDF. Me sirve para detectar documentos parecidos, revisar duplicados semánticos o justificar agrupaciones rápidas entre textos."
+        },
+        {
+          title: "Sacar top términos por documento",
+          body: "Este bloque ayuda mucho a interpretar por qué un texto quedó representado de cierta manera dentro de TF-IDF.",
+          code: "import numpy as np\n\nfeature_names = tfidf.get_feature_names_out()\nfor i, fila in enumerate(X_tfidf.toarray()):\n    top_idx = np.argsort(fila)[::-1][:5]\n    top_terms = [(feature_names[j], round(fila[j], 3)) for j in top_idx if fila[j] > 0]\n    print(f'Documento {i}:', top_terms)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Lista los términos más importantes por documento según TF-IDF. Me sirve para inspección rápida, explicaciones preliminares o para revisar si el preprocesamiento está dejando palabras útiles."
+        },
+        {
+          title: "Entrenar un clasificador clásico con Naive Bayes",
+          body: "Este patrón deja una base corta y muy útil para clasificación de texto con modelos ligeros.",
+          code: "from sklearn.model_selection import train_test_split\nfrom sklearn.naive_bayes import MultinomialNB\nfrom sklearn.metrics import classification_report\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X_tfidf,\n    datos['clase_id'],\n    test_size=0.3,\n    random_state=42,\n    stratify=datos['clase_id']\n)\n\nnb = MultinomialNB()\nnb.fit(X_train, y_train)\npred_nb = nb.predict(X_test)\n\nprint(classification_report(y_test, pred_nb, zero_division=0))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrena un modelo clásico y devuelve métricas por clase. Me sirve como baseline rápido antes de pasar a transformers o cuando necesito una solución interpretable y liviana."
+        },
+        {
+          title: "Usar un diccionario para reagrupar salidas del modelo",
+          body: "Acá entra de nuevo la idea de los diccionarios, porque no siempre quiero dejar la salida cruda del modelo tal cual viene.",
+          code: "mapeo_sentimiento = {\n    '1 star': 'negativo',\n    '2 stars': 'negativo',\n    '3 stars': 'mixto',\n    '4 stars': 'positivo',\n    '5 stars': 'positivo'\n}\n\nsalidas_crudas = ['5 stars', '1 star', '3 stars']\nsalidas_legibles = [mapeo_sentimiento[x] for x in salidas_crudas]\nprint(salidas_legibles)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Convierte etiquetas crudas en categorías más útiles para el análisis. Me sirve muchísimo cuando trabajo con modelos preentrenados que devuelven estrellas, scores o labels poco naturales para un reporte."
+        },
+        {
+          title: "Clasificar texto con un transformer ya preentrenado",
+          body: "Este patrón resume muy bien la parte moderna del módulo 8: usar un pipeline listo para inferencia rápida.",
+          code: "from transformers import pipeline\n\nmodel_name = 'nlptown/bert-base-multilingual-uncased-sentiment'\nclasificador = pipeline('sentiment-analysis', model=model_name)\n\ntextos = datos['texto'].tolist()\nresultados = clasificador(textos)\nprint(resultados)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Carga un modelo de Hugging Face y lo aplica directo sobre una lista de textos. Me sirve para prototipos rápidos, clasificación de sentimiento o para contrastar un enfoque moderno contra uno clásico."
+        },
+        {
+          title: "Entrenar BERT con Trainer",
+          body: "En la evaluación modular aparece esta estructura más robusta para fine-tuning y evaluación formal.",
+          code: "from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer\n\nmodel_ckpt = 'dccuchile/bert-base-spanish-wwm-cased'\ntokenizer = AutoTokenizer.from_pretrained(model_ckpt)\nmodel = AutoModelForSequenceClassification.from_pretrained(model_ckpt, num_labels=3)\n\nargs = TrainingArguments(\n    output_dir='bert_resultados',\n    evaluation_strategy='epoch',\n    save_strategy='epoch',\n    learning_rate=2e-5,\n    per_device_train_batch_size=8,\n    per_device_eval_batch_size=8,\n    num_train_epochs=2,\n    weight_decay=0.01\n)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja la configuración base para fine-tuning con `Trainer`. Me sirve cuando el pipeline ya no basta y necesito entrenar un transformer sobre mis propias clases con un control más serio."
+        },
+        {
+          title: "Generar texto con GPT-2",
+          body: "Como en tus notebooks también aparece generación, vale la pena dejar este bloque como referencia corta.",
+          code: "from transformers import AutoTokenizer, AutoModelForCausalLM, set_seed\n\nset_seed(42)\nmodel_name = 'gpt2'\ntokenizer = AutoTokenizer.from_pretrained(model_name)\nmodel = AutoModelForCausalLM.from_pretrained(model_name)\n\nprompt = 'El futuro de la inteligencia artificial'\ninputs = tokenizer(prompt, return_tensors='pt')\noutputs = model.generate(**inputs, max_length=60, do_sample=True, temperature=0.8)\n\nprint(tokenizer.decode(outputs[0], skip_special_tokens=True))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera texto desde un prompt usando GPT-2. Me sirve para experimentar con generación, comparar temperaturas y dejar una base mínima para tareas más creativas o de completado."
+        },
+        {
+          title: "Explicar predicciones con LIME en texto",
+          body: "Este bloque ayuda bastante cuando quiero justificar por qué un texto fue clasificado de cierta manera.",
+          code: "from lime.lime_text import LimeTextExplainer\n\nexplicador = LimeTextExplainer(class_names=['leve', 'moderado', 'grave'])\n\ndef predict_proba_textos(textos):\n    X_vec = tfidf.transform([preprocesar(limpiar_texto(t)) for t in textos])\n    return nb.predict_proba(X_vec)\n\nexp = explicador.explain_instance(\n    datos.loc[0, 'texto'],\n    predict_proba_textos,\n    num_features=6\n)\n\nprint(exp.as_list())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Usa LIME para mostrar qué palabras empujan una predicción. Me sirve cuando necesito explicabilidad local y no quiero quedarme solo con el label final del modelo."
+        },
+        {
+          title: "Agregar una nota de cautela con sarcasmo o ironía",
+          body: "En tus notebooks aparece esta necesidad: no asumir que el modelo entiende sarcasmo o contraste emocional solo porque acierta algunas etiquetas.",
+          code: "cues_ironia = ['claro', 'seguro', 'maravilloso', 'excelente', '\"', 'ja']\n\ndef alerta_ironia(texto):\n    t = texto.lower()\n    return any(cue in t for cue in cues_ironia)\n\ndatos['alerta_ironia'] = datos['texto'].apply(alerta_ironia)\nprint(datos[['texto', 'alerta_ironia']])"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Marca textos donde podría haber ironía, exageración o contraste raro. Me sirve como alerta manual para no confiar ciegamente en el sentimiento predicho cuando el lenguaje tiene matices difíciles."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es partir con limpieza y representación clásica, después levantar un baseline ligero y recién luego comparar con transformers o explicabilidad avanzada. Y sí: los diccionarios ayudan mucho a ordenar clases, agrupar etiquetas y dejar la clasificación mucho más consistente.",
+      references: [],
+      relatedIds: [
+        "nlp-fundamentals-from-text-to-meaning",
+        "nlp-preprocessing-embeddings-and-transformer-based-models",
+        "nlp-model-evaluation-metrics-and-good-practices",
+        "ethical-nlp-bias-transparency-and-human-review"
+      ]
+    },
+    {
+      id: "python-module-9-code-recipes-for-lime-and-shap",
+      slug: "recetario-de-codigo-python-para-lime-y-shap",
+      title: "LIME y SHAP para explicar modelos en Python",
+      summary: "Una nota práctica con snippets reutilizables para preparar datos, entrenar modelos interpretables, explicar predicciones individuales con LIME, revisar contribuciones locales y globales con SHAP y comunicar resultados con más claridad.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "20 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "LIME", "SHAP", "XAI"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar una base práctica para interpretar predicciones y no quedarme solo con el score final del modelo. En simple: entrenar, evaluar y después abrir la caja para entender qué variables o palabras están empujando cada decisión."
+        },
+        {
+          title: "Preparar un baseline de texto con TF-IDF y Logistic Regression",
+          body: "En las actividades de texto aparece mucho esta estructura: limpiar, vectorizar y entrenar un modelo lineal balanceado antes de explicar casos puntuales.",
+          code: "import pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.feature_extraction.text import TfidfVectorizer\nfrom sklearn.linear_model import LogisticRegression\n\nX = df['texto_limpio']\ny = df['label_binaria']\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, random_state=42, stratify=y\n)\n\ntfidf = TfidfVectorizer(ngram_range=(1, 3), max_features=5000)\nX_train_vec = tfidf.fit_transform(X_train)\nX_test_vec = tfidf.transform(X_test)\n\nclf = LogisticRegression(class_weight='balanced', max_iter=2000)\nclf.fit(X_train_vec, y_train)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja un pipeline clásico de NLP listo para explicar. Me sirve porque LIME y varias lecturas de SHAP se entienden mejor si primero tengo un modelo baseline claro y rápido de revisar."
+        },
+        {
+          title: "Barrido simple de umbrales antes de explicar",
+          body: "Antes de interpretar, conviene confirmar que el umbral de decisión sí tiene sentido y no estoy explicando una clasificación mal calibrada.",
+          code: "import numpy as np\nfrom sklearn.metrics import f1_score\n\nprobs = clf.predict_proba(X_test_vec)[:, 1]\numbrales = np.arange(0.30, 0.71, 0.05)\n\nmejor_umbral = 0.5\nmejor_f1 = 0\nfor t in umbrales:\n    pred_t = (probs >= t).astype(int)\n    f1 = f1_score(y_test, pred_t)\n    if f1 > mejor_f1:\n        mejor_f1 = f1\n        mejor_umbral = t\n\nprint(mejor_umbral, mejor_f1)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prueba varios umbrales y se queda con el que mejor balancea el F1. Me sirve para que la explicabilidad se apoye sobre una decisión razonable y no sobre un corte arbitrario."
+        },
+        {
+          title: "Explicar una predicción textual con LIME",
+          body: "Este es el patrón más útil cuando quiero mostrar por qué una reseña, nota clínica o comentario fue clasificado de cierta forma.",
+          code: "from lime.lime_text import LimeTextExplainer\n\nexplainer = LimeTextExplainer(class_names=['negativo', 'positivo'])\n\ndef predict_proba_lime(textos):\n    X_vec = tfidf.transform(textos)\n    return clf.predict_proba(X_vec)\n\ntexto_objetivo = X_test.iloc[0]\nexp = explainer.explain_instance(\n    texto_objetivo,\n    predict_proba_lime,\n    num_features=8\n)\n\nprint(exp.as_list())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrega una explicación local palabra por palabra para un texto específico. Me sirve cuando quiero revisar si el modelo está entendiendo señales reales o si se quedó pegado a palabras engañosas."
+        },
+        {
+          title: "Mostrar varias explicaciones LIME de prueba",
+          body: "En tus actividades aparece la idea de revisar varios casos, no solo uno. Este bloque deja una base rápida para eso.",
+          code: "indices_muestra = [0, 1, 2]\nfor idx in indices_muestra:\n    texto = X_test.iloc[idx]\n    print('\\nTEXTO:', texto)\n    exp = explainer.explain_instance(texto, predict_proba_lime, num_features=6)\n    print(exp.as_list())"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Explica varias observaciones del test de una sola vez. Me sirve para comparar si el modelo decide con lógica consistente o si cambia mucho entre casos positivos, negativos y ambiguos."
+        },
+        {
+          title: "Explicar un modelo tabular con SHAP",
+          body: "En la evaluación modular del módulo 9 aparece muy fuerte el caso tabular, así que conviene dejar este patrón a mano para Random Forest u otros modelos de árbol.",
+          code: "import shap\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.preprocessing import OneHotEncoder, StandardScaler\nfrom sklearn.impute import SimpleImputer\n\nnum_cols = X_tab.select_dtypes(include=['number']).columns\ncat_cols = X_tab.select_dtypes(exclude=['number']).columns\n\npreprocessor = ColumnTransformer([\n    ('num', Pipeline([\n        ('imputer', SimpleImputer(strategy='median')),\n        ('scaler', StandardScaler())\n    ]), num_cols),\n    ('cat', Pipeline([\n        ('imputer', SimpleImputer(strategy='most_frequent')),\n        ('onehot', OneHotEncoder(handle_unknown='ignore'))\n    ]), cat_cols)\n])\n\nrf = Pipeline([\n    ('prep', preprocessor),\n    ('model', RandomForestClassifier(random_state=42))\n])\n\nrf.fit(X_train_tab, y_train_tab)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja entrenado un modelo tabular robusto y preparado para pasar a explicaciones SHAP. Me sirve cuando quiero interpretar variables clínicas, financieras o categóricas con un modelo más realista que un ejemplo mínimo."
+        },
+        {
+          title: "SHAP local para un caso específico",
+          body: "Cuando quiero revisar una sola predicción en profundidad, este bloque es de los más valiosos.",
+          code: "X_train_proc = rf.named_steps['prep'].transform(X_train_tab)\nX_test_proc = rf.named_steps['prep'].transform(X_test_tab)\nmodelo_rf = rf.named_steps['model']\n\nexplainer_shap = shap.TreeExplainer(modelo_rf)\nshap_values = explainer_shap.shap_values(X_test_proc)\n\ncaso = 0\nprint('Predicción:', modelo_rf.predict(X_test_proc[caso]))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Prepara el modelo y los datos para obtener valores SHAP locales. Me sirve cuando quiero revisar por qué un caso particular fue marcado como positivo, negativo o riesgoso."
+        },
+        {
+          title: "Resumen global con SHAP",
+          body: "Más allá de un caso puntual, este patrón deja una lectura global de qué variables pesan más en el modelo.",
+          code: "feature_names = rf.named_steps['prep'].get_feature_names_out()\n\nshap.summary_plot(\n    shap_values[1] if isinstance(shap_values, list) else shap_values,\n    X_test_proc,\n    feature_names=feature_names,\n    show=False\n)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera un resumen global de importancia y dirección del efecto de las variables. Me sirve para explicar hallazgos a nivel general y no quedarme solo con ejemplos aislados."
+        },
+        {
+          title: "Promedio de importancia global con SHAP",
+          body: "Si quiero una tabla más simple para reportar, este bloque convierte SHAP en un ranking ordenado.",
+          code: "import numpy as np\nimport pandas as pd\n\nvalores = shap_values[1] if isinstance(shap_values, list) else shap_values\nimportancia_media = np.abs(valores).mean(axis=0)\n\nranking_shap = pd.DataFrame({\n    'feature': feature_names,\n    'mean_abs_shap': importancia_media\n}).sort_values('mean_abs_shap', ascending=False)\n\nprint(ranking_shap.head(10))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula una importancia global promedio basada en contribuciones absolutas. Me sirve para reportes, tablas ejecutivas o comparaciones entre variables sin depender solo del gráfico."
+        },
+        {
+          title: "Traducir o normalizar textos para interpretar mejor LIME",
+          body: "En una de tus actividades aparece esta lógica: si el texto fuente está en inglés u otro idioma, conviene dejar una capa de traducción o apoyo antes de presentar la explicación.",
+          code: "from googletrans import Translator\n\ntranslator = Translator()\ntexto_original = X_test.iloc[0]\ntexto_traducido = translator.translate(texto_original, dest='es').text\n\nprint(texto_original)\nprint(texto_traducido)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Entrega una versión traducida o más legible del texto antes de analizarlo. Me sirve cuando necesito presentar explicaciones a alguien que no trabajará directamente con el idioma original del corpus."
+        },
+        {
+          title: "Comparar explicación local de LIME vs SHAP",
+          body: "Este bloque no busca hacerlos competir, sino dejar claro que ambos miran una misma predicción desde enfoques distintos.",
+          code: "resultado_lime = exp.as_list()\nresultado_shap = ranking_shap.head(5)\n\nprint('LIME local:', resultado_lime)\nprint('SHAP global top 5:')\nprint(resultado_shap)"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Deja lado a lado una explicación local textual y una visión global tabular. Me sirve para mostrar que LIME responde mejor al caso puntual, mientras SHAP suele dar una lectura más estable del modelo completo."
+        },
+        {
+          title: "Revisar sesgos básicos por grupo",
+          body: "Como tú querías conectar esto también con ética y legalidad, este bloque ayuda a mirar si el modelo se comporta distinto entre grupos relevantes.",
+          code: "from sklearn.metrics import f1_score\n\nfor grupo in df_eval['genero'].dropna().unique():\n    mask = df_eval['genero'] == grupo\n    y_true_g = y_test_tab[mask]\n    y_pred_g = pred_tab[mask]\n    print(grupo, f1_score(y_true_g, y_pred_g))"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Calcula una métrica por subgrupo para revisar si el rendimiento cambia demasiado entre segmentos. Me sirve como alerta rápida de sesgo antes de sacar conclusiones más fuertes."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es primero asegurar un modelo razonable, luego evaluar bien sus métricas y recién después abrir explicaciones con LIME o SHAP. Así la interpretabilidad no se vuelve maquillaje del modelo, sino una capa real de entendimiento y revisión crítica.",
+      references: [],
+      relatedIds: [
+        "xai-with-lime-and-shap-for-model-interpretation",
+        "ethical-nlp-bias-transparency-and-human-review",
+        "nlp-model-evaluation-metrics-and-good-practices"
+      ]
+    },
+    {
+      id: "python-module-10-code-recipes-for-mlops-and-deployment",
+      slug: "recetario-de-codigo-python-para-mlops-docker-git-y-cicd",
+      title: "Docker, Git y CI/CD para un flujo MLOps en Python",
+      summary: "Una nota práctica con snippets reutilizables para estructurar un proyecto de Machine Learning, contenedorizarlo con Docker, versionarlo con Git y automatizar pruebas con un flujo simple de CI/CD.",
+      category: "Código",
+      type: "Recetario",
+      level: "advanced",
+      readingTime: "18 min",
+      updatedAt: "2026-08-04",
+      tags: ["Python", "MLOps", "Docker", "Git", "CI/CD"],
+      featured: false,
+      showSectionIndex: true,
+      contentSections: [
+        {
+          title: "Para qué sirve este recetario",
+          body: "La idea aquí es dejar un mapa práctico para pasar de un modelo suelto a un proyecto más ordenado: con API, frontend, base local, contenedores, pruebas y una automatización mínima que valide que todo sigue funcionando antes de subir cambios."
+        },
+        {
+          title: "1. Estructurar el proyecto antes de desplegar",
+          body: "Antes de pensar en Docker o en GitHub Actions, conviene ordenar el repositorio. Este tipo de estructura separa mejor entrenamiento, API, interfaz, scripts, base de datos, artefactos y pruebas.",
+          code: "breast-cancer-mlops/\n├── api/\n│   └── api.py\n├── frontend/\n│   └── app.py\n├── model/\n│   └── train_model.py\n├── database/\n│   ├── schema.sql\n│   ├── seed_data.sql\n│   └── db_manager.py\n├── docker/\n│   ├── Dockerfile.api\n│   ├── Dockerfile.frontend\n│   └── docker-compose.yml\n├── requirements/\n│   ├── common.txt\n│   ├── api.txt\n│   ├── frontend.txt\n│   └── dev.txt\n├── scripts/\n│   ├── init_db.py\n│   └── seed_demo_patients.py\n├── tests/\n│   └── test_api.py\n└── .github/\n    └── workflows/\n        └── deploy.yml"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Ordena el proyecto por responsabilidades. Me sirve cuando ya no estoy trabajando solo un notebook, sino un flujo que mezcla entrenamiento, inferencia, persistencia, visualización y validación automática."
+        },
+        {
+          title: "2. Separar dependencias por entorno",
+          body: "Una práctica útil en MLOps es no meter todo en un solo `requirements.txt`. Separar dependencias facilita mantenimiento, despliegue y builds más claros.",
+          code: "# requirements/common.txt\nnumpy\npandas\nscikit-learn\njoblib\n\n# requirements/api.txt\n-r common.txt\nflask\n\n# requirements/frontend.txt\n-r common.txt\nstreamlit\nrequests\n\n# requirements/dev.txt\n-r api.txt\n-r frontend.txt\npytest"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Permite instalar solo lo necesario según el servicio. Me sirve mucho cuando una API no necesita el mismo peso que el frontend o cuando el pipeline de pruebas requiere paquetes extra que en producción no quiero arrastrar."
+        },
+        {
+          title: "3. Crear una imagen Docker para la API",
+          body: "Este patrón toma directamente la lógica de tu proyecto: instalar dependencias, copiar el código, inicializar la base y levantar la API dentro del contenedor.",
+          code: "FROM python:3.11-slim\n\nENV PYTHONDONTWRITEBYTECODE=1\nENV PYTHONUNBUFFERED=1\nENV PYTHONPATH=/app\n\nWORKDIR /app\n\nCOPY requirements/ ./requirements\nRUN pip install --no-cache-dir -r requirements/api.txt\n\nCOPY . .\n\nEXPOSE 5000\nCMD [\"sh\", \"-c\", \"python scripts/init_db.py && python api/api.py\"]"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Genera una imagen reproducible de la API. Me sirve cuando quiero dejar de depender de mi entorno local y asegurar que otro equipo o un servidor puedan levantar el mismo servicio bajo las mismas condiciones."
+        },
+        {
+          title: "4. Crear una imagen Docker para el frontend",
+          body: "Si el frontend va separado, también conviene contenedorizado aparte para que cada servicio tenga su propio ciclo de vida.",
+          code: "FROM python:3.11-slim\n\nENV PYTHONDONTWRITEBYTECODE=1\nENV PYTHONUNBUFFERED=1\n\nWORKDIR /app\n\nCOPY requirements/ ./requirements\nRUN pip install --no-cache-dir -r requirements/frontend.txt\n\nCOPY . .\n\nEXPOSE 8501\nCMD [\"streamlit\", \"run\", \"frontend/app.py\", \"--server.address=0.0.0.0\", \"--server.port=8501\"]"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Levanta la interfaz de manera aislada. Esto sirve cuando quiero probar frontend y API como piezas separadas, o cuando una parte cambia más seguido que la otra."
+        },
+        {
+          title: "5. Orquestar servicios con docker-compose",
+          body: "Cuando ya tengo más de un servicio, `docker-compose` simplifica mucho el arranque coordinado y el paso de variables entre contenedores.",
+          code: "version: \"3.9\"\n\nservices:\n  api:\n    build:\n      context: ..\n      dockerfile: docker/Dockerfile.api\n    container_name: breast-cancer-api\n    image: breast-cancer-api:latest\n    ports:\n      - \"5000:5000\"\n    volumes:\n      - ../artifacts:/app/artifacts\n      - ../database:/app/database\n    environment:\n      - DEBUG=false\n\n  frontend:\n    build:\n      context: ..\n      dockerfile: docker/Dockerfile.frontend\n    container_name: breast-cancer-frontend\n    ports:\n      - \"8501:8501\"\n    depends_on:\n      - api\n    environment:\n      - API_URL=http://api:5000\n    volumes:\n      - ../artifacts:/app/artifacts"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Arranca API y frontend juntos, compartiendo volúmenes y variables. Me sirve cuando quiero simular un entorno más real, probar integración local o dejar más fácil la puesta en marcha del proyecto."
+        },
+        {
+          title: "6. Flujo local paso a paso para levantar el proyecto",
+          body: "Tener un orden claro para levantar el sistema evita errores tontos y deja el flujo más reproducible.",
+          code: "git clone https://github.com/FredyGR-98/detector-cancer-mama-mlops.git\ncd breast-cancer-mlops\npy -m venv .venv\n.venv\\Scripts\\activate\npip install -r requirements/dev.txt\npython model/train_model.py\npython scripts/init_db.py\npython scripts/seed_demo_patients.py\npython api/api.py\nstreamlit run frontend/app.py"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Resume el flujo manual para clonar, preparar entorno, entrenar modelo, inicializar base y levantar servicios. Me sirve para pruebas locales, para explicar el proyecto en portafolio y para no olvidar el orden correcto al volver días después."
+        },
+        {
+          title: "7. Versionar bien con Git antes de automatizar",
+          body: "Si no tengo un flujo mínimo de Git, CI/CD se vuelve puro caos. Lo importante es dejar commits claros, ramas entendibles y archivos innecesarios fuera del repo.",
+          code: "# Inicializar o revisar el repositorio\ngit init\ngit status\n\n# Crear una rama de trabajo\ngit checkout -b feature/docker-cicd\n\n# Agregar cambios importantes\ngit add api/ frontend/ docker/ requirements/ tests/ .github/workflows/deploy.yml README.md\n\n# Crear commit con mensaje claro\ngit commit -m \"Agrega flujo MLOps con Docker y CI\"\n\n# Conectar remoto y subir\ngit remote add origin <URL_DEL_REPO>\ngit push -u origin feature/docker-cicd"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Ordena la subida de cambios para que el historial tenga sentido y el pipeline se active sobre una base limpia. Me sirve muchísimo cuando trabajo por iteraciones y quiero saber qué cambio exacto tocó Docker, tests o despliegue."
+        },
+        {
+          title: "8. Automatizar validación con GitHub Actions",
+          body: "Este flujo CI ya es suficiente para validar algo muy útil: que el repo instala dependencias, entrena el modelo, inicializa la base y pasa pruebas antes de aceptar cambios en `main`.",
+          code: "name: CI - Breast Cancer API\n\non:\n  push:\n    branches: [\"main\"]\n  pull_request:\n    branches: [\"main\"]\n\njobs:\n  build-and-test:\n    runs-on: ubuntu-latest\n\n    steps:\n      - name: Checkout del repositorio\n        uses: actions/checkout@v4\n\n      - name: Configurar Python\n        uses: actions/setup-python@v5\n        with:\n          python-version: \"3.11\"\n\n      - name: Instalar dependencias\n        run: |\n          python -m pip install --upgrade pip\n          pip install -r requirements/dev.txt\n\n      - name: Entrenar modelo\n        run: python model/train_model.py\n\n      - name: Inicializar base de datos\n        run: python scripts/init_db.py\n\n      - name: Ejecutar pruebas automáticas\n        env:\n          PYTHONPATH: ${{ github.workspace }}\n        run: python -m pytest -v tests/"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Cada `push` o `pull request` hacia `main` dispara una validación automática. Me sirve para detectar roturas antes de fusionar cambios y para dejar evidencia visible de que el proyecto no es solo una demo visual, sino también un flujo validado."
+        },
+        {
+          title: "9. Empaquetar el proyecto cuando necesito compartirlo",
+          body: "A veces no quiero compartir todo el repo tal cual, sino entregar una versión comprimida sin entornos virtuales ni carpetas pesadas.",
+          code: "import zipfile\nimport os\n\n\ndef empaquetar(nombre_zip=\"EvaluacionModular10.zip\"):\n    excluir = [\n        \"__pycache__\", \".git\", \".github\", \".venv\", \"venv\",\n        \"mlops-env\", \".env\", \".vscode\", nombre_zip\n    ]\n\n    with zipfile.ZipFile(nombre_zip, \"w\", zipfile.ZIP_DEFLATED) as zipf:\n        for root, dirs, files in os.walk(\".\"):\n            dirs[:] = [d for d in dirs if d not in excluir]\n            for file in files:\n                if file in excluir or file == nombre_zip:\n                    continue\n                ruta_completa = os.path.join(root, file)\n                ruta_relativa = os.path.relpath(ruta_completa, \".\")\n                zipf.write(ruta_completa, ruta_relativa)\n                print(f\"Añadido: {ruta_relativa}\")"
+        },
+        {
+          title: "Qué hace y cuándo me sirve",
+          body: "Crea un ZIP del proyecto excluyendo basura técnica y carpetas pesadas. Me sirve cuando quiero entregar una evaluación, respaldar una versión limpia o compartir una copia portable sin subir todo el entorno al repositorio."
+        },
+        {
+          title: "10. Buenas prácticas mínimas para que esto no se rompa",
+          body: "MLOps no parte en Kubernetes ni en la nube; parte en pequeñas decisiones ordenadas que vuelven el proyecto más reproducible.",
+          comparisonTable: {
+            columns: ["Práctica", "Por qué ayuda"],
+            rows: [
+              ["Separar dependencias por entorno", "Reduce ruido y hace builds más claros."],
+              ["Tener tests automáticos", "Evita romper API o lógica sin darte cuenta."],
+              ["Versionar con ramas y commits claros", "Da trazabilidad sobre qué cambió y por qué."],
+              ["Contenerizar servicios", "Hace reproducible el entorno en otras máquinas."],
+              ["Automatizar CI antes de pensar en CD", "Primero conviene validar, luego desplegar."]
+            ]
+          }
+        },
+        {
+          title: "Para recordar",
+          body: "En un proyecto de ML aplicado, Docker no es solo 'empaquetar', Git no es solo 'guardar cambios' y CI/CD no es solo 'subir a GitHub'. Los tres juntos sirven para que el trabajo sea repetible, entendible, portable y mucho más profesional."
+        }
+      ],
+      closingNote:
+        "La mejor forma de usar este recetario es pensar el flujo en capas: primero ordeno el repo, luego separo dependencias, después levanto servicios, pruebo local, versiono cambios y recién ahí automatizo validaciones. Ese orden evita mucho dolor más adelante.",
+      references: [],
+      relatedIds: [
+        "share-ml-projects-and-mlops-collaboration",
+        "python-module-7-code-recipes-for-deep-learning-and-neural-networks",
+        "python-module-9-code-recipes-for-lime-and-shap"
       ]
     },
     {
@@ -8977,9 +13411,118 @@
     }
   ];
 
+  const inferAtlasMlSubcategory = (note) => {
+    const haystack = `${note.title} ${note.summary} ${(note.tags || []).join(" ")}`.toLowerCase();
+
+    if (
+      haystack.includes("nlp") ||
+      haystack.includes("bert") ||
+      haystack.includes("transformers") ||
+      haystack.includes("texto")
+    ) {
+      return "NLP";
+    }
+
+    if (
+      haystack.includes("redes neuronales") ||
+      haystack.includes("deep learning") ||
+      haystack.includes("lstm") ||
+      haystack.includes("resnet") ||
+      haystack.includes("efficientnet") ||
+      haystack.includes("autoencoder") ||
+      haystack.includes("transfer learning") ||
+      haystack.includes("fine-tuning")
+    ) {
+      return "Deep Learning";
+    }
+
+    if (
+      haystack.includes("clustering") ||
+      haystack.includes("agrupamiento") ||
+      haystack.includes("dbscan") ||
+      haystack.includes("hdbscan") ||
+      haystack.includes("pca") ||
+      haystack.includes("dimensionalidad") ||
+      haystack.includes("t-sne") ||
+      haystack.includes("umap") ||
+      haystack.includes("anomal")
+    ) {
+      return "Clustering y reducción de dimensionalidad";
+    }
+
+    if (
+      haystack.includes("docker") ||
+      haystack.includes("mlops") ||
+      haystack.includes("despliegue") ||
+      haystack.includes("shap") ||
+      haystack.includes("lime") ||
+      haystack.includes("xai") ||
+      haystack.includes("ci/cd") ||
+      haystack.includes("api")
+    ) {
+      return "MLOps e interpretabilidad";
+    }
+
+    if (
+      haystack.includes("regresión") ||
+      haystack.includes("regularización") ||
+      haystack.includes("ridge") ||
+      haystack.includes("lasso") ||
+      haystack.includes("elastic net") ||
+      haystack.includes("boosting") ||
+      haystack.includes("cross validation") ||
+      haystack.includes("feature selection") ||
+      haystack.includes("selección de características") ||
+      haystack.includes("métricas") ||
+      haystack.includes("f1")
+    ) {
+      return "Modelos supervisados";
+    }
+
+    return "Fundamentos ML";
+  };
+
+  atlasNotes.forEach((note) => {
+    if (note.category !== "Machine Learning") return;
+    note.subcategory = inferAtlasMlSubcategory(note);
+    if (note.subcategory && !note.tags.includes(note.subcategory)) {
+      note.tags = [note.subcategory, ...note.tags];
+    }
+  });
+
+  const atlasCategoryChildren = atlasTopics.reduce((accumulator, category) => {
+    if (category === "Machine Learning") {
+      accumulator[category] = atlasMlSubcategories;
+      return accumulator;
+    }
+
+    const tagCounts = new Map();
+
+    atlasNotes
+      .filter((note) => note.category === category)
+      .forEach((note) => {
+        (note.tags || []).forEach((tag) => {
+          if (!tag || tag === category) return;
+          tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+        });
+      });
+
+    accumulator[category] = Array.from(tagCounts.entries())
+      .sort((a, b) => {
+        if (b[1] !== a[1]) return b[1] - a[1];
+        return a[0].localeCompare(b[0], "es");
+      })
+      .slice(0, 6)
+      .map(([tag]) => tag);
+
+    return accumulator;
+  }, {});
+
   let currentProjectIndex = 0;
   let atlasSearchTerm = "";
-  let atlasSelectedTopics = new Set();
+  let atlasSelectedTopic = null;
+  let atlasSelectedCategoryTag = null;
+  let atlasOpenTopic = null;
   let atlasSelectedLevels = new Set();
   let atlasSortMode = "recent";
   let atlasCurrentPage = 1;
@@ -9215,15 +13758,20 @@
           !search ||
           note.title.toLowerCase().includes(search) ||
           note.summary.toLowerCase().includes(search) ||
-          note.tags.some((tag) => tag.toLowerCase().includes(search));
+          note.tags.some((tag) => tag.toLowerCase().includes(search)) ||
+          (note.subcategory || "").toLowerCase().includes(search);
 
-        const matchesTopics =
-          atlasSelectedTopics.size === 0 || atlasSelectedTopics.has(note.category);
+        const matchesTopics = !atlasSelectedTopic || note.category === atlasSelectedTopic;
+
+        const matchesCategoryTags =
+          !atlasSelectedCategoryTag ||
+          note.tags.includes(atlasSelectedCategoryTag) ||
+          note.subcategory === atlasSelectedCategoryTag;
 
         const matchesLevels =
           atlasSelectedLevels.size === 0 || atlasSelectedLevels.has(note.level);
 
-        return matchesSearch && matchesTopics && matchesLevels;
+        return matchesSearch && matchesTopics && matchesCategoryTags && matchesLevels;
       })
       .sort((a, b) => {
         if (atlasSortMode === "alpha") {
@@ -9241,32 +13789,102 @@
     atlasMemoryList.innerHTML = "";
 
     if (atlasMemorySummary) {
+      const summaryParts = [];
+      if (atlasSelectedTopic) {
+        summaryParts.push(atlasSelectedTopic);
+      }
+      if (atlasSelectedCategoryTag) {
+        summaryParts.push(atlasSelectedCategoryTag);
+      }
+
       atlasMemorySummary.textContent =
-        atlasSelectedTopics.size === 0
-          ? "Seleccionar categor\u00EDas"
-          : Array.from(atlasSelectedTopics).join(" \u00B7 ");
+        summaryParts.length === 0 ? "Seleccionar categor\u00EDas" : summaryParts.join(" \u00B7 ");
     }
 
-    atlasTopics.forEach((topic) => {
-      const label = document.createElement("label");
-      label.className = "atlas-memory-option";
-      label.innerHTML = `
-        <input type="checkbox" value="${topic}" ${atlasSelectedTopics.has(topic) ? "checked" : ""} />
-        <span>${topic}</span>
-      `;
+    const menu = document.createElement("div");
+    menu.className = "atlas-hover-menu";
 
-      label.querySelector("input")?.addEventListener("change", (event) => {
-        if (event.target.checked) {
-          atlasSelectedTopics.add(topic);
-        } else {
-          atlasSelectedTopics.delete(topic);
-        }
+    const showAllButton = document.createElement("button");
+    showAllButton.type = "button";
+    showAllButton.className = `atlas-hover-menu-button atlas-hover-menu-button--topic ${!atlasSelectedTopic ? "is-active" : ""}`;
+    showAllButton.innerHTML = `
+      <span>Mostrar todo</span>
+      <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+    `;
+    showAllButton.addEventListener("click", () => {
+      atlasSelectedTopic = null;
+      atlasSelectedCategoryTag = null;
+      atlasCurrentPage = 1;
+      renderAtlas();
+    });
+    menu.appendChild(showAllButton);
+
+    atlasTopics.forEach((topic) => {
+      const childItems = atlasCategoryChildren[topic] || [];
+      const isActive = atlasSelectedTopic === topic;
+      if (childItems.length > 0) {
+        const item = document.createElement("div");
+        item.className = "atlas-hover-menu-item atlas-hover-menu-item--has-children";
+
+        const trigger = document.createElement("button");
+        trigger.type = "button";
+        trigger.className = `atlas-hover-menu-button atlas-hover-menu-button--topic ${isActive ? "is-active" : ""}`;
+        trigger.innerHTML = `
+          <span>${topic}</span>
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        `;
+        trigger.addEventListener("click", () => {
+          atlasSelectedTopic = topic;
+          atlasSelectedCategoryTag = null;
+          atlasOpenTopic = null;
+          atlasCurrentPage = 1;
+          renderAtlas();
+        });
+
+        const submenu = document.createElement("div");
+        submenu.className = "atlas-hover-submenu";
+
+        childItems.forEach((childTag) => {
+          const subButton = document.createElement("button");
+          subButton.type = "button";
+          subButton.className = `atlas-hover-menu-button atlas-hover-menu-button--child ${
+            atlasSelectedTopic === topic && atlasSelectedCategoryTag === childTag ? "is-active" : ""
+          }`;
+          subButton.textContent = childTag;
+          subButton.addEventListener("click", () => {
+            atlasSelectedTopic = topic;
+            atlasSelectedCategoryTag = childTag;
+            atlasOpenTopic = null;
+            atlasCurrentPage = 1;
+            renderAtlas();
+          });
+          submenu.appendChild(subButton);
+        });
+
+        item.appendChild(trigger);
+        item.appendChild(submenu);
+        menu.appendChild(item);
+        return;
+      }
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `atlas-hover-menu-button atlas-hover-menu-button--topic ${isActive ? "is-active" : ""}`;
+      button.innerHTML = `
+        <span>${topic}</span>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      `;
+      button.addEventListener("click", () => {
+        atlasSelectedTopic = topic;
+        atlasSelectedCategoryTag = null;
+        atlasOpenTopic = null;
         atlasCurrentPage = 1;
         renderAtlas();
       });
-
-      atlasMemoryList.appendChild(label);
+      menu.appendChild(button);
     });
+
+    atlasMemoryList.appendChild(menu);
   };
 
   const renderAtlasComplexityFilters = () => {
@@ -9328,9 +13946,63 @@
     return button;
   };
 
-  const buildAtlasSection = (section) => {
+  const escapeHtml = (value = "") =>
+    String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+
+  const buildAtlasQuickNav = (note, sections) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "atlas-note-quick-nav";
+    wrapper.id = `atlas-note-top-${note.id}`;
+
+    const links = sections
+      .map(
+        (_, index) => `
+          <button
+            type="button"
+            class="atlas-note-index-link"
+            data-atlas-scroll-target="atlas-section-${note.id}-${index}"
+          >
+            Sección ${index + 1}
+          </button>
+        `
+      )
+      .join("");
+
+    wrapper.innerHTML = `
+      <p class="atlas-note-quick-nav-label">Visualiza más rápido</p>
+      <div class="atlas-note-index-nav">${links}</div>
+    `;
+
+    return wrapper;
+  };
+
+  const buildAtlasSection = (section, options = {}) => {
     const article = document.createElement("article");
-    article.className = "atlas-note-section";
+    const sectionClasses = ["atlas-note-section"];
+    if (section.comparisonTable) sectionClasses.push("atlas-note-section--comparison");
+    if (section.highlights) sectionClasses.push("atlas-note-section--highlights");
+    if (section.commandGroups) sectionClasses.push("atlas-note-section--commands");
+    if (section.illustrations) sectionClasses.push("atlas-note-section--visual");
+    if (section.bestPractices) sectionClasses.push("atlas-note-section--playbook");
+    article.className = sectionClasses.join(" ");
+
+    let sectionTypeLabel = "";
+    if (section.comparisonTable) {
+      sectionTypeLabel = "Tabla comparativa";
+    } else if (section.highlights) {
+      sectionTypeLabel = "Resumen clave";
+    } else if (section.commandGroups) {
+      sectionTypeLabel = "Guía práctica";
+    } else if (section.illustrations) {
+      sectionTypeLabel = "Apoyo visual";
+    } else if (section.bestPractices) {
+      sectionTypeLabel = "Buenas prácticas";
+    }
 
     let extraBlocks = "";
     if (section.highlights) {
@@ -9383,7 +14055,7 @@
             <article class="atlas-note-command-card">
               <h4>${item.title}</h4>
               <p>${item.description}</p>
-              <pre class="atlas-note-command-code"><code>${item.code}</code></pre>
+              <pre class="atlas-note-command-code"><code>${escapeHtml(item.code)}</code></pre>
             </article>
           `
         )
@@ -9408,7 +14080,7 @@
       extraBlocks += `<div class="${illustrationGridClass}">${items}</div>`;
     }
     if (section.code) {
-      extraBlocks += `<div class="atlas-note-code">${section.code}</div>`;
+      extraBlocks += `<pre class="atlas-note-code"><code>${escapeHtml(section.code)}</code></pre>`;
     }
     if (section.resourceLinks) {
       const items = section.resourceLinks
@@ -9426,9 +14098,51 @@
       const items = section.bestPractices.map((item) => `<li>${item}</li>`).join("");
       extraBlocks += `<div class="atlas-note-best-practices"><strong>Buenas pr\u00E1cticas</strong><ul>${items}</ul></div>`;
     }
+    const sectionFooterActions = [];
+    if (section.tooltipBody) {
+      sectionFooterActions.push(`
+        <div class="atlas-note-inline-help">
+          <button
+            type="button"
+            class="atlas-note-inline-help__trigger"
+            aria-label="Ver explicación rápida"
+            title="Ver explicación rápida"
+          >
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          </button>
+          <div class="atlas-note-inline-help__popover">
+            <strong>Qué hace y cuándo me sirve</strong>
+            <p>${section.tooltipBody}</p>
+          </div>
+        </div>
+      `);
+    }
+    if (options.showBackToTop) {
+      sectionFooterActions.push(`
+        <button
+          type="button"
+          class="atlas-note-back-to-top"
+          data-atlas-scroll-target="atlas-note-top-${options.noteId}"
+          aria-label="Volver al inicio"
+          title="Volver al inicio"
+        >
+          <i class="fa-solid fa-arrow-up-long" aria-hidden="true"></i>
+        </button>
+      `);
+    }
+    if (sectionFooterActions.length > 0) {
+      extraBlocks += `
+        <div class="atlas-note-section-actions">
+          ${sectionFooterActions.join("")}
+        </div>
+      `;
+    }
 
     article.innerHTML = `
-      <h3>${section.title}</h3>
+      <div class="atlas-note-section-heading">
+        <h3>${options.sectionLabel ? `<span class="atlas-note-section-label">${options.sectionLabel}</span>${section.title}` : section.title}</h3>
+        ${sectionTypeLabel ? `<span class="atlas-note-section-type">${sectionTypeLabel}</span>` : ""}
+      </div>
       <p>${section.body}</p>
       ${extraBlocks}
     `;
@@ -9472,8 +14186,9 @@
     if (atlasResultsCount) atlasResultsCount.textContent = String(filtered.length);
 
     if (atlasCurrentCategory) {
-      atlasCurrentCategory.textContent =
-        atlasSelectedTopics.size === 0 ? "Todo el atlas" : Array.from(atlasSelectedTopics).join(" \u00B7 ");
+      const topicLabel = atlasSelectedTopic || "Todo el atlas";
+      const subcategoryLabel = atlasSelectedCategoryTag ? ` \u00B7 ${atlasSelectedCategoryTag}` : "";
+      atlasCurrentCategory.textContent = `${topicLabel}${subcategoryLabel}`;
     }
 
     if (atlasEmptyState) {
@@ -9535,7 +14250,9 @@
     const note = atlasNotes.find((item) => item.id === noteId);
     if (!note || !atlasNoteModal) return;
 
-    atlasNoteKicker.textContent = `${note.category} \u00B7 ${note.type}`;
+    atlasNoteKicker.textContent = note.subcategory
+      ? `${note.category} \u00B7 ${note.subcategory} \u00B7 ${note.type}`
+      : `${note.category} \u00B7 ${note.type}`;
     atlasNoteTitle.textContent = note.title;
     atlasNoteSummary.textContent = note.summary;
     atlasNoteReadingTime.textContent = note.readingTime;
@@ -9552,11 +14269,52 @@
     });
 
     atlasNoteSections.innerHTML = "";
-    note.contentSections.forEach((section, index) => {
-      const article = buildAtlasSection(section);
+    const sectionsToRender = [];
+    let introSection = null;
+    note.contentSections.forEach((section) => {
+      if (!introSection && section.title === "Para qué sirve este recetario") {
+        introSection = { ...section };
+        return;
+      }
+      if (section.title === "Qué hace y cuándo me sirve" && sectionsToRender.length > 0) {
+        sectionsToRender[sectionsToRender.length - 1].tooltipBody = section.body;
+        return;
+      }
+      sectionsToRender.push({ ...section });
+    });
+
+    if (introSection) {
+      const intro = document.createElement("div");
+      intro.className = "atlas-note-quick-intro";
+      intro.innerHTML = `
+        <h3>${introSection.title}</h3>
+        <p>${introSection.body}</p>
+      `;
+      atlasNoteSections.appendChild(intro);
+    }
+
+    if (note.showSectionIndex && sectionsToRender.length > 1) {
+      atlasNoteSections.appendChild(buildAtlasQuickNav(note, sectionsToRender));
+    }
+    sectionsToRender.forEach((section, index) => {
+      const article = buildAtlasSection(section, {
+        showBackToTop: Boolean(note.showSectionIndex),
+        noteId: note.id,
+        sectionLabel: note.showSectionIndex ? `Sección ${index + 1}. ` : ""
+      });
       article.id = `atlas-section-${note.id}-${index}`;
       atlasNoteSections.appendChild(article);
     });
+
+    if (note.closingNote) {
+      const closing = document.createElement("div");
+      closing.className = "atlas-note-closing-note";
+      closing.innerHTML = `
+        <strong>Nota final</strong>
+        <p>${note.closingNote}</p>
+      `;
+      atlasNoteSections.appendChild(closing);
+    }
 
     if (Array.isArray(note.references) && note.references.length > 0) {
       atlasNoteSections.appendChild(buildAtlasReferences(note.references));
@@ -9573,6 +14331,14 @@
         button.addEventListener("click", () => openAtlasNote(related.id));
         atlasRelatedGrid.appendChild(button);
       });
+
+    atlasNoteSections.querySelectorAll("[data-atlas-scroll-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.dataset.atlasScrollTarget;
+        const target = targetId ? document.getElementById(targetId) : null;
+        target?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
 
     atlasNoteModal.classList.add("is-open");
     atlasNoteModal.setAttribute("aria-hidden", "false");
@@ -9626,7 +14392,9 @@
 
   atlasClearFilters?.addEventListener("click", () => {
     atlasSearchTerm = "";
-    atlasSelectedTopics.clear();
+    atlasSelectedTopic = null;
+    atlasSelectedCategoryTag = null;
+    atlasOpenTopic = null;
     atlasSelectedLevels.clear();
     atlasSortMode = "recent";
     atlasCurrentPage = 1;

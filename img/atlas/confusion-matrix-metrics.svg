@@ -1,0 +1,88 @@
+<svg width="960" height="720" viewBox="0 0 960 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="720" rx="28" fill="#FFFDF8"/>
+  <rect x="70" y="110" width="820" height="500" rx="24" fill="#FFF8FB" stroke="#F2D7E1" stroke-width="2"/>
+
+  <text x="80" y="72" fill="#6E5340" font-family="Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">
+    Matriz de confusión y métricas clave
+  </text>
+  <text x="80" y="100" fill="#8A7465" font-family="Segoe UI, Arial, sans-serif" font-size="18">
+    Ejemplo simple para recordar VP, FP, FN, VN y cómo calcular las métricas más usadas.
+  </text>
+
+  <text x="470" y="152" text-anchor="middle" fill="#D64F74" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">
+    Real / Gold standard
+  </text>
+  <text x="215" y="355" text-anchor="middle" fill="#49A54D" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">
+    Predicción
+  </text>
+  <text x="215" y="382" text-anchor="middle" fill="#7B6A5E" font-family="Segoe UI, Arial, sans-serif" font-size="16">
+    del modelo
+  </text>
+
+  <rect x="300" y="180" width="520" height="260" rx="20" fill="#FFFFFF" stroke="#E9D6DE" stroke-width="2"/>
+  <line x1="300" y1="250" x2="820" y2="250" stroke="#E9D6DE" stroke-width="2"/>
+  <line x1="300" y1="345" x2="820" y2="345" stroke="#E9D6DE" stroke-width="2"/>
+  <line x1="430" y1="180" x2="430" y2="440" stroke="#E9D6DE" stroke-width="2"/>
+  <line x1="625" y1="180" x2="625" y2="440" stroke="#E9D6DE" stroke-width="2"/>
+
+  <text x="527" y="222" text-anchor="middle" fill="#6E5340" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Positivo
+  </text>
+  <text x="722" y="222" text-anchor="middle" fill="#6E5340" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Negativo
+  </text>
+
+  <text x="365" y="305" text-anchor="middle" fill="#6E5340" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Positivo
+  </text>
+  <text x="365" y="397" text-anchor="middle" fill="#6E5340" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">
+    Negativo
+  </text>
+
+  <rect x="430" y="250" width="195" height="95" fill="#EAF8E8"/>
+  <rect x="625" y="250" width="195" height="95" fill="#FDEDEF"/>
+  <rect x="430" y="345" width="195" height="95" fill="#FFF1D9"/>
+  <rect x="625" y="345" width="195" height="95" fill="#EEF6EA"/>
+
+  <text x="527" y="290" text-anchor="middle" fill="#3A8A3D" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">
+    VP
+  </text>
+  <text x="527" y="322" text-anchor="middle" fill="#578359" font-family="Segoe UI, Arial, sans-serif" font-size="17">
+    Verdadero positivo
+  </text>
+
+  <text x="722" y="290" text-anchor="middle" fill="#D64F74" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">
+    FP
+  </text>
+  <text x="722" y="322" text-anchor="middle" fill="#A16A79" font-family="Segoe UI, Arial, sans-serif" font-size="17">
+    Falso positivo
+  </text>
+
+  <text x="527" y="385" text-anchor="middle" fill="#D9871C" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">
+    FN
+  </text>
+  <text x="527" y="417" text-anchor="middle" fill="#9A7B4A" font-family="Segoe UI, Arial, sans-serif" font-size="17">
+    Falso negativo
+  </text>
+
+  <text x="722" y="385" text-anchor="middle" fill="#4E8D43" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">
+    VN
+  </text>
+  <text x="722" y="417" text-anchor="middle" fill="#698462" font-family="Segoe UI, Arial, sans-serif" font-size="17">
+    Verdadero negativo
+  </text>
+
+  <rect x="95" y="492" width="770" height="88" rx="18" fill="#FFFFFF" stroke="#E8D8E0" stroke-width="2"/>
+  <text x="122" y="527" fill="#6E5340" font-family="Consolas, 'Courier New', monospace" font-size="18" font-weight="700">
+    Sensibilidad = VP / (VP + FN)
+  </text>
+  <text x="462" y="527" fill="#6E5340" font-family="Consolas, 'Courier New', monospace" font-size="18" font-weight="700">
+    Especificidad = VN / (VN + FP)
+  </text>
+  <text x="122" y="560" fill="#6E5340" font-family="Consolas, 'Courier New', monospace" font-size="18" font-weight="700">
+    Precisión = VP / (VP + FP)
+  </text>
+  <text x="462" y="560" fill="#6E5340" font-family="Consolas, 'Courier New', monospace" font-size="18" font-weight="700">
+    VPN = VN / (VN + FN)
+  </text>
+</svg>
